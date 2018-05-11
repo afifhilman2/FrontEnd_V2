@@ -1,0 +1,404 @@
+table, td, th{
+    width: 273px;
+    height: 28px;
+    border-radius: 3px;
+    border: solid 1px #dddddd;
+    padding: 5px;
+    padding-left: 13px;
+    font-size: 11px;
+}
+
+.alamat-agen{
+    font-size: 12px;
+}
+.alamat-paket{
+    font-size: 11px;
+}
+
+.bagikan{
+    font-size: 11px;
+}
+
+.body-info{
+    display: inline-block;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.body-title{
+    display: inline;
+    margin-left: 30px;
+}
+
+.button-body{
+    margin-top: 11px;
+    margin-right: 23px;
+}
+
+.btn-lihatProfil{
+    width: 111px;
+    height: 37px;
+    border-radius: 2.4px;
+    background-color: #e91e63;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.btn-kirimPesan{
+    width: 111px;
+    height: 37px;
+    border-radius: 2.4px;
+    border: solid 0.8px #ab47bc;
+    background-color: #ffffff;
+    color: #ab47bc;
+    font-weight: bold;
+}
+
+.btn-pesan{
+    width: 274px;
+    height: 43px;
+    border-radius: 2.4px;
+    background-color: #9c27b0;
+    color: white;
+    margin-left: 50px;
+    margin-top: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.calendar{
+    margin-left: 50px;
+}
+
+.carousel{
+    width: 796px;
+    height: 350px;
+}
+
+.container-fluid-page{
+    margin-left: 100px;
+    
+}
+
+.diskon{
+    display: inline-block;
+    color: #e91e63;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.harga{
+    width: 273px;
+    height: 72px;
+    border-radius: 2.4px;
+    /* background-color: #ffffff; */
+    border: solid 0.8px #9c27b0;
+    padding-top: 7px;
+}
+
+.harga-diskon{
+    font-size: 24.9px;
+    color:#9c27b0;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-top: 15px;
+    font-family: sans-serif;
+}
+
+.harga-normal{
+    text-decoration: line-through;
+    margin-left: 55px;
+    font-size: 12.9px;
+    color: #4a4a4a;
+}
+
+.orang{
+    font-weight: bold;
+    color: #9c27b0;
+}
+
+.harga-tanggal{
+    margin-left: 50px;
+}
+
+
+.img-agen{
+    width: 50px;
+    height: 59px;
+    float: left;
+    margin-right: 22px;
+}
+
+.img-share{
+    
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.img-share img{
+    width: 15px;
+    height: 15px;
+}
+
+.info{
+    margin-left: 16px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+.informasi-agen{
+    width: 437px;
+    height: 143px;
+    border: solid 0.8px #dddddd;
+    margin-bottom: 20px;
+    margin-top: 28px;
+}
+
+.item img{
+    object-fit: cover;
+}
+
+.jenis-trip{
+    font-weight: bold;
+    color: #e91e63;
+    font-size: 13.4px;
+    margin-left: 11px;
+}
+
+.jenis-paket{
+    margin-top: 25px;
+}
+
+.judul-paket{
+    width: 461px;
+    height: 36px;
+    font-family: sans-serif;
+    font-size: 34.7px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.89;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+}
+
+.kanan{
+    margin-bottom: 15px;
+    font-weight: bold; 
+}
+
+.kanan-deskripsi{
+    font-size: 13.4px;
+    margin-top: 15px;
+    border-bottom: solid 1px #dddddd;
+    border-top: solid 1px #dddddd;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.kanan-fasilitas{
+    font-size: 13.4px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px #dddddd;
+}
+
+.kanan-meeting{
+    font-size: 13.4px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px #dddddd;
+}
+
+.kanan-catatan{
+    font-size: 13.4px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px #dddddd;
+}
+
+.kelas-agen{
+    font-size: 10.2px;
+    color: #9c27b0;
+    font-family: sans-serif;
+    font-weight: normal;
+    margin-top: -8px;
+}
+
+.komen{
+    width: 814px;
+    height: 106px;
+    border: solid 0.8px #dddddd;
+    padding: 12px;
+    display: -webkit-inline-box;
+    font-family: sans-serif;
+}
+
+.komen-image{
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    border: solid 1.5px #dddddd;
+    padding: 1.5px;
+    display: block;
+}
+
+.komen-star{
+    margin-left: 18px;
+}
+
+.komen-tanggal{
+    font-size: 11px;
+    color: #4a4a4a;
+    margin-left: 18px;
+    font-family: sans-serif;
+}
+
+.komen-tanggapan{
+    font-size: 13.4px;
+    color: #4a4a4a;
+    margin-left: 18px;
+    font-family: sans-serif;
+}
+
+.komen-user-name{
+    font-size: 13.4px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #9c27b0;
+    display: inline;
+    margin-left: 18px;
+}
+
+
+.map-responsive{
+    width: 432px;
+    height: 226px;
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.nama-agen{
+    font-size: 13px;
+    font-weight: bold;
+}
+.nama-paket{
+    margin-bottom: 15px;
+    margin-top: 12px;
+}
+
+/* .nav-tabs> li.active{
+    border-bottom: solid #9c27b0;
+    color: #9c27b0;
+     
+} */
+
+.nav-tabs{
+    border: none;
+    font-family: sans-serif;
+    font-size: 13.4px;
+    font-weight: bold;
+}
+
+.nav-tabs> li> a{
+    border: none;
+    background-color: transparent;
+    
+}
+.nav-tabs>li.active>a,
+.nav-tabs>li>a:hover {
+    border: none;
+    color: #ab47bc !important;
+    background: transparent;
+}
+
+.nav-tabs>li>a::after {
+    content: "";
+    background: #ab47bc;
+    height: 2px;
+    position: absolute;
+    width: 91%;
+    left: 9px;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+    margin-left: -5px;
+}
+
+.nav-tabs>li.active>a::after,
+.nav-tabs>li:hover>a::after {
+    transform: scale(1);
+}
+
+.tab-nav>li>a::after {
+    background: #ab47bc none repeat scroll 0% 0%;
+    color: #fff;
+}
+
+.nominal-table{
+    font-weight: bold;
+    color: #8e3caa;
+}
+
+.pilih-tanggal{
+    width: 275px;
+    height: 40px;
+    background-color: #f5f5f5;
+    margin-left: 50px;
+    padding-left: 50px;
+    padding-top: 10px;
+    border: 1px solid #dddddd;
+}
+
+.pilih-tanggal p{
+    width: 183px;
+    height: 15px;
+    font-family: sans-serif;
+    font-size: 13.9px;
+    font-weight: bold;
+    color: #9c27b0;
+}
+.tab-content{
+    border: none;
+}
+
+.table{
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.title-info{
+    width: 435px;
+    height: 40px;
+    background-color: #f5f5f5;
+    border-bottom: solid 0.8px #dddddd;
+    font-weight: bold;
+    font-size: 13px;
+    
+}
+
+.waktu-trip{
+    font-weight: Bold;
+    font-size: 13.4px;
+    margin-left: 6px;
+}
+
+
+
+
+
+

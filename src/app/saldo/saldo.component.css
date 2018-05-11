@@ -1,0 +1,263 @@
+thead {
+    background-color: #f5f5f5;
+}
+
+th {
+    height: 28px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    padding: 10px;
+}
+
+th:nth-child(1) {
+    width: 110px;
+}
+
+th:nth-child(2) {
+    width: 115px;
+}
+
+th:nth-child(3) {
+    width: 115px;
+}
+
+td {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-tittle {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.head-tittle {
+    font-size: 35px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.current-saldo {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-saldo {
+    padding: 0 30px;
+    width: 100%;
+    height: 94px;
+    line-height: 94px;
+    background-color: #f5f5f5;
+}
+
+.rupiah {
+    font-size: 40px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+}
+
+.saldo-price {
+    font-size: 40px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+}
+
+.wrap-search {
+    position: relative;
+    text-align: right;
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.petunjuk-pencarian {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.petunjuk-pencarian:hover {
+    text-decoration: none;
+}
+
+.btn-trv-ajukan {
+    width: 180px;
+    height: 40px;
+    border-radius: 3px;
+    border: none;
+    background-color: #58b957;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn-trv-ok {
+    width: 73px;
+    height: 27px;
+    border-radius: 3px;
+    background-color: transparent;
+    border: solid 1px #ab47bc;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ab47bc;
+}
+
+.detail-saldo {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-modal-content {
+    margin-top: 180px;
+    margin-left: 60px;
+    width: 490px;
+    height: 305px;
+    border-radius: 3px;
+    background-color: white
+}
+
+.wrap-modal-header {
+    border-radius: 3px 3px 0px 0px;
+    width: 490px;
+    height: 41px;
+    line-height: 41px;
+    padding-left: 20px;
+    background-color: #dddddd;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-modal-body {
+    padding: 25px 60px;
+}
+
+.margin-tittle-label {
+    margin-bottom: 15px;
+}
+
+.margin-tittle-ikon {
+    margin-bottom: 10px;
+}
+
+.tittle-label-modal {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-bottom: 3px
+}
+
+.tittle-sign {
+    display: inline;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.batal {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.wrap-btn {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-trv-kirim {
+    width: 160px;
+    height: 31px;
+    border-radius: 3px;
+    border: 1px solid #ab47bc;
+    background-color: #ab47bc;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.wrap-modal-pencarian {
+    margin-top: 180px;
+    margin-left: 60px;
+    padding: 40px 60px;
+    width: 473px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.img-modal-pencarian {
+    width: 84px;
+    height: 84px;
+}
+
+.tittle-modal-pencarian {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a4a4a;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

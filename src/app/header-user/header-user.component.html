@@ -1,0 +1,90 @@
+<nav class="navbar navbar-profil navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="sr-only"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+            <a [routerLink]="['']" class="navbar-brand" href="#">
+                <img alt="Brand" src="../assets/img/travinesia-logo.png" class="brand-logo">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <form class="navbar-form navbar-left">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="Cari Lokasi Wisata">
+                    <span class="input-group-addon">
+                <button [routerLink]="['/searchNavbar/1']" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    </span>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a [routerLink]="['/traveler/Akun/Pemesanan']" role="button">Pemesanan</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/traveler/Notifikasi']" role="button">Notifikasi</a>
+                </li>
+                <li>
+                    <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Travel</button> <span class="notif"></span>
+                </li>
+                <li>
+                    <a (click)="logout()" role="button" class="profil"> foto
+                      <img src="./assets/img/foto.png" class=foto-profil>
+                  </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+
+    <div class="container-fluid-bar-fixed">
+        <ul class="head-category">
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Beach'}"> <span class="icon-island-with-palm-trees"></span> Beach</a>
+            </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'City Tour'}"> <span class="icon-hotel-with-three-floors"></span> City Tour</a>
+            </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Culture'}"> <span class="icon-theatre-masks"></span> Culture</a>
+            </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Fishing'}"> <span class="icon-fishing-sign"></span> Fishing</a>
+            </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Hiking'}"> <span class="icon-mountains-with-trees"></span> Hiking</a>
+            </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Honeymoon'}"> <span class="icon-love-hot-air-balloon"></span> Honeymoon</a>
+            </li>
+            <li><a [routerLink]="['/search']" [queryParams]="{order:'Tracking'}"><span class="icon-human-foot-prints"></span> Tracking</a> </li>
+            <li>
+                <a [routerLink]="['/search']" [queryParams]="{order:'Sailing'}"> <span class="icon-sea-ship-with-containers"></span> Sailing</a>
+            </li>
+            <li class="kanan">
+                <a [routerLink]="['/JualTrip']"> <span class="icon-question">
+                    <span class="path1"></span><span class="path2"></span>
+                    </span>
+                    Bantuan
+                </a>
+            </li>
+        </ul>
+        <hr class="line-category">
+    </div>
+</nav>
+
+<div class="margin-content">
+    <router-outlet></router-outlet>
+</div>

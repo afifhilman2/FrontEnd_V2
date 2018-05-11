@@ -1,0 +1,126 @@
+<nav class="navbar navbar-transparent navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+            <a [routerLink]="['']" class="navbar-brand" href="#">
+                <img alt="Brand" src="../assets/img/travinesia-logo.png" class="brand-logo">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="input-group stylish-input-group">
+                    <input type="text" (ngModel)="tripSearch" class="form-control" placeholder="Cari Lokasi Wisata">
+                    <span class="input-group-addon">
+                                <button [routerLink]="['/searchNavbar/1']" type="submit" (click)=searchTrip()>
+                                    <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    </span>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a [routerLink]="['/Daftar']">Daftar</a>
+                </li>
+
+                <li>
+                    <a role="button" (click)="toggleLogin()">Masuk <span class="glyphicon glyphicon-chevron-down"></span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid-bar-fixed">
+    <ul class="head-category">
+        <li *ngFor="let category of categoryAllTrip" (click)="searchTrip($event)">
+            <a name="{{category.id_category}}" [routerLink]="['/search']" [queryParams]="{order:''}"> <span class="icon-island-with-palm-trees"></span> {{category.category_name}} </a>
+        </li>
+        <!-- <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'City Tour'}"> <span class="icon-hotel-with-three-floors"></span> {{cityTour}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Culture'}"> <span class="icon-theatre-masks"></span> {{culture}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Fishing'}"> <span class="icon-fishing-sign"></span> {{fishing}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Hiking'}"> <span class="icon-mountains-with-trees"></span> {{hiking}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Honeymoon'}"> <span class="icon-love-hot-air-balloon"></span> {{honeymoon}}</a>
+        </li>
+        <li><a [routerLink]="['/search']" [queryParams]="{order:'Tracking'}"><span class="icon-human-foot-prints"></span> {{tracking}}</a> </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Sailing'}"> <span class="icon-sea-ship-with-containers"></span> {{sailing}}</a>
+        </li> -->
+        <li class="kanan">
+            <a href=""> <span class="icon-question">
+                                <span class="path1"></span><span class="path2"></span>
+                </span>
+                Bantuan
+            </a>
+        </li>
+    </ul>
+    <hr class="line-category">
+</div>
+<!-- <div *ngFor="let trip of getTripSearch"
+[]></div> -->
+
+
+<div class="margin-content">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf='showLogin' (click)="toggleLogin()" class="modal-bg">
+</div>
+
+<div *ngIf='showLogin' class="login-form">
+    <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)" (submit)="onSubmit()">
+        <div class="trv-form-login">
+            <input type="text" class="form-control" placeholder="Email" formControlName="email" autofocus [(ngModel)]="user.email" name="email">
+            <div class="trv-alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">{{emailAlertMessage}}</div>
+        </div>
+
+        <div class="trv-form-login">
+            <input id="password" class="form-control" placeholder="Password" type="password" data-toggle="password" formControlName="password" [(ngModel)]="user.password" name="password">
+            <div class="trv-alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{passwordAlertMessage}}</div>
+        </div>
+
+        <div class="login-forgot">
+            <div class="col-md-6 text-left">
+                <input type="checkbox" class="checkbox">
+                <label class="label-checkbox"> Ingat Saya
+                    </label>
+            </div>
+
+            <div class="col-md-6">
+                <a role="button" [routerLink]="['/login']">
+                    <p>Lupa Password ?</p>
+                </a>
+            </div>
+        </div>
+
+        <button class="btn btn-masuk" type="submit Form">Masuk</button>
+
+        <div class="trv-line-login"></div>
+
+        <button class="btn btn-facebook" type="submit"> <span class="icon-facebook"></span> Masuk Dengan Facebook</button>
+        <button class="btn btn-gmail" type="submit">Masuk Dengan Gmail</button>
+    </form>
+</div>
+
+<!-- end login form  -->

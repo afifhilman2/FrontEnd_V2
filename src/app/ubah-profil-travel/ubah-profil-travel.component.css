@@ -1,0 +1,166 @@
+.wrap-tittle {
+    position: relative;
+}
+
+.head-tittle {
+    font-size: 35px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.info-paket {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    width: 615px;
+    margin-left: 6px;
+    display: inline-table;
+}
+
+.highlight {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+}
+
+.highlight:hover {
+    text-decoration: none;
+}
+
+.wrap-slogan {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.label-form {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.slogan-trip {
+    width: 663px;
+    height: 89px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-deskripsi {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.deskripsi-trip {
+    width: 663px;
+    height: 89px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-alamat {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.alamat-trip {
+    width: 663px;
+    height: 89px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-info-trip {
+    position: relative;
+}
+
+.label-form {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.form-sort {
+    position: absolute;
+    top: 25px;
+    width: 238px;
+    height: 36px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+}
+
+.label-phone {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.phone-trip {
+    position: absolute;
+    width: 238px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+}
+
+.wrap-btn-trv {
+    position: relative;
+    text-align: right;
+    margin-top: 70px;
+    margin-bottom: 15px;
+}
+
+.batal {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    margin-right: 20px;
+}
+
+.batal:hover {
+    text-decoration: none;
+}
+
+.btn-trv-ubah {
+    width: 282px;
+    height: 44px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #ab47bc;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}

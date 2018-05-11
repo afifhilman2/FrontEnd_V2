@@ -1,0 +1,393 @@
+.container{
+    width: 959px;
+}
+
+.tahapan-proses{
+    display: inline-flex;
+    margin-left: 15px;
+    margin-bottom: 64px;
+}
+.no-proses1{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    padding-left: 6px;
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-left: 290px;
+    
+}
+
+.no-proses1 p{
+    line-height: 24px;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #9c27b0;
+}
+
+.no-proses2{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    padding-left: 6px;
+    margin-top: 8px;
+}
+
+.no-proses2 p{
+    line-height: 24px;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #f5f5f5;
+}
+.tahapan-proses1{
+    width: 449px;
+    height: 68px;
+    background-color: #9c27b0;
+    padding-top: 15px;
+    padding-right: 30px;
+    border-top-left-radius: 10px;
+
+}
+
+.proses1{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: white;
+    margin-top: -32px;
+    margin-left: 50px;
+}
+
+.tahapan-proses2{
+    width: 449px;
+    height: 68px;
+    background-color: #f5f5f5;
+    padding-top: 15px;
+    padding-left: 30px;
+    border-top-right-radius: 10px;
+}
+
+.proses2{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: white;
+    margin-top: -32px;
+    margin-left: 40px;
+}
+
+.isi-tahapan-pesanan{
+    width: 264px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 3px 4.7px 0.3px rgba(0, 0, 0, 0.24), 0px 2px 5.9px 0.1px rgba(0, 0, 0, 0.16);
+    border: solid 1px #dddddd;
+    padding-bottom: 17px;
+}
+
+.isi-tahapan-title{
+    width: 264px;
+    height: 36px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-left: -1px;
+    background-color: #9c27b0;
+    
+}
+
+.isi-tahapan-title p{
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-top: 8px; 
+}
+
+.gambar{
+    width: 264px;
+    height: 231px;
+    display: flex;
+    /* align-items: center; */
+    margin-left: -1px;
+}
+
+.gambar img{
+    width: 264px;
+    height: auto;
+    display: block;
+    object-fit: cover;
+
+}
+
+.detail-pesanan{
+    padding-left: 23px;
+    margin-top: 15px;
+    padding-right: 23px;
+}
+
+.isi-pesanan-nama-pulau p{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.isi-pesanan-waktu.waktu{
+    font-family: sans-serif;
+    font-size: 13.4px;
+    color: #4a4a4a;
+}
+
+.isi-pesanan-travel.travel{
+    font-family: sans-serif;
+    font-size: 13.4px;
+    color: #4a4a4a;
+}
+
+.isi-detail{
+    margin-top: 28px;
+    width: 271px;
+}
+
+.panel-detail{
+    width: 264px;
+}
+
+.panel-heading p{
+    font-family: sans-serif;
+    font-size: 15px;
+    color: #4a4a4a;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.panel-body span{
+    font-size: 13px;
+    font-family: sans-serif;
+}
+.detail-pelaksanaan p{
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.detail-jumlah p{
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.detail-keterangan p{
+    font-family: sans-serif;
+    font-size: 11px;
+    color: #9e9e9e;
+}
+
+.form-data-pemesan{
+    margin-left: 34px;
+    margin-right: 42px;
+    border-radius:3px;
+    
+}
+
+.label-form-pemesanan{
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+.form-email{
+    width: 225px;
+    height: 34px;
+    margin-top: 19px;
+}
+
+.form-telepon{
+    width: 225px;
+    height: 34px;
+    margin-top: -34px;
+}
+
+.ubah-data p{
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #9c27b0;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-left: 35px;
+}
+
+textarea{
+    width: 508px;
+    height: 170px;
+    padding-left: 0;
+    margin-left: -10px;
+    margin-top: 10px;
+}
+
+
+.keterangan{
+    margin-left: 20px;
+}
+
+.dana{
+    margin-right: 20px;
+}
+
+.form-kode-promo{
+    display: inline;
+}
+
+
+.form-kode-promo input{
+    width: 234px;
+    height: 26px;
+    display: inline-block;
+    margin-left: 30px;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
+.form-kode-promo label{
+    margin-left: 20px;
+}
+.btn-kode{
+    width: 113px;
+    height: 26px;
+    background-color: white;
+    border-color: #ccc;
+    color: #9c27b0;
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 11px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-left: -4px;
+    margin-top: -4px;
+    border-radius: 0;
+}
+
+
+.pembayaran{
+    width: 588px;
+    height: 41px;
+    mix-blend-mode: undefined;
+    border-radius: 2.4px;
+    background-color: #e91e63;
+    padding-top: 12px;
+}
+
+.pembayaran p{
+    color:white;
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.titik-dua{
+    position: absolute;
+    left: 177px;
+}
+
+.nominal{
+    position: relative;
+    left: -20px;
+    align-self: right;
+    font-size: 15px;
+}
+
+hr{
+    width: 520px;
+}
+.detail span.jumlah{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left:  5px;
+}
+
+.detail span{
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.total{
+    margin-left: 20px;
+}
+
+.total p{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.total span{
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+/* checkbox */
+
+.cbx{
+    padding-top: 12px;
+}
+.cbx label{
+    font-weight: bold;
+}
+
+.label--checkbox {
+    position: absolute;
+    margin-left: 3px;
+    font-family: sans-serif;
+    font-size : 13px;
+    font-weight: bold;
+    line-height: 158%;
+    margin-top: -5px;
+    font-weight: normal;
+    width: 427px;
+    margin-right: 10px;
+}
+  
+.checkbox {
+    position: relative;
+    top: -0.375rem;
+    margin: 0 1rem 0 0;
+    cursor: pointer;
+    display: inline-block;
+}
+ 
+.checkbox:before {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    width: 13px;
+    height: 13px;
+    border: 2px solid #dddddd;
+}
+ 
+.checkbox:checked:before {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 0.7rem;
+    border-color: purple;
+    border-top-style: none;
+    border-right-style: none;
+}
+ 
+.checkbox:after {
+    content: "";
+    position: absolute;
+    top: -0.125rem;
+    left: 0;
+    width: 1.3rem;
+    height: 1.4rem;
+    background: #fff;
+    cursor: pointer;
+}

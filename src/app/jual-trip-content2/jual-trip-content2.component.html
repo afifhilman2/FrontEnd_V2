@@ -1,0 +1,95 @@
+<div *ngIf='jual2'>
+    <div class="wrap-tittle">
+        <p class="head-content"> Jual Trip </p>
+        <span class="state-all"> Tahap 2 dari 2</span>
+        <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
+        </span>
+    </div>
+
+    <div class="info-trip-term"> Jual Trip Travel Anda disini. Masukkan informasi trip selengkap mungkin untuk meningkatkan kepercayaan traveller terhadap paket trip yang ditawarkan. Berikan fasilitas yang terbaik Travel Anda.</div>
+
+    <div class="wrap-deskripsi">
+        <label class="label-form" for="Deskripsi">Deskripsi</label>
+        <div class="input-group">
+            <textarea class="deskripsi-trip form-control" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
+        </div>
+    </div>
+
+    <div class="wrap-catatan">
+        <label class="label-form" for="catatan">Catatan untuk Traveller</label>
+        <div class="input-group">
+            <textarea class="catatan-trip form-control" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
+        </div>
+    </div>
+
+    <div class="wrap-mepo">
+        <label class="label-form" for="mepo">Meeting Point</label>
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-mepo dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+            <input type="text" class="mepo-trip form-control" placeholder="Cari lokasi meeting point" aria-describedby="mepo" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl">
+        </div>
+        <div class="catatan-mepo"> <span class="note-mepo">Catatan :</span> Masukkan nama tempat atau gedung populer di sekitar meeting point</div>
+
+        <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker [latitude]="latitude" [longitude]="longitude"> </agm-marker>
+        </agm-map>
+    </div>
+
+    <div class="wrap-petunjuk">
+        <label class="label-form" for="petunjuk">Petunjuk ke Meeting Point</label>
+        <div class="input-group">
+            <textarea class="petunjuk-trip form-control" id="petunjuk" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
+        </div>
+    </div>
+
+    <div class="wrap-waktu">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="tittle-waktu">Waktu bertemu:</div>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" placeholder="Jam : Menit" class="waktu-bertemu-input form-control">
+            </div>
+
+            <div class="col-md-4">
+                <div class="note-waktu">Diisi sesuai pembagian wilayah waktu lokasi trip berada</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap-harga">
+        <div class="wrap-publish">
+            <label class="label-form" for="harga">Harga Trip</label>
+            <div class="publish-trip input-group">
+                <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                <input type="text" class="form-control" placeholder="Harga Publish">
+            </div>
+            <span class="perorang">/ Orang </span>
+        </div>
+
+        <div class="wrap-kuota">
+            <label class="label-form" for="harga">Kuota Maksimal</label>
+            <div class="publish-trip input-group">
+                <input type="text" class="form-control">
+                <span class=" input-group-addon" id="harga"> Peserta </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap-checkbox">
+        <input type="checkbox" class="checkbox">
+        <label class="label-checkbox"> Dengan ini saya meneyetujui bahwa paket trip yang saya jual sesuai dengan syarat dan
+                ketentuan pihak Travinesia dan bersedia mengikuti segala kebijakan yang berlaku</label>
+    </div>
+
+    <div class="wrap-btn">
+        <button class="btn-content"> Jual</button>
+    </div>
+</div>
+
+<div *ngIf='jual1'>
+    <app-jual-trip-content></app-jual-trip-content>
+</div>

@@ -1,0 +1,320 @@
+[hidden] {
+    display: none !important;
+}
+
+.blur {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 99;
+    top: 0;
+}
+
+.wrap-form-daftar {
+    width: 476px;
+    height: 899px;
+    border-radius: 5px;
+    background-color: #fafafa;
+    box-shadow: 0px 3px 4.7px 0.3px rgba(0, 0, 0, 0.24), 0px 2px 5.9px 0.1px rgba(0, 0, 0, 0.16);
+}
+
+.head-daftar {
+    width: 476px;
+    height: 57px;
+    padding: 15px 36px;
+    background-color: #ab47bc;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.wrap-form-content {
+    padding: 36px;
+    padding-right: 45px;
+}
+
+.label-form {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.form-control {
+    margin-bottom: 24px;
+}
+
+.namaTrv {
+    width: 396px;
+    height: 33px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+}
+
+.sloganTrv {
+    width: 396px;
+    height: 83px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.deskripsiTrv {
+    width: 396px;
+    height: 83px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-alamat {
+    position: relative;
+}
+
+.alamatTrv {
+    width: 213px;
+    height: 125px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.sort {
+    display: inline-block;
+    position: absolute;
+    right: 111px;
+    top: 0px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.form-sort {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+    width: 167px;
+    height: 33px;
+    border-radius: 2.4px;
+    display: inline-block;
+    padding: 0px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.nomorTrv {
+    width: 396px;
+    height: 33px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+}
+
+.domain-name {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #9c27b0;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.domainTrv {
+    display: inline-block;
+    width: 290px;
+    height: 33px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+}
+
+.wrap-domain {
+    float: right;
+}
+
+.checkbox:after {
+    content: "";
+    position: absolute;
+    top: -0.125rem;
+    left: 0;
+    width: 1.3rem;
+    height: 1.4rem;
+    background: #fafafa;
+    cursor: pointer;
+}
+
+.label-checkbox {
+    position: absolute;
+    width: 383px;
+    bottom: 106px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.btn-daftar-trv {
+    width: 395px;
+    height: 35px;
+    margin-top: 55px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: solid 1px #b7b7b7;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.logo {
+    width: 88px;
+    height: 21px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.tittle-head {
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+}
+
+.title-content {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.head-category {
+    list-style: none;
+    display: inline-block;
+    padding: 0px;
+}
+
+ul.head-category li {
+    display: inline;
+    margin-right: 21px;
+    position: relative;
+}
+
+li>a:hover {
+    text-decoration: none;
+}
+
+.wrap-modal {
+    border: 1px solid #dddddd;
+    position: fixed;
+    top: 75px;
+    left: 160px;
+    z-index: 99;
+    width: 342px;
+    height: 450px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    padding: 11px;
+}
+
+.close-modal {
+    display: block;
+    position: relative;
+    left: 143px;
+    margin-bottom: 100px;
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-size: 28px;
+    width: 31px;
+    height: 31px;
+    line-height: 31px;
+    border-radius: 3px;
+    background-color: #d24d57;
+    cursor: pointer;
+}
+
+.exit:hover {
+    text-decoration: none;
+}
+
+.wrap-foto-content {
+    margin: 38px auto;
+    width: 204px;
+    height: 204px;
+}
+
+.img-modal {
+    width: 204px;
+    height: 204px;
+}
+
+.tittle-foto {
+    text-align: center;
+    font-size: 25px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.detail-tittle {
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.btn-trv-modal {
+    width: 319px;
+    height: 45px;
+    line-height: 42px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+}

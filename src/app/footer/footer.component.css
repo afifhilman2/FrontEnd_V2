@@ -1,0 +1,36 @@
+.footer {
+    width: 101%;
+    height: 206px;
+    background-color: #9c27b0;
+    margin-top: 61px;
+    padding-top: 42px;
+}
+
+.footer-brand-logo {
+    margin-top: -2px;
+}
+
+.cr-head {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 21px;
+}
+
+.cr-tittle {
+    font-size: 13px;
+    color: #ffffff;
+}
+
+.footer-black {
+    width: 101%;
+    height: 44px;
+    background-color: #1b1b1b;
+}
+
+.cr-black {
+    font-size: 13px;
+    text-align: left;
+    color: #ffffff;
+    margin-left: 40px;
+}

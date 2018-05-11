@@ -1,0 +1,26 @@
+
+<div class="flex-container flex-center">
+    <div  class="calendar"> 
+        <div class="month">      
+        <ul>
+            <li class="prev" (click)="prevMonth()">&#10094;</li>
+            <li class="next" (click)="nextMonth()">&#10095;</li>
+            <li>
+            <div>{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
+            </li>
+        </ul>
+        </div>
+        <ul class="weekdays">
+        <li *ngFor="let nama of dayNames">
+            {{nama}}
+        </li>
+        </ul>
+        <div class="">
+        <ul class="days">
+            <li *ngFor="let day of daysArr" [ngClass]="{'today':todayCheck(day)}">{{day?.date()}}</li>
+        </ul>
+        </div> 
+    </div>
+</div>
+  
+  

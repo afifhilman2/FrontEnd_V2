@@ -1,0 +1,307 @@
+.container{
+    width: 959px;
+}
+
+.tahapan-proses{
+    display: inline-flex;
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+.no-proses1{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    padding-left: 6px;
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-left: 290px;
+    
+}
+
+.no-proses1 p{
+    line-height: 24px;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #f5f5f5;
+}
+
+.no-proses2{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    padding-left: 6.5px;
+    margin-top: 8px;
+}
+
+.no-proses2 p{
+    line-height: 24px;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #9c27b0;
+}
+.tahapan-proses1{
+    width: 449px;
+    height: 68px;
+    background-color: #f5f5f5;
+    padding-top: 15px;
+    padding-right: 30px;
+    border-top-left-radius: 10px;
+
+}
+
+.proses1{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: white;
+    margin-top: -32px;
+    margin-left: 50px;
+}
+
+.tahapan-proses2{
+    width: 449px;
+    height: 68px;
+    background-color: #9c27b0;
+    padding-top: 15px;
+    padding-left: 30px;
+    border-top-right-radius: 10px;
+}
+
+.proses2{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: white;
+    margin-top: -32px;
+    margin-left: 40px;
+}
+
+.trv-notice{
+    width: 895px;
+    margin-left: 17px;
+    height: 52px;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+}
+
+.txt-notice{
+    width: 412px;
+    height: 13px;
+    font-family: sans-serif;
+    font-size: 15px;
+    line-height: 3.5;
+    letter-spacing: normal;
+    margin-left: 52px;
+    color: #ab47bc;
+    margin: auto;
+    display: block;
+}
+
+.metode-bayar{
+    width: 584px;
+    height: 323px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5.9px 0.1px rgba(233, 30, 99, 0.5);
+    border: solid 1px #dddddd;
+    margin-top: 30px;
+    margin-left: 5px;
+}
+
+.batas-waktu{
+    margin-top: 30px;
+    width: 274px;
+    height: 36px;
+    mix-blend-mode: undefined;
+    border-radius: 3px;
+    border: solid 1px #dddddd;
+    padding: 7px;
+}
+
+.batas-waktu p{
+    margin-left: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.glyphicon-time{
+    margin-right: 5px;
+}
+
+.waktu{
+    font-weight: bold;
+    color: #e91e63;
+}
+
+.body-metode{
+    padding: 0;
+}
+
+.titik-dua{
+    position: absolute;
+    left: 199px;
+}
+
+.nominal{
+    position: relative;
+    left: -20px;
+    align-self: right;
+    font-size: 15px;
+}
+
+hr{
+    width: 520px;
+}
+.detail span.jumlah{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left:  5px;
+}
+
+.detail p{
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.total{
+    margin-left: 20px;
+}
+
+.total p{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.total span{
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+
+.no-pesanan{
+    margin-top: 22px;
+}
+
+.btn-batal{
+    width: 240px;
+    height: 36px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: sans-serif;
+    background-color: #ffffff;
+    color: #9c27b0;
+    margin-left:72px;
+}
+.btn-simpan{
+    width: 273px;
+    height: 36px;
+    border-radius: 3px;
+    background-color: #e91e63;
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.no-resi{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.pesan{
+    font-family: sans-serif;
+    font-size: 11px;
+    color: #9e9e9e;
+}
+
+.salin{
+    font-size: 11px;
+    color: #9c27b0;
+    font-weight: normal;
+}
+
+.detail-pesanan{
+    background-color: #ffffff;
+
+}
+
+.glyphicon-briefcase{
+    margin-right: 10px;
+}
+
+.total-bayar{
+    display: inline;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.tanggal{
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.pemesan{
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-size: 13px;
+    display: inline;
+}
+
+.jumlah-orang{
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.panel-heading p{
+    display: inline;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.gambar{
+    width: 127px;
+    height: 127px;
+    border-radius: 3px;
+    border: solid 1px #e91e63;
+    display: flex;
+    align-items: center;
+}
+
+.gambar img{
+    width: 120px;
+    height: 45px;
+    display: block;
+    margin: auto;
+}
+
+.ul-transver{
+    list-style-type: none;
+    margin-left: -10px;
+
+}
+
+.transver{
+    float: left;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: solid 1px #e91e63;
+    padding: 46px 9px 46px 9px;
+    width: 127px;
+    height: 127px;
+}
+
+li img{
+    width: 109px;
+    height: 35px;
+    
+}

@@ -1,0 +1,50 @@
+<div class="container-sidebar">
+    <div class="my-akun"> Akun Saya</div>
+    <span class="root-akun">Beranda > Akun > {{order}}</span>
+
+    <div class="wrapper">
+        <nav id="sidebar" [class.show]="show">
+            <ul id="sidemenu" class="sidebar-nav">
+                <li>
+                    <a [routerLink]="['/JualTrip']" [queryParams]="{order:'Profil'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <span class="sidebar-title">Profil</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['Pemesanan']" [queryParams]="{order:'Pemesanan'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="sidebar-title">Pemesanan</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['Favorit']" [queryParams]="{order:'Favorit'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="sidebar-title">Favorit</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['Notifikasi']" [queryParams]="{order:'Notifikasi'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="sidebar-title">Notifikasi</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['Promo']" [queryParams]="{order:'Promo'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="sidebar-title">Promo</span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <div class="content">
+            <div class="btn-toggle" (click)="toggleCollapse()" role="button"><span class="glyphicon glyphicon-chevron-left"></span></div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,90 @@
+.head {
+    width: 1366px;
+    height: 75px;
+    background-color: #f5f5f5;
+    border: solid 1px #dddddd;
+}
+
+.wrap-head {
+    width: 181px;
+    margin: 12px auto;
+}
+
+.head-password {
+    width: 181px;
+    height: 44px;
+}
+
+.wrapper-lupa-sandi {
+    width: 463px;
+    height: 269px;
+    border-radius: 5px;
+    border: solid 1px #dddddd;
+    margin: 54px auto;
+    padding: 5px 33px 0px 33px;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 4.7px 0.3px rgba(0, 0, 0, 0.24), 0px 2px 5.9px 0.1px rgba(0, 0, 0, 0.16);
+}
+
+.head-kata-sandi {
+    font-size: 25.2px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 13px;
+}
+
+.content-kata-sandi {
+    font-size: 13px;
+    color: #4a4a4a;
+    margin-bottom: 29px;
+}
+
+.input-kata-sandi {
+    width: 396px;
+    height: 33px;
+    padding: 10px;
+    border-radius: 3px;
+    border: solid 1px #dddddd;
+}
+
+.input-kata-sandi:focus {
+    border-color: #dddddd;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #e91e63;
+}
+
+.input-kata-sandi::-webkit-input-placeholder {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(158, 158, 158, 0.6);
+}
+
+.input-kata-sandi::-moz-placeholder {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(158, 158, 158, 0.6);
+}
+
+.input-kata-sandi::-o-input-placeholder {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(158, 158, 158, 0.6);
+}
+
+.btn-kata-sandi {
+    width: 167px;
+    height: 35px;
+    border-radius: 3px;
+    margin-top: 34px;
+    background-color: #8e3caa;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.disini {
+    color: #8e3caa;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}

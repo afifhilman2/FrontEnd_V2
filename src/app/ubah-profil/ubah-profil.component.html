@@ -1,0 +1,134 @@
+<main id="page-content-wrapper" role="main">
+  <p class="profil">Profil</p>
+  <p class="masukan-profil">Masukkan profil Anda dengan benar. Travinesia akan menghubungi sesuai dengan informasi yang Anda masukkan. 
+     Pastikan informasi pada Halaman Profil selalu update jika ada perubahan informasi terkait Anda.</p>
+  <div class="trv-notice">
+    <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
+  </div>
+  <div class="col-md-8">
+    <div class="form">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name" class=" form-label"> Nama Lengkap <p class="pull-right">:</p></label>
+          <div class="form-nama">
+            <input  formControlName="name" type="text" class="form-control" autofocus> 
+          </div>
+        </div> 
+        <div class="form-group">
+          <label for="tanggalLahir" class="form-label"> Tanggal Lahir <p class="pull-right">:</p></label>
+            <div class="form-tanggal">
+              <div class="form-group">
+                <select class="form-control form-select">
+                  <option>Tanggal</option>  
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>  	
+                </select>
+              </div>
+            </div>
+            <div class="form-bulan">
+              <div class="form-group">
+                <select class="form-control form-select">
+                  <option>Bulan</option>
+                  <option>Januari</option>
+                  <option>Februari</option>
+                  <option>Maret</option>
+                  <option>April</option>
+                  <option>Mei</option>	
+                </select>
+              </div>
+            </div>
+            <div class="form-tahun">
+              <div class="form-group">
+                <select class="form-control form-select">
+                  <option>Tahun</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>	
+                </select>
+              </div>
+            </div>
+          
+        </div>
+        <div class="form-group">
+          <div class="radio-trv">
+            <label for="optradio" class="label-radio">Jenis Kelamin <p class="pull-right">:</p></label>
+            <div class="radio">
+              <label class="trv-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
+              <label class="trv-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Perempuan</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label"> Email <p class="pull-right">:</p></label>
+          <div class="form-email">
+            <input id="email" type="email" class="form-control" formControlName="email">
+          </div> 
+        </div>
+        <div class="form-group">
+          <label for="telephone" class="form-label"> No. HP <p class="pull-right">:</p></label>
+          <div class="form-telepone">
+            <input id="telephone" type="text" class="form-control" formControlName="telephone"> 
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="identity" class="form-label"> No Identitas <p class="pull-right">:</p></label>
+          <div class="form-identitas">
+            <input id="identity" type="text" class="form-control" formControlName="identity"> 
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-simpan" type="submit">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <img src="assets/img/foto.png" class="image">
+    <div class="ubahPr">
+      <button class="btn btn-ubahProfil" type="file">Ubah Foto Profil</button>
+      <p class="btn-deskripsi">Maksimum ukuran file 2 Mb format.JPG,.JPEG atau.PNG</p>
+    </div>
+    <div class="ubahPa">
+      <button class="btn btn-ubahPassword" type="button" data-toggle="modal" data-target="#ubahpassword">
+        <span class="glyphicon glyphicon-lock lock"></span>Ubah Password</button>
+    </div>
+  </div>
+  <div class="modal fade" id="ubahpassword" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <p class="modal-title"><span class="glyphicon glyphicon-lock"></span> Ubah Password</p>   
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label class="label-modal">Password Lama</label>
+              <input type="text" class="form-control modal-form">
+            </div>
+            <div class="form-group">
+              <label class="label-modal">Password Baru</label>
+              <input type="text" class="form-control modal-form">
+            </div>
+            <div class="form-group">
+              <label class="label-modal">Ulangi Password Baru</label>
+              <input type="text" class="form-control modal-form">
+            </div>  
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-batal" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-save">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
