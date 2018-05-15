@@ -46,47 +46,6 @@ export const routes :Routes = [
             {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
             {path:'loginpage', component:LoginpageComponent},
             {path:'Notifikasi', component:EksternalComponent},
-            // {path:'JadiTravel', component:DaftarTravelComponent,},
-            // {path:'EtalaseTravel', component:EtalaseTravelComponent},
-            // {path:'DetailPaket', component:DetailPaketComponent},
-            // {path:'ProsesPemesanan', component:ProsesPemesananComponent},
-            // {path:'ProsesBayar', component:ProsesBayarComponent},
-            // {path:'ProsesBayar2', component:ProsesBayar2Component},
-            // {path:'Daftar', component:RegisterComponent},
-            // {path:'Calendar', component:CalendarComponent},
-            // {path:'Akun', component:TrvSidebarComponent,
-            // children:[
-            //     {path:'', component:PemesananComponent},
-            //     {path:'Profil', component:UbahProfilComponent},
-            //     {path:'Pemesanan', component:PemesananComponent},
-            //     {path:'Favorit', component:FavoritUserComponent},
-            //     {path:'Notifikasi', component:EksternalComponent},
-            //     {path:'Promo', component:EksternalComponent}
-            //         ]
-            //         },
-            // {path:'JualTrip', component:JualTripComponent,
-            // children:[
-            //     {path:'', component:JualTripContentComponent},
-            //     {path:'Saldo', component:SaldoComponent},
-            //     {path:'JualTrip', component:JualTripContentComponent},
-            //     {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
-            //     {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
-            //     {path:'DaftarTrip', component:DaftarTripComponent},
-            // ]
-            // }
-                    ]
-    },
-
-    //with login
-    {
-        path :'traveler', 
-        component:HeaderUserComponent,
-        children: [
-            {path:'', component:LandingpageComponent},
-            {path:'search', component:TrvSearchResultComponent},
-            {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
-            {path:'loginpage', component:LoginpageComponent},
-            {path:'Notifikasi', component:EksternalComponent},
             {path:'JadiTravel', component:DaftarTravelComponent,},
             {path:'EtalaseTravel', component:EtalaseTravelComponent},
             {path:'DetailPaket', component:DetailPaketComponent},
@@ -98,7 +57,7 @@ export const routes :Routes = [
             {path:'Akun', component:TrvSidebarComponent,
             children:[
                 {path:'', component:PemesananComponent},
-                {path:'Profil', component:UbahProfilComponent},
+                {path:'Profile', component:UbahProfilComponent},
                 {path:'Pemesanan', component:PemesananComponent},
                 {path:'Favorit', component:FavoritUserComponent},
                 {path:'Notifikasi', component:EksternalComponent},
@@ -117,11 +76,55 @@ export const routes :Routes = [
             }
                     ]
     },
+
+    //with login
+    // {
+    //     path :'traveler', 
+    //     component:HeaderUserComponent,
+    //     children: [
+    //         {path:'', component:LandingpageComponent},
+    //         {path:'search', component:TrvSearchResultComponent},
+    //         {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
+    //         {path:'loginpage', component:LoginpageComponent},
+    //         {path:'Notifikasi', component:EksternalComponent},
+    //         {path:'JadiTravel', component:DaftarTravelComponent,},
+    //         {path:'EtalaseTravel', component:EtalaseTravelComponent},
+    //         {path:'DetailPaket', component:DetailPaketComponent},
+    //         {path:'ProsesPemesanan', component:ProsesPemesananComponent},
+    //         {path:'ProsesBayar', component:ProsesBayarComponent},
+    //         {path:'ProsesBayar2', component:ProsesBayar2Component},
+    //         {path:'Calendar', component:CalendarComponent},
+    //         {path:'Akun', component:TrvSidebarComponent,
+    //         children:[
+    //             {path:'', component:PemesananComponent},
+    //             {path:'Profil', component:UbahProfilComponent},
+    //             {path:'Pemesanan', component:PemesananComponent},
+    //             {path:'Favorit', component:FavoritUserComponent},
+    //             {path:'Notifikasi', component:EksternalComponent},
+    //             {path:'Promo', component:EksternalComponent}
+    //                 ]
+    //                 },
+    //         {path:'JualTrip', component:JualTripComponent,
+    //         children:[
+    //             {path:'', component:JualTripContentComponent},
+    //             {path:'Saldo', component:SaldoComponent},
+    //             {path:'JualTrip', component:JualTripContentComponent},
+    //             {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
+    //             {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
+    //             {path:'DaftarTrip', component:DaftarTripComponent},
+    //         ]
+    //         }
+    //                 ]
+    // },
     
     //lupa sandi
     {
         path:'login', component:LupaKataSandiComponent,
     },
+
+    //Daftar
+
+    {path:'Daftar', component:RegisterComponent},
 
     //not found
     {

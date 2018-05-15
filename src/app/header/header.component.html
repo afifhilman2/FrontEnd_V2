@@ -46,7 +46,7 @@
 <div class="container-fluid-bar-fixed">
     <ul class="head-category">
         <li *ngFor="let category of categoryAllTrip" (click)="searchTrip($event)">
-            <a name="{{category.id_category}}" [routerLink]="['/search']" [queryParams]="{order:''}"> <span class="icon-island-with-palm-trees"></span> {{category.category_name}} </a>
+            <a name="{{category.id_category}}" [routerLink]="['/search']" [queryParams]="{order:''}"> <span class="{{category.class}}"></span> {{category.category_name}} </a>
         </li>
         <!-- <li>
             <a [routerLink]="['/search']" [queryParams]="{order:'City Tour'}"> <span class="icon-hotel-with-three-floors"></span> {{cityTour}}</a>
