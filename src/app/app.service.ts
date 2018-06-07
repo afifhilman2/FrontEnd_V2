@@ -63,15 +63,26 @@ export class AppService {
         .map(res => res.json());
     }
 
+    getTypeTrip() {
+        return this.http.get('http://travinesia.com:3000/get/type')
+        .map(res => res.json());
+    }
+
     getDataTrip() {
         return this.http.get('http://travinesia.com:3000/get/trip/')
         .map(res => res.json());
     }
 
     //post
+
     //register
     registerUser(newUser) {
         return this.http.post('http://travinesia.com:3000/v1/user/users', newUser)
+        .map(res => res.json());
+    }
+
+    addTripProvider(trip) {
+        return this.http.post('http://travinesia.com:3000/v1/provider/add_trip',trip)
         .map(res => res.json());
     }
 

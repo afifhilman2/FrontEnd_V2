@@ -80,11 +80,9 @@
 
 .nama-trip {
     width: 660px;
-    height: 72px;
     border-radius: 3px;
     background-color: #fdfdfd;
-    border: solid 1px #dddddd;
-    resize: none;
+    height: 42px;
 }
 
 .wrap-form-trip {

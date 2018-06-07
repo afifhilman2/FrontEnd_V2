@@ -67,15 +67,11 @@ export class HeaderComponent implements OnInit {
    //searchById
    
    searchTrip(e) {
-   this.idCategory = e.target.name
-    this.http.get('http://travinesia.com:3000/get/category/'+this.idCategory)
-    .subscribe(
-      (res:Response)=> {
-        let tripSearch = res.json();
-        this.getTripSearch = tripSearch.data;
-        console.log(this.getTripSearch);
-      }
-    )
+     
+   this.idCategory = e.target.id;
+ // console.log(e);    
+    this.router.navigate(['/search', this.idCategory]);
+
   }
 
 

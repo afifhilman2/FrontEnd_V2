@@ -42,7 +42,7 @@ export const routes :Routes = [
         component:HeaderComponent,
         children: [
             {path:'', component:LandingpageComponent},
-            {path:'search', component:TrvSearchResultComponent},
+            {path:'search/:id', component:TrvSearchResultComponent},
             {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
             {path:'loginpage', component:LoginpageComponent},
             {path:'Notifikasi', component:EksternalComponent},
@@ -76,6 +76,7 @@ export const routes :Routes = [
             }
                     ]
     },
+
 
     //with login
     // {

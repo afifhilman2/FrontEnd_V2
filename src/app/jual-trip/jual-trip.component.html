@@ -1,71 +1,74 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="wrap-sidebar-info">
+            <div class="wrap-menu-info">
                 <div class="wrap-info-content">
-                    <img src="../assets/img/Award.png" class="badge-travel">
+                    <img class="bgn-img" src="../assets/img/trip.jpg">
 
-                    <img class="img-info" src="../assets/img/kuylah.png">
+                    <div class="wrap-img-circle">
+                        <img class="img-info" src="../assets/img/kuylah.png">
+                    </div>
 
                     <div class="info-tittle"> Kuylah Travel Indonesia </div>
-                    <div class="info-tittle-address"> <span class="glyphicon glyphicon-home"></span> Bogor, Jawa Barat</div>
-                    <p class="info-level-travel"> Travel Kelas Satu</p>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
+                    <p class="info-level-travel"> Trip Berhasil : 86 </p>
                 </div>
-                <div class="info-footer"> <span class="glyphicon glyphicon-ok-circle"></span> Akun Terverifikasi </div>
-            </div>
 
-            <div class="wrap-menu-info">
+                <hr>
+
                 <ul class="list-menu">
                     <li>
-                        <a [routerLink]="['JualTrip']" [queryParams]="{order:'Jual Trip'}">
+                        <a class="padding-right" [routerLink]="['JualTrip']" [queryParams]="{order:'Jual Trip'}">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i>
                                                       </span>
                             <span class="sidebar-title">Jual Trip</span>
+
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
+                            <span class="pull-right"> <i class="badge"> 7 </i> </span>
                         </a>
                     </li>
 
                     <li>
-                        <a [routerLink]="['Saldo']" [queryParams]="{order:'Saldo'}">
+                        <a class="padding-right" [routerLink]="['Saldo']" [queryParams]="{order:'Saldo'}">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-file"></i>
                                                       </span>
                             <span class="sidebar-title">Saldo</span>
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
                         </a>
                     </li>
 
                     <li>
-                        <a [routerLink]="['TransaksiPenjualan']" [queryParams]="{order:'Transaksi Penjualan'}">
+                        <a class="padding-right" [routerLink]="['TransaksiPenjualan']" [queryParams]="{order:'Transaksi Penjualan'}">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-heart-empty"></i>
                                                       </span>
                             <span class="sidebar-title">Transaksi Penjualan</span>
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
                         </a>
                     </li>
 
                     <li>
-                        <a [routerLink]="['DaftarTrip']" [queryParams]="{order:'Daftar Trip'}">
+                        <a class="padding-right" [routerLink]="['DaftarTrip']" [queryParams]="{order:'Daftar Trip'}">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-bell"></i>
                                                       </span>
                             <span class="sidebar-title">Daftar Trip</span>
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
                         </a>
                     </li>
 
                     <li>
-                        <a [routerLink]="['/EtalaseTravel']">
+                        <a class="padding-right" [routerLink]="['/EtalaseTravel']">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-cog"></i>
                                                       </span>
                             <span class="sidebar-title">Etalase Travel</span>
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
                         </a>
                     </li>
 
                     <li>
-                        <a [routerLink]="['UbahProfilTravel']" [queryParams]="{order:'Ubah Profil Travel'}">
+                        <a class="padding-right" [routerLink]="['UbahProfilTravel']" [queryParams]="{order:'Ubah Profil Travel'}">
                             <span class="sidebar-icon"><i class="glyphicon glyphicon-cog"></i>
                                                       </span>
                             <span class="sidebar-title">Ubah Profil Travel</span>
+                            <span class="pull-right"> <i class="glyphicon glyphicon-chevron-right"></i> </span>
                         </a>
                     </li>
                 </ul>
