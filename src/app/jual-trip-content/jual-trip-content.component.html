@@ -18,7 +18,7 @@
                     <label>
                                 <div class="img-add">
                                     <img src="../assets/img/add.png" class="add">
-                                    <input type="file" hidden>
+                                    <input type="file" hidden (change)="uploadImage1($event)">
                                 </div>
                             </label>
 
@@ -31,7 +31,7 @@
                             <label>
                                         <div class="img-add">
                                             <img src="../assets/img/add.png" class="add">
-                                            <input type="file" hidden>
+                                            <input type="file" hidden (change)="uploadImage2($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Panorama/ Lokasi Trip </p>
@@ -41,7 +41,7 @@
                             <label>
                                         <div class="img-add">
                                             <img src="../assets/img/add.png" class="add">
-                                            <input type="file" hidden>
+                                            <input type="file" hidden (change)="uploadImage3($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Peserta Trip</p>
@@ -51,7 +51,7 @@
                             <label>
                                         <div class="img-add">
                                             <img src="../assets/img/add.png" class="add">
-                                            <input type="file" hidden>
+                                            <input type="file" hidden (change)="uploadImage4($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Kegiatan Trip</p>
@@ -83,8 +83,8 @@
                 <div class="col-md-12">
                     <label class="label-form">Jenis Trip</label>
                     <div class="radio">
-                        <label class="radio"><input type="radio" name="radios" id="1"><span class="outer"><span class="inner"></span></span>Open</label>
-                        <label class="radio"><input type="radio" name="radios" id="2"><span class="outer"><span class="inner"></span></span>Private</label>
+                        <label class="radio"><input type="radio" name="radios" id="1" value="1" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Open</label>
+                        <label class="radio"><input type="radio" name="radios" id="2" value="2" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Private</label>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[0]" name="date_trip" class=" form-control">
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[1]" name="date_trip" class=" form-control">
                             </div>
                         </div>
 
@@ -122,7 +122,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[2]" name="date_trip" class=" form-control">
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[3]" name="date_trip" class=" form-control">
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[4]" name="date_trip" class=" form-control">
                             </div>
                         </div>
                     </div>
@@ -156,21 +156,26 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="durasi">Durasi Trip </label>
-                    <select class="form-control form-durasi">
-                                    <option>1 Hari</option>
-                                    <option>2 Hari</option>
-                                    <option>3 Hari</option>
-                                    <option>4 Hari</option>
-                                    <option>5 Hari</option>	
+                    <select class="form-control form-durasi" (change)='onSelectDuration($event)'>
+                                    <option value="1">1 Hari</option>
+                                    <option value="2">2 Hari</option>
+                                    <option value="3">3 Hari</option>
+                                    <option value="4">4 Hari</option>
+                                    <option value="5">5 Hari</option>
+                                    <option value="6">6 Hari</option>
+                                    <option value="7">7 Hari</option>
+                                    <option value="8">8 Hari</option>
+                                    <option value="9">9 Hari</option>
+                                    <option value="10">10 Hari</option>	
                                   </select>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-offset-1 col-md-7">
                     <label class="kategori">Kategori Trip </label>
                     <span class="kategori-tittle">Kategori Utama :</span>
-                    <select class="form-control form-kategori">
+                    <select class="form-control form-kategori" (change)='onSelectCategory($event)'>
                                     <option>Pilih Kategori</option>
-                                    <option *ngFor="let category of categoryTrip" id="Beach" >{{category.category_name}}</option>
+                                    <option *ngFor="let category of categoryTrip" id= "{{category.category_name}}" value= "{{category.id_category}}">{{category.category_name}}</option>
                                     <!-- <option id="City Tour" >City Tour</option>
                                     <option id="Culture">Culture</option>
                                     <option id="Fishing">Fishing</option>
@@ -187,7 +192,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="sort" for="lokasi"> Lokasi (Provinsi) </label>
-                    <select class="form-control form-sort">
+                    <select class="form-control form-sort" (change)='onSelectProvince($event)'>
                                                             <option >Pilih Provinsi</option>
                                                             <option *ngFor="let province of provinceTrip" value="{{province.id_province}}">{{province.province_name}} </option>
                                                             <!-- <option >Sumatra Utara</option>
@@ -226,49 +231,49 @@
                                                         </select>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-offset-1 col-md-7">
                     <div class="kategori-tittle">
                         <span class="kategori-tittle-lanjutan">Kategori Lainnya : (Pilih Dua)</span>
                     </div>
                     <div class="wrap-category-item">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" value="Beach" [(ngModel)]="trip.other_category[0]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Beach</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" value="Hiking" [(ngModel)]="trip.other_category[1]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Hiking</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[2]" name="other_category">
                                 <span class="checkbox-label-fasilitas">City Tour</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[3]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Honeymoon</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[4]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Culture</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[5]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Tracking</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[6]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Fishing</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[7]" name="other_category">
                                 <span class="checkbox-label-fasilitas">Sailing</span>
                             </div>
                         </div>
@@ -398,12 +403,96 @@
         <div class="wrap-btn">
             <button (click)="toggleJual()" class="btn-content"> Selanjutnya</button>
         </div>
-
-
     </div>
 
+
+
     <div *ngIf='content2'>
-        <app-jual-trip-content2></app-jual-trip-content2>
+        <div class="wrap-tittle">
+            <p class="head-content"> Jual Trip </p>
+            <span class="state-all"> Tahap 2 dari 2</span>
+            <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
+            </span>
+        </div>
+
+        <div class="info-trip-term"> Jual Trip Travel Anda disini. Masukkan informasi trip selengkap mungkin untuk meningkatkan kepercayaan traveller terhadap paket trip yang ditawarkan. Berikan fasilitas yang terbaik Travel Anda.</div>
+
+        <div class="wrap-deskripsi">
+            <label class="label-form" for="Deskripsi">Deskripsi</label>
+            <textarea class="deskripsi-trip form-control" [(ngModel)]="trip.description" name="description" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
+
+        </div>
+
+        <div class="wrap-mepo">
+            <label class="label-form" for="mepo">Meeting Point (MePo)</label>
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-mepo dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+                <input type="text" class="mepo-trip form-control" placeholder="Cari lokasi meeting point" aria-describedby="mepo" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl">
+            </div>
+            <div class="catatan-mepo"> <span class="note-mepo">Catatan :</span> Masukkan nama tempat atau gedung populer di sekitar meeting point</div>
+
+            <agm-map [latitude]="latitude" [longitude]="longitude">
+                <agm-marker [latitude]="latitude" [longitude]="longitude"> </agm-marker>
+            </agm-map>
+        </div>
+
+        <div class="wrap-petunjuk">
+            <label class="label-form" for="petunjuk">Petunjuk ke Meeting Point</label>
+            <textarea class="petunjuk-trip form-control" id="petunjuk" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
+        </div>
+
+        <div class="wrap-waktu">
+            <div class="tittle-waktu">Waktu bertemu:</div>
+
+            <input type="text" placeholder="Jam" class="waktu-bertemu-input form-control"> :
+
+            <input type="text" placeholder="Menit" class="waktu-bertemu-input form-control">
+
+            <select class="form-control form-waktu">
+                <option>WIB</option>
+                <option>WITA</option>
+                <option>WIT</option>	
+                </select>
+            <div class="note-waktu">Diisi sesuai dengan waktu wilayah di trip berada, sesuai pembagian zona waktu Indonesia</div>
+        </div>
+
+        <div class="wrap-catatan">
+            <label class="label-form" for="catatan">Catatan untuk Traveller</label>
+
+            <textarea class="catatan-trip form-control" [(ngModel)]="trip.notes_traveler" name="notes_traveler" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
+
+        </div>
+
+        <div class="wrap-harga">
+            <div class="wrap-publish">
+                <label class="label-form" for="harga">Harga Trip</label>
+                <div class="publish-trip input-group">
+                    <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                    <input type="text" [(ngModel)]="trip.publish_price" name="publish_price" class="form-control publish-price" placeholder="Harga Publish">
+                </div>
+                <span class="perorang">/ Orang </span>
+            </div>
+
+            <div class="wrap-kuota">
+                <label class="label-form" for="harga">Kuota Trip</label>
+                <div class="publish-trip input-group">
+                    <input type="text" [(ngModel)]="trip.quota_trip" name="quota_trip" class="form-control" placeholder="Jumlah">
+                    <span class=" input-group-addon" id="harga"> Peserta </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrap-checkbox">
+            <input type="checkbox" class="checkbox">
+            <label class="label-checkbox"> Dengan ini saya meneyetujui bahwa paket trip yang saya jual sesuai dengan syarat dan
+                    ketentuan pihak Travinesia dan bersedia mengikuti segala kebijakan yang berlaku. <a class="read-more"> Baca Selengkapnya </a> </label>
+        </div>
+
+        <div class="wrap-btn">
+            <button type="submit" class="btn-content"> Jual Trip</button>
+        </div>
     </div>
 
 </form>

@@ -79,7 +79,7 @@
 }
 
 .nama-trip {
-    width: 660px;
+    width: 100%;
     border-radius: 3px;
     background-color: #fdfdfd;
     height: 42px;
@@ -139,6 +139,7 @@
     background-color: #ffffff;
     border: solid 1px #dddddd;
     padding: 15px;
+    margin-left: 10px;
     display: inline-block;
 }
 
@@ -186,6 +187,7 @@
     background-color: #fdfdfd;
     border: solid 1px #dddddd;
     padding: 20px;
+    padding-left: 39px;
     margin-bottom: 20px;
     position: relative;
 }
@@ -225,13 +227,13 @@
 }
 
 .img-paket-gallery {
-    width: 536px;
+    width: 570px;
     height: 100%;
     position: absolute;
     border-left: 1px solid #dddddd;
     top: 0px;
-    left: 135px;
-    padding: 20px 25px 0px 25px;
+    left: 165px;
+    padding: 20px 25px 0px 45px;
 }
 
 .tittle-img-gallery {
@@ -421,4 +423,307 @@
 
 .tanggal-trip {
     width: 216px;
+}
+
+
+/* content2 */
+
+agm-map {
+    height: 305px;
+}
+
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.state-back a {
+    position: absolute;
+    bottom: 22px;
+    right: 90px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    cursor: pointer;
+}
+
+.state-back span {
+    margin-left: 12px;
+    margin-right: 14px;
+    color: #dddddd;
+}
+
+.state-back a:hover {
+    text-decoration: none;
+}
+
+.deskripsi-trip {
+    width: 100%;
+    height: 147px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.catatan-trip {
+    width: 100%;
+    height: 191px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-catatan {
+    margin-bottom: 35px;
+}
+
+.wrap-mepo {
+    margin-bottom: 25px;
+}
+
+.btn-mepo {
+    width: 77px;
+    height: 49px;
+}
+
+.mepo-trip {
+    border-radius: 0px !important;
+    height: 49px;
+}
+
+.glyphicon-search:before {
+    color: #ab47bc
+}
+
+.note-mepo {
+    font-size: 12.7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    float: left;
+    margin-left: 13px;
+    margin-right: 20px;
+    color: #4a4a4a;
+    margin-top: 7px;
+}
+
+.catatan-mepo {
+    width: 100%;
+    height: 37px;
+    border-bottom: solid 1px #dddddd;
+    border-left: solid 1px #dddddd;
+    border-right: solid 1px #dddddd;
+    font-size: 12.7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 32px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #9e9e9e;
+    padding: 2px;
+    margin-bottom: 15px;
+}
+
+.wrap-petunjuk {
+    margin-bottom: 25px;
+}
+
+.petunjuk-trip {
+    width: 100%;
+    height: 68px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-waktu {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.tittle-waktu {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    display: inline-block;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+    padding: 8px 0;
+    margin-right: 10px;
+}
+
+.note-waktu {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    display: inline-block;
+    letter-spacing: normal;
+    text-align: left;
+    color: #9e9e9e;
+    margin-bottom: 25px;
+    margin-left: 15px;
+    width: 300px;
+    line-height: 14px;
+}
+
+.form-waktu {
+    width: 82px;
+    display: inline-block;
+    background-color: #f5f5f5;
+}
+
+.tittle-tanggal a {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.tittle-tanggal a:hover {
+    text-decoration: none;
+}
+
+.waktu-bertemu-input {
+    text-align: center;
+    width: 64px;
+    border-radius: 3px;
+    display: inline-block !important;
+    margin-left: 2px;
+    background-color: #fdfdfd;
+}
+
+.tanggal-trip {
+    width: 216px;
+}
+
+.waktu-bertemu::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu::-moz-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu:-ms-input-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu:-moz-placeholder {
+    text-align: center;
+}
+
+.input-group-addon {
+    background-color: #fdfdfd;
+}
+
+.rupiah {
+    font-weight: bold;
+}
+
+.wrap-harga {
+    position: relative;
+    width: 100%;
+    height: 127px;
+    border-radius: 3px;
+    border: solid 1px #ab47bc;
+    background-color: #f7f7f7;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.perorang {
+    position: absolute;
+    right: -60px;
+    top: 34px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.publish-trip {
+    width: 225px;
+    border-radius: 3px;
+}
+
+.wrap-publish {
+    display: inline-block;
+    position: relative;
+}
+
+.publish-price {
+    width: 335px;
+}
+
+.wrap-kuota {
+    float: right;
+}
+
+.wrap-checkbox {
+    position: relative;
+}
+
+.label-checkbox {
+    position: absolute;
+    width: 660px;
+    top: -4px;
+    left: 25px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-btn {
+    margin: 20px auto;
+    text-align: right;
+}
+
+.btn-content {
+    width: 189px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #dddddd;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.read-more {
+    color: #9c27b0;
+    display: inline;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    cursor: pointer;
 }

@@ -81,11 +81,6 @@ export class AppService {
         .map(res => res.json());
     }
 
-    addTripProvider(trip) {
-        return this.http.post('http://travinesia.com:3000/v1/provider/add_trip',trip)
-        .map(res => res.json());
-    }
-
     //login
     addUser(user) {
         return this.http.post('http://travinesia.com:3000/v1/user/authenticate', user)
@@ -99,6 +94,15 @@ export class AppService {
         this.createAuthorizationHeader (headers);
         // console.log(headers)
         return this.http.post('http://travinesia.com:3000/v1/user/register_provider',travel,
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    addTripProvider(trip) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.post('http://travinesia.com:3000/v1/provider/add_trip',trip,
         {headers: headers})
         .map(res => res.json());
     }

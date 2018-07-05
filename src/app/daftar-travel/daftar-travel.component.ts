@@ -30,11 +30,12 @@ export class DaftarTravelComponent implements OnInit {
     logo : ''
   }
   
+
   province:any[];
 
   constructor( public appService:AppService, private http:Http ) {
     this.appService.getProvinceTrip().subscribe(province => {
-      this.province = province.data;    
+      this.province = province.data;   
     });
    }
 
@@ -68,8 +69,7 @@ export class DaftarTravelComponent implements OnInit {
   
   _handleReaderLoaded(readerEvt) {
      let binaryString = readerEvt.target.result;
-            this.travel.logo= btoa(binaryString);
-            console.log(this.travel.logo);
+            this.travel.logo= btoa(binaryString);          
     }
 
 

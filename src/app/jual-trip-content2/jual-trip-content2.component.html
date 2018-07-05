@@ -10,20 +10,12 @@
 
     <div class="wrap-deskripsi">
         <label class="label-form" for="Deskripsi">Deskripsi</label>
-        <div class="input-group">
-            <textarea class="deskripsi-trip form-control" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
-        </div>
-    </div>
+        <textarea class="deskripsi-trip form-control" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
 
-    <div class="wrap-catatan">
-        <label class="label-form" for="catatan">Catatan untuk Traveller</label>
-        <div class="input-group">
-            <textarea class="catatan-trip form-control" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
-        </div>
     </div>
 
     <div class="wrap-mepo">
-        <label class="label-form" for="mepo">Meeting Point</label>
+        <label class="label-form" for="mepo">Meeting Point (MePo)</label>
         <div class="input-group">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-mepo dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span></button>
@@ -39,25 +31,29 @@
 
     <div class="wrap-petunjuk">
         <label class="label-form" for="petunjuk">Petunjuk ke Meeting Point</label>
-        <div class="input-group">
-            <textarea class="petunjuk-trip form-control" id="petunjuk" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
-        </div>
+        <textarea class="petunjuk-trip form-control" id="petunjuk" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
     </div>
 
     <div class="wrap-waktu">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="tittle-waktu">Waktu bertemu:</div>
-            </div>
+        <div class="tittle-waktu">Waktu bertemu:</div>
 
-            <div class="col-md-4">
-                <input type="text" placeholder="Jam : Menit" class="waktu-bertemu-input form-control">
-            </div>
+        <input type="text" placeholder="Jam" class="waktu-bertemu-input form-control"> :
 
-            <div class="col-md-4">
-                <div class="note-waktu">Diisi sesuai pembagian wilayah waktu lokasi trip berada</div>
-            </div>
-        </div>
+        <input type="text" placeholder="Menit" class="waktu-bertemu-input form-control">
+
+        <select class="form-control form-waktu">
+            <option>WIB</option>
+            <option>WITA</option>
+            <option>WIT</option>	
+            </select>
+        <div class="note-waktu">Diisi sesuai dengan waktu wilayah di trip berada, sesuai pembagian zona waktu Indonesia</div>
+    </div>
+
+    <div class="wrap-catatan">
+        <label class="label-form" for="catatan">Catatan untuk Traveller</label>
+
+        <textarea class="catatan-trip form-control" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
+
     </div>
 
     <div class="wrap-harga">
@@ -65,15 +61,15 @@
             <label class="label-form" for="harga">Harga Trip</label>
             <div class="publish-trip input-group">
                 <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                <input type="text" class="form-control" placeholder="Harga Publish">
+                <input type="text" class="form-control publish-price" placeholder="Harga Publish">
             </div>
             <span class="perorang">/ Orang </span>
         </div>
 
         <div class="wrap-kuota">
-            <label class="label-form" for="harga">Kuota Maksimal</label>
+            <label class="label-form" for="harga">Kuota Trip</label>
             <div class="publish-trip input-group">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" placeholder="Jumlah">
                 <span class=" input-group-addon" id="harga"> Peserta </span>
             </div>
         </div>
@@ -82,11 +78,11 @@
     <div class="wrap-checkbox">
         <input type="checkbox" class="checkbox">
         <label class="label-checkbox"> Dengan ini saya meneyetujui bahwa paket trip yang saya jual sesuai dengan syarat dan
-                ketentuan pihak Travinesia dan bersedia mengikuti segala kebijakan yang berlaku</label>
+                ketentuan pihak Travinesia dan bersedia mengikuti segala kebijakan yang berlaku. <a class="read-more"> Baca Selengkapnya </a> </label>
     </div>
 
     <div class="wrap-btn">
-        <button class="btn-content"> Jual</button>
+        <button type="submit" class="btn-content"> Jual Trip</button>
     </div>
 </div>
 
