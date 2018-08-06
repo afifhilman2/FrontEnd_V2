@@ -1,5 +1,6 @@
 .container{
     width: 959px;
+    padding: 20px;
 }
 
 .tahapan-proses{
@@ -220,6 +221,7 @@ textarea{
     padding-left: 0;
     margin-left: -10px;
     margin-top: 10px;
+    resize: none;
 }
 
 
@@ -265,13 +267,18 @@ textarea{
 }
 
 
-.pembayaran{
+.btn-pembayaran{
     width: 588px;
     height: 41px;
     mix-blend-mode: undefined;
     border-radius: 2.4px;
     background-color: #e91e63;
-    padding-top: 12px;
+    padding-top: 5px;
+    cursor: pointer;
+    color:white;
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: bold;
 }
 
 .pembayaran p{

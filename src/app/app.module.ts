@@ -9,6 +9,7 @@ import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
 
 
+
 import { AppComponent } from './app.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { HeaderComponent } from './header/header.component';
@@ -33,7 +34,7 @@ import { JualTripContent2Component } from './jual-trip-content2/jual-trip-conten
 
 import { AuthService } from './token/auth.service';
 import { DataService} from './data.service';
-import { AuthGuardService } from './token/auth-guard.service';
+import { GuardService } from './guard.service';
 import { routes } from './app.route';
 import { AppService } from './app.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +51,15 @@ import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
 import { ProsesPemesananComponent } from './proses-pemesanan/proses-pemesanan.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RegisterComponent } from './register/register.component';
+import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
+import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
+import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { SearchFilterPipe } from './header/search-pipe';
+import { ClickOutsideDirective } from './header/directive-dropdown';
+import { MiniFooterComponent } from './mini-footer/mini-footer.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -85,7 +95,14 @@ import { RegisterComponent } from './register/register.component';
     ProsesBayar2Component,
     ProsesPemesananComponent,
     CalendarComponent,
-    RegisterComponent
+    RegisterComponent,
+    PesanMasukComponent,
+    DiskusiTripComponent,
+    HeaderNologinComponent,
+    SearchFilterPipe,
+    ClickOutsideDirective,
+    MiniFooterComponent,
+    LoaderComponent,
 
   ],
   imports: [
@@ -93,6 +110,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     // MatInputModule,
     // ReactiveFormsModule,
     // MatAutocompleteModule,
@@ -106,7 +124,7 @@ import { RegisterComponent } from './register/register.component';
   
     
   ],
-  providers: [AppService, DataService, AuthService, AuthGuardService],
+  providers: [AppService, DataService, AuthService, GuardService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

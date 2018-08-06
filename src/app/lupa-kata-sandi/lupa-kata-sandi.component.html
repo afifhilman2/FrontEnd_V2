@@ -1,18 +1,12 @@
-<header class="head">
-    <div class="wrap-head">
-        <a [routerLink]="['']">
-            <img src="../assets/img/travinesia-logo.png" class="head-password">
-        </a>
-    </div>
-</header>
+
 
 <div class="wrapper-lupa-sandi text-center">
     <h2 class="head-kata-sandi">Lupa Password ?</h2>
     <p class="content-kata-sandi">Masukkan email login Anda, Travinesia akan mengirimkan email dan tautan untuk reset password Anda</p>
-    <form (submit)="onSubmitEmail(isEdit)">
+    <form (submit)="onSubmitEmail()">
         <input type="text" placeholder="Email Anda" class="input-kata-sandi" [(ngModel)]="user.email" name="email">
-        <a class="btn btn-kata-sandi">Ubah Password</a>
+        <button type="submit" class="btn btn-kata-sandi">Ubah Password</button>
     </form>
 </div>
 
-<p class="text-center">Masuk Travinesia, <a class="disini">disini</a></p>
+<p class="text-center">Masuk Travinesia, <a class="disini" routerLink="/LoginPage">disini</a></p>

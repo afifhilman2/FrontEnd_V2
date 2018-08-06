@@ -1,46 +1,61 @@
 <div class="container-sidebar">
-    <div class="my-akun"> Akun Saya</div>
-    <span class="root-akun">Beranda > Akun > {{order}}</span>
-
     <div class="wrapper">
         <nav id="sidebar" [class.show]="show">
+            <div class="akun">
+                <div class="akun-image">
+                    <img src="{{photo}}">
+                </div>
+                <div class="akun-text">
+                    <p class="my-akun"> Akun Saya</p>
+                    <p class="akun-name">{{dataUser?.name}}</p>
+                </div>
+            </div>
             <ul id="sidemenu" class="sidebar-nav">
                 <li>
-                    <a [routerLink]="['Profile']" [queryParams]="{order:'Profil'}">
+                    <a [routerLink]="['Profile']" [queryParams]="{order:'Profile'}">
                         <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <span class="sidebar-title">Profil</span>
+                        <span class="sidebar-title">Profil <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['Pemesanan']" [queryParams]="{order:'Pemesanan'}">
-                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
-                        <span class="sidebar-title">Pemesanan</span>
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-list"></i></span>
+                        <span class="sidebar-title">Pemesanan <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['Favorit']" [queryParams]="{order:'Favorit'}">
-                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
-                        <span class="sidebar-title">Favorit</span>
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-heart"></i></span>
+                        <span class="sidebar-title">Favorit <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
+                    </a>
+                </li>
+
+                <p class="kotak-masuk">Kotak Masuk</p>
+
+                <li>
+                    <a [routerLink]="['PesanMasuk']" [queryParams]="{order:'PesanMasuk'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-save"></i></span>
+                        <span class="sidebar-title">Pesan Masuk <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
                     </a>
                 </li>
                 <li>
-                    <a [routerLink]="['Notifikasi']" [queryParams]="{order:'Notifikasi'}">
-                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
-                        <span class="sidebar-title">Notifikasi</span>
+                    <a [routerLink]="['DiskusiTrip']" [queryParams]="{order:'DiskusiTrip'}">
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-comment"></i></span>
+                        <span class="sidebar-title">Diskusi Trip <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['Promo']" [queryParams]="{order:'Promo'}">
-                        <span class="sidebar-icon"><i class="glyphicon glyphicon-user"></i></span>
-                        <span class="sidebar-title">Promo</span>
+                        <span class="sidebar-icon"><i class="glyphicon glyphicon-bullhorn"></i></span>
+                        <span class="sidebar-title">Promo <span class="glyphicon glyphicon-menu-right pull-right"></span><i class="badge pull-right">7</i></span>
                     </a>
                 </li>
             </ul>
 
         </nav>
-
         <div class="content">
+            <p class="root-akun">Beranda > Akun > {{order}}</p>
             <div class="btn-toggle" (click)="toggleCollapse()" role="button"><span class="glyphicon glyphicon-chevron-left"></span></div>
             <router-outlet></router-outlet>
         </div>

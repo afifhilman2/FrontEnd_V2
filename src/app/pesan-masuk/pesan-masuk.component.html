@@ -1,0 +1,52 @@
+<main id="page-content-wrapper" role="main">
+  <p class="profil">Pesan Masuk</p>
+  <p class="masukan-profil">Tanyakan semua hal terkait Trip kepada Agen Travel di Pesan Masuk. Ciptakan komuniasi dan Trip yang menyenangkan
+    dimulai dari Pesan Masuk.</p>
+  <div class="history-chat">
+    
+    <a class="link" (click)="showChat()">
+    <div class="chat">
+        <div class="image">
+          <img src="assets/img/foto.png">
+        </div>
+        <div class="keterangan">
+          <span>Kuylah Travel Indonesia</span><span class="time">20.30</span>
+          <p class="text-chat">masih ada gan silahkan book lagi</p>
+        </div>
+    </div>
+    </a>
+    <div class="chat">
+      <div class="image">
+        <img src="assets/img/foto.png">
+      </div>
+      <div class="keterangan">
+        <span>Kuylah Travel Indonesia</span><span class="time">20.30</span>
+        <p class="text-chat">masih ada gan silahkan book lagi</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf='showChatText' class="content-chat">
+    <div class="header-chat">
+      <div class="akun-image">
+          <img src="assets/img/foto.png">
+      </div>
+      <div class="akun-text">
+        <span class="akun-name">Kuylah Travel Indonesia</span>
+        <p class="my-akun">Agen Traveler</p> 
+      </div>
+    </div>
+    <div class="percakapan">
+
+    </div>
+    <div class="send-chat">
+      <input type="text" class="form-control form-diskusi">
+        <div class="send">
+          <i class="glyphicon glyphicon-send"></i>
+        </div>
+    </div>
+  </div>
+</main>
+
+

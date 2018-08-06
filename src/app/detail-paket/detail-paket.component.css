@@ -2,6 +2,7 @@ table, td, th{
     width: 273px;
     height: 28px;
     border-radius: 3px;
+    background-color: #ffffff;
     border: solid 1px #dddddd;
     padding: 5px;
     padding-left: 13px;
@@ -22,8 +23,6 @@ table, td, th{
 .body-info{
     display: inline-block;
     width: 250px;
-    margin-left: 20px;
-    margin-top: 20px;
 }
 
 .body-title{
@@ -32,28 +31,30 @@ table, td, th{
 }
 
 .button-body{
-    margin-top: 11px;
-    margin-right: 23px;
+    display: inline-block;
+    position: absolute;
+    top: 25px;
 }
 
 .btn-lihatProfil{
-    width: 111px;
+    width: 140px;
     height: 37px;
     border-radius: 2.4px;
     background-color: #e91e63;
     color: white;
     font-weight: bold;
-    margin-bottom: 6px;
+    display: inline-block;
 }
 
 .btn-kirimPesan{
-    width: 111px;
+    width: 140px;
     height: 37px;
     border-radius: 2.4px;
     border: solid 0.8px #ab47bc;
     background-color: #ffffff;
     color: #ab47bc;
     font-weight: bold;
+    display: inline-block;
 }
 
 .btn-pesan{
@@ -63,7 +64,7 @@ table, td, th{
     background-color: #9c27b0;
     color: white;
     margin-left: 50px;
-    margin-top: 15px;
+    margin-top: 10px;
     font-family: sans-serif;
     font-weight: bold;
     font-size: 15px;
@@ -73,15 +74,30 @@ table, td, th{
     margin-left: 50px;
 }
 
+
+.card{
+    margin-top: 20px;
+}
 .carousel{
-    width: 796px;
-    height: 350px;
+    
+    height: 350px !important;
 }
 
+.col-md-4{
+    position: absolute;
+    right: 0;
+}
+
+.collapse{
+    position: relative;
+    left: 15px;
+    top: 5px;
+}
 .container-fluid-page{
     margin-left: 100px;
     
 }
+
 
 .diskon{
     display: inline-block;
@@ -96,9 +112,9 @@ table, td, th{
     width: 273px;
     height: 72px;
     border-radius: 2.4px;
-    /* background-color: #ffffff; */
+    background-color: #ffffff;
     border: solid 0.8px #9c27b0;
-    padding-top: 7px;
+    padding-top: 19px;
 }
 
 .harga-diskon{
@@ -160,11 +176,14 @@ table, td, th{
 
 .item img{
     object-fit: cover;
+    height: 349px !important;
+    margin: auto;
+    width: 100%;
 }
 
 .jenis-trip{
     font-weight: bold;
-    color: #e91e63;
+    color: #ff9800;
     font-size: 13.4px;
     margin-left: 11px;
 }
@@ -174,7 +193,6 @@ table, td, th{
 }
 
 .judul-paket{
-    width: 461px;
     height: 36px;
     font-family: sans-serif;
     font-size: 34.7px;
@@ -220,6 +238,10 @@ table, td, th{
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: solid 1px #dddddd;
+}
+
+.kategori-detail{
+    display: inline;
 }
 
 .kelas-agen{
@@ -275,6 +297,9 @@ table, td, th{
     margin-left: 18px;
 }
 
+.lokasi-detail{
+    display: inline;
+}
 
 .map-responsive{
     width: 432px;
@@ -283,13 +308,31 @@ table, td, th{
     padding-bottom:50%;
     position:relative;
     height:0;
+    display: inline-block;
 }
+
 .map-responsive iframe{
     left:0;
     top:0;
     height:100%;
     width:100%;
     position:absolute;
+}
+
+.facility{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 40px;
+    margin-top: 50px
+}
+
+.tempat{
+    display: inline-block;
+    
+}
+
+.text-description{
+    display: inline-block;
 }
 
 .nama-agen{
@@ -354,6 +397,9 @@ table, td, th{
     color: #8e3caa;
 }
 
+.pembatas{
+    display: inline
+}
 .pilih-tanggal{
     width: 275px;
     height: 40px;
@@ -379,6 +425,8 @@ table, td, th{
 .table{
     margin-left: 50px;
     margin-top: 5px;
+    margin-bottom: 10px;
+    width: 90%;
 }
 
 .title-info{
@@ -396,6 +444,123 @@ table, td, th{
     font-size: 13.4px;
     margin-left: 6px;
 }
+
+.tanggal-tersedia{
+    width: 275px;
+}
+
+.kuota-jumlah{
+    width: 275px;
+    height: 65px;
+    margin-left: 50px;
+    padding-top: 10px;
+    border: 1px solid #dddddd;
+}
+
+.kuota{
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #e91e63;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.berangkat{
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.jumlah{
+    width: 275px;
+    height: auto;
+    margin-left: 50px;
+    border: 1px solid #dddddd;
+    margin-top: 10px;
+}
+
+.jumlah-orang{
+    height: 40px;
+    background-color: #f5f5f5;
+    border-bottom: solid 1px #dddddd;
+    font-size: 14.8px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.44;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a4a4a;
+}
+
+.minus{
+    float: left;
+    width: 15%;
+    padding: 7px;
+    text-align: center;
+    border-bottom: solid 1px #dddddd;
+}
+
+.jumlah-input{
+    display: inline-block;
+    width: 192px;
+    margin-left: -1px;
+}
+
+.form-control{
+    border-radius: 0;
+    background-color: white;
+    height: 36px;
+    margin-top: -1px;
+    border: 1px solid #dddddd;
+    
+}
+
+.nominal{
+    color: #9c27b0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.plus{
+    /* display: inline-block; */
+    float: right;
+    width: 15%;
+    padding: 7px;
+    text-align: center;
+    border-bottom: solid 1px #dddddd;
+}
+
+.text-harga{
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.harga-satuorang{
+    font-size: 24.9px;
+    color:#9c27b0;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.trv-alert{
+    font-size:11px;
+    color: #d24d57;
+    margin-bottom: 0px;
+    padding: 10px;
+
+}
+
+
 
 
 

@@ -217,12 +217,18 @@ label {
     font-size: 13px;
 }
 
+.price{
+    margin-right: 15px;
+}
+
 .caption-tittle {
     font-size: 13px;
     text-align: left;
     margin-top: 10px;
-    line-height: 1.15;
     color: #4a4a4a;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .caption-duration {

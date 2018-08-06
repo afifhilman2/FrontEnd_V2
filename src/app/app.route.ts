@@ -1,5 +1,5 @@
 import { Routes, CanActivate } from '@angular/router';
-import { AuthGuardService as AuthGuard } from './token/auth-guard.service';
+import { GuardService } from './guard.service';
 import { AppComponent } from './app.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { HeaderComponent } from './header/header.component';
@@ -32,6 +32,10 @@ import { ProsesBayarComponent } from './proses-bayar/proses-bayar.component';
 import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
 import { RegisterComponent } from './register/register.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
+import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
+import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 export const routes :Routes = [
@@ -44,23 +48,22 @@ export const routes :Routes = [
             {path:'', component:LandingpageComponent},
             {path:'search/:id', component:TrvSearchResultComponent},
             {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
-            {path:'loginpage', component:LoginpageComponent},
+            
             {path:'Notifikasi', component:EksternalComponent},
             {path:'JadiTravel', component:DaftarTravelComponent,},
             {path:'EtalaseTravel', component:EtalaseTravelComponent},
-            {path:'DetailPaket', component:DetailPaketComponent},
-            {path:'ProsesPemesanan', component:ProsesPemesananComponent},
-            {path:'ProsesBayar', component:ProsesBayarComponent},
-            {path:'ProsesBayar2', component:ProsesBayar2Component},
-            {path:'Daftar', component:RegisterComponent},
+            {path:'DetailPaket/:id', component:DetailPaketComponent},
+            {path:'DiskusiTrip', component:DiskusiTripComponent},
+            {path:'PesanMasuk', component:PesanMasukComponent},
             {path:'Calendar', component:CalendarComponent},
             {path:'Akun', component:TrvSidebarComponent,
             children:[
                 {path:'', component:PemesananComponent},
                 {path:'Profile', component:UbahProfilComponent},
-                {path:'Pemesanan', component:PemesananComponent},
+                {path:'Pemesanan/:id', component:PemesananComponent},
                 {path:'Favorit', component:FavoritUserComponent},
-                {path:'Notifikasi', component:EksternalComponent},
+                {path:'PesanMasuk', component:PesanMasukComponent},
+                {path:'DiskusiTrip', component:DiskusiTripComponent},
                 {path:'Promo', component:EksternalComponent}
                     ]
                     },
@@ -77,55 +80,66 @@ export const routes :Routes = [
                     ]
     },
 
-
     //with login
-    // {
-    //     path :'traveler', 
-    //     component:HeaderUserComponent,
-    //     children: [
-    //         {path:'', component:LandingpageComponent},
-    //         {path:'search', component:TrvSearchResultComponent},
-    //         {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
-    //         {path:'loginpage', component:LoginpageComponent},
-    //         {path:'Notifikasi', component:EksternalComponent},
-    //         {path:'JadiTravel', component:DaftarTravelComponent,},
-    //         {path:'EtalaseTravel', component:EtalaseTravelComponent},
-    //         {path:'DetailPaket', component:DetailPaketComponent},
-    //         {path:'ProsesPemesanan', component:ProsesPemesananComponent},
-    //         {path:'ProsesBayar', component:ProsesBayarComponent},
-    //         {path:'ProsesBayar2', component:ProsesBayar2Component},
-    //         {path:'Calendar', component:CalendarComponent},
-    //         {path:'Akun', component:TrvSidebarComponent,
-    //         children:[
-    //             {path:'', component:PemesananComponent},
-    //             {path:'Profil', component:UbahProfilComponent},
-    //             {path:'Pemesanan', component:PemesananComponent},
-    //             {path:'Favorit', component:FavoritUserComponent},
-    //             {path:'Notifikasi', component:EksternalComponent},
-    //             {path:'Promo', component:EksternalComponent}
-    //                 ]
-    //                 },
-    //         {path:'JualTrip', component:JualTripComponent,
-    //         children:[
-    //             {path:'', component:JualTripContentComponent},
-    //             {path:'Saldo', component:SaldoComponent},
-    //             {path:'JualTrip', component:JualTripContentComponent},
-    //             {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
-    //             {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
-    //             {path:'DaftarTrip', component:DaftarTripComponent},
-    //         ]
-    //         }
-    //                 ]
-    // },
+    {
+        path :'traveler', 
+        component:HeaderUserComponent,
+        children: [
+            {path:'', component:LandingpageComponent},
+            {path:'search/:id', component:TrvSearchResultComponent},
+            {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
+            {path:'searchBar/:category/:province', component:TrvSearchNavbarComponent},
+            {path:'Notifikasi', component:EksternalComponent},
+            {path:'JadiTravel', component:DaftarTravelComponent,},
+            {path:'EtalaseTravel', component:EtalaseTravelComponent},
+            {path:'DetailPaket/:id', component:DetailPaketComponent},
+            {path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},
+            // {path:'ProsesBayar', component:ProsesBayarComponent},
+            // {path:'ProsesBayar2', component:ProsesBayar2Component},
+            {path:'Calendar', component:CalendarComponent},
+            {path:'Akun', component:TrvSidebarComponent,
+            children:[
+                {path:'', component:PemesananComponent},
+                {path:'Profile', component:UbahProfilComponent},
+                {path:'Pemesanan', component:PemesananComponent},
+                {path:'Favorit', component:FavoritUserComponent},
+                {path:'PesanMasuk', component:PesanMasukComponent},
+                {path:'DiskusiTrip', component:DiskusiTripComponent},
+                {path:'Promo', component:EksternalComponent}
+                    ]
+                    },
+            {path:'JualTrip', component:JualTripComponent,
+            children:[
+                {path:'', component:JualTripContentComponent},
+                {path:'Saldo', component:SaldoComponent},
+                {path:'JualTrip', component:JualTripContentComponent},
+                {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
+                {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
+                {path:'DaftarTrip', component:DaftarTripComponent},
+            ]
+            }
+                    ]
+    },
     
     //lupa sandi
-    {
-        path:'login', component:LupaKataSandiComponent,
+
+    {path:'', component:HeaderNologinComponent,
+        children:[
+            {   path:'lupakatasandi', component:LupaKataSandiComponent},
+            {   path:'LoginPage', component:LoginpageComponent},
+            {   path:'Daftar', component:RegisterComponent},
+            {   path:'LupaPassword', component:LupaKataSandiComponent},
+            
+            {   path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},
+            {   path:'ProsesBayar2/:id', component:ProsesBayar2Component},
+            {   path:'ProsesBayar/:id', component:ProsesBayarComponent},
+        ]
     },
 
-    //Daftar
-
-    {path:'Daftar', component:RegisterComponent},
+    {
+        path:'loader', component:LoaderComponent
+    },
+    
 
     //not found
     {

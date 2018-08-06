@@ -8,7 +8,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-            <a [routerLink]="['']" class="navbar-brand" href="#">
+            <a routerLink="/traveler" class="navbar-brand" href="#">
                 <img alt="Brand" src="../assets/img/travinesia-logo.png" class="brand-logo">
             </a>
         </div>
@@ -39,22 +39,25 @@
                     <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Travel</button> <span class="notif"></span>
                 </li>
                 <li>
-                    <a (click)="logout()" role="button" class="profil"> foto
-                      <img src="./assets/img/foto.png" class=foto-profil>
+                    <a (click)="openLogout()" role="button" class="profil">
+                      <img [src]="photos" class=foto-profil>
                   </a>
+                 
                 </li>
+                
             </ul>
         </div>
+        
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 
     <div class="container-fluid-bar-fixed">
         <ul class="head-category">
-            <li>
-                <a [routerLink]="['/search']" [queryParams]="{order:'Beach'}"> <span class="icon-island-with-palm-trees"></span> Beach</a>
+            <li *ngFor="let category of categoryAllTrip" (click)="searchTrip($event)">
+                <a id="{{category.id_category}}" name="{{category.category_name}}" class="btn-search"> <span class="{{category.class}}"></span> {{category.category_name}} </a>
             </li>
-            <li>
+            <!-- <li>
                 <a [routerLink]="['/search']" [queryParams]="{order:'City Tour'}"> <span class="icon-hotel-with-three-floors"></span> City Tour</a>
             </li>
             <li>
@@ -72,7 +75,7 @@
             <li><a [routerLink]="['/search']" [queryParams]="{order:'Tracking'}"><span class="icon-human-foot-prints"></span> Tracking</a> </li>
             <li>
                 <a [routerLink]="['/search']" [queryParams]="{order:'Sailing'}"> <span class="icon-sea-ship-with-containers"></span> Sailing</a>
-            </li>
+            </li> -->
             <li class="kanan">
                 <a [routerLink]="['/JualTrip']"> <span class="icon-question">
                     <span class="path1"></span><span class="path2"></span>
@@ -80,11 +83,17 @@
                     Bantuan
                 </a>
             </li>
+           
         </ul>
         <hr class="line-category">
+        
     </div>
 </nav>
 
+
 <div class="margin-content">
     <router-outlet></router-outlet>
+</div>
+<div *ngIf="dropLogout" class="logout pull-right"> 
+    <p (click)="logout()">Logout</p>
 </div>

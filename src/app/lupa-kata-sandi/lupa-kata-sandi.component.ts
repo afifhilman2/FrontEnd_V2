@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { Http, Response } from '@angular/http';
 
 @Component({
   selector: 'app-lupa-kata-sandi',
@@ -15,12 +16,18 @@ export class LupaKataSandiComponent implements OnInit {
 
   isEdit:boolean = false;
 
-  constructor(public appService: AppService) { 
+  constructor(public appService: AppService, private http:Http) { 
     
   }
 
-  onSubmitEmail(isEdit){
-    
+  onSubmitEmail(user){
+    this.http.put('http://travinesia.com:3000/v1/user/forgot_password', this.user)
+    .subscribe(
+      (res: Response) =>{
+        let users = res.json();
+        console.log(users);
+      }
+    )
   }
 
   onForgot(user) {

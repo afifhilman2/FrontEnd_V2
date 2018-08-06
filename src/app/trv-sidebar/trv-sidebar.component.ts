@@ -13,12 +13,19 @@ export class TrvSidebarComponent implements OnInit {
   order: string;
 
   show:boolean =false;
+  dataUser;
+  photo = '../assets/img/user.png'
 
   toggleCollapse() {
     this.show =!this.show;
   }
 
-  constructor(private routeActive : ActivatedRoute) {
+  constructor(private routeActive : ActivatedRoute, private appService: AppService) {
+    this.appService.getUsers().subscribe(user =>{
+      this.dataUser = user.data;
+      this.photo = user.data.photo;
+      console.log(this.dataUser);
+    })
    }
 
   ngOnInit() {

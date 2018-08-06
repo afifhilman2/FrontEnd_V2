@@ -1,17 +1,46 @@
 .my-akun {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 27px;
-    margin-top: -9px;
-    margin-bottom: 20px;
+    font-size:13px;
+    font-weight: normal;
+    margin-bottom: 0;
     text-align: left;
     color: #4a4a4a;
+}
+
+.akun-image{
+    position: relative;
+    left: 6px;
     display: inline-block;
+}
+
+.akun-text{
+    padding-left: 15px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.akun-image img{
+    width:45px;
+    height:45px;
+    border-radius: 50%;
+    border: solid 1px #ab47bc;
+    padding: 1px;
+    display: inline-block;
+}
+
+.akun-name{
+    margin-top: -7px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.95;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
 }
 
 .root-akun {
     font-size: 15px;
-    margin-left: 125px;
     color: #9e9e9e;
 }
 
@@ -35,16 +64,20 @@
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;
     transition: all .5s ease;
+    position: relative;
 }
 
 .sidebar-nav {
     padding: 0;
     list-style: none;
+    border-top: solid 1px #dddddd;
+    position: relative;
+    margin-top: 15px;
 }
 
 .sidebar-nav li {
     text-indent: 0;
-    line-height: 45px;
+    line-height: 46px;
 }
 
 #sidebar .sidebar-nav li a {
@@ -59,16 +92,15 @@
 .sidebar-nav li a:focus {
     background-color: #f7f7f7;
     color: #ab47bc;
-    width: 85%;
+    width: 100%;
 }
 
 #sidebar .sidebar-nav li a .sidebar-icon {
     width: 45px;
     height: 45px;
     font-size: 15px;
-    padding: 0 2px;
     display: inline-block;
-    text-indent: 15px;
+    text-indent: 7px;
     margin-right: 10px;
     float: left;
 }
@@ -90,10 +122,46 @@
     text-indent: 15px;
 }
 
-.content {
-    width: 100%;
+.glyphicon-menu-right{
+    margin-top: 15px;
+    margin-right: 13px;
 }
 
+.kotak-masuk{
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 3;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+    padding: 15px 10px 0px; 
+    margin-bottom: 2px;
+}
+
+.content {
+    width: 100%;
+    padding-left: 85px;
+    
+}
+
+.badge{
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 6px;
+    font-size: 12px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    font-size: 11px;
+    width: 17px;
+    height: 17px;
+    background-color: #ab47bc;
+    position: relative;
+    top: 15px;
+    right: 20px;
+}
 @media (min-width:450px) and (max-width: 992px) {
     .btn-toggle {
         display: none;

@@ -18,7 +18,7 @@
   <div class="isi-tahapan">
     <div class="col-md-4">
       <div class="isi-tahapan-pesanan">
-        <div class="isi-tahapan-title">
+        <div class="isi-tahapan-title" value="idTrip">
           <p>Trip Pesanan Anda</p>
         </div>
         <div class="gambar">
@@ -33,10 +33,10 @@
             <span class="icon-star"></span>
           </div>
           <div class="isi-pesanan-nama-pulau">
-            <p>Pulau Harapan Kepulauan Seribu Jakarta Utara</p>
+            <p>{{booking?.trip_name}}</p>
           </div>
           <div class="isi-pesanan-waktu">
-            <span class="glyphicon glyphicon-time"></span> <span class="waktu">2 Hari 1 Malam</span>
+            <span class="glyphicon glyphicon-time"></span> <span class="waktu">{{detailTrip?.days}} Hari {{detailTrip?.night}} Malam</span>
           </div>
           <div class="isi-pesanan-travel">
             <span class="glyphicon glyphicon-user"></span> <span class="travel">Kuylah Travel</span>
@@ -51,11 +51,11 @@
           <div class="panel-body">
             <div class="detail-pelaksanaan">
               <span>Pelaksanaan :</span>
-              <p>14-16 November 2018</p>
+              <p>{{startDay}} {{startMonth}} {{startYear}} - {{endDay}} {{endMonth}} {{endYear}}</p>
             </div>
             <div class="detail-jumlah">
               <span>Jumlah Peserta (yang anda pesan) :</span>
-              <p>10 Orang</p>
+              <p>{{jumlahOrang}}</p>
             </div>
             <div class="detail-keterangan">
               <p>Data peserta dilengkapi setelah melakukan pembayaran</p>
@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    <form (submit)="goToPembayaran($event)" id="{{dataTrip}}">
     <div class="col-md-8">
       <div class="isi-data-pemesan">
         <div class="panel panel-default">
@@ -71,26 +72,26 @@
             <p>Data Pemesan</p>
           </div>
           <div class="panel-body">
-            <form class="form-data-pemesan">
+            <div class="form-data-pemesan">
               <div class="form-group">
                 <label class="label-form-pemesanan">Nama Lengkap</label>
-                <input type="text" class="form-control"> 
+                <input type="text" class="form-control" [(ngModel)]="nbook.order_name" name="order_name"> 
               </div>
               <div class="form-email">
                 <div class="form-group">
                   <label class="label-form-pemesanan">Email</label>
-                  <input type="email" class="form-control">
+                  <input type="email" class="form-control" [(ngModel)]="nbook.email" name="email">
                 </div>
               </div>
               <div class="form-telepon pull-right">
                 <div class="form-group">
                   <label class="label-form-pemesanan">No Telepon</label>
-                  <input type="number" class="form-control">
+                  <input type="number" class="form-control" [(ngModel)]="nbook.telephone" name="telephone">
                 </div>
               </div>
-            </form>
+            </div>
             <div class="ubah-data">
-              <p>Ubah Data Pemesan?</p>
+              <p></p>
             </div>
           </div>
         </div>
@@ -101,11 +102,11 @@
             <p>Cacatan untuk Provider</p>
           </div>
           <div class="panel-body">
-            <form class="form-data-pemesan">
+            <div class="form-data-pemesan">
               <div class="form-group">
-                <textarea class="form-control"> </textarea>
+                <textarea class="form-control" [(ngModel)]="nbook.catatan_provider" name="catatan_provider"> </textarea>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -131,13 +132,13 @@
       <div class="kode-promo">
         <div class="panel panel-default">
           <div class="panel-body">
-             <form class="form-kode-promo">
+             <div class="form-kode-promo">
               <div class="form-group">
                 <label>Punya Kode Promo?</label>
                 <input type="text" class="form-control">
                 <button class="btn btn-kode" type="submit">Gunakan Kode</button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -149,28 +150,28 @@
           <div class="panel-body">
             <div class="detail">
               <div class="harga">
-                <span>Harga Paket</span><span class="jumlah">x 10</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span>
+                <span>Harga Paket</span><span class="jumlah">x {{jumlahOrang}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{bayar}}</span>
               </div>
-              <div class="diskon">
-                <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span>
-              </div>
+              <!-- <div class="diskon">
+                <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right"> - Rp {{promo}}</span>
+              </div> -->
               <div class="kode">
-                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 300000</span>
+                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">Rp {{random}}</span>
               </div>
-              <div class="asuransi">
-                <span>Asuransi</span><span class="jumlah">x 10</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 4002004990</span>
-              </div>
+              <!-- <div class="asuransi">
+                <span>Asuransi</span><span class="jumlah">x {{jumlahOrang}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{hargaAsuransi}}</span>
+              </div> -->
             </div>
             <hr>
             <div class="total">
-              <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span></p>
+              <p class="total-bayar" >Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.publish_price">Rp {{totalBayar}}</span></p>
             </div>
           </div>
         </div>
       </div>
-      <div class="pembayaran">
-        <p>Lanjut ke Pembayaran</p>
-      </div>
+        <button type="submit" class="btn btn-pembayaran">Lanjut ke Pembayaran</button>
     </div>
+    </form>
   </div>
 </div>
+<app-mini-footer></app-mini-footer>

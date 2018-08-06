@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
     email:'',
     password:''
   }
-  constructor( private fb: FormBuilder, private appService: AppService) { 
+  constructor( private fb: FormBuilder, private appService: AppService, private router:Router) { 
   }
 
   ngOnInit() {
@@ -24,7 +25,9 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
     
       this.appService.registerUser(this.newUser).subscribe(newUser =>{
-        console.log(newUser);
+        if(newUser.succes=true){
+          this.router.navigate(['/LoginPage']); 
+        }
       })
   }
 }  

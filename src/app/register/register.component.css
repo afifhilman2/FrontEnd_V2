@@ -1,3 +1,19 @@
+.head {
+    width: 1366px;
+    height: 75px;
+    background-color: #f5f5f5;
+    border: solid 1px #dddddd;
+}
+
+.wrap-head {
+    width: 181px;
+    margin: 12px auto;
+}
+
+.head-password {
+    width: 181px;
+    height: 44px;
+}
 
 .wrap-form {
 	width: 526px;

@@ -44,14 +44,10 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="lokasi">Lokasi : </label>
-                                <select class="form-control">
-                                            <option >Pilih Lokasi</option>
-									 		<option >Jawa</option>
-									 		<option >Kalimantan</option>
-									 		<option >Sumatera</option>
-									 		<option >Sulawesi</option>
-									 		<option >NTB</option>
-									 		<option >NTT</option>
+                                <select class="form-control" (change)="getprovinsi($event)">
+                                            <option value="" disabled selected>Pilih Lokasi</option>
+									 		<option *ngFor="let p of profinsi" [value]="p.province_name">{{ p.province_name }}</option>
+									 		
 									 	</select>
                             </div>
                         </div>
@@ -59,16 +55,16 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="kategori">Kategori : </label>
-                                <select class="form-control">
-                                            <option>Pilih Kategori</option>
-									 		<option id="Beach" >Beach</option>
-									 		<option id="City Tour" >City Tour</option>
+                                <select class="form-control" (change)="getcategory($event)">
+                                            <option value="" disabled selected>Pilih Kategori</option>
+									 		<option id="Beach" *ngFor="let k of category" [value]="k.category_name">{{ k.category_name}}</option>
+									 		<!-- <option id="City Tour" >City Tour</option>
 									 		<option id="Culture">Culture</option>
 									 		<option id="Fishing">Fishing</option>
 									 		<option id="Hiking">Hiking</option>
 									 		<option id="Honeymoon">Honeymoon</option>
 									 		<option id="Tracking">Tracking</option>
-									 		<option id="Sailing">Sailing</option>	
+									 		<option id="Sailing">Sailing</option>	 -->
 								</select>
                             </div>
                         </div>
@@ -124,7 +120,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <button [routerLink]="['/searchNavbar/Jawa']" class="btn btn-cari" type="submit">Cari</button>
+                                <button (click)="goToSearch()" class="btn btn-cari" type="submit">Cari</button>
                             </div>
                         </div>
                     </div>
@@ -138,15 +134,15 @@
         <div class="row">
             <div class="diskon-category text-diskon">
                 Diskon Minggu Ini </div>
-            <a class="diskon-category lihat-diskon">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
+            <a class="diskon-category lihat-diskon" routerLink="/search">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
-                <div *ngFor="let trip of dataTrip; let i=index">
-                    <div *ngIf="i<6">
-                        <div class="col-md-2 col-sm-4 col-xs-6">
-                            <a [routerLink]="['/DetailPaket']">
+                <div *ngFor="let trip of dataTrip; let i=index" >
+                    <div *ngIf="i<6" >
+                        <div class="col-md-2 col-sm-4 col-xs-6" (click)="goDetail($event)">
+                            <a >
                                 <div class="thumb-promo">
-                                    <img src="../assets/img/1.jpg" class="img-promo">
+                                    <img src="{{trip.photo_trip['0']}}" class="img-promo" id="{{trip._id}}">
                                     <div class="disc">-10%</div>
                                     <div class="trip">Open</div>
                                     <div class="body-caption">
@@ -156,12 +152,12 @@
                                                 <span class="icon-star"></span>
                                                 <span class="icon-star"></span>
                                             </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="caption-price">Rp 300.000</div>
+                                            <div class="price pull-right">
+                                                <div class="caption-price">Rp {{trip.publish_price}}</div>
                                             </div>
                                         </div>
                                         <div class="caption-tittle"> {{ trip.trip_name }} </div>
-                                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
+                                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
                                         <a [routerLink]="['/EtalaseTravel']">
                                             <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
                                         </a>
@@ -172,8 +168,35 @@
                     </div>
                 </div>
 
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['/DetailPaket']">
+                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
+                    <a [routerLink]="['DetailPaket']">
+                        <div class="thumb-promo">
+                            <img src="../assets/img/1.jpg" class="img-promo">
+                            <div class="disc">-10%</div>
+                            <div class="trip">Open</div>
+                            <div class="body-caption">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <span class="icon-star"></span>
+                                        <span class="icon-star"></span>
+                                        <span class="icon-star"></span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="caption-price">Rp 300.000</div>
+                                    </div>
+                                </div>
+                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
+                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
+                                <a [routerLink]="['/EtalaseTravel']">
+                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div> -->
+
+                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
+                    <a [routerLink]="['DetailPaket']">
                         <div class="thumb-promo">
                             <img src="../assets/img/1.jpg" class="img-promo">
                             <div class="disc">-10%</div>
@@ -200,7 +223,7 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['/DetailPaket']">
+                    <a [routerLink]="['DetailPaket']">
                         <div class="thumb-promo">
                             <img src="../assets/img/1.jpg" class="img-promo">
                             <div class="disc">-10%</div>
@@ -224,10 +247,10 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['/DetailPaket']">
+                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
+                    <a [routerLink]="['DetailPaket']">
                         <div class="thumb-promo">
                             <img src="../assets/img/1.jpg" class="img-promo">
                             <div class="disc">-10%</div>
@@ -251,10 +274,10 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['/DetailPaket']">
+                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
+                    <a [routerLink]="['DetailPaket']">
                         <div class="thumb-promo">
                             <img src="../assets/img/1.jpg" class="img-promo">
                             <div class="disc">-10%</div>
@@ -278,35 +301,10 @@
                             </div>
                         </div>
                     </a>
-                </div>
-
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['/DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </div>
+
+<app-footer></app-footer>

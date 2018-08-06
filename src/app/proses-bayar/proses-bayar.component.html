@@ -1,4 +1,6 @@
 <div class="container">
+  
+  <form (submit)="goToCheckout($event)" id="idBook">
   <div class="tahapan-proses">
     <div class="tahapan-proses1">
       <div class="no-proses1">
@@ -26,6 +28,7 @@
         </div>
         <div class="panel-body body-metode">
           <div class="card">
+            
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#transfer" aria-controls="home" role="tab" data-toggle="tab">Transfer</a></li>
               <li role="presentation"><a href="#kartu-kredit" aria-controls="settings" role="tab" data-toggle="tab">Kartu Kredit</a></li>
@@ -34,32 +37,70 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
+
+              
               <div role="tabpanel" class="tab-pane active" id="transfer">
+                <p class="pilih-bank">Pilih Bank:</p>
+                
                 <ul class="ul-transver">
-                  <li class="transver"><img src="assets/img/bca.png"></li>
-                  <li class="transver"><img src="assets/img/bca.png"></li>
-                  <li class="transver"><img src="assets/img/bca.png"></li>
-                  <li class="transver"><img src="assets/img/bca.png"></li>
+                  <li class="transver" tabindex="1" (click)="sendValueBank($event)" value="1"><img src="assets/img/bca.png"></li>
+                  <li class="transver" tabindex="2" (click)="sendValueBank($event)" value="2"><img src="assets/img/BNI.png"></li>
+                  <li class="transver" tabindex="3" (click)="sendValueBank($event)" value="3"><img src="assets/img/mandiri.png"></li>
+                  <li class="transver" tabindex="4" (click)="sendValueBank($event)" value="4"><img src="assets/img/BRI.png"></li>
                 </ul>
+                <p class="info-no">Nomer rekening tujuan muncul setelah menekan tombol Bayar Dengan Transfer</p>
+                
               </div>
               <div role="tabpanel" class="tab-pane" id="kartu-kredit">
-                
+                <form class="kredit-form">
+                  <div class="form-group">
+                    <label class="label-form">No Kartu Kredit :</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  
+                    <div class="form-group berlaku-form">
+                      <label class="label-form">Berlaku Hingga :</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  
+                  
+                    <div class="form-group cvv-form">
+                      <label class="label-form">Berlaku Hingga :</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  
+                  <div class="form-group">
+                    <label class="label-form">Nama di Kartu :</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </form>
               </div>
               <div role="tabpanel" class="tab-pane" id="indomart">
-                
+                <div class="kredit-form">
+                  <ul class="indo-alfa">
+                      <li class="gambar" tabindex="5" (click)="sendValueBank($event)" value="5">
+                          <img src="assets/img/indo.png">
+                      </li>
+                  </ul>
+                  
+                  <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
+                </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="alfamart">
-                <div class="gambar">
-                  <div class="ceklist">
+                <div class="kredit-form">
+                  <ul class="indo-alfa">
+                      <li class="gambar" tabindex="6" (click)="sendValueBank($event)" value="6">
+                        <img src="assets/img/alfa.png">
+                      </li>
+                  </ul>
+                  <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
 
-                  </div>
-                  <img src="assets/img/alfa.png">
                 </div>
               </div>
             </div>
           </div>
-          
         </div>
+        
       </div>
     </div>
     <div>
@@ -69,22 +110,22 @@
         </div>
         <div class="panel-body">
           <div class="detail">
-              <p>Harga Paket<span class="jumlah">x 10</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span></p>
-              <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span></p>
-              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">Rp 300000</span></p>
-              <p>Asuransi<span class="jumlah">x 10</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp 4002004990</span></p>
-              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right">Rp 4002004990</span></p>
+              <p>Harga Paket<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking?.publish_price === null ? '' : 'Rp ' + dataBooking?.publish_price}}</span></p>
+              <!-- <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">Rp {{promo}}</span></p> -->
+              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking?.uniq_code === null ? '' : 'Rp ' + dataBooking?.uniq_code}}</span></p>
+              <!-- <p>Asuransi<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{hargaAsuransi}}</span></p> -->
+              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right">{{price === undifined ? '' : 'Rp ' + price}}</span></p>
           </div>
           <hr>
           <div class="total">
-            <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3 000 000</span></p>
+            <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="boking.coded_amount">{{totalBayar === undifined ? '' : 'Rp ' + totalBayar}}</span></p>
           </div>
         </div>
       </div>
     </div>
     <div>
       <button type="button" class="btn btn-batal">Kembali ke Halaman Pemesanan</button>
-      <button type="button" class="btn btn-simpan">Bayar dengan <span>Alfamart</span></button>
+      <button type="submit" class="btn btn-simpan" >Lanjutkan</button>
     </div>
   </div>
   <div class="col-md-4">
@@ -93,23 +134,24 @@
     </div>
     <div>
       <div class="panel panel-default no-pesanan">
-        <div class="panel-heading">
+        <div class="panel-heading heading-no">
           <p>Nomor Pesanan</p>
         </div>
         <div class="panel-body">
           <div class="no">
-            <p class="no-resi">90090-0987789 <span class="salin pull-right">Salin</span></p>
+            <p class="no-resi" ([ngModel])="boking.no_booking">{{noPesanan}} <span class="salin pull-right">Salin</span></p>
             <p class="pesan">Nomor Pesanan digunakan untuk mewakili paket trip yang dipesan</p>
           </div>
         </div>
         <div class="panel-footer detail-pesanan">
           <p class="total-bayar"><span class="glyphicon glyphicon-briefcase"></span>Pulau Harapan</p>
-          <p class="tanggal"> 14-16 November 2018</p>
-          <p class="pemesan">Jumlah Orang : <span>Irfan Harianto</span></p>
-          <p class="jumlah-orang">Jumlah yang dipesan : <span>10 Orang</span></p>
+          <p class="tanggal"> {{startDay}} {{startMonth}} {{startYear}} - {{endDay}} {{endMonth}} {{endYear}}</p>
+          <p class="pemesan">Nama Pemesan : <span>{{dataBooking?.order_name}}</span></p>
+          <p class="jumlah-orang">Jumlah yang dipesan : <span>{{dataBooking?.quantity}}</span></p>
         </div>
       </div>
     </div>
   </div>
-  
+</form>
 </div>
+<app-mini-footer></app-mini-footer>

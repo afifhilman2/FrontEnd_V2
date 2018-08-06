@@ -20,6 +20,16 @@
     display: initial;
 }
 
+.trv-alert{
+    font-size:11px;
+    color: #d24d57;
+    margin-left: 117px;
+    margin-top: -25px;
+    position: absolute;
+
+}
+
+
 .col-md-4{
     padding-top: 30px;
     margin-left: -38px;
@@ -136,7 +146,6 @@
 }
 
 .btn-ubahProfil{
-    margin: auto;
     display: block;
     width: 168px;
     height: 33px;
@@ -145,7 +154,16 @@
     font-size: 13px;
     border-radius: 0;
     font-weight: bold;
+    padding: 7px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: auto;
 }
+
+[hidden]{
+    display: none !important;
+}
+
 .btn-deskripsi{
     padding: 12px 12px;
     font-family: sans-serif;

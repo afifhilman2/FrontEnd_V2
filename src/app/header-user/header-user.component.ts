@@ -15,9 +15,15 @@ export class HeaderUserComponent implements OnInit {
   provider:any=[];
   query:any;
 
+  dropLogout: boolean = false;
+
   changeHead:boolean = true;
   changeHeadUser:boolean = false;
 
+  categoryAllTrip;
+  dataUser;
+  photo;
+  photos = ("../assets/img/user.png");
   querySearch(e) {
     this.query= e.target.value;
     console.log(this.query);
@@ -26,19 +32,31 @@ export class HeaderUserComponent implements OnInit {
 
 
 
-  constructor(public appService: AppService) {
+  constructor(public appService: AppService, private router: Router) {
+    // this.photos = ;
     this.appService.getUsers().subscribe(profile => {
-      
+      this.dataUser = profile.data;
+      this.photos = profile.data.photo;
+      console.log(profile);
     });
 
     this.appService.getProvider().subscribe(provider => {
       console.log(provider);
     });
-   
+
+    this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
+      this.categoryAllTrip = categoryAllTrip.data; 
+    });
+
    }
 
    logout() {
-    localStorage.removeItem('token');   
+    localStorage.removeItem('token');
+    this.router.navigate(['/']); 
+  }
+
+  openLogout(): void{
+    this.dropLogout = !this.dropLogout;
   }
 
 

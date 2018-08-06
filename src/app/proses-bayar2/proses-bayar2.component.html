@@ -20,7 +20,7 @@
     <p class="text-center perintah">Silahkan segera selesaikan pembayaran sebelum batas waktu habis</p>
   </div>
   <div>
-    <p class="text-center waktu">02 : 03 : 58</p>
+    <p class="text-center waktu">{{ countDown }}</p>
   </div>
   <div class="panel-transfer">
     <div class="panel panel-default transfer">
@@ -39,7 +39,8 @@
     </div>
 
     <div class="total">
-      <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3.000.<span class="code">000</span></span></p>
+      <!-- <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3.000.<span class="code">000</span></span></p> -->
+      <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">{{coded_amount === undifined ? '' : 'Rp ' + coded_amount}}</span></p>
     </div>
     <div class="notice">
       <p><span class="perhatikan">Perhatikan !</span> Transfer hingga 3 digit terakhir</p>      
@@ -52,8 +53,11 @@
       </label>
     </div>
     <div>
-      <button type="button" class="btn btn-bayar">Kembali ke Halaman Pemesanan</button>
+      <button type="button" class="btn btn-bayar" (click)="goToPemesanan()">Kembali ke Halaman Pemesanan</button>
     </div>
 
   </div>
+
+  
 </div>
+<app-mini-footer></app-mini-footer>

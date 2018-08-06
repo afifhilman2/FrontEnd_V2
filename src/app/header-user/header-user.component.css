@@ -131,3 +131,33 @@ li.kanan {
         margin-bottom: 8px;
     }
 }
+
+.logout{
+    position: fixed;
+    width: 189px;
+    background-color: #ffffff;
+    padding: 15px 31px 9px 18px;
+    right: 0;
+    top: 51px;
+    z-index: 1030;
+    box-sizing: border-box;
+    border-radius: 0 0 0 10px;
+    border: solid 1px #dddddd;
+    text-align: right;
+    cursor: pointer;
+}
+
+.logout:hover{
+    position: fixed;
+    width: 189px;
+    background-color: #dddddd;
+    padding: 15px 31px 9px 18px;
+    right: 0;
+    top: 51px;
+    z-index: 1030;
+    box-sizing: border-box;
+    border-radius: 0 0 0 10px;
+    border: solid 1px #dddddd;
+    text-align: right;
+    cursor: pointer;
+}
