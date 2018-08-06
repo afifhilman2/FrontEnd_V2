@@ -1,4 +1,6 @@
-table, td, th{
+table,
+td,
+th {
     width: 273px;
     height: 28px;
     border-radius: 3px;
@@ -9,34 +11,35 @@ table, td, th{
     font-size: 11px;
 }
 
-.alamat-agen{
+.alamat-agen {
     font-size: 12px;
 }
-.alamat-paket{
+
+.alamat-paket {
     font-size: 11px;
 }
 
-.bagikan{
+.bagikan {
     font-size: 11px;
 }
 
-.body-info{
+.body-info {
     display: inline-block;
     width: 250px;
 }
 
-.body-title{
+.body-title {
     display: inline;
     margin-left: 30px;
 }
 
-.button-body{
+.button-body {
     display: inline-block;
     position: absolute;
     top: 25px;
 }
 
-.btn-lihatProfil{
+.btn-lihatProfil {
     width: 140px;
     height: 37px;
     border-radius: 2.4px;
@@ -46,7 +49,7 @@ table, td, th{
     display: inline-block;
 }
 
-.btn-kirimPesan{
+.btn-kirimPesan {
     width: 140px;
     height: 37px;
     border-radius: 2.4px;
@@ -57,7 +60,7 @@ table, td, th{
     display: inline-block;
 }
 
-.btn-pesan{
+.btn-pesan {
     width: 274px;
     height: 43px;
     border-radius: 2.4px;
@@ -70,36 +73,34 @@ table, td, th{
     font-size: 15px;
 }
 
-.calendar{
+.calendar {
     margin-left: 50px;
 }
 
-
-.card{
+.card {
     margin-top: 20px;
 }
-.carousel{
-    
+
+.carousel {
     height: 350px !important;
 }
 
-.col-md-4{
+.col-md-4 {
     position: absolute;
     right: 0;
 }
 
-.collapse{
+.collapse {
     position: relative;
     left: 15px;
     top: 5px;
 }
-.container-fluid-page{
+
+.container-fluid-page {
     margin-left: 100px;
-    
 }
 
-
-.diskon{
+.diskon {
     display: inline-block;
     color: #e91e63;
     font-family: sans-serif;
@@ -108,7 +109,7 @@ table, td, th{
     margin-left: 2px;
 }
 
-.harga{
+.harga {
     width: 273px;
     height: 72px;
     border-radius: 2.4px;
@@ -117,56 +118,55 @@ table, td, th{
     padding-top: 19px;
 }
 
-.harga-diskon{
+.harga-diskon {
     font-size: 24.9px;
-    color:#9c27b0;
+    color: #9c27b0;
     font-weight: bold;
     margin-left: 50px;
     margin-top: 15px;
     font-family: sans-serif;
 }
 
-.harga-normal{
+.harga-normal {
     text-decoration: line-through;
     margin-left: 55px;
     font-size: 12.9px;
     color: #4a4a4a;
 }
 
-.orang{
+.orang {
     font-weight: bold;
     color: #9c27b0;
 }
 
-.harga-tanggal{
+.harga-tanggal {
     margin-left: 50px;
 }
 
-
-.img-agen{
+.img-agen {
     width: 50px;
     height: 59px;
     float: left;
     margin-right: 22px;
 }
 
-.img-share{
-    
+.img-share {
     margin-left: 10px;
     display: inline-block;
 }
 
-.img-share img{
+.img-share img {
     width: 15px;
     height: 15px;
 }
 
-.info{
+.info {
     margin-left: 16px;
     padding-top: 10px;
     font-weight: bold;
 }
-.informasi-agen{
+
+.informasi-agen {
     width: 437px;
     height: 143px;
     border: solid 0.8px #dddddd;
@@ -174,25 +174,25 @@ table, td, th{
     margin-top: 28px;
 }
 
-.item img{
+.item img {
     object-fit: contain;
     height: 349px !important;
     margin: auto;
     width: 100%;
 }
 
-.jenis-trip{
+.jenis-trip {
     font-weight: bold;
     color: #ff9800;
     font-size: 13.4px;
     margin-left: 11px;
 }
 
-.jenis-paket{
+.jenis-paket {
     margin-top: 25px;
 }
 
-.judul-paket{
+.judul-paket {
     height: 36px;
     font-family: sans-serif;
     font-size: 34.7px;
@@ -205,12 +205,12 @@ table, td, th{
     color: #4a4a4a;
 }
 
-.kanan{
+.kanan {
     margin-bottom: 15px;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
-.kanan-deskripsi{
+.kanan-deskripsi {
     font-size: 13.4px;
     margin-top: 15px;
     border-bottom: solid 1px #dddddd;
@@ -219,32 +219,32 @@ table, td, th{
     padding-bottom: 15px;
 }
 
-.kanan-fasilitas{
+.kanan-fasilitas {
     font-size: 13.4px;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: solid 1px #dddddd;
 }
 
-.kanan-meeting{
+.kanan-meeting {
     font-size: 13.4px;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: solid 1px #dddddd;
 }
 
-.kanan-catatan{
+.kanan-catatan {
     font-size: 13.4px;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: solid 1px #dddddd;
 }
 
-.kategori-detail{
+.kategori-detail {
     display: inline;
 }
 
-.kelas-agen{
+.kelas-agen {
     font-size: 10.2px;
     color: #9c27b0;
     font-family: sans-serif;
@@ -252,7 +252,7 @@ table, td, th{
     margin-top: -8px;
 }
 
-.komen{
+.komen {
     width: 814px;
     height: 106px;
     border: solid 0.8px #dddddd;
@@ -261,7 +261,7 @@ table, td, th{
     font-family: sans-serif;
 }
 
-.komen-image{
+.komen-image {
     width: 37px;
     height: 37px;
     border-radius: 50%;
@@ -270,25 +270,25 @@ table, td, th{
     display: block;
 }
 
-.komen-star{
+.komen-star {
     margin-left: 18px;
 }
 
-.komen-tanggal{
+.komen-tanggal {
     font-size: 11px;
     color: #4a4a4a;
     margin-left: 18px;
     font-family: sans-serif;
 }
 
-.komen-tanggapan{
+.komen-tanggapan {
     font-size: 13.4px;
     color: #4a4a4a;
     margin-left: 18px;
     font-family: sans-serif;
 }
 
-.komen-user-name{
+.komen-user-name {
     font-size: 13.4px;
     font-weight: bold;
     font-family: sans-serif;
@@ -297,52 +297,53 @@ table, td, th{
     margin-left: 18px;
 }
 
-.lokasi-detail{
+.lokasi-detail {
     display: inline;
 }
 
-.map-responsive{
+.map-responsive {
     width: 432px;
     height: 226px;
-    overflow:hidden;
-    padding-bottom:50%;
-    position:relative;
-    height:0;
+    overflow: hidden;
+    padding-bottom: 50%;
+    position: relative;
+    height: 0;
     display: inline-block;
 }
 
-.map-responsive iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
-.facility{
+.facility {
     display: inline-block;
     vertical-align: top;
     margin-left: 40px;
     margin-top: 50px
 }
 
-.tempat{
-    display: inline-block;
-    
-}
-
-.text-description{
+.tempat {
     display: inline-block;
 }
 
-.nama-agen{
+.text-description {
+    display: inline-block;
+}
+
+.nama-agen {
     font-size: 13px;
     font-weight: bold;
 }
-.nama-paket{
+
+.nama-paket {
     margin-bottom: 15px;
     margin-top: 12px;
 }
+
 
 /* .nav-tabs> li.active{
     border-bottom: solid #9c27b0;
@@ -350,18 +351,18 @@ table, td, th{
      
 } */
 
-.nav-tabs{
+.nav-tabs {
     border: none;
     font-family: sans-serif;
     font-size: 13.4px;
     font-weight: bold;
 }
 
-.nav-tabs> li> a{
+.nav-tabs>li>a {
     border: none;
     background-color: transparent;
-    
 }
+
 .nav-tabs>li.active>a,
 .nav-tabs>li>a:hover {
     border: none;
@@ -392,15 +393,16 @@ table, td, th{
     color: #fff;
 }
 
-.nominal-table{
+.nominal-table {
     font-weight: bold;
     color: #8e3caa;
 }
 
-.pembatas{
+.pembatas {
     display: inline
 }
-.pilih-tanggal{
+
+.pilih-tanggal {
     width: 275px;
     height: 40px;
     background-color: #f5f5f5;
@@ -410,7 +412,7 @@ table, td, th{
     border: 1px solid #dddddd;
 }
 
-.pilih-tanggal p{
+.pilih-tanggal p {
     width: 183px;
     height: 15px;
     font-family: sans-serif;
@@ -418,38 +420,38 @@ table, td, th{
     font-weight: bold;
     color: #9c27b0;
 }
-.tab-content{
+
+.tab-content {
     border: none;
 }
 
-.table{
+.table {
     margin-left: 50px;
     margin-top: 5px;
     margin-bottom: 10px;
     width: 90%;
 }
 
-.title-info{
+.title-info {
     width: 435px;
     height: 40px;
     background-color: #f5f5f5;
     border-bottom: solid 0.8px #dddddd;
     font-weight: bold;
     font-size: 13px;
-    
 }
 
-.waktu-trip{
+.waktu-trip {
     font-weight: Bold;
     font-size: 13.4px;
     margin-left: 6px;
 }
 
-.tanggal-tersedia{
+.tanggal-tersedia {
     width: 275px;
 }
 
-.kuota-jumlah{
+.kuota-jumlah {
     width: 275px;
     height: 65px;
     margin-left: 50px;
@@ -457,7 +459,7 @@ table, td, th{
     border: 1px solid #dddddd;
 }
 
-.kuota{
+.kuota {
     font-size: 13px;
     font-weight: normal;
     font-style: normal;
@@ -468,7 +470,7 @@ table, td, th{
     text-align: center;
 }
 
-.berangkat{
+.berangkat {
     font-size: 13px;
     font-weight: normal;
     font-style: normal;
@@ -479,7 +481,7 @@ table, td, th{
     text-align: center;
 }
 
-.jumlah{
+.jumlah {
     width: 275px;
     height: auto;
     margin-left: 50px;
@@ -487,7 +489,7 @@ table, td, th{
     margin-top: 10px;
 }
 
-.jumlah-orang{
+.jumlah-orang {
     height: 40px;
     background-color: #f5f5f5;
     border-bottom: solid 1px #dddddd;
@@ -501,7 +503,7 @@ table, td, th{
     color: #4a4a4a;
 }
 
-.minus{
+.minus {
     float: left;
     width: 15%;
     padding: 7px;
@@ -509,28 +511,27 @@ table, td, th{
     border-bottom: solid 1px #dddddd;
 }
 
-.jumlah-input{
+.jumlah-input {
     display: inline-block;
     width: 192px;
     margin-left: -1px;
 }
 
-.form-control{
+.form-control {
     border-radius: 0;
     background-color: white;
     height: 36px;
     margin-top: -1px;
     border: 1px solid #dddddd;
-    
 }
 
-.nominal{
+.nominal {
     color: #9c27b0;
     font-weight: bold;
     text-align: center;
 }
 
-.plus{
+.plus {
     /* display: inline-block; */
     float: right;
     width: 15%;
@@ -539,31 +540,22 @@ table, td, th{
     border-bottom: solid 1px #dddddd;
 }
 
-.text-harga{
+.text-harga {
     margin-bottom: 0;
     text-align: center;
 }
 
-.harga-satuorang{
+.harga-satuorang {
     font-size: 24.9px;
-    color:#9c27b0;
+    color: #9c27b0;
     font-weight: bold;
     font-family: sans-serif;
     text-align: center;
 }
 
-.trv-alert{
-    font-size:11px;
+.trv-alert {
+    font-size: 11px;
     color: #d24d57;
     margin-bottom: 0px;
     padding: 10px;
-
 }
-
-
-
-
-
-
-
-
