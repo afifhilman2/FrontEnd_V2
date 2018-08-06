@@ -132,7 +132,7 @@ export class DetailPaketComponent implements OnInit {
       this.bookId = book.data;
       this.idT = book.data._id;
       // console.log(this.bookId);
-      if(!(this.bookId == null)){
+      if(!(this.idT === null)){
         if(book.status = true){
           this.router.navigate(['/ProsesPemesanan', this.idT ]); 
         }

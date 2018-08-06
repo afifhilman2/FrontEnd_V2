@@ -166,7 +166,7 @@
       </div>
     </div>
     
-    <form (submit)="goToProsespemesanan($event)" id="{{idT}}">
+    <form (submit)="goToProsespemesanan($event)" id="{{idT}}" #pesan="ngForm">
       <div class="col-md-4" >
         <div class="kolom-kanan">
           <div class="harga-tanggal">
@@ -235,7 +235,7 @@
               </div>
             </div>
           <!-- </div> -->
-          <button type="submit" class="btn btn-pesan" > Pesan Sekarang </button>
+          <button type="submit" class="btn btn-pesan" [disabled]="!pesan.form.valid" > Pesan Sekarang </button>
         </div>
       </div>
     </form>

@@ -14,8 +14,9 @@ export class GuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.isLoggedIn) {
-      return true;
+    if (!(localStorage.token == null)) {
+      this.isLoggedIn = true;
+      return this.isLoggedIn;
     } else {
       alert('Please log in')
       this.router.navigate(['/loginpage']);

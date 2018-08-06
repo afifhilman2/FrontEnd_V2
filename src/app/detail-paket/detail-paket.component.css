@@ -175,7 +175,7 @@ table, td, th{
 }
 
 .item img{
-    object-fit: cover;
+    object-fit: contain;
     height: 349px !important;
     margin: auto;
     width: 100%;
