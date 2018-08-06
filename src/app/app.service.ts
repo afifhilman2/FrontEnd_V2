@@ -79,6 +79,11 @@ export class AppService {
         .map(res => res.json());
     }
 
+    etTypeTrip() {
+        return this.http.get('http://travinesia.com:3000/get/type')
+        .map(res => res.json());
+    }   
+
     getDataTrip() {
         return this.http.get('http://travinesia.com:3000/get/trip/')
         .map(res => res.json())
@@ -114,6 +119,23 @@ export class AppService {
         .map(res => res.json());
     }
 
+    addTripProvider(trip) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.post('http://travinesia.com:3000/v1/provider/add_trip',trip,
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    editProfileProvider(provider) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.put('http://travinesia.com:3000/v1/provider/profile',provider,
+        {headers: headers})
+        .map(res => res.json());
+    }
 
     //searchResult
     search_word(term){

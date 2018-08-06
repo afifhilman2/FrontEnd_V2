@@ -75,6 +75,7 @@ export const routes :Routes = [
                 {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
                 {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
                 {path:'DaftarTrip', component:DaftarTripComponent},
+                {path:'UbahTrip/:id', component:JualTripContent2Component}, 
             ]
             }
                     ]

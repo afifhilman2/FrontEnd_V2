@@ -38,6 +38,7 @@ import { GuardService } from './guard.service';
 import { routes } from './app.route';
 import { AppService } from './app.service';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { SaldoComponent } from './saldo/saldo.component';
 import { DaftarTripComponent } from './daftar-trip/daftar-trip.component';
@@ -116,10 +117,10 @@ import { LoaderComponent } from './loader/loader.component';
     // MatAutocompleteModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBClUZWzmnXM-51wYSX22_lI2dBouzEDXM',
-      libraries: ["places"]
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyBClUZWzmnXM-51wYSX22_lI2dBouzEDXM',
+    //   libraries: ["places"]
+    // }),
     RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: PreloadAllModules }),
   
     
