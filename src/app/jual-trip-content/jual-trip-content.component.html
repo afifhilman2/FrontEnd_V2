@@ -17,7 +17,7 @@
                 <div class="img-paket-core">
                     <label>
                                 <div class="img-add">
-                                    <img src="../assets/img/add.png" class="add">
+                                    <img src={{trip.photo_trip[0]}} class="add">
                                     <input type="file" hidden (change)="uploadImage1($event)">
                                 </div>
                             </label>
@@ -30,7 +30,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="../assets/img/add.png" class="add">
+                                            <img src={{trip.photo_trip[1]}} class="add">
                                             <input type="file" hidden (change)="uploadImage2($event)">
                                         </div>
                                     </label>
@@ -40,7 +40,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="../assets/img/add.png" class="add">
+                                            <img src={{trip.photo_trip[2]}} class="add">
                                             <input type="file" hidden (change)="uploadImage3($event)">
                                         </div>
                                     </label>
@@ -50,7 +50,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="../assets/img/add.png" class="add">
+                                            <img src={{trip.photo_trip[3]}} class="add">
                                             <input type="file" hidden (change)="uploadImage4($event)">
                                         </div>
                                     </label>
@@ -60,8 +60,8 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="../assets/img/add.png" class="add">
-                                            <input type="file" hidden>
+                                            <img src="{{trip.photo_trip[4]}}" class="add">
+                                            <input type="file" hidden (change)="uploadImage5($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Fasilitas Trip</p>
@@ -157,33 +157,33 @@
                 <div class="col-md-4">
                     <label class="durasi">Durasi Trip </label>
                     <select class="form-control form-durasi" (change)='onSelectDuration($event)'>
-                                    <option value="1">1 Hari</option>
-                                    <option value="2">2 Hari</option>
-                                    <option value="3">3 Hari</option>
-                                    <option value="4">4 Hari</option>
-                                    <option value="5">5 Hari</option>
-                                    <option value="6">6 Hari</option>
-                                    <option value="7">7 Hari</option>
-                                    <option value="8">8 Hari</option>
-                                    <option value="9">9 Hari</option>
-                                    <option value="10">10 Hari</option>	
-                                  </select>
+                    <option value="1">1 Hari</option>
+                    <option value="2">2 Hari</option>
+                    <option value="3">3 Hari</option>
+                    <option value="4">4 Hari</option>
+                    <option value="5">5 Hari</option>
+                    <option value="6">6 Hari</option>
+                    <option value="7">7 Hari</option>
+                    <option value="8">8 Hari</option>
+                    <option value="9">9 Hari</option>
+                    <option value="10">10 Hari</option>
+                    </select>
                 </div>
 
                 <div class="col-md-offset-1 col-md-7">
                     <label class="kategori">Kategori Trip </label>
                     <span class="kategori-tittle">Kategori Utama :</span>
-                    <select class="form-control form-kategori" (change)='onSelectCategory($event)'>
-                                    <option>Pilih Kategori</option>
-                                    <option *ngFor="let category of categoryTrip" id= "{{category.category_name}}" value= "{{category.id_category}}">{{category.category_name}}</option>
-                                    <!-- <option id="City Tour" >City Tour</option>
+                    <select class="form-control form-kategori" (change)='onSelectCategory($event)' name="category">
+                    <option>Pilih Kategori</option>
+                    <option *ngFor="let category of categoryTrip" id="{{category.category_name}}" value="{{category.category_name}}">{{category.category_name}}</option>
+                    <!-- <option id="City Tour" >City Tour</option>
                                     <option id="Culture">Culture</option>
                                     <option id="Fishing">Fishing</option>
                                     <option id="Hiking">Hiking</option>
                                     <option id="Honeymoon">Honeymoon</option>
                                     <option id="Tracking">Tracking</option>
                                     <option id="Sailing">Sailing</option> -->
-                                </select>
+                    </select>
                 </div>
             </div>
 
@@ -193,9 +193,9 @@
                 <div class="col-md-4">
                     <label class="sort" for="lokasi"> Lokasi (Provinsi) </label>
                     <select class="form-control form-sort" (change)='onSelectProvince($event)'>
-                                                            <option >Pilih Provinsi</option>
-                                                            <option *ngFor="let province of provinceTrip" value="{{province.id_province}}">{{province.province_name}} </option>
-                                                            <!-- <option >Sumatra Utara</option>
+                    <option>Pilih Provinsi</option>
+                    <option *ngFor="let province of provinceTrip" value="{{province.id_province}}">{{province.province_name}} </option>
+                    <!-- <option >Sumatra Utara</option>
                                                             <option >Sumatra Selatan </option>
                                                             <option >Sumatra Barat</option>
                                                             <option >Bengkulu</option>
@@ -228,7 +228,7 @@
                                                             <option >Maluku </option>
                                                             <option >Papua Barat </option>
                                                             <option >Papua  </option> -->
-                                                        </select>
+                    </select>
                 </div>
 
                 <div class="col-md-offset-1 col-md-7">
@@ -238,42 +238,42 @@
                     <div class="wrap-category-item">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" value="Beach" [(ngModel)]="trip.other_category[0]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Beach" [(ngModel)]="trip.category[1]" name="category">
                                 <span class="checkbox-label-fasilitas">Beach</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" value="Hiking" [(ngModel)]="trip.other_category[1]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Hiking" [(ngModel)]="trip.category[2]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Hiking</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[2]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="City Tour" [(ngModel)]="trip.category[3]" name="id_category">
                                 <span class="checkbox-label-fasilitas">City Tour</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[3]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Honeymoon" [(ngModel)]="trip.category[4]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Honeymoon</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[4]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Culture" [(ngModel)]="trip.category[5]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Culture</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[5]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Tracking" [(ngModel)]="trip.category[6]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Tracking</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[6]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Fishing" [(ngModel)]="trip.category[7]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Fishing</span>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" [(ngModel)]="trip.other_category[7]" name="other_category">
+                                <input type="checkbox" class="checkbox" value="Sailing" [(ngModel)]="trip.category[8]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Sailing</span>
                             </div>
                         </div>
@@ -411,7 +411,7 @@
         <div class="wrap-tittle">
             <p class="head-content"> Jual Trip </p>
             <span class="state-all"> Tahap 2 dari 2</span>
-            <span class="state-back"> <a (click)="toggleJual()">  Kembali ke halaman sebelumnya <span>|</span> </a>
+            <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
             </span>
         </div>
 
@@ -419,7 +419,7 @@
 
         <div class="wrap-deskripsi">
             <label class="label-form" for="Deskripsi">Deskripsi</label>
-            <textarea class="deskripsi-trip form-control" [(ngModel)]="trip.description" name="description" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
+            <textarea class="deskripsi-trip form-control" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
 
         </div>
 
@@ -429,26 +429,24 @@
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-mepo dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
-                <input type="text" class="mepo-trip form-control" placeholder="Cari lokasi meeting point" aria-describedby="mepo" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl">
+
+                <!-- <input type="text" class="mepo-trip form-control" placeholder="Cari lokasi meeting point" aria-describedby="mepo" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl"> -->
             </div>
             <div class="catatan-mepo"> <span class="note-mepo">Catatan :</span> Masukkan nama tempat atau gedung populer di sekitar meeting point</div>
 
-            <!-- <agm-map [latitude]="latitude" [longitude]="longitude">
-                <agm-marker [latitude]="latitude" [longitude]="longitude"> </agm-marker>
-            </agm-map> -->
         </div>
 
         <div class="wrap-petunjuk">
             <label class="label-form" for="petunjuk">Petunjuk ke Meeting Point</label>
-            <textarea class="petunjuk-trip form-control" id="petunjuk" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
+            <textarea class="petunjuk-trip form-control" id="petunjuk" [(ngModel)]="trip.notes_meeting_point" name="notes_meeting_point" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
         </div>
 
         <div class="wrap-waktu">
             <div class="tittle-waktu">Waktu bertemu:</div>
 
-            <input type="text" placeholder="Jam" class="waktu-bertemu-input form-control"> :
+            <input type="number" placeholder="Jam" class="waktu-bertemu-input form-control"> :
 
-            <input type="text" placeholder="Menit" class="waktu-bertemu-input form-control">
+            <input type="number" placeholder="Menit" class="waktu-bertemu-input form-control">
 
             <select class="form-control form-waktu">
                 <option>WIB</option>
@@ -461,7 +459,7 @@
         <div class="wrap-catatan">
             <label class="label-form" for="catatan">Catatan untuk Traveller</label>
 
-            <textarea class="catatan-trip form-control" [(ngModel)]="trip.notes_traveler" name="notes_traveler" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
+            <textarea class="catatan-trip form-control" id="catatan" [(ngModel)]="trip.notes_traveler" name="notes_traveler" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
 
         </div>
 
@@ -470,7 +468,7 @@
                 <label class="label-form" for="harga">Harga Trip</label>
                 <div class="publish-trip input-group">
                     <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                    <input type="text" [(ngModel)]="trip.publish_price" name="publish_price" class="form-control publish-price" placeholder="Harga Publish">
+                    <input type="number" min="0" class="form-control publish-price" [(ngModel)]="trip.publish_price" name="publish_price" placeholder="Harga Publish">
                 </div>
                 <span class="perorang">/ Orang </span>
             </div>
@@ -478,7 +476,7 @@
             <div class="wrap-kuota">
                 <label class="label-form" for="harga">Kuota Trip</label>
                 <div class="publish-trip input-group">
-                    <input type="text" [(ngModel)]="trip.quota_trip" name="quota_trip" class="form-control" placeholder="Jumlah">
+                    <input type="number" min="1" max="100" class="form-control" [(ngModel)]="trip.quota_trip" name="quota_trip" placeholder="Jumlah">
                     <span class=" input-group-addon" id="harga"> Peserta </span>
                 </div>
             </div>

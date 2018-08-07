@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/filter';
+import { AppService } from '../app.service';
+import { Http } from '@angular/http';
 
 
 @Component({
@@ -13,7 +15,24 @@ export class JualTripComponent implements OnInit {
   order: string;
   order2: string;
 
-  constructor(private routeActive : ActivatedRoute) { }
+
+  profileProvider = {
+    nameTrip :'',
+    cover:'',
+    photo:'',
+  }
+
+  constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http) { 
+    this.appService.getProvider().subscribe(profile => {
+      this.profileProvider.nameTrip = profile.provider.travel_name;
+      this.profileProvider.cover = profile.provider.cover;
+     // this.profileProvider.photo = profile.provider.photo;
+      
+      // console.log(profile);
+    })
+
+    
+  }
 
   ngOnInit() {
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {

@@ -1,8 +1,7 @@
-import { Component, ElementRef, NgModule, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-// import { } from 'googlemaps';
-// import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+
 import {Router} from "@angular/router";
 import { AppService} from '../app.service';
 
@@ -18,13 +17,6 @@ export class JualTripContentComponent implements OnInit {
   content2:boolean = false;
 
   // content2
-  // public searchControl: FormControl;
-  // latitude =-6.104273;
-  // longitude=106.776137;
-
-  // @ViewChild("search")
-  // public searchElementRef: ElementRef;
-
 
   toggleJual():void {
     this.content1 = !this.content1;
@@ -34,6 +26,12 @@ export class JualTripContentComponent implements OnInit {
   categoryTrip:any[];
   provinceTrip:any[];
   typeTrip:any[];
+  service:any;
+  publish:any;
+  fixed:any;
+  days:any;
+  night:any;
+
 
   trip = {
     trip_name : '', 
@@ -47,30 +45,38 @@ export class JualTripContentComponent implements OnInit {
     quota_trip : '', 
     description : '', 
     notes_traveler : '', 
-    id_category : '',
-    other_category : [], 
+    notes_meeting_point :'',
+    id_province_trip :'',
+    category : [], 
     id_facility : '', 
     id_status_trip : '',
-    id_location : '', 
     publish_price_group : '', 
     service_fee_group : '', 
-    photo_trip : [],
+    photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
     fixed_price_grorup : '', 
   }
 
-  constructor(private ngZone: NgZone, public router :Router, private appService: AppService ) {
+  constructor( public router :Router, private appService: AppService ) {
     this.appService.getCategoryTrip().subscribe( category => {
       this.categoryTrip = category.data;
+     
     });
 
     this.appService.getProvinceTrip().subscribe( province => {
       this.provinceTrip = province.data;
+     
     })
    }
 
    onSubmitTrip1() {
+
+        this.publish = this.trip.publish_price;
+        this.service = (5 * this.publish) / 100;
+        this.trip.service_fee = this.service
+        this.fixed = this.publish - this.service;
+        this.trip.fixed_price = this.fixed;
      this.appService.addTripProvider(this.trip).subscribe(trip => {
-       console.log(trip);
+       console.log(trip); 
 
      })
    }
@@ -92,8 +98,8 @@ export class JualTripContentComponent implements OnInit {
   }
   
   _handleReaderLoaded1(readerEvt) {
-     let binaryString = readerEvt.target.result;
-            this.trip.photo_trip[0]= btoa(binaryString);          
+     let binaryString = readerEvt.target.result; 
+            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
     }
 
     uploadImage2(evt) {
@@ -111,7 +117,7 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
-              this.trip.photo_trip[1]= btoa(binaryString);         
+       this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
       uploadImage3(evt) {
@@ -129,7 +135,7 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
-              this.trip.photo_trip[2]= btoa(binaryString);          
+       this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
       uploadImage4(evt) {
@@ -147,7 +153,7 @@ export class JualTripContentComponent implements OnInit {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
-                this.trip.photo_trip[3]= btoa(binaryString);          
+         this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
         uploadImage5(evt) {
@@ -165,7 +171,7 @@ export class JualTripContentComponent implements OnInit {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
-                  this.trip.photo_trip[4]= btoa(binaryString);          
+           this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
           // end upload image
@@ -173,58 +179,30 @@ export class JualTripContentComponent implements OnInit {
 
       onSelectDuration(e) {
         this.trip.days = e.target.value;
+        this.days = this.trip.days;
+        this.night = this.days - 1;
+        this.trip.night = this.night;
+        
       }
 
       onSelectCategory(e) {
-        this.trip.id_category = e.target.value;
+        this.trip.category[0] = e.target.value;
+        console.log(this.trip.category);
+       
       }
 
       onSelectProvince(e) {
-        this.trip.id_location = e.target.value;
+        this.trip.id_province_trip = e.target.value;
+       
       }
 
       onRadioType(event :any) {
-        this.trip.id_type_trip = event.target.value;  
+        this.trip.id_type_trip = event.target.value; 
+        
       }
 
   ngOnInit() {
-    // this.latitude = -6.104273;
-    // this.longitude = 106.776137;
-
-    // this.searchControl = new FormControl();
-     //set current position
-    //  this.setCurrentPosition();
-    
-     //load Places Autocomplete
-    //  this.mapsAPILoader.load().then(() => {
-    //    let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-    //      types: ["address"]
-    //    });
-      //  autocomplete.addListener("place_changed", () => {
-      //    this.ngZone.run(() => {
-           //get the place result
-          //  let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-   
-          //  //verify result
-          //  if (place.geometry === undefined || place.geometry === null) {
-          //    return;
-          //  }
-           
-           //set latitude, longitude and zoom
-  //          this.latitude = place.geometry.location.lat();
-  //          this.longitude = place.geometry.location.lng();
-  //        });
-  //      });
-  //    });
-  // }
-
-//   private setCurrentPosition() {
-//     if ("geolocation" in navigator) {
-//       navigator.geolocation.getCurrentPosition((position) => {
-//         this.latitude = position.coords.latitude;
-//         this.longitude = position.coords.longitude;
-//       });
-//     }
- }
+  
+    }
 
 }
