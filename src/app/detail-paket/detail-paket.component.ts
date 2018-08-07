@@ -3,7 +3,7 @@ import { Router, ActivatedRoute,  ParamMap } from "@angular/router";
 import { AppService} from '../app.service';
 import { Http, Headers, Response} from '@angular/http';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/switchMap';
 import { Product } from '../product';
 
@@ -64,6 +64,7 @@ export class DetailPaketComponent implements OnInit {
 
   name;
   photo;
+  error = HttpErrorResponse;
 
   
   constructor(private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
@@ -127,23 +128,23 @@ export class DetailPaketComponent implements OnInit {
     this.idtrip = e.target.id;
     this.book.trip_name = this.name
     
-    console.log(this.idtrip);
+   if(!(localStorage.token == null)){
     this.appServis.booking(this.book).subscribe(book => {
       this.bookId = book.data;
       this.idT = book.data._id;
       // console.log(this.bookId);
-      if(!(this.idT === null)){
-        if(book.status = true){
+      
+        if(book.status = true && this.idT != null){
           this.router.navigate(['/ProsesPemesanan', this.idT ]); 
         }
-      }else{
-        alert('Please log in')
-        this.router.navigate(['/LoginPage']);
-        return false;
-      }
+    });
+
+   }else {
+    alert('Please log in')
+    this.router.navigate(['/LoginPage']);
+    return false;
+   }
      
-      
-    })  
     
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { AppService} from '../app.service';
 
+import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-landingpage',
@@ -11,16 +13,19 @@ import { AppService} from '../app.service';
 export class LandingpageComponent implements OnInit {
 
   idDetail:any[];
-  dataTrip:any[];
+  dataTrip;
   profinsi:any[];
   category:any[];
   photo:[ '../assets/img/user.png']
 
   catego;
   profin;
+  showSpinner: boolean = true;
+  subcribe = Subscription;
+  load;
   
   constructor(private router: Router, private appService: AppService) { 
-    this.appService.getDataTrip().subscribe (dataTrip => {
+    this.load = this.appService.getDataTrip().subscribe (dataTrip => {
      
       this.dataTrip = dataTrip.data;
       // console.log(dataTrip);
@@ -43,6 +48,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.load.subcribe(() => this.showSpinner = false)
   }
 
   goDetail(e){

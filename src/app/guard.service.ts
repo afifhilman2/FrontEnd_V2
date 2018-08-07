@@ -19,7 +19,7 @@ export class GuardService implements CanActivate {
       return this.isLoggedIn;
     } else {
       alert('Please log in')
-      this.router.navigate(['/loginpage']);
+      this.router.navigate(['/LoginPage']);
       return false;
     }
   }

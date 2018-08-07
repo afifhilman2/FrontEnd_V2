@@ -1,10 +1,55 @@
-<!-- <form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input type="text" placeholder="search word" aria-label="Number" matInput [formControl]="searchTerm" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let item of searchResult" [value]="item">
-                {{ item }}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form> -->
+<div class="container">
+        <div class="trv-tema-atas">
+          <h2><strong> Masuk di Travinesia </strong></h2>
+          <div class="garis-vertical"></div>
+          <div class="trv-punya-akun">
+            <p> Belum Punya Akun Travinesia? Daftar <a role="button" [routerLink]="['/Daftar']">disini</a></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+              <label for="email"> Email </label>
+              <input id="email" type="email" class="form-control" [(ngModel)]="loginUser.email" name="email" #newUserEmail="ngModel" required> 
+              <div *ngIf="newUserEmail.errors?.required && newUserEmail.touched" class="alert trv-alert">Email Tidak Boleh Kosong</div> 
+            </div>
+            <div class="form-group">
+              <label for="password"> Password </label>
+              <input id="password" type="password" class="form-control" [(ngModel)]="loginUser.password" name="password" #newUserPassword="ngModel" required minlength="8"> 
+              <div *ngIf="newUserPassword.errors?.required && newUserPassword.touched" class="alert trv-alert">Password Tidak Boleh Kosong</div> 
+              <div *ngIf="newUserPassword.errors?.minlength && newUserPassword.touched" class="alert trv-alert">Minimal 8 Karakter</div> 
+            </div>
+            <div>
+              <div class="col-md-6">
+                <input type="checkbox" class="checkbox">
+                <label class="label--checkbox">
+                  Ingat saya
+                </label>
+              </div>
+              <div class="col-md-6">
+                <a role="button" [routerLink]="['/LupaPassword']">
+                  <p class="lupa">Lupa Password?</p>
+                </a>
+              </div> 
+            </div>
+            <button class="btn btn-daftar pull-right" type="submit">Masuk</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="trv-atau">
+              <p>Atau</p>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col-md-4">
+              <button class="btn btn-facebook">Daftar Dengan Facebook</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <button class="btn btn-google">Daftar Dengan Google</button>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AppService } from '../app.service';
+
+import { Router, CanActivate } from '@angular/router';
 // import 'rxjs/add/operator/debounceTime';
 // import 'rxjs/add/operator/map';
 
@@ -10,11 +12,16 @@ import { AppService } from '../app.service';
   styleUrls: ['./loginpage.component.css']
 })
 export class LoginpageComponent implements OnInit {
-  searchTerm : FormControl = new FormControl();
+  // searchTerm : FormControl = new FormControl();
 
-  searchResult = [];
+  // searchResult = [];
 
-  constructor(private service: AppService){
+  loginUser = {
+    email:'',
+    password: ''
+  }
+
+  constructor(private service: AppService, private router: Router){
     // this.searchTerm.valueChanges
     //     .debounceTime(400) 
     //     .subscribe(data => {
@@ -34,5 +41,21 @@ export class LoginpageComponent implements OnInit {
   
   ngOnInit() {
   }
+
+  onSubmit() {
+  
+    this.service.addUser(this.loginUser).subscribe(loginUser => {
+      localStorage.setItem("token", loginUser.token);
+      if (localStorage.token == loginUser.token) {
+        // this.changeHead = !this.changeHead;
+        // this.changeHeadUser = !this.changeHeadUser;
+        this.router.navigate(['/traveler'])
+        
+      }
+      else {
+        this.router.navigate(['']);
+      }
+    })
+   }
 
 }
