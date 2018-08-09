@@ -1,3 +1,4 @@
+<app-loader *ngIf="loaded"></app-loader>
 <div class="container">
   
   <form (submit)="goToCheckout($event)" id="idBook">
@@ -110,7 +111,7 @@
         </div>
         <div class="panel-body">
           <div class="detail">
-              <p>Harga Paket<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking?.publish_price === null ? '' : 'Rp ' + dataBooking?.publish_price}}</span></p>
+              <p>Harga Paket<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{bayar === null ? '' : 'Rp ' + bayar}}</span></p>
               <!-- <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">Rp {{promo}}</span></p> -->
               <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking?.uniq_code === null ? '' : 'Rp ' + dataBooking?.uniq_code}}</span></p>
               <!-- <p>Asuransi<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{hargaAsuransi}}</span></p> -->

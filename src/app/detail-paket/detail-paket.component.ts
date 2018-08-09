@@ -65,6 +65,7 @@ export class DetailPaketComponent implements OnInit {
   name;
   photo;
   error = HttpErrorResponse;
+  loaded : boolean = true;
 
   
   constructor(private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
@@ -84,9 +85,6 @@ export class DetailPaketComponent implements OnInit {
 
   ngOnInit() {
     this.getTrip();
-     
-      
-
   }
 
   
@@ -106,9 +104,12 @@ export class DetailPaketComponent implements OnInit {
             this.totalHarga = this.totalHargaBayar * this.hargaProduct;
             this.photo = trip.data.photo_trip;
             console.log(this.detailTrip)
-          }
-            
+
+            this.loaded = false;
+          }          
         )
+
+        
   }
 
 
@@ -124,6 +125,7 @@ export class DetailPaketComponent implements OnInit {
     
     this.book.quantity = this.totalHargaBayar;
     this.book.publish_price = this.totalHarga;
+    console.log(this.book.publish_price);
     this.book.id_trip = this.idBook;
     this.idtrip = e.target.id;
     this.book.trip_name = this.name
@@ -134,7 +136,7 @@ export class DetailPaketComponent implements OnInit {
       this.idT = book.data._id;
       // console.log(this.bookId);
       
-        if(book.status = true && this.idT != null){
+        if(book.status = true){
           this.router.navigate(['/ProsesPemesanan', this.idT ]); 
         }
     });

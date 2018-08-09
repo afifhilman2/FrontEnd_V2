@@ -45,6 +45,8 @@ export class ProsesBayarComponent implements OnInit {
   price;
   book;
 
+  loaded: boolean = true;
+
   constructor(private active: ActivatedRoute,private http:Http, private router: Router, private appService: AppService, private datePipe: DatePipe) {
     let id = this.active.snapshot.params['id']
     this.idBooking = id;
@@ -80,9 +82,10 @@ export class ProsesBayarComponent implements OnInit {
         this.endDay = this.datePipe.transform(dataBook.data.endDate_trip, 'd');
         this.endMonth = this.datePipe.transform(dataBook.data.endDate_trip, 'MMMM');
         this.endYear = this.datePipe.transform(dataBook.data.endDate_trip, 'yyyy');
-        this.bayar = dataBook.data.publish_price;
+        this.bayar = dataBook.data.publish_price * dataBook.data.quantity;
         this.uniq = dataBook.data.uniq_code;
-        
+  
+        this.loaded = false;
       }
     )
   }

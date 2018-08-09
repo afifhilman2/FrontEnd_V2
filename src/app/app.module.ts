@@ -61,6 +61,7 @@ import { SearchFilterPipe } from './header/search-pipe';
 import { ClickOutsideDirective } from './header/directive-dropdown';
 import { MiniFooterComponent } from './mini-footer/mini-footer.component';
 import { LoaderComponent } from './loader/loader.component';
+import {LoaderService} from './loader/loader-service';
 
 
 @NgModule({
@@ -125,7 +126,7 @@ import { LoaderComponent } from './loader/loader.component';
   
     
   ],
-  providers: [AppService, DataService, AuthService, GuardService, DatePipe],
+  providers: [AppService, DataService, AuthService, GuardService, DatePipe, LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

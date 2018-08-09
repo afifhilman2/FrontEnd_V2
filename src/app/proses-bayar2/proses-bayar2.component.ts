@@ -23,6 +23,8 @@ export class ProsesBayar2Component implements OnInit {
   dataTrip;
   coded_amount;
 
+  loaded: boolean = true;
+
   constructor(private active: ActivatedRoute,private http: Http, private router:Router, private datePipe: DatePipe) {
   //   this.countDown = timer(0,1000).pipe(
   //     take(this.count),
@@ -77,6 +79,7 @@ export class ProsesBayar2Component implements OnInit {
         console.log(this.dataBooking);
         this.coded_amount = dataBook.data.coded_amount;
         
+        this.loaded = false;
       }
     )
   }

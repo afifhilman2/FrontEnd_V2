@@ -75,6 +75,7 @@ export class UbahProfilComponent implements OnInit {
       this.edit.year = this.datePipe.transform(edit.data.birthday, 'yyyy');
       
       this.edit.photo = edit.data.photo;
+      this.edit.gender = edit.data.gender;
 
       console.log(this.daraUser);
     });

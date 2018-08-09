@@ -44,6 +44,8 @@ export class ProsesPemesananComponent implements OnInit {
   }
 
 
+  loaded: boolean = true;
+
   constructor(private router: Router, private datePipe: DatePipe, private http: Http, private active: ActivatedRoute, private appService: AppService) { 
     let id = this.active.snapshot.params['id'];
     this.dataTrip = id;
@@ -62,10 +64,7 @@ export class ProsesPemesananComponent implements OnInit {
       
     // })
     this.getBookingId();
-    
-    
 
-    
   }
 
   idDataTrip;
@@ -126,13 +125,16 @@ export class ProsesPemesananComponent implements OnInit {
       this.endMonth = this.datePipe.transform(dataBook.data.endDate_trip, 'MMMM');
       this.endYear = this.datePipe.transform(dataBook.data.endDate_trip, 'yyyy');
       this.jumlahOrang = dataBook.data.quantity;
-      this.bayar = dataBook.data.publish_price;
+      this.bayar = dataBook.data.publish_price * dataBook.data.quantity;
       // console.log(this.bayar);
       this.hargaAsuransi = this.asuransi * this.jumlahOrang;
       this.promo = 0.1 * this.bayar;
       this.totalBayar = this.bayar + this.random;
       // console.log(this.booking)
       this.nbook.order_name = dataBook.data.order_name;
+      this.nbook.telephone = dataBook.data.telephone;
+
+      this.loaded = false;
      }      
     )
 

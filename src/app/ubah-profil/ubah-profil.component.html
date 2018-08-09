@@ -109,8 +109,8 @@
                     <div class="radio-trv">
                         <label for="optradio" class="label-radio">Jenis Kelamin <p class="pull-right">:</p></label>
                         <div class="radio" >
-                            <label class="trv-radio"><input type="radio" name="radios" [value]="1" (change)="onRadioType($event)" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
-                            <label class="trv-radio"><input type="radio" name="radios" [value]="2" (change)="onRadioType($event)" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Perempuan</label>
+                            <label class="trv-radio"><input type="radio" name="radios" value="1" id="1" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
+                            <label class="trv-radio"><input type="radio" name="radios" value="2" id="2" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Perempuan</label>
                         </div>
                     </div>
                 </div>

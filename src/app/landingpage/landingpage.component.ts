@@ -20,17 +20,19 @@ export class LandingpageComponent implements OnInit {
 
   catego;
   profin;
-  showSpinner: boolean = true;
   subcribe = Subscription;
-  load;
+  loaded : boolean = true;
   
   constructor(private router: Router, private appService: AppService) { 
-    this.load = this.appService.getDataTrip().subscribe (dataTrip => {
+    // this.loaded = true;
+    this.appService.getDataTrip().subscribe (dataTrip => {
      
       this.dataTrip = dataTrip.data;
       // console.log(dataTrip);
       this.photo = dataTrip.data.photo_trip
       // console.log(this.photo)
+
+      this.loaded = false;
     });
 
     this.appService.getProvinceTrip().subscribe (province => {
