@@ -15,6 +15,8 @@ export class JualTripComponent implements OnInit {
   order: string;
   order2: string;
 
+  loaded:boolean = true;
+
 
   profileProvider = {
     nameTrip :'',
@@ -24,11 +26,18 @@ export class JualTripComponent implements OnInit {
 
   constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http) { 
     this.appService.getProvider().subscribe(profile => {
+
+      if(profile.success == false) {
+
+        alert('Belum Login ');
+      }
+
+      // console.log(profile);
       this.profileProvider.nameTrip = profile.provider.travel_name;
       this.profileProvider.cover = profile.provider.cover;
      // this.profileProvider.photo = profile.provider.photo;
       
-      // console.log(profile);
+    //  this.loaded = false;
     })
 
     

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from "@angular/router";
 import { AppService} from '../app.service';
+import { DatePipe } from '@angular/common';
 
 
 @Injectable ()
@@ -37,6 +38,7 @@ export class JualTripContent2Component implements OnInit {
   fixed:any;
   days:any;
   night:any;
+  idTrip:any;
 
 
   trip = {
@@ -52,7 +54,7 @@ export class JualTripContent2Component implements OnInit {
     description : '', 
     notes_traveler : '', 
     notes_meeting_point :'',
-    id_province_trip :'',
+    id_province :'',
     id_category : [], 
     id_facility : '', 
     id_status_trip : '',
@@ -62,7 +64,7 @@ export class JualTripContent2Component implements OnInit {
     fixed_price_grorup : '', 
   }
 
-  constructor( public router :Router, private routeActive:ActivatedRoute, private appService: AppService, private http:Http ) {
+  constructor( public router :Router, private routeActive:ActivatedRoute, private appService: AppService, private http:Http, private datePipe:DatePipe ) {
    
     // get categori trip
     this.appService.getCategoryTrip().subscribe( category => {
@@ -83,19 +85,28 @@ export class JualTripContent2Component implements OnInit {
     
    }
 
+   onSubmitEditTrip() {
+    // this.idTrip = e.target;
+        let headers = new Headers();
+        
+        this.createAuthorizationHeader (headers);
+        return this.http.put('http://travinesia.com:3000/v1/provider/edit_trip/'+ this.idParams, this.trip,
+        {headers: headers})
+        .subscribe(
+          (res:Response)=> {
+            let nullTrip = res.json();
+            console.log(nullTrip);
+            if(nullTrip.status == 200) {
+              this.successedTrip = true;
+              this.content1 = !this.content1;
+              this.content2 = !this.content2;
+        
+             }
+          }
+        )
 
-   onSubmitTrip1() {
-
-        this.publish = this.trip.publish_price;
-        this.service = (5 * this.publish) / 100;
-        this.trip.service_fee = this.service
-        this.fixed = this.publish - this.service;
-        this.trip.fixed_price = this.fixed;
-     this.appService.addTripProvider(this.trip).subscribe(trip => {
-       console.log(trip); 
-
-     })
-   }
+        
+  }
 
 
    //upload image
@@ -207,7 +218,7 @@ export class JualTripContent2Component implements OnInit {
       }
 
       onSelectProvince(e) {
-        this.trip.id_province_trip = e.target.value;
+        this.trip.id_province = e.target.value;
        
       }
 
@@ -226,13 +237,32 @@ export class JualTripContent2Component implements OnInit {
     .subscribe(
       (res:Response)=> {
         let ubahTrip = res.json();
-        console.log(ubahTrip);
+
+        this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
+        this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
+        this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
+        this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
+        this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
         this.trip.trip_name = ubahTrip.data.trip_name;
         this.trip.id_type_trip = ubahTrip.data.id_type_trip;
-        this.trip.date_trip = ubahTrip.data.date_trip;
-        console.log(this.trip.trip_name);
-      
+        // this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        // this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        // this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        // this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        // this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        this.trip.id_category = ubahTrip.data.id_category;
+        // this.trip.id_category = ubahTrip.data.id_category;
+        // this.trip.id_category[2] = ubahTrip.data.id_category[2];
+        // this.trip.id_category[3] = ubahTrip.data.id_category[3];
+        // this.trip.id_category[4] = ubahTrip.data.id_category[4];
+        this.trip.days = ubahTrip.data.days;
+        this.trip.id_province = ubahTrip.data.id_province_trip;
+        this.trip.description = ubahTrip.data.description;
+        this.trip.notes_meeting_point = ubahTrip.data.notes_meeting_point;
+        this.trip.notes_traveler = ubahTrip.data.notes_traveler;
+        this.trip.publish_price = ubahTrip.data.publish_price;
+        this.trip.quota_trip = ubahTrip.data.quota_trip;  
        
       }
     )

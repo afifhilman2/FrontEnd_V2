@@ -14,6 +14,7 @@ Injectable()
 export class DaftarTripComponent implements OnInit {
 
   tripProvider:any[]
+  photo_trip
 
   idTrip:any;
   night:any;
@@ -23,7 +24,13 @@ export class DaftarTripComponent implements OnInit {
   constructor( public appService:AppService, private http:Http, public router:Router) { 
     this.appService.getTripProvider().subscribe (Trip =>{
       this.tripProvider = Trip.provider_trip;
-      console.log(Trip);
+      // this.photo_trip = Trip.provider_trip[2].photo_trip[0];
+
+      // console.log(Trip);
+
+      if (Trip.success == false) {
+        alert('Belum ada trip');
+        }
     })
   }
 

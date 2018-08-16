@@ -75,8 +75,16 @@ export class JualTripContentComponent implements OnInit {
         this.trip.service_fee = this.service
         this.fixed = this.publish - this.service;
         this.trip.fixed_price = this.fixed;
-     this.appService.addTripProvider(this.trip).subscribe(trip => {
+        
+        this.appService.addTripProvider(this.trip).subscribe(trip => {
        console.log(trip); 
+
+       if(trip.status == 200) {
+         this.successedTrip = true;
+         this.content1 = !this.content1;
+         this.content2 = !this.content2;
+          
+       }
 
      })
    }
