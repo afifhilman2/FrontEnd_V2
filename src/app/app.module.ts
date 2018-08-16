@@ -62,6 +62,7 @@ import { ClickOutsideDirective } from './header/directive-dropdown';
 import { MiniFooterComponent } from './mini-footer/mini-footer.component';
 import { LoaderComponent } from './loader/loader.component';
 import {LoaderService} from './loader/loader-service';
+import { TrvSearchNavbarModule } from './trv-search-navbar/trv-search-navbar.module';
 
 
 @NgModule({
@@ -80,7 +81,7 @@ import {LoaderService} from './loader/loader-service';
     FavoritUserComponent,
     TrvSidebarComponent,
     TrvSearchResultComponent,
-    TrvSearchNavbarComponent,
+    // TrvSearchNavbarComponent,
     EtalaseTravelComponent,
     DaftarTravelComponent,
     JualTripComponent,
@@ -117,6 +118,7 @@ import {LoaderService} from './loader/loader-service';
     // ReactiveFormsModule,
     // MatAutocompleteModule,
     BrowserAnimationsModule,
+    TrvSearchNavbarModule,
     AppRoutingModule,
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBClUZWzmnXM-51wYSX22_lI2dBouzEDXM',

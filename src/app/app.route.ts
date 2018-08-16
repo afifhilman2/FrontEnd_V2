@@ -1,4 +1,5 @@
-import { Routes, CanActivate } from '@angular/router';
+import { ModuleWithProviders} from '@angular/core'
+import { Routes, CanActivate, RouterModule } from '@angular/router';
 import { GuardService } from './guard.service';
 import { AppComponent } from './app.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
@@ -41,13 +42,16 @@ import { LoaderComponent } from './loader/loader.component';
 export const routes :Routes = [
 
     // without login header
+    {   path:'searchNavbar/:query', 
+        loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'
+    },
+
     {
         path :'', 
         component:HeaderComponent,
         children: [
             {path:'', component:LandingpageComponent},
             {path:'search/:id', component:TrvSearchResultComponent},
-            {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
             
             {path:'Notifikasi', component:EksternalComponent},
             {path:'JadiTravel', component:DaftarTravelComponent,},
@@ -150,3 +154,7 @@ export const routes :Routes = [
 
 
 ] 
+
+
+export const appRouting:ModuleWithProviders = RouterModule.forRoot(routes);
+
