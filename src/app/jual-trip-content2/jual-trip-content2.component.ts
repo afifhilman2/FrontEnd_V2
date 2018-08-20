@@ -61,6 +61,7 @@ export class JualTripContent2Component implements OnInit {
     publish_price_group : '', 
     service_fee_group : '', 
     photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
+    photo:[],
     fixed_price_grorup : '', 
   }
 
@@ -86,6 +87,10 @@ export class JualTripContent2Component implements OnInit {
    }
 
    onSubmitEditTrip() {
+
+    this.trip.photo_trip[0] = this.trip.photo[0];
+    console.log(this.trip.photo_trip[0])
+    console.log(this.trip);
     // this.idTrip = e.target;
         let headers = new Headers();
         
@@ -95,6 +100,9 @@ export class JualTripContent2Component implements OnInit {
         .subscribe(
           (res:Response)=> {
             let nullTrip = res.json();
+
+          
+
             console.log(nullTrip);
             if(nullTrip.status == 200) {
               this.successedTrip = true;
@@ -126,7 +134,9 @@ export class JualTripContent2Component implements OnInit {
   
   _handleReaderLoaded1(readerEvt) {
      let binaryString = readerEvt.target.result; 
-            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
+            this.trip.photo[0]=btoa(binaryString);
+            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);  
+            
     }
 
     uploadImage2(evt) {
@@ -144,6 +154,7 @@ export class JualTripContent2Component implements OnInit {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[1]=btoa(binaryString);
        this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
@@ -162,6 +173,7 @@ export class JualTripContent2Component implements OnInit {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[2]=btoa(binaryString);
        this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
@@ -180,6 +192,7 @@ export class JualTripContent2Component implements OnInit {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
+         this.trip.photo[3]=btoa(binaryString);
          this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
@@ -198,6 +211,7 @@ export class JualTripContent2Component implements OnInit {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
+           this.trip.photo[4]=btoa(binaryString);
            this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
@@ -228,11 +242,9 @@ export class JualTripContent2Component implements OnInit {
       }
 
   ngOnInit() {
-    // let headers = new Headers();
-    
-    // this.createAuthorizationHeader (headers);
+  
     return this.http.get('http://travinesia.com:3000/get/detail_trip/'+ this.idParams,
-    // {headers: headers}
+  
   )
     .subscribe(
       (res:Response)=> {

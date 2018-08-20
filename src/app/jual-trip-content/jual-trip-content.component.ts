@@ -53,6 +53,7 @@ export class JualTripContentComponent implements OnInit {
     publish_price_group : '', 
     service_fee_group : '', 
     photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
+    photo : [],
     fixed_price_grorup : '', 
   }
 
@@ -76,8 +77,37 @@ export class JualTripContentComponent implements OnInit {
         this.fixed = this.publish - this.service;
         this.trip.fixed_price = this.fixed;
         
+        // this.trip.photo_trip[0]= this.trip.photo[0];     
+        // this.trip.photo_trip[1]= this.trip.photo[1];
+        // this.trip.photo_trip[2]= this.trip.photo[2];
+        // this.trip.photo_trip[3]= this.trip.photo[3];
+        // this.trip.photo_trip[4]= this.trip.photo[4];
+
+        if(this.trip.photo_trip[0] != '') {
+          this.trip.photo_trip[0]= this.trip.photo[0];
+        }
+
+        console.log(this.trip.photo_trip[0]); 
+
+        // if(this.trip.photo_trip[1] != '') {
+        //   this.trip.photo_trip[1]= this.trip.photo[1];
+        // }
+
+        // if(this.trip.photo_trip[2] != '') {
+        //   this.trip.photo_trip[2]= this.trip.photo[2];
+        // }
+
+        // if(this.trip.photo_trip[2] != '') {
+        //   this.trip.photo_trip[3]= this.trip.photo[3];
+        // }
+
+        // if(this.trip.photo_trip[4] != '') {
+        //   this.trip.photo_trip[4]= this.trip.photo[4];
+        // }
+
         this.appService.addTripProvider(this.trip).subscribe(trip => {
        console.log(trip); 
+       
 
        if(trip.status == 200) {
          this.successedTrip = true;
@@ -106,7 +136,8 @@ export class JualTripContentComponent implements OnInit {
   }
   
   _handleReaderLoaded1(readerEvt) {
-     let binaryString = readerEvt.target.result; 
+     let binaryString = readerEvt.target.result;
+            this.trip.photo[0]= btoa(binaryString); 
             this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
     }
 
@@ -125,6 +156,7 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[1]= btoa(binaryString); 
        this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
@@ -143,6 +175,7 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[2]= btoa(binaryString); 
        this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
@@ -161,6 +194,7 @@ export class JualTripContentComponent implements OnInit {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
+         this.trip.photo[3]= btoa(binaryString); 
          this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
@@ -179,6 +213,7 @@ export class JualTripContentComponent implements OnInit {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
+           this.trip.photo[4]= btoa(binaryString); 
            this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
