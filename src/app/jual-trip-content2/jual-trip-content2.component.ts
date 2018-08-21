@@ -88,10 +88,10 @@ export class JualTripContent2Component implements OnInit {
 
    onSubmitEditTrip() {
 
-    this.trip.photo_trip[0] = this.trip.photo[0];
-    console.log(this.trip.photo_trip[0])
+
+    this.trip.photo_trip[2] = this.trip.photo[2];
+
     console.log(this.trip);
-    // this.idTrip = e.target;
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
@@ -103,7 +103,7 @@ export class JualTripContent2Component implements OnInit {
 
           
 
-            console.log(nullTrip);
+            // console.log(nullTrip);
             if(nullTrip.status == 200) {
               this.successedTrip = true;
               this.content1 = !this.content1;
@@ -249,6 +249,7 @@ export class JualTripContent2Component implements OnInit {
     .subscribe(
       (res:Response)=> {
         let ubahTrip = res.json();
+      
 
         this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
         this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
@@ -258,11 +259,12 @@ export class JualTripContent2Component implements OnInit {
 
         this.trip.trip_name = ubahTrip.data.trip_name;
         this.trip.id_type_trip = ubahTrip.data.id_type_trip;
-        // this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
-        // this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
-        // this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
-        // this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
-        // this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip, 'yyyy-MM-dd');
+        this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip[0], 'yyyy-MM-dd'); 
+        this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip[1], 'yyyy-MM-dd');
+        this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip[2], 'yyyy-MM-dd');
+        this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip[3], 'yyyy-MM-dd');
+        this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip[4], 'yyyy-MM-dd');
+        // console.log(this.trip.date_trip);
         this.trip.id_category = ubahTrip.data.id_category;
         // this.trip.id_category = ubahTrip.data.id_category;
         // this.trip.id_category[2] = ubahTrip.data.id_category[2];

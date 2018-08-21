@@ -6,7 +6,7 @@
 
 <div class="wrap-paket-trip" *ngFor="let trip of tripProvider">
     <div class="wrap-content-paket-trip">
-        <img class="img-paket-trip" src={{photo_trip}}>
+        <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
 
         <div class="wrap-info-paket-trip">
             <p class="tittle-paket-trip">{{trip.trip_name}} </p>
