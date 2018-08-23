@@ -95,7 +95,6 @@
 }
 
 .wrap-info-harga {
-    text-align: right;
     position: relative;
     height: 100%;
 }
@@ -205,4 +204,97 @@
     text-align: center;
     color: #db524b;
     margin-right: 10px;
+}
+
+.wrap-modal-content {
+    margin-top: 180px;
+    margin-left: 60px;
+    width: 473px;
+    border-radius: 3px;
+    background-color: white
+}
+
+.wrap-modal-body {
+    padding: 25px;
+}
+
+.wrap-modal-header {
+    border-radius: 3px 3px 0px 0px;
+    width: 473px;
+    height: 69px;
+    line-height: 69px;
+    padding-left: 20px;
+    background-color: #dddddd;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+}
+
+.confirm-delete {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    text-align: left;
+}
+
+.batal {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.wrap-btn {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-trv-hapus {
+    width: 135px;
+    height: 31px;
+    border-radius: 3px;
+    border: 1px solid #ab47bc;
+    background-color: #ab47bc;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.purpletext {
+    color: #ab47bc;
+    cursor: pointer;
+    display: inherit;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+}
+
+.label-checkbox-search {
+    position: relative;
+    top: -6px;
+    font-size: 12.7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4c4c4c;
 }

@@ -47,20 +47,76 @@
                     <li><a class="dropdown-list">Beri Diskon</a></li>
                     <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
                     <li><a class="dropdown-list">Salin Trip</a></li>
-                    <li><a class="dropdown-list" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan Kuota</a></li>
-                    <li><a class="delete-trip dropdown-list" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus Trip</a></li>
-
+                    <li><a class="dropdown-list" data-toggle="modal" data-target="#kosongkankuotaModal">Kosongkan Kuota</a></li>
+                    <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal">Hapus Trip</a></li>
                 </ul>
             </div>
 
+            <!-- modal hapus -->
+            <div class="modal fade" id="hapusModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="wrap-modal-content">
+                        <div class="wrap-modal-header">
+                            Hapus Trip
+                        </div>
+                        <div class="wrap-modal-body">
+
+                            <p class="confirm-delete"> Apakah Anda yakin akan menghapus Trip ini?
+                            </p>
+                            <div class="wrap-btn">
+                                <span data-dismiss="modal" class="batal">Batal</span>
+                                <button class="btn-trv-hapus" data-dismiss="modal" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal kosongkan kuota -->
+            <div class="modal fade" id="kosongkankuotaModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="wrap-modal-content">
+                        <div class="wrap-modal-header">
+                            Kosongkan Kuota
+                        </div>
+                        <div class="wrap-modal-body">
+
+                            <div class="confirm-delete"> Kosongkan Kuota untuk mengubah kondisi sisa kuota Trip Anda menjadi 0 atau menghabiskan sisa kuota.</div>
+                            <a class="purpletext">Pelajari lebih lanjut</a>
+
+                            <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
+
+                            <div class="col-md-12">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Sabtu, 1 Desember </label>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="wrap-btn">
+                                <span data-dismiss="modal" class="batal">Batal</span>
+                                <button class="btn-trv-hapus" data-dismiss="modal" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
         </div>
-
     </div>
-
-    <!-- <div class="wrap-btn-trv">
-        <button class="btn-trv-ubah" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip </button>
-        <button class="btn-trv-kosong" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan Trip </button>
-        <button class="btn-trv-hapus" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus Trip </button>
-    </div> -->
 </div>
