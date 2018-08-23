@@ -19,8 +19,6 @@ export class DaftarTripComponent implements OnInit {
   idTrip:any;
   night:any;
 
-
-
   constructor( public appService:AppService, private http:Http, public router:Router) { 
     this.appService.getTripProvider().subscribe (Trip =>{
       this.tripProvider = Trip.provider_trip;

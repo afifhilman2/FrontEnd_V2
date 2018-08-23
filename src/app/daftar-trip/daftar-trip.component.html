@@ -2,11 +2,12 @@
     <p class="head-tittle">Daftar Trip</p>
 </div>
 
-<p class="info-paket">Berikut adalah daftar trip yang Anda jual. Anda dapat mengubah informasi paket trip Anda.</p>
+<p class="info-paket">Berikut adalah daftar trip yang Anda jual. Anda dapat mengubah informasi paket trip Anda. Beri Diskon, Ubah Trip, Salin Trip, Kosongkan Kuota atau Hapus Trip dapat Anda Lakukan disini.</p>
 
 <div class="wrap-paket-trip" *ngFor="let trip of tripProvider">
+    <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
+
     <div class="wrap-content-paket-trip">
-        <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
 
         <div class="wrap-info-paket-trip">
             <p class="tittle-paket-trip">{{trip.trip_name}} </p>
@@ -25,20 +26,41 @@
                 <span class="colon-info">:</span>
                 <div class="tittle-info-value">{{trip.id_type_trip}}</div>
             </div>
+
+            <div class="tittle-info">Harga (Publish)
+                <span class="colon-info">:</span>
+                <div class="tittle-info-value">Rp {{trip.publish_price}}</div>
+            </div>
+
+            <div class="tittle-info">Kuota
+                <span class="colon-info">:</span>
+                <div class="tittle-info-value">{{trip.quota_trip[0]}}</div>
+            </div>
         </div>
 
+
         <div class="wrap-info-harga">
-            <div class="tittle-info-harga">Harga per orang :</div>
-            <div class="info-harga">Rp {{trip.publish_price}}</div>
-            <div class="info-kuota">Kuota : {{trip.quota_trip[0]}}</div>
+            <div class="dropdown-setting">
+                <span class="glyphicon glyphicon-cog info-setting" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a class="dropdown-list">Beri Diskon</a></li>
+                    <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
+                    <li><a class="dropdown-list">Salin Trip</a></li>
+                    <li><a class="dropdown-list" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan Kuota</a></li>
+                    <li><a class="delete-trip dropdown-list" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus Trip</a></li>
+
+                </ul>
+            </div>
+
             <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
         </div>
 
     </div>
 
-    <div class="wrap-btn-trv">
+    <!-- <div class="wrap-btn-trv">
         <button class="btn-trv-ubah" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip </button>
         <button class="btn-trv-kosong" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan Trip </button>
         <button class="btn-trv-hapus" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus Trip </button>
-    </div>
+    </div> -->
 </div>

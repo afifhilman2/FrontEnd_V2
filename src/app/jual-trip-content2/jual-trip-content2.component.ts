@@ -250,7 +250,6 @@ export class JualTripContent2Component implements OnInit {
       (res:Response)=> {
         let ubahTrip = res.json();
       
-
         this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
         this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
         this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
@@ -258,13 +257,14 @@ export class JualTripContent2Component implements OnInit {
         this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
         this.trip.trip_name = ubahTrip.data.trip_name;
+       
         this.trip.id_type_trip = ubahTrip.data.id_type_trip;
         this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip[0], 'yyyy-MM-dd'); 
         this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip[1], 'yyyy-MM-dd');
         this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip[2], 'yyyy-MM-dd');
         this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip[3], 'yyyy-MM-dd');
         this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip[4], 'yyyy-MM-dd');
-        // console.log(this.trip.date_trip);
+       
         this.trip.id_category = ubahTrip.data.id_category;
         // this.trip.id_category = ubahTrip.data.id_category;
         // this.trip.id_category[2] = ubahTrip.data.id_category[2];
