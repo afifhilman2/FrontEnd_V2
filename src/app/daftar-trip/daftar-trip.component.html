@@ -44,7 +44,7 @@
                 <span class="glyphicon glyphicon-cog info-setting" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a class="dropdown-list">Beri Diskon</a></li>
+                    <li><a class="dropdown-list" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
                     <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
                     <li><a class="dropdown-list">Salin Trip</a></li>
                     <li><a class="dropdown-list" data-toggle="modal" data-target="#kosongkankuotaModal">Kosongkan Kuota</a></li>
@@ -116,7 +116,67 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
+
+            <!-- modal Beri Diskon -->
+            <div class="modal fade" id="beridiskonModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="wrap-modal-content-diskon">
+                        <div class="wrap-modal-header">
+                            Beri Diskon
+                        </div>
+                        <div class="wrap-modal-body">
+
+                            <div class="confirm-delete"> Beri Diskon untuk meningkatkan penjualan Trip Anda. Atur dan pertimbangkan fasilitas yang ditawarkan di menu Ubah Trip.</div>
+                            <div class="pinktext">Besarnya diskon berlaku untuk semua tanggal trip yang dipilih.</div>
+
+
+                            <div class="wrap-content-body">
+
+                                <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
+
+                                <div class="text-diskon">Besarnya Diskon :</div>
+                                <input class="form-control input-diskon" type=number> <span class="percent-diskon"> % </span>
+                                <div class="price-diskon">Rp. </div>
+
+                            </div>
+                            <div class="col-md-9">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Sabtu, 1 Desember </label>
+                            </div>
+
+                            <div class="col-md-9">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="col-md-9">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="col-md-9">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="col-md-9">
+                                <input type="checkbox" class="checkbox">
+                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
+                            </div>
+
+                            <div class="wrap-btn">
+                                <span data-dismiss="modal" class="batal">Batal</span>
+                                <button class="btn-trv-hapus" data-dismiss="modal">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <a class="info-detail-trip">Lihat Detail Trip</a>
         </div>
     </div>
 </div>

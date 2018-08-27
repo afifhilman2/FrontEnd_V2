@@ -16,11 +16,26 @@ export class JualTripContentComponent implements OnInit {
   content1:boolean = true;
   content2:boolean = false;
 
+  opentrip:boolean = true;
+  privatetrip:boolean = false;
+
   // content2
 
   toggleJual():void {
     this.content1 = !this.content1;
     this.content2 = !this.content2;
+  }
+
+  //toggle open private 
+
+  openclick():void {
+    this.opentrip = true;
+    this.privatetrip= false;
+  }
+
+  privateclick():void {
+    this.opentrip = false;
+    this.privatetrip= true;
   }
 
   categoryTrip:any[];

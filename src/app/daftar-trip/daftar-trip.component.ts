@@ -44,6 +44,7 @@ export class DaftarTripComponent implements OnInit {
 
   hapusTrip(e, trip) {
     this.idTrip = e.target.id;
+    console.log(this.idTrip);
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);

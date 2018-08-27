@@ -1,11 +1,13 @@
 <form (submit)="onSubmitEditTrip()">
     <div *ngIf='content1'>
         <div class="wrap-tittle">
-            <p class="head-content"> Jual Trip </p>
+            <p class="head-content"> Ubah Trip </p>
             <span class="state-all"> Tahap 1 dari 2</span>
         </div>
 
-        <div class="info-trip-term"> Jual Trip Travel Anda disini. Masukkan informasi trip selengkap mungkin untuk meningkatkan kepercayaan traveller terhadap paket trip yang ditawarkan. Berikan fasilitas yang terbaik Travel Anda.</div>
+        <div class="info-trip-term"> Ubah Trip Travel Anda disini. Anda dapat merubah beberapa informasi paket trip yang Anda jual
+            <span class="textpink"> Beberapa informasi tidak dapat dirubah untuk menjaga kenyamanan dan kepercayaan Traveller </span>
+        </div>
 
         <div class="info-term" *ngIf='successedTrip'><span class="bold-term">Trip berhasil diperbaharui. </span> Silahkan cek pilihan "Daftar Trip" untuk melihat seluruh trip yang anda jual</div>
 
@@ -409,7 +411,7 @@
 
     <div *ngIf='content2'>
         <div class="wrap-tittle">
-            <p class="head-content"> Jual Trip </p>
+            <p class="head-content"> Ubah Trip </p>
             <span class="state-all"> Tahap 2 dari 2</span>
             <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
             </span>
@@ -489,7 +491,7 @@
         </div>
 
         <div class="wrap-btn">
-            <button type="submit" class="btn-content"> Jual Trip</button>
+            <button type="submit" class="btn-content"> Ubah Trip</button>
         </div>
     </div>
 
