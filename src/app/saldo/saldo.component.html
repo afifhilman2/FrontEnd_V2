@@ -2,15 +2,17 @@
     <p class="head-tittle">Saldo</p>
 </div>
 
-<p class="current-saldo">Saldo Anda saat ini</p>
+<p class="current-saldo">Saldo Travel Anda saat ini :</p>
 
 <div class="wrap-saldo">
     <span class="rupiah">Rp</span> <span class="saldo-price">137.100.000</span>
 
-    <div class="wrap-search">
+    <div class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </div>
+    <div class="petunjuk-pencarian" data-toggle="modal" data-target="#ModalPencarian"> Lihat Petunjuk Pencairan </div>
+    <!-- <div class="wrap-search">
         <a data-toggle="modal" data-target="#ModalPencarian" class="petunjuk-pencarian">Lihat Petunjuk Pencairan </a>
-        <button class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </button>
-    </div>
+        <a class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </a>
+    </div> -->
 </div>
 
 <div class="modal fade" id="ModalPencarian" role="dialog">
@@ -19,7 +21,7 @@
         <!-- Modal content-->
         <div class="wrap-modal-pencarian">
             <img src="../assets/img/Award.png" class="img-modal-pencarian">
-            <p class="tittle-modal-pencarian">Travinesia, beberapa saat lagi akan menghubungi nomor yang tertera pada profil agen travel Anda. Silahkan pergi ke tab pilihan <span class="bold">“pencairan” </span> untuk memantau status proses penarikan.</p>
+            <p class="tittle-modal-pencarian"> <span class="bold"> Travinesia, </span> beberapa saat lagi akan menghubungi nomor yang tertera pada profil agen travel Anda. Silahkan pergi ke tab pilihan <span class="bold">“pencairan” </span> untuk memantau status proses penarikan.</p>
             <button data-dismiss="modal" class="btn-trv-ok">Ok</button>
         </div>
     </div>
@@ -35,14 +37,38 @@
                 Ajukan Pencairan
             </div>
             <div class="wrap-modal-body">
-                <div class="tittle-label-modal">Nomor Rekening :</div>
-                <input class="form-control margin-tittle-label">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="tittle-label-modal">Pilih Bank</div>
+                        <select class="form-control pilih-bank ">
+                            <option >Pilih Bank</option>
+                            <option >Mandiri</option>
+                            <option >BRI</option>
+                            <option >BNI</option>
+                            <option >BCA</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="tittle-label-modal">Nomor Rekening :</div>
+                        <input type="number" class="form-control margin-tittle-ikon">
+                    </div>
+                </div>
 
                 <div class="tittle-label-modal">Atas Nama :</div>
                 <input class="form-control margin-tittle-ikon">
 
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <div class="tittle-sign">Pengajuan pencairan dapat dilakukan pada pukul 08.00 - 14.00 WIB</div>
+                <div class="tittle-label-modal">Nominal :</div>
+                <div class="input-group margin-tittle-ikon">
+                    <span class="input-group-addon bold"> Rp. </span>
+                    <input class="form-control margin-tittle-label" type="number">
+                </div>
+                <div class="tittle-label-modal">Kata Sandi Akun Travinesia :</div>
+                <input type="password" class="form-control margin-tittle-ikon">
+
+                <!-- <span class="glyphicon glyphicon-info-sign"></span>
+                <div class="tittle-sign">Pengajuan pencairan dapat dilakukan pada pukul 08.00 - 14.00 WIB</div> -->
 
                 <div class="wrap-btn">
                     <span data-dismiss="modal" class="batal">Batal</span>
@@ -54,7 +80,10 @@
     </div>
 </div>
 
-<p class="detail-saldo">Detail Saldo</p>
+<div class="wrap-info-saldo">
+    <p class="detail-saldo">Detail Saldo</p>
+    <div class="unduh-rekap-saldo">Unduh Rekap Saldo</div>
+</div>
 
 <div class="table-responsive">
     <table class="table table-hover">
