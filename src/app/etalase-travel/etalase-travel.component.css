@@ -26,23 +26,6 @@
     box-shadow: 0px 3px 4.7px 0.3px rgba(0, 0, 0, 0.24), 0px 1px 5.9px 0.1px rgba(66, 66, 66, 0.5);
 }
 
-.btn-chat-trv {
-    position: absolute;
-    right: 40px;
-    bottom: 20px;
-    width: 122px;
-    height: 31px;
-    border-radius: 2.4px;
-    background-color: #ffffff;
-    border: solid 1px #b7b7b7;
-    font-size: 12.8px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
-    color: #ab47bc;
-}
-
 .wrap-info {
     width: 1138px;
     height: 147px;
@@ -81,10 +64,10 @@
 
 .number-success-trip {
     position: absolute;
-    right: 170px;
-    top: 10px;
+    right: 215px;
+    top: 20px;
     font-size: 19.7px;
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
@@ -94,7 +77,7 @@
 .success-trip {
     position: absolute;
     top: 45px;
-    right: 150px;
+    right: 193px;
     font-size: 10.8px;
     font-weight: normal;
     font-style: normal;
@@ -103,28 +86,21 @@
     color: #4a4a4a;
 }
 
-.badge-travel {
+.chat-travel {
     position: absolute;
     right: 20px;
-    top: 10px;
-    font-size: 19.7px;
-    font-weight: normal;
+    top: 25px;
+    width: 137px;
+    height: 29px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ab47bc;
+    font-size: 12.5px;
+    font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    color: #4a4a4a;
-}
-
-.level-travel {
-    position: absolute;
-    top: 45px;
-    right: 35px;
-    font-size: 10.8px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
-    color: #4a4a4a;
+    color: #ffffff;
 }
 
 .info-travel {
@@ -155,9 +131,9 @@
     position: relative;
     height: 60px;
     width: 1138px;
-    border-bottom: 1px solid #dddddd;
+    /* border-bottom: 1px solid #dddddd; */
     padding-top: 18px;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
 }
 
 .paket-penawaran {
