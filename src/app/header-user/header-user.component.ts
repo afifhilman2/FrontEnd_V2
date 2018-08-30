@@ -24,6 +24,7 @@ export class HeaderUserComponent implements OnInit {
   dataUser;
   photo;
   photos = ("../assets/img/user.png");
+  
   querySearch(e) {
     this.query= e.target.value;
     console.log(this.query);
@@ -40,13 +41,13 @@ export class HeaderUserComponent implements OnInit {
       console.log(profile);
     });
 
-    this.appService.getProvider().subscribe(provider => {
-      console.log(provider);
-    });
+    // this.appService.getProvider().subscribe(provider => {
+    //   console.log(provider);
+    // });
 
-    this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
-      this.categoryAllTrip = categoryAllTrip.data; 
-    });
+    // this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
+    //   this.categoryAllTrip = categoryAllTrip.data; 
+    // });
 
    }
 

@@ -40,7 +40,7 @@
                 <input id="typeahead-config" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" /> -->
             </form>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul *ngIf="login" class="nav navbar-nav navbar-right">
                 <li>
                     <a [routerLink]="['/Daftar']">Daftar</a>
                 </li>
@@ -48,6 +48,25 @@
                 <li>
                     <a role="button" (click)="toggleLogin()">Masuk <span class="glyphicon glyphicon-chevron-down"></span></a>
                 </li>
+            </ul>
+
+            <ul *ngIf="!login" class="nav navbar-nav navbar-right">
+                <li>
+                    <a [routerLink]="['/traveler/Akun/Pemesanan']" role="button">Pemesanan</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/traveler/Notifikasi']" role="button">Notifikasi</a>
+                </li>
+                <li>
+                    <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span>
+                </li>
+                <li>
+                    <a (click)="openLogout()" role="button" class="profil">
+                      <img [src]="photos" class="foto-profil">
+                  </a>
+                 
+                </li>
+                
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -136,3 +155,8 @@
 </div>
 
 <!-- end login form  -->
+
+<!-- dropdown profile -->
+<div *ngIf="dropLogout" class="logout pull-right"> 
+    <p (click)="logout()">Logout</p>
+</div>

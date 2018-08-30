@@ -51,7 +51,7 @@ import { ProsesBayarComponent } from './proses-bayar/proses-bayar.component';
 import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
 import { ProsesPemesananComponent } from './proses-pemesanan/proses-pemesanan.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { RegisterComponent } from './register/register.component';
+// import { RegisterComponent } from './register/register.component';
 import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
 import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
 import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
@@ -97,7 +97,7 @@ import {LoaderService} from './loader/loader-service';
     ProsesBayar2Component,
     ProsesPemesananComponent,
     CalendarComponent,
-    RegisterComponent,
+    // RegisterComponent,
     PesanMasukComponent,
     DiskusiTripComponent,
     HeaderNologinComponent,

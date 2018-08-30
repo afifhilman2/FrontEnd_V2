@@ -184,3 +184,69 @@ ul>li>a:focus .glyphicon-chevron-down {
 .btn-search:hover{
     color: #ab47bc;
 }
+
+
+
+.btn-trv {
+    position: relative;
+    top: 8px;
+    border-radius: 3px;
+    color: #ab47bc;
+    border: solid 1px #ab47bc;
+    background-color: transparent;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.notif {
+    position: absolute;
+    top: 13px;
+    right: 21px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #ab47bc;
+}
+
+.foto-profil {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    position: absolute;
+    top: 7px;
+    right: 0px;
+}
+
+.profil {
+    margin-right: 20px;
+}
+
+.logout{
+    position: fixed;
+    width: 189px;
+    background-color: #ffffff;
+    padding: 15px 31px 9px 18px;
+    right: 0;
+    top: 51px;
+    z-index: 1030;
+    box-sizing: border-box;
+    border-radius: 0 0 0 10px;
+    border: solid 1px #dddddd;
+    text-align: right;
+    cursor: pointer;
+}
+
+.logout:hover{
+    position: fixed;
+    width: 189px;
+    background-color: #dddddd;
+    padding: 15px 31px 9px 18px;
+    right: 0;
+    top: 51px;
+    z-index: 1030;
+    box-sizing: border-box;
+    border-radius: 0 0 0 10px;
+    border: solid 1px #dddddd;
+    text-align: right;
+    cursor: pointer;
+}

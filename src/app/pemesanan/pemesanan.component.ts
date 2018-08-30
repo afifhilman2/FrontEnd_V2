@@ -9,6 +9,7 @@ import 'rxjs/add/operator/filter';
 })
 export class PemesananComponent implements OnInit {
   public order: string;
+  otherContent: boolean = false;
 
   constructor(private routeActive : ActivatedRoute) { 
   
@@ -21,5 +22,10 @@ export class PemesananComponent implements OnInit {
       this.order = params.order;
       console.log(this.order); // popular
     });
-}
   }
+
+  showContent(): void{
+    this.otherContent = !this.otherContent;
+  }
+
+}

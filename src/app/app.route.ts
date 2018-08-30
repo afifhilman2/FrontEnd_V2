@@ -30,7 +30,7 @@ import { UbahProfilComponent } from './ubah-profil/ubah-profil.component';
 import { ProsesPemesananComponent } from './proses-pemesanan/proses-pemesanan.component';
 import { ProsesBayarComponent } from './proses-bayar/proses-bayar.component';
 import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
-import { RegisterComponent } from './register/register.component';
+// import { RegisterComponent } from './register/register.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
 import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
@@ -128,7 +128,8 @@ export const routes :Routes = [
         children:[
             {   path:'lupakatasandi', component:LupaKataSandiComponent},
             {   path:'LoginPage', component:LoginpageComponent},
-            {   path:'Daftar', component:RegisterComponent},
+            {   path:'Daftar',
+                loadChildren: 'app/register/register.module#RegisterModule'},
             {   path:'LupaPassword', component:LupaKataSandiComponent},
             
             {   path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},

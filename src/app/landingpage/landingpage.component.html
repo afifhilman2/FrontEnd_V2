@@ -81,7 +81,7 @@
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                     </div>
-                                    <input type="text" class="date-form form-control">
+                                    <input type="date" class="date-form form-control">
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                                                 <span class="icon-star"></span>
                                             </div>
                                             <div class="price pull-right">
-                                                <div class="caption-price">Rp {{trip.publish_price}}</div>
+                                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price}}</div>
                                             </div>
                                         </div>
                                         <div class="caption-tittle"> {{ trip.trip_name }} </div>

@@ -2,8 +2,52 @@
     width: 19.666667% !important;
 }
 
+.masukan-profil{
+    font-size: 13px;
+    width: 707px;
+    line-height: 1.56;
+}
+
+.profil{
+    font-weight: bold;
+    font-size: 40px;
+    font-family: sans-serif;
+    display: initial;
+}
+
+.trv-alert{
+    font-size:11px;
+    color: #d24d57;
+    margin-left: 117px;
+    margin-top: -25px;
+    position: absolute;
+
+}
+
+.trv-notice{
+    width: 100%;
+    height: 41px;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    border: solid 1px #dddddd;
+    margin-top: 26px;
+    margin-bottom: 15px;
+}
+
+.txt-notice{
+    width: 500px;
+    height: 13px;
+    font-family: sans-serif;
+    font-size: 13px;
+    padding-top: 10px;
+    letter-spacing: normal;
+    margin: auto;
+    display: block;
+    color: #ab47bc;
+}
+
 .thumb-promo {
-    width: 165px;
+    width: 180px;
     border-radius: 10px;
     border: none;
     position: relative;
@@ -12,6 +56,7 @@
     box-sizing: border-box;
     box-shadow: 0px 0px 1px #dddddd;
     margin-top: 8px;
+    margin-bottom: 10px;
 }
 
 .img-thumb img {

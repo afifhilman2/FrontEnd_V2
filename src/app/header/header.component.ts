@@ -64,7 +64,28 @@ export class HeaderComponent implements OnInit {
   heroes: Observable<Product[]>;
   private searchTerms = new Subject<string>();
   name;
+  loginUser: boolean = false;
 
+  login = localStorage.token == undefined;
+
+  profile:any =[];
+  provider:any=[];
+  query:any;
+
+  dropLogout: boolean = false;
+
+  // changeHead:boolean = true;
+  // changeHeadUser:boolean = false;
+
+  // categoryAllTrip;
+  dataUser;
+  photo;
+  photos = ("../assets/img/user.png");
+
+  querySearch(e) {
+    this.query= e.target.value;
+    console.log(this.query);
+  }
 
   toggleLogin():void {
     this.showLogin = !this.showLogin;
@@ -74,13 +95,17 @@ export class HeaderComponent implements OnInit {
     this.showDropDown = !this.showDropDown;
   }
 
+  openLogout(): void{
+    this.dropLogout = !this.dropLogout;
+  }
+
   
   // private results: Observable<SearchItem[]>;
   private searchField: FormControl;
   
   constructor( public data:DataService, private http:Http, private fb: FormBuilder, public appService: AppService, private authService:AuthService, private router:Router, myElement: ElementRef) {
 
-    //get all category trip
+    // get all category trip
     this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
       this.categoryAllTrip = categoryAllTrip.data; 
     });
@@ -99,6 +124,14 @@ export class HeaderComponent implements OnInit {
       'email':['', Validators.required],
     });
 
+    // cek login
+
+    // if(!(localStorage.token == null)){
+    //   this.loginUser = true; //true jika toke ada
+    // }else{
+    //   this.loginUser = false; //jika token gak ada
+    // }
+    this.login;
 
     this.initForm();
   }
@@ -124,9 +157,13 @@ export class HeaderComponent implements OnInit {
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
       if (localStorage.token == user.token) {
+        this.login = user.token;
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;
-        this.router.navigate(['/traveler'])
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate([''])
+      )
+        
         
       }
       else {
