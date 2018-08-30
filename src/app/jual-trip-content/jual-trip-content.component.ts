@@ -16,11 +16,26 @@ export class JualTripContentComponent implements OnInit {
   content1:boolean = true;
   content2:boolean = false;
 
+  opentrip:boolean = true;
+  privatetrip:boolean = false;
+
   // content2
 
   toggleJual():void {
     this.content1 = !this.content1;
     this.content2 = !this.content2;
+  }
+
+  //toggle open private 
+
+  openclick():void {
+    this.opentrip = true;
+    this.privatetrip= false;
+  }
+
+  privateclick():void {
+    this.opentrip = false;
+    this.privatetrip= true;
   }
 
   categoryTrip:any[];
@@ -52,7 +67,8 @@ export class JualTripContentComponent implements OnInit {
     id_status_trip : '',
     publish_price_group : '', 
     service_fee_group : '', 
-    photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
+    photo_trip : [],
+    photo : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
     fixed_price_grorup : '', 
   }
 
@@ -75,8 +91,16 @@ export class JualTripContentComponent implements OnInit {
         this.trip.service_fee = this.service
         this.fixed = this.publish - this.service;
         this.trip.fixed_price = this.fixed;
-     this.appService.addTripProvider(this.trip).subscribe(trip => {
-       console.log(trip); 
+        this.appService.addTripProvider(this.trip).subscribe(trip => {
+       
+          // console.log(trip); 
+       
+       if(trip.status == 200) {
+         this.successedTrip = true;
+         this.content1 = !this.content1;
+         this.content2 = !this.content2;
+          
+       }
 
      })
    }
@@ -98,8 +122,9 @@ export class JualTripContentComponent implements OnInit {
   }
   
   _handleReaderLoaded1(readerEvt) {
-     let binaryString = readerEvt.target.result; 
-            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
+     let binaryString = readerEvt.target.result;
+            this.trip.photo_trip[0]= btoa(binaryString); 
+            this.trip.photo[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
     }
 
     uploadImage2(evt) {
@@ -117,7 +142,8 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
-       this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
+       this.trip.photo_trip[1]= btoa(binaryString); 
+       this.trip.photo[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
       uploadImage3(evt) {
@@ -135,7 +161,8 @@ export class JualTripContentComponent implements OnInit {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
-       this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
+       this.trip.photo_trip[2]= btoa(binaryString); 
+       this.trip.photo[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
       uploadImage4(evt) {
@@ -153,7 +180,8 @@ export class JualTripContentComponent implements OnInit {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
-         this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
+         this.trip.photo_trip[3]= btoa(binaryString); 
+         this.trip.photo[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
         uploadImage5(evt) {
@@ -171,7 +199,8 @@ export class JualTripContentComponent implements OnInit {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
-           this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
+           this.trip.photo_trip[4]= btoa(binaryString); 
+           this.trip.photo[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
           // end upload image
@@ -187,7 +216,7 @@ export class JualTripContentComponent implements OnInit {
 
       onSelectCategory(e) {
         this.trip.category[0] = e.target.value;
-        console.log(this.trip.category);
+        // console.log(this.trip.category);
        
       }
 

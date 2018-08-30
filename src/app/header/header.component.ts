@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit {
   getTripSearch:any[]=[];
   trip: any[];
 
+
   filterTrip;
   // heroes: Observable<Product[]>;
   // private searchTerms = new Subject<{}>();
@@ -114,7 +115,7 @@ export class HeaderComponent implements OnInit {
     this.appService.getDataTrip().subscribe(dataTrip => {
       this.filterTrip = dataTrip.data;
       this.name = dataTrip.data.trip_name;
-      console.log(this.filterTrip);
+      // console.log(this.filterTrip);
     });
 
     //validation
@@ -134,6 +135,7 @@ export class HeaderComponent implements OnInit {
     this.login;
 
     this.initForm();
+
   }
 
    //searchById

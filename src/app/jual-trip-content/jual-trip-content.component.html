@@ -17,7 +17,7 @@
                 <div class="img-paket-core">
                     <label>
                                 <div class="img-add">
-                                    <img src={{trip.photo_trip[0]}} class="add">
+                                    <img src={{trip.photo[0]}} class="add">
                                     <input type="file" hidden (change)="uploadImage1($event)">
                                 </div>
                             </label>
@@ -30,7 +30,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[1]}} class="add">
+                                            <img src={{trip.photo[1]}} class="add">
                                             <input type="file" hidden (change)="uploadImage2($event)">
                                         </div>
                                     </label>
@@ -40,7 +40,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[2]}} class="add">
+                                            <img src={{trip.photo[2]}} class="add">
                                             <input type="file" hidden (change)="uploadImage3($event)">
                                         </div>
                                     </label>
@@ -50,7 +50,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[3]}} class="add">
+                                            <img src={{trip.photo[3]}} class="add">
                                             <input type="file" hidden (change)="uploadImage4($event)">
                                         </div>
                                     </label>
@@ -60,7 +60,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="{{trip.photo_trip[4]}}" class="add">
+                                            <img src="{{trip.photo[4]}}" class="add">
                                             <input type="file" hidden (change)="uploadImage5($event)">
                                         </div>
                                     </label>
@@ -83,8 +83,8 @@
                 <div class="col-md-12">
                     <label class="label-form">Jenis Trip</label>
                     <div class="radio">
-                        <label class="radio"><input type="radio" name="radios" id="1" value="1" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Open</label>
-                        <label class="radio"><input type="radio" name="radios" id="2" value="2" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Private</label>
+                        <label class="radio" (click)="openclick()"><input type="radio" name="radios" id="1" value="1" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Open</label>
+                        <label class="radio" (click)="privateclick()"><input type="radio" name="radios" id="2" value="2" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Private</label>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[0]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[0]" name="date_trip[0]" class=" form-control" [disabled]="privatetrip">
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[1]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[1]" name="date_trip[1]" class=" form-control" [disabled]="privatetrip">
                             </div>
                         </div>
 
@@ -122,7 +122,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[2]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[2]" name="date_trip[2]" class=" form-control" [disabled]="privatetrip">
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[3]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[3]" name="date_trip[3]" class=" form-control" [disabled]="privatetrip">
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[4]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[4]" name="date_trip[4]" class=" form-control" [disabled]="privatetrip">
                             </div>
                         </div>
                     </div>
@@ -419,7 +419,7 @@
 
         <div class="wrap-deskripsi">
             <label class="label-form" for="Deskripsi">Deskripsi</label>
-            <textarea class="deskripsi-trip form-control" id="Deskripsi" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
+            <textarea class="deskripsi-trip form-control" id="Deskripsi" [(ngModel)]="trip.description" name="description" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
 
         </div>
 
@@ -463,24 +463,128 @@
 
         </div>
 
-        <div class="wrap-harga">
-            <div class="wrap-publish">
-                <label class="label-form" for="harga">Harga Trip</label>
-                <div class="publish-trip input-group">
-                    <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                    <input type="number" min="0" class="form-control publish-price" [(ngModel)]="trip.publish_price" name="publish_price" placeholder="Harga Publish">
-                </div>
-                <span class="perorang">/ Orang </span>
-            </div>
 
-            <div class="wrap-kuota">
-                <label class="label-form" for="harga">Kuota Trip</label>
-                <div class="publish-trip input-group">
-                    <input type="number" min="1" max="100" class="form-control" [(ngModel)]="trip.quota_trip" name="quota_trip" placeholder="Jumlah">
-                    <span class=" input-group-addon" id="harga"> Peserta </span>
+        <!-- open trip  -->
+        <div *ngIf='opentrip'>
+            <div class="wrap-harga">
+                <div class="wrap-publish">
+                    <label class="label-form" for="harga">Harga Trip</label>
+                    <div class="publish-trip input-group">
+                        <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                        <input type="number" min="0" class="form-control publish-price" [(ngModel)]="trip.publish_price" name="publish_price" placeholder="Harga Publish">
+                    </div>
+                    <span class="perorang">/ Orang </span>
+                </div>
+
+                <div class="wrap-kuota">
+                    <label class="label-form" for="harga">Kuota Trip</label>
+                    <div class="publish-trip input-group">
+                        <input type="number" min="1" max="100" class="form-control" [(ngModel)]="trip.quota_trip" name="quota_trip" placeholder="Jumlah">
+                        <span class=" input-group-addon" id="harga"> Peserta </span>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+        <!-- private trip  -->
+        <div *ngIf='privatetrip'>
+            <div class="wrap-range-harga">
+                <div class="wrap-publish">
+                    <label class="label-form" for="harga">Range Harga Trip</label>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="tittle-range-harga"> Peserta </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="tittle-range-harga"> Harga </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="range-price-trip form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="wrap-range-kuota">
+                    <label class="label-form" for="harga">Kuota Trip</label>
+                    <div class="publish-range-trip">
+                        <input type="number" min="1" max="100" class="form-control" placeholder="Kuota Maksimal">
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="wrap-checkbox">
             <input type="checkbox" class="checkbox">

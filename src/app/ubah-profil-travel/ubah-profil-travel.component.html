@@ -7,30 +7,62 @@
 
 <form (submit)="onEditProfile()">
 
-    <div class="wrap-slogan">
-        <label class="label-form" for="Slogan">Slogan </label>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="wrap-slogan">
+                <label class="label-form">Foto Profil Travel </label>
+                <label>
+                    <div class="wrap-img-profil">
+                        <img src="" alt="" class="img-profil">
+                        <input type="file" hidden>
+                    </div>
+                </label>
+            </div>
+        </div>
 
-        <textarea class="slogan-trip form-control" id="Slogan" [(ngModel)]="provider.slogan" name="slogan"> </textarea>
+        <div class="col-md-8">
+            <div class="wrap-alamat">
+                <label class="label-form">Foto Profil Travel </label>
+                <div class="wrap-cover-profil">
+                    <img src="" alt="" class="cover-profil">
+                    <input type="file" hidden>
+                </div>
+            </div>
+            <div class="text-cover-profil">Cover Travel dapat dilihat pada halaman Etalase Travel</div>
+        </div>
+    </div>
+
+    <div>
+        <label class="label-form" for="Deskripsi">Deskripsi Travel </label>
+
+        <textarea class="deskripsi-trip form-control" id="Deskripsi" [(ngModel)]="provider.description" name="deskripsi" placeholder="Tuliskan Deskripsi Travel Anda"> </textarea>
 
     </div>
 
-    <div class="wrap-deskripsi">
-        <label class="label-form" for="Deskripsi">Deskripsi </label>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="wrap-slogan">
+                <label class="label-form" for="Slogan">Slogan Travel </label>
 
-        <textarea class="deskripsi-trip form-control" id="Deskripsi" [(ngModel)]="provider.description" name="deskripsi"> </textarea>
+                <textarea class="slogan-trip form-control" id="Slogan" [(ngModel)]="provider.slogan" name="slogan" placeholder="Tuliskan Slogan Travel Anda"> </textarea>
 
-    </div>
+            </div>
+        </div>
 
-    <div class="wrap-alamat">
-        <label class="label-form" for="Alamat">Alamat Kantor </label>
+        <div class="col-md-6">
+            <div class="wrap-alamat">
+                <label class="label-form" for="Alamat">Alamat Travel </label>
 
-        <textarea class="alamat-trip form-control" id="Alamat" [(ngModel)]="provider.office_address" name="alamat"></textarea>
+                <textarea class="alamat-trip form-control" id="Alamat" [(ngModel)]="provider.office_address" name="alamat" placeholder="Tuliskan Alamat Kantor Anda"></textarea>
 
+            </div>
+
+        </div>
     </div>
 
     <div class="wrap-info-trip">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="label-form" for="provinsi"> Provinsi </label>
                 <select class="form-control form-sort" [(ngModel)]="provider.province" name="provinsi">
                                                           <option >Pilih Provinsi</option>
@@ -71,17 +103,17 @@
                                                       </select>
             </div>
 
-            <div class="col-md-6">
-                <label class="label-phone" for="NoTelepon"> No Telepon </label>
+            <div class="col-md-5">
+                <label class="label-form" for="NoTelepon"> Nomor Handphone Travel </label>
 
-                <input type="text" class="phone-trip form-control" [(ngModel)]="provider.office_phone_number" name="notelp">
+                <input type="number" class="phone-trip form-control" [(ngModel)]="provider.office_phone_number" name="notelp" placeholder="Tuliskan Nomor Hanphone Travel">
 
             </div>
         </div>
 
         <div class="wrap-btn-trv">
-            <a href="" class="batal">Batal </a>
-            <button class="btn-trv-ubah" type="submit"> Ubah dan Simpan </button>
+            <a class="batal">Batal </a>
+            <button class="btn-trv-ubah" type="submit"> Simpan </button>
         </div>
     </div>
 

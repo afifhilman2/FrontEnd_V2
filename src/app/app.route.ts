@@ -1,4 +1,5 @@
-import { Routes, CanActivate } from '@angular/router';
+import { ModuleWithProviders} from '@angular/core'
+import { Routes, CanActivate, RouterModule } from '@angular/router';
 import { GuardService } from './guard.service';
 import { AppComponent } from './app.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
@@ -41,45 +42,52 @@ import { LoaderComponent } from './loader/loader.component';
 export const routes :Routes = [
 
     // without login header
-    {
-        path :'', 
-        component:HeaderComponent,
-        children: [
-            {path:'', component:LandingpageComponent},
-            {path:'search/:id', component:TrvSearchResultComponent},
-            {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
-            
-            {path:'Notifikasi', component:EksternalComponent},
-            {path:'JadiTravel', component:DaftarTravelComponent,},
-            {path:'EtalaseTravel', component:EtalaseTravelComponent},
-            {path:'DetailPaket/:id', component:DetailPaketComponent},
-            {path:'DiskusiTrip', component:DiskusiTripComponent},
-            {path:'PesanMasuk', component:PesanMasukComponent},
-            {path:'Calendar', component:CalendarComponent},
-            {path:'Akun', component:TrvSidebarComponent,
-            children:[
-                {path:'', component:PemesananComponent},
-                {path:'Profile', component:UbahProfilComponent},
-                {path:'Pemesanan/:id', component:PemesananComponent},
-                {path:'Favorit', component:FavoritUserComponent},
-                {path:'PesanMasuk', component:PesanMasukComponent},
-                {path:'DiskusiTrip', component:DiskusiTripComponent},
-                {path:'Promo', component:EksternalComponent}
-                    ]
-                    },
-            {path:'JualTrip', component:JualTripComponent,
-            children:[
-                {path:'', component:JualTripContentComponent},
-                {path:'Saldo', component:SaldoComponent},
-                {path:'JualTrip', component:JualTripContentComponent},
-                {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
-                {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
-                {path:'DaftarTrip', component:DaftarTripComponent},
-                {path:'UbahTrip/:id', component:JualTripContent2Component}, 
-            ]
-            }
-                    ]
+    {   path:'searchNavbar/:query', 
+        loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'
     },
+    
+    {   path:'JualTrip', 
+        loadChildren: './jual-trip/jual-trip.module#JualTripModule'
+    },
+
+    // {
+    //     path :'', 
+    //     component:HeaderComponent,
+    //     children: [
+    //         {path:'', component:LandingpageComponent},
+    //         {path:'search/:id', component:TrvSearchResultComponent},
+            
+    //         {path:'Notifikasi', component:EksternalComponent},
+    //         {path:'JadiTravel', component:DaftarTravelComponent,},
+    //         {path:'EtalaseTravel', component:EtalaseTravelComponent},
+    //         {path:'DetailPaket/:id', component:DetailPaketComponent},
+    //         {path:'DiskusiTrip', component:DiskusiTripComponent},
+    //         {path:'PesanMasuk', component:PesanMasukComponent},
+    //         {path:'Calendar', component:CalendarComponent},
+    //         {path:'Akun', component:TrvSidebarComponent,
+    //         children:[
+    //             {path:'', component:PemesananComponent},
+    //             {path:'Profile', component:UbahProfilComponent},
+    //             {path:'Pemesanan/:id', component:PemesananComponent},
+    //             {path:'Favorit', component:FavoritUserComponent},
+    //             {path:'PesanMasuk', component:PesanMasukComponent},
+    //             {path:'DiskusiTrip', component:DiskusiTripComponent},
+    //             {path:'Promo', component:EksternalComponent}
+    //                 ]
+    //                 },
+    //         {path:'JualTrip', component:JualTripComponent,
+    //         children:[
+    //             {path:'', component:JualTripContentComponent},
+    //             {path:'Saldo', component:SaldoComponent},
+    //             {path:'JualTrip', component:JualTripContentComponent},
+    //             {path:'TransaksiPenjualan', component:TransaksiPenjualanComponent},
+    //             {path:'UbahProfilTravel', component:UbahProfilTravelComponent},
+    //             {path:'DaftarTrip', component:DaftarTripComponent},
+    //             {path:'UbahTrip/:id', component:JualTripContent2Component}, 
+    //         ]
+    //         }
+    //                 ]
+    // },
 
     //with login
     {
@@ -148,6 +156,8 @@ export const routes :Routes = [
         path:'**', component:EksternalComponent
     }
 
-
-
 ] 
+
+
+export const appRouting:ModuleWithProviders = RouterModule.forRoot(routes);
+

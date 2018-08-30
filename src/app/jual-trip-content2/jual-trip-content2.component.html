@@ -1,13 +1,15 @@
-<form>
+<form (submit)="onSubmitEditTrip()">
     <div *ngIf='content1'>
         <div class="wrap-tittle">
-            <p class="head-content"> Jual Trip </p>
+            <p class="head-content"> Ubah Trip </p>
             <span class="state-all"> Tahap 1 dari 2</span>
         </div>
 
-        <div class="info-trip-term"> Jual Trip Travel Anda disini. Masukkan informasi trip selengkap mungkin untuk meningkatkan kepercayaan traveller terhadap paket trip yang ditawarkan. Berikan fasilitas yang terbaik Travel Anda.</div>
+        <div class="info-trip-term"> Ubah Trip Travel Anda disini. Anda dapat merubah beberapa informasi paket trip yang Anda jual
+            <span class="textpink"> Beberapa informasi tidak dapat dirubah untuk menjaga kenyamanan dan kepercayaan Traveller </span>
+        </div>
 
-        <div class="info-term" *ngIf='successedTrip'><span class="bold-term">Trip berhasil ditambahkan. </span> Silahkan cek pilihan "Daftar Trip" untuk melihat seluruh trip yang anda jual</div>
+        <div class="info-term" *ngIf='successedTrip'><span class="bold-term">Trip berhasil diperbaharui. </span> Silahkan cek pilihan "Daftar Trip" untuk melihat seluruh trip yang anda jual</div>
 
 
         <div class="wrap-img-trip">
@@ -17,8 +19,8 @@
                 <div class="img-paket-core">
                     <label>
                                 <div class="img-add">
-                                    <img src={{trip.photo_trip[0]}} class="add">
-                                    <input type="file" hidden >
+                                    <img src="{{trip.photo_trip[0] == undefined ? '../assets/img/add.png' : trip.photo_trip[0] }}" class="add">
+                                    <input type="file" hidden (change)="uploadImage1($event)" >
                                 </div>
                             </label>
 
@@ -30,8 +32,8 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[1]}} class="add">
-                                            <input type="file" hidden >
+                                            <img src="{{trip.photo_trip[1] == undefined ? '../assets/img/add.png' : trip.photo_trip[1] }}" class="add">
+                                            <input type="file" hidden (change)="uploadImage2($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Panorama/ Lokasi Trip </p>
@@ -40,8 +42,8 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[2]}} class="add">
-                                            <input type="file" hidden >
+                                            <img src= "{{trip.photo_trip[2] == undefined ? '../assets/img/add.png' : trip.photo_trip[2] }}"  class="add">
+                                            <input type="file" hidden (change)="uploadImage3($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Peserta Trip</p>
@@ -50,8 +52,8 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src={{trip.photo_trip[3]}} class="add">
-                                            <input type="file" hidden >
+                                            <img src="{{trip.photo_trip[3] == undefined ? '../assets/img/add.png' : trip.photo_trip[3] }}" class="add">
+                                            <input type="file" hidden (change)="uploadImage4($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Kegiatan Trip</p>
@@ -60,8 +62,8 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="{{trip.photo_trip[4]}}" class="add">
-                                            <input type="file" hidden >
+                                            <img src="{{trip.photo_trip[4] == undefined ? '../assets/img/add.png' : trip.photo_trip[4] }}" class="add">
+                                            <input type="file" hidden (change)="uploadImage5($event)">
                                         </div>
                                     </label>
                             <p class="tittle-img-core">Fasilitas Trip</p>
@@ -104,7 +106,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[0]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[0]" name="date_trip[0]" class=" form-control">
                             </div>
                         </div>
 
@@ -113,7 +115,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[1]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[1]" name="date_trip[1]" class=" form-control">
                             </div>
                         </div>
 
@@ -122,7 +124,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[2]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[2]" name="date_trip[2]" class=" form-control">
                             </div>
                         </div>
                     </div>
@@ -135,7 +137,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[3]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[3]" name="date_trip[3]" class=" form-control">
                             </div>
                         </div>
 
@@ -144,7 +146,7 @@
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
                                 </div>
-                                <input type="date" [(ngModel)]="trip.date_trip[4]" name="date_trip" class=" form-control">
+                                <input type="date" [(ngModel)]="trip.date_trip[4]" name="date_trip[4]" class=" form-control">
                             </div>
                         </div>
                     </div>
@@ -156,7 +158,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="durasi">Durasi Trip </label>
-                    <select class="form-control form-durasi">
+                    <select class="form-control form-durasi" [(ngModel)]="trip.days" name="days">
                     <option value="1">1 Hari</option>
                     <option value="2">2 Hari</option>
                     <option value="3">3 Hari</option>
@@ -192,7 +194,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="sort" for="lokasi"> Lokasi (Provinsi) </label>
-                    <select class="form-control form-sort" [(ngModel)]="trip.days" name="day">
+                    <select class="form-control form-sort" [(ngModel)]="trip.id_province_trip" name="id_province_trip">
                     <option>Pilih Provinsi</option>
                     <option *ngFor="let province of provinceTrip" value="{{province.id_province}}">{{province.province_name}} </option>
                     <!-- <option >Sumatra Utara</option>
@@ -409,7 +411,7 @@
 
     <div *ngIf='content2'>
         <div class="wrap-tittle">
-            <p class="head-content"> Jual Trip </p>
+            <p class="head-content"> Ubah Trip </p>
             <span class="state-all"> Tahap 2 dari 2</span>
             <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
             </span>
@@ -419,7 +421,7 @@
 
         <div class="wrap-deskripsi">
             <label class="label-form" for="Deskripsi">Deskripsi</label>
-            <textarea class="deskripsi-trip form-control" id="Deskripsi" [(ngModel)]="trip.description" name="description" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
+            <textarea class="deskripsi-trip form-control" [(ngModel)]="trip.description" name="description" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
 
         </div>
 
@@ -449,10 +451,10 @@
             <input type="number" placeholder="Menit" class="waktu-bertemu-input form-control">
 
             <select class="form-control form-waktu">
-                <option>WIB</option>
-                <option>WITA</option>
-                <option>WIT</option>	
-                </select>
+                <option value="WIB">WIB</option>
+                <option value="WITA">WITA</option>
+                <option value="WIT">WIT</option>	
+            </select>
             <div class="note-waktu">Diisi sesuai dengan waktu wilayah di trip berada, sesuai pembagian zona waktu Indonesia</div>
         </div>
 
@@ -468,7 +470,7 @@
                 <label class="label-form" for="harga">Harga Trip</label>
                 <div class="publish-trip input-group">
                     <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                    <input type="number" min="0" class="form-control publish-price" [(ngModel)]="trip.fixed_price" name="publish_price" placeholder="Harga Publish">
+                    <input type="number" min="0" class="form-control publish-price" [(ngModel)]="trip.publish_price" name="publish_price" placeholder="Harga Publish">
                 </div>
                 <span class="perorang">/ Orang </span>
             </div>
@@ -489,7 +491,7 @@
         </div>
 
         <div class="wrap-btn">
-            <button type="submit" class="btn-content"> Jual Trip</button>
+            <button type="submit" class="btn-content"> Ubah Trip</button>
         </div>
     </div>
 

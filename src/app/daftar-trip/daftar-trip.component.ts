@@ -13,17 +13,21 @@ Injectable()
 })
 export class DaftarTripComponent implements OnInit {
 
-  tripProvider:any[]
+  tripProvider:any[];
+  photo_trip:any[];
 
   idTrip:any;
   night:any;
 
-
-
   constructor( public appService:AppService, private http:Http, public router:Router) { 
     this.appService.getTripProvider().subscribe (Trip =>{
       this.tripProvider = Trip.provider_trip;
-      console.log(Trip);
+
+      // console.log(Trip);
+
+      if (Trip.success == false) {
+        alert('Belum ada trip');
+        }
     })
   }
 
@@ -40,6 +44,7 @@ export class DaftarTripComponent implements OnInit {
 
   hapusTrip(e, trip) {
     this.idTrip = e.target.id;
+    console.log(this.idTrip);
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);

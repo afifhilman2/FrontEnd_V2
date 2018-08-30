@@ -727,3 +727,9 @@ textarea {
     letter-spacing: normal;
     cursor: pointer;
 }
+
+.textpink {
+    color: #e91e63;
+    display: block;
+    font-weight: bold;
+}

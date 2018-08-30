@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from "@angular/router";
 import { AppService} from '../app.service';
+import { DatePipe } from '@angular/common';
 
 
 @Injectable ()
@@ -37,6 +38,7 @@ export class JualTripContent2Component implements OnInit {
   fixed:any;
   days:any;
   night:any;
+  idTrip:any;
 
 
   trip = {
@@ -52,17 +54,18 @@ export class JualTripContent2Component implements OnInit {
     description : '', 
     notes_traveler : '', 
     notes_meeting_point :'',
-    id_province_trip :'',
+    id_province :'',
     id_category : [], 
     id_facility : '', 
     id_status_trip : '',
     publish_price_group : '', 
     service_fee_group : '', 
     photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
+    photo:[],
     fixed_price_grorup : '', 
   }
 
-  constructor( public router :Router, private routeActive:ActivatedRoute, private appService: AppService, private http:Http ) {
+  constructor( public router :Router, private routeActive:ActivatedRoute, private appService: AppService, private http:Http, private datePipe:DatePipe ) {
    
     // get categori trip
     this.appService.getCategoryTrip().subscribe( category => {
@@ -83,19 +86,35 @@ export class JualTripContent2Component implements OnInit {
     
    }
 
+   onSubmitEditTrip() {
 
-   onSubmitTrip1() {
 
-        this.publish = this.trip.publish_price;
-        this.service = (5 * this.publish) / 100;
-        this.trip.service_fee = this.service
-        this.fixed = this.publish - this.service;
-        this.trip.fixed_price = this.fixed;
-     this.appService.addTripProvider(this.trip).subscribe(trip => {
-       console.log(trip); 
+    this.trip.photo_trip[2] = this.trip.photo[2];
 
-     })
-   }
+    console.log(this.trip);
+        let headers = new Headers();
+        
+        this.createAuthorizationHeader (headers);
+        return this.http.put('http://travinesia.com:3000/v1/provider/edit_trip/'+ this.idParams, this.trip,
+        {headers: headers})
+        .subscribe(
+          (res:Response)=> {
+            let nullTrip = res.json();
+
+          
+
+            // console.log(nullTrip);
+            if(nullTrip.status == 200) {
+              this.successedTrip = true;
+              this.content1 = !this.content1;
+              this.content2 = !this.content2;
+        
+             }
+          }
+        )
+
+        
+  }
 
 
    //upload image
@@ -115,7 +134,9 @@ export class JualTripContent2Component implements OnInit {
   
   _handleReaderLoaded1(readerEvt) {
      let binaryString = readerEvt.target.result; 
-            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);       
+            this.trip.photo[0]=btoa(binaryString);
+            this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);  
+            
     }
 
     uploadImage2(evt) {
@@ -133,6 +154,7 @@ export class JualTripContent2Component implements OnInit {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[1]=btoa(binaryString);
        this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
@@ -151,6 +173,7 @@ export class JualTripContent2Component implements OnInit {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
+       this.trip.photo[2]=btoa(binaryString);
        this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
@@ -169,6 +192,7 @@ export class JualTripContent2Component implements OnInit {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
+         this.trip.photo[3]=btoa(binaryString);
          this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
@@ -187,6 +211,7 @@ export class JualTripContent2Component implements OnInit {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
+           this.trip.photo[4]=btoa(binaryString);
            this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
@@ -207,7 +232,7 @@ export class JualTripContent2Component implements OnInit {
       }
 
       onSelectProvince(e) {
-        this.trip.id_province_trip = e.target.value;
+        this.trip.id_province = e.target.value;
        
       }
 
@@ -217,22 +242,41 @@ export class JualTripContent2Component implements OnInit {
       }
 
   ngOnInit() {
-    // let headers = new Headers();
-    
-    // this.createAuthorizationHeader (headers);
+  
     return this.http.get('http://travinesia.com:3000/get/detail_trip/'+ this.idParams,
-    // {headers: headers}
+  
   )
     .subscribe(
       (res:Response)=> {
         let ubahTrip = res.json();
-        console.log(ubahTrip);
+      
+        this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
+        this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
+        this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
+        this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
+        this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
         this.trip.trip_name = ubahTrip.data.trip_name;
+       
         this.trip.id_type_trip = ubahTrip.data.id_type_trip;
-        this.trip.date_trip = ubahTrip.data.date_trip;
-        console.log(this.trip.trip_name);
-      
+        this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip[0], 'yyyy-MM-dd'); 
+        this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip[1], 'yyyy-MM-dd');
+        this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip[2], 'yyyy-MM-dd');
+        this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip[3], 'yyyy-MM-dd');
+        this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip[4], 'yyyy-MM-dd');
+       
+        this.trip.id_category = ubahTrip.data.id_category;
+        // this.trip.id_category = ubahTrip.data.id_category;
+        // this.trip.id_category[2] = ubahTrip.data.id_category[2];
+        // this.trip.id_category[3] = ubahTrip.data.id_category[3];
+        // this.trip.id_category[4] = ubahTrip.data.id_category[4];
+        this.trip.days = ubahTrip.data.days;
+        this.trip.id_province = ubahTrip.data.id_province_trip;
+        this.trip.description = ubahTrip.data.description;
+        this.trip.notes_meeting_point = ubahTrip.data.notes_meeting_point;
+        this.trip.notes_traveler = ubahTrip.data.notes_traveler;
+        this.trip.publish_price = ubahTrip.data.publish_price;
+        this.trip.quota_trip = ubahTrip.data.quota_trip;  
        
       }
     )
