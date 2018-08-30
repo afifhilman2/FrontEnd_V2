@@ -9,7 +9,7 @@
         <div class="thumb-promo">
             <img src="../assets/img/1.jpg" class="img-promo">
             <a href="">
-                <a href="#">
+                <a (click)="openAlert()" role="button">
                     <div class="exit"> X </div>
                 </a>
             </a>
@@ -40,7 +40,7 @@
     <div class="col-md-3 col-sm-4">
         <div class="thumb-promo">
             <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="#">
+            <a (click)="openAlert()" role="button">
                 <div class="exit"> X </div>
             </a>
             <div class="trip">Open</div>
@@ -61,7 +61,7 @@
                     <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
                 </a>
             </div>
-            <a href="#" class="pesan">
+            <a (click)="openAlert()">
                 <div class="pesan-travel text-center"> Pesan Sekarang</div>
             </a>
         </div>
@@ -70,100 +70,8 @@
     <div class="col-md-3 col-sm-4">
         <div class="thumb-promo">
             <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="#">
+            <a (click)="openAlert()" role="button">
                 <div class="exit"> X </div>
-            </a>
-            <div class="trip">Open</div>
-            <div class="body-caption">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
-                    </div>
-                </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                <a [routerLink]="['/EtalaseTravel']">
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </a>
-            </div>
-            <a href="#" class="pesan">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-sm-4">
-        <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="#">
-                <div class="exit"> X </div>
-            </a>
-            <div class="trip">Open</div>
-            <div class="body-caption">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
-                    </div>
-                </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                <a [routerLink]="['/EtalaseTravel']">
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </a>
-            </div>
-            <a href="#" class="pesan">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-sm-4">
-        <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="#">
-                <div class="exit"> X </div>
-            </a>
-            <div class="trip">Open</div>
-            <div class="body-caption">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
-                    </div>
-                </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                <a [routerLink]="['/EtalaseTravel']">
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </a>
-            </div>
-            <a href="#" class="pesan">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-sm-4">
-        <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="">
-                <a href="#">
-                    <div class="exit"> X </div>
-                </a>
             </a>
             <div class="trip">Open</div>
             <div class="body-caption">
@@ -191,3 +99,17 @@
 
 </div>
 </main>
+
+<div class="modal-hapus" *ngIf="alert" (click)="openAlert()">
+    <div class="hapus-trip">
+        <div class="header">
+            <p>Hapus Trip</p>
+        </div>
+        <div class="body">
+            <p>Apakah Anda yakin akan menghapus Trip ini dari Favorit Anda?</p>
+            
+            <button type="button" class="btn hapus">Hapus</button>
+            <button type="button" class="btn batal" (click)="openAlert()">Batal</button>
+        </div>
+    </div>
+</div>

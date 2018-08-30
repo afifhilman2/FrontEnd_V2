@@ -37,6 +37,7 @@ import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
 import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
 import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
 import { LoaderComponent } from './loader/loader.component';
+import { PromoComponent } from './promo/promo.component';
 
 
 export const routes :Routes = [
@@ -114,7 +115,7 @@ export const routes :Routes = [
                 {path:'Favorit', component:FavoritUserComponent},
                 {path:'PesanMasuk', component:PesanMasukComponent},
                 {path:'DiskusiTrip', component:DiskusiTripComponent},
-                {path:'Promo', component:EksternalComponent}
+                {path:'Promo', component:PromoComponent}
                     ]
                     },
             {path:'JualTrip', component:JualTripComponent,

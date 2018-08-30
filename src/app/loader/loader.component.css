@@ -112,7 +112,6 @@
         transform: perspective(140px) rotateY(180deg);
         opacity: 0;
     }
-<<<<<<< HEAD
   }
 
 
@@ -143,6 +142,4 @@
     80% { left: 50%;}
     95% {left: 120%;}
     to {left: 100%;}
-=======
->>>>>>> 16b94fa6a300aaf87dfe2c24f791d8543c2b46ab
 }

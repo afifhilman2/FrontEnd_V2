@@ -62,6 +62,7 @@ import {LoaderService} from './loader/loader-service';
 
 import { TrvSearchNavbarModule } from './trv-search-navbar/trv-search-navbar.module';
 import {JualTripModule} from './jual-trip/jual-trip.module';
+import { PromoComponent } from './promo/promo.component';
 
 
 
@@ -106,6 +107,7 @@ import {JualTripModule} from './jual-trip/jual-trip.module';
     ClickOutsideDirective,
     MiniFooterComponent,
     LoaderComponent,
+    PromoComponent,
 
   ],
   imports: [

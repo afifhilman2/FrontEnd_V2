@@ -1,7 +1,11 @@
 .profil{
-    font-size: 20px;
-    font-family: sans-serif;
+    font-size: 35px;
     font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #454545;
 }
 
 .masukan-profil{
@@ -13,6 +17,10 @@
     position: relative;
     padding-right: 15px;
     display: inline-block;
+}
+
+.content-diskusi{
+    padding-top: 15px;
 }
 
 .diskusi{
@@ -27,6 +35,18 @@
     border: solid 1px #d7d7d7;
     display: inline-block;
     vertical-align: top;
+    margin-left: 15px;
+}
+
+.isi-pesanan-nama-pulau p{
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4c4c4c;
+    margin-top: 5px;
 }
 
 .gambar{
@@ -72,6 +92,7 @@
     position: relative;
     display: inline-block;
     vertical-align: top;
+    margin-left: 40px;
 }
 
 .akun{
