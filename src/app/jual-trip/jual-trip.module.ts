@@ -14,6 +14,7 @@ import { SaldoComponent } from '.././saldo/saldo.component';
 import { UbahProfilTravelComponent } from '.././ubah-profil-travel/ubah-profil-travel.component';
 import { TransaksiPenjualanComponent } from '.././transaksi-penjualan/transaksi-penjualan.component';
 import { DaftarPemesanComponent } from '.././daftar-pemesan/daftar-pemesan.component';
+
 // import { MiniFooterComponent } from '.././mini-footer/mini-footer.component';
 
 

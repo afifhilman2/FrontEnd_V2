@@ -9,6 +9,7 @@ import { TransaksiPenjualanComponent } from ".././transaksi-penjualan/transaksi-
 import { UbahProfilTravelComponent } from ".././ubah-profil-travel/ubah-profil-travel.component";
 import { DaftarTripComponent } from ".././daftar-trip/daftar-trip.component";
 import { JualTripContent2Component } from ".././jual-trip-content2/jual-trip-content2.component";
+import { EtalaseTravelComponent } from ".././etalase-travel/etalase-travel.component";
 
 const JualTrip: Routes = [
     {
@@ -41,6 +42,9 @@ const JualTrip: Routes = [
                         component:JualTripContent2Component
                     },
                 ]
+            },
+            {   path:'EtalaseTravel', 
+                component:EtalaseTravelComponent,
             }
 
         ]
