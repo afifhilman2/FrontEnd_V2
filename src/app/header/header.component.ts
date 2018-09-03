@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
   name;
   loginUser: boolean = false;
 
-  login = localStorage.token == undefined;
+  login;
 
   profile:any =[];
   provider:any=[];
@@ -132,7 +132,7 @@ export class HeaderComponent implements OnInit {
     // }else{
     //   this.loginUser = false; //jika token gak ada
     // }
-    this.login;
+    // this.login;
 
     this.initForm();
 
@@ -158,18 +158,22 @@ export class HeaderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
-      if (localStorage.token == user.token) {
-        this.login = user.token;
+      console.log(user);
+      this.login = localStorage.token;
+      console.log(this.login);
+      if (user.success== true) {
+        
+        
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
         this.router.navigate([''])
       )
         
-        
       }
       else {
-        this.router.navigate(['']);
+        alert("Login Gagal");
+        // this.router.navigate(['']);
       }
     })
    }
