@@ -27,7 +27,8 @@ export class DaftarTravelComponent implements OnInit {
     province :'', 
     office_phone_number :'', 
     domain :'', 
-    logo : ''
+    logo : '', 
+    medsoc_account:'',
   }
   
 

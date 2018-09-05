@@ -69,17 +69,17 @@ export class AppService {
         .map(res => res.json());
     }
 
-    // getSearchTrip() {
-    //     return this.http.get('http://travinesia.com:3000/get/category/:category')
-    //     .map(res => res.json());
-    // }
+    getFacilityTrip() {
+        return this.http.get('http://travinesia.com:3000/get/facility')
+        .map(res => res.json());
+    }
 
     getProvinceTrip() {
         return this.http.get('http://travinesia.com:3000/get/province')
         .map(res => res.json());
     }
 
-    etTypeTrip() {
+    getTypeTrip() {
         return this.http.get('http://travinesia.com:3000/get/type')
         .map(res => res.json());
     }   

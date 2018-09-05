@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { HeaderComponent } from './header/header.component';
 import { PemesananComponent } from './pemesanan/pemesanan.component';
-import { HeaderUserComponent } from './header-user/header-user.component';
+
+// import { HeaderUserComponent } from './header-user/header-user.component';
 import { SidebarAkunProfilComponent } from './sidebar-akun-profil/sidebar-akun-profil.component';
 import { FooterComponent } from './footer/footer.component';
 import { EksternalComponent } from './eksternal/eksternal.component';
@@ -92,7 +93,7 @@ export const routes :Routes = [
     //with login
     {
         path :'traveler', 
-        component:HeaderUserComponent,
+        component:HeaderComponent,
         children: [
             {path:'', component:LandingpageComponent},
             {path:'search/:id', component:TrvSearchResultComponent},

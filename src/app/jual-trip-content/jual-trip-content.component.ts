@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
+import { filter } from 'rxjs/operators';
+// import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+// import { BrowserModule } from "@angular/platform-browser";
 
 import {Router} from "@angular/router";
 import { AppService} from '../app.service';
@@ -19,40 +20,22 @@ export class JualTripContentComponent implements OnInit {
   opentrip:boolean = true;
   privatetrip:boolean = false;
 
-  // content2
-
-  toggleJual():void {
-    this.content1 = !this.content1;
-    this.content2 = !this.content2;
-  }
-
-  //toggle open private 
-
-  openclick():void {
-    this.opentrip = true;
-    this.privatetrip= false;
-  }
-
-  privateclick():void {
-    this.opentrip = false;
-    this.privatetrip= true;
-  }
-
   categoryTrip:any[];
   provinceTrip:any[];
   typeTrip:any[];
+  facilityTrip:any[];
   service:any;
   publish:any;
   fixed:any;
   days:any;
-  night:any;
+  idTypeOpen:any;
+  idTypePrivate:any;
 
-
+  // var jual trip
   trip = {
     trip_name : '', 
     id_type_trip : '', 
-    days : '',
-    night : '', 
+    days : this.days,
     date_trip : [], 
     publish_price : '', 
     fixed_price : '', 
@@ -62,27 +45,68 @@ export class JualTripContentComponent implements OnInit {
     notes_traveler : '', 
     notes_meeting_point :'',
     id_province_trip :'',
-    category : [], 
-    id_facility : '', 
-    id_status_trip : '',
-    publish_price_group : '', 
-    service_fee_group : '', 
+    id_category : [], 
+    id_facility : [], 
+    zone_time:'',
+    time:'',
+    min_qty_group:[],
+    latitude:'',
+    longitude:'',
+    publish_price_group : [], 
+    service_fee_group : [], 
     photo_trip : [],
     photo : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
-    fixed_price_grorup : '', 
+    fixed_price_grorup : [], 
   }
 
   constructor( public router :Router, private appService: AppService ) {
     this.appService.getCategoryTrip().subscribe( category => {
       this.categoryTrip = category.data;
+      // console.log(this.categoryTrip);
      
     });
 
     this.appService.getProvinceTrip().subscribe( province => {
       this.provinceTrip = province.data;
+      // console.log(this.provinceTrip);
      
-    })
+    });
+
+    this.appService.getTypeTrip().subscribe( type => {
+      this.typeTrip = type.data;
+      this.idTypeOpen = this.typeTrip[0]._id;
+      this.idTypePrivate = this.typeTrip[1]._id;
+     
+    });
+
+    this.appService.getFacilityTrip().subscribe( facility => {
+      this.facilityTrip = facility.data;
+      // console.log(this.facilityTrip);
+     
+    });
+
    }
+
+    // content2
+
+    toggleJual():void {
+      this.content1 = !this.content1;
+      this.content2 = !this.content2;
+    }
+  
+    //toggle open private 
+  
+    openclick():void {
+      this.opentrip = true;
+      this.privatetrip= false;
+    }
+  
+    privateclick():void {
+      this.opentrip = false;
+      this.privatetrip= true;
+    }
+
+    // submit jual trip
 
    onSubmitTrip1() {
 
@@ -93,7 +117,7 @@ export class JualTripContentComponent implements OnInit {
         this.trip.fixed_price = this.fixed;
         this.appService.addTripProvider(this.trip).subscribe(trip => {
        
-          // console.log(trip); 
+          console.log(trip); 
        
        if(trip.status == 200) {
          this.successedTrip = true;
@@ -206,17 +230,16 @@ export class JualTripContentComponent implements OnInit {
           // end upload image
 
 
+      // event value
+
       onSelectDuration(e) {
-        this.trip.days = e.target.value;
-        this.days = this.trip.days;
-        this.night = this.days - 1;
-        this.trip.night = this.night;
+        this.days = e.target.value;
+        this.trip.days = parseInt(this.days);
         
       }
 
       onSelectCategory(e) {
-        this.trip.category[0] = e.target.value;
-        // console.log(this.trip.category);
+        this.trip.id_category[0] = e.target.value;
        
       }
 
@@ -229,6 +252,18 @@ export class JualTripContentComponent implements OnInit {
         this.trip.id_type_trip = event.target.value; 
         
       }
+
+      checked(e) {
+        if(e.target.checked) {
+          this.trip.id_facility = e.target.value;
+          console.log(this.trip.id_facility);
+        }
+        
+      }
+
+    //   filterItemsOfType(type) {
+    //     return this.facilityTrip.filter(x => x.facility_category == type);
+    // }
 
   ngOnInit() {
   

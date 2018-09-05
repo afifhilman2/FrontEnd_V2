@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HeaderComponent } from ".././header/header.component";
+import { HeaderUserComponent } from '.././header-user/header-user.component';
 import { JualTripComponent } from ".././jual-trip/jual-trip.component";
 import { JualTripContentComponent } from ".././jual-trip-content/jual-trip-content.component";
 import { SaldoComponent } from ".././saldo/saldo.component";

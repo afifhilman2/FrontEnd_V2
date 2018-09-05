@@ -19,12 +19,12 @@
 
             <div class="tittle-info">Kategori
                 <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.category[0]}}</div>
+                <div class="tittle-info-value">{{trip.category[0].category_name}}</div>
             </div>
 
             <div class="tittle-info">Jenis Trip
                 <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.id_type_trip}}</div>
+                <div class="tittle-info-value">{{trip.id_type_trip.type_trip}}</div>
             </div>
 
             <div class="tittle-info">Harga (Publish)
@@ -34,7 +34,7 @@
 
             <div class="tittle-info">Kuota
                 <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.quota_trip[0]}}</div>
+                <div class="tittle-info-value">{{trip.quota_trip}}</div>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                     <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
                     <li><a class="dropdown-list">Salin Trip</a></li>
                     <li><a class="dropdown-list" data-toggle="modal" data-target="#kosongkankuotaModal">Kosongkan Kuota</a></li>
-                    <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal">Hapus Trip</a></li>
+                    <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal" (click)="idHapus($event)" id="{{trip._id}}">Hapus Trip</a></li>
                 </ul>
             </div>
 

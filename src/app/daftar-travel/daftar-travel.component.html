@@ -31,7 +31,7 @@
                         <label class="sort" for="lokasi">Provinsi : </label>
                         <select class="form-control form-sort" (change)='onSelectProv($event)'>
                             <option >Pilih Provinsi</option>
-                            <option *ngFor="let name of province" value="{{name.id_province}}">{{name.province_name}}  </option>
+                            <option *ngFor="let name of province" value="{{name._id}}">{{name.province_name}}  </option>
                             <!-- <option >Sumatra Utara</option>
                             <option >Sumatra Selatan </option>
                             <option >Sumatra Barat</option>
@@ -71,6 +71,12 @@
                     <label class="label-form" for="nomorTravel">Nomor Telepon Travel</label>
                     <div class="input-group">
                         <input type="tel" max="13" class="nomorTrv form-control" id="nomorTravel" [(ngModel)]="travel.office_phone_number" name="office_phone_number">
+                    </div>
+
+                    <label class="label-form" for="domainTravel">Social Media</label>
+                    <p class="domain-name">Instagram.com/</p>
+                    <div class="input-group wrap-domain">
+                        <input type="text" class="domainTrv form-control" id="domainTravel" [(ngModel)]="travel.medsoc_account" name="medsoc_account">
                     </div>
 
                     <label class="label-form" for="domainTravel">Domain</label>

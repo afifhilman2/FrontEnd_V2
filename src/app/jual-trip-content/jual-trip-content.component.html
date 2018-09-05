@@ -83,8 +83,8 @@
                 <div class="col-md-12">
                     <label class="label-form">Jenis Trip</label>
                     <div class="radio">
-                        <label class="radio" (click)="openclick()"><input type="radio" name="radios" id="1" value="1" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Open</label>
-                        <label class="radio" (click)="privateclick()"><input type="radio" name="radios" id="2" value="2" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Private</label>
+                        <label class="radio" (click)="openclick()"><input type="radio" name="radios" id="{{idTypeOpen}}" value="{{idTypeOpen}}" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Open</label>
+                        <label class="radio" (click)="privateclick()"><input type="radio" name="radios" id="{{idTypePrivate}}" value="{{idTypePrivate}}" (change)='onRadioType($event)'><span class="outer"><span class="inner"></span></span>Private</label>
                     </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                     <span class="kategori-tittle">Kategori Utama :</span>
                     <select class="form-control form-kategori" (change)='onSelectCategory($event)' name="category">
                     <option>Pilih Kategori</option>
-                    <option *ngFor="let category of categoryTrip" id="{{category.category_name}}" value="{{category.category_name}}">{{category.category_name}}</option>
+                    <option *ngFor="let category of categoryTrip" id="{{category._id}}" value="{{category._id}}">{{category.category_name}}</option>
                     <!-- <option id="City Tour" >City Tour</option>
                                     <option id="Culture">Culture</option>
                                     <option id="Fishing">Fishing</option>
@@ -194,7 +194,7 @@
                     <label class="sort" for="lokasi"> Lokasi (Provinsi) </label>
                     <select class="form-control form-sort" (change)='onSelectProvince($event)'>
                     <option>Pilih Provinsi</option>
-                    <option *ngFor="let province of provinceTrip" value="{{province.id_province}}">{{province.province_name}} </option>
+                    <option *ngFor="let province of provinceTrip" value="{{province._id}}">{{province.province_name}} </option>
                     <!-- <option >Sumatra Utara</option>
                                                             <option >Sumatra Selatan </option>
                                                             <option >Sumatra Barat</option>
@@ -237,12 +237,12 @@
                     </div>
                     <div class="wrap-category-item">
                         <div class="row">
-                            <div class="col-md-6">
-                                <input type="checkbox" class="checkbox" value="Beach" [(ngModel)]="trip.category[1]" name="category">
-                                <span class="checkbox-label-fasilitas">Beach</span>
+                            <div class="col-md-6" *ngFor="let categorylain of categoryTrip">
+                                <input type="checkbox" class="checkbox" (change)="checked($event)" value="{{categorylain._id}}" id="{{categorylain._id}}">
+                                <span class="checkbox-label-fasilitas">{{categorylain.category_name}}</span>
                             </div>
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <input type="checkbox" class="checkbox" value="Hiking" [(ngModel)]="trip.category[2]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Hiking</span>
                             </div>
@@ -275,7 +275,7 @@
                             <div class="col-md-6">
                                 <input type="checkbox" class="checkbox" value="Sailing" [(ngModel)]="trip.category[8]" name="id_category">
                                 <span class="checkbox-label-fasilitas">Sailing</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -291,12 +291,15 @@
         <div class="wrap-fasilitas">
             <label class="label-fasilitas">Penginapan</label>
             <div class="row">
-                <div class="col-md-3">
-                    <input type="checkbox" class="checkbox">
-                    <span class="checkbox-label-fasilitas">Homestay</span>
+
+                <div *ngFor="let facility of facilityTrip">
+                    <div class="col-md-3" *ngIf="(facility.facility_category=='1')">
+                        <input type="checkbox" class="checkbox" value="{{facility._id}}" id="{{facility._id}}">
+                        <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
+                    </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Villa</span>
                 </div>
@@ -304,18 +307,20 @@
                 <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Hotel</span>
-                </div>
+                </div> -->
             </div>
 
             <div class="margin-fasilitas"></div>
             <label class="label-fasilitas">Transportasi</label>
             <div class="row">
-                <div class="col-md-3">
-                    <input type="checkbox" class="checkbox">
-                    <span class="checkbox-label-fasilitas">Kapal</span>
+                <div *ngFor="let facility of facilityTrip">
+                    <div class="col-md-3" *ngIf="(facility.facility_category=='2')">
+                        <input type="checkbox" class="checkbox" value="{{facility._id}}" id="{{facility._id}}">
+                        <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
+                    </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Speedboat</span>
                 </div>
@@ -338,17 +343,19 @@
                 <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Flight</span>
-                </div>
+                </div> -->
             </div>
 
             <div class="margin-fasilitas"></div>
             <div class="row">
-                <div class="col-md-3">
-                    <input type="checkbox" class="checkbox">
-                    <span class="checkbox-label-fasilitas">Makan</span>
+                <div *ngFor="let facility of facilityTrip">
+                    <div class="col-md-3" *ngIf="(facility.facility_category=='3')">
+                        <input type="checkbox" (change)=checked($event) class="checkbox" value="{{facility._id}}" id="{{facility._id}}">
+                        <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
+                    </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Snack</span>
                 </div>
@@ -396,7 +403,7 @@
                 <div class="col-md-3">
                     <input type="checkbox" class="checkbox">
                     <span class="checkbox-label-fasilitas">Tiket Objek Wisata</span>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -449,9 +456,9 @@
             <input type="number" placeholder="Menit" class="waktu-bertemu-input form-control">
 
             <select class="form-control form-waktu">
-                <option>WIB</option>
-                <option>WITA</option>
-                <option>WIT</option>	
+                <option value="WIB">WIB</option>
+                <option value="WITA">WITA</option>
+                <option value="WIT">WIT</option>	
                 </select>
             <div class="note-waktu">Diisi sesuai dengan waktu wilayah di trip berada, sesuai pembagian zona waktu Indonesia</div>
         </div>
@@ -460,7 +467,6 @@
             <label class="label-form" for="catatan">Catatan untuk Traveller</label>
 
             <textarea class="catatan-trip form-control" id="catatan" [(ngModel)]="trip.notes_traveler" name="notes_traveler" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
-
         </div>
 
 
@@ -507,27 +513,13 @@
                     <div class="row row-range-harga">
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="range-price-trip form-control" placeholder="Jumlah Peserta">
+                                <input type="number" [(ngModel)]="trip.min_qty_group[0]" name="min_qty_group[0]" class="range-price-trip form-control" placeholder="Jumlah Peserta">
                             </div>
                         </div>
 
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Harga Trip">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row row-range-harga">
-                        <div class="col-md-5">
-                            <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Harga Trip">
+                                <input type="number" [(ngModel)]="trip.publish_price_group[0]" name="publish_price_group[0]" class="form-control" placeholder="Harga Trip">
                             </div>
                         </div>
                     </div>
@@ -535,27 +527,13 @@
                     <div class="row row-range-harga">
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                                <input type="number" [(ngModel)]="trip.min_qty_group[1]" name="min_qty_group[1]" class="form-control" placeholder="Jumlah Peserta">
                             </div>
                         </div>
 
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Harga Trip">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row row-range-harga">
-                        <div class="col-md-5">
-                            <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Harga Trip">
+                                <input type="number" [(ngModel)]="trip.publish_price_group[1]" name="publish_price_group[1]" class="form-control" placeholder="Harga Trip">
                             </div>
                         </div>
                     </div>
@@ -563,13 +541,41 @@
                     <div class="row row-range-harga">
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Jumlah Peserta">
+                                <input type="number" [(ngModel)]="trip.min_qty_group[2]" name="min_qty_group[2]" class="form-control" placeholder="Jumlah Peserta">
                             </div>
                         </div>
 
                         <div class="col-md-5">
                             <div class="range-price-trip">
-                                <input type="number" class="form-control" placeholder="Harga Trip">
+                                <input type="number" [(ngModel)]="trip.publish_price_group[2]" name="publish_price_group[2]" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" [(ngModel)]="trip.min_qty_group[3]" name="min_qty_group[3]" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" [(ngModel)]="trip.publish_price_group[3]" name="publish_price_group[3]" class="form-control" placeholder="Harga Trip">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga">
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" [(ngModel)]="trip.min_qty_group[4]" name="min_qty_group[4]" class="form-control" placeholder="Jumlah Peserta">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <input type="number" [(ngModel)]="trip.publish_price_group[4]" name="publish_price_group[4]" class="form-control" placeholder="Harga Trip">
                             </div>
                         </div>
                     </div>
@@ -579,7 +585,7 @@
                 <div class="wrap-range-kuota">
                     <label class="label-form" for="harga">Kuota Trip</label>
                     <div class="publish-range-trip">
-                        <input type="number" min="1" max="100" class="form-control" placeholder="Kuota Maksimal">
+                        <input type="number" [(ngModel)]="trip.quota_trip" name="quota_trip" min="1" max="100" class="form-control" placeholder="Kuota Maksimal">
                     </div>
                 </div>
             </div>
