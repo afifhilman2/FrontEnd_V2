@@ -1,0 +1,735 @@
+[hidden] {
+    display: none !important;
+}
+
+.wrap-fasilitas .col-md-3 {
+    margin-bottom: 3px;
+}
+
+.wrap-tittle {
+    position: relative;
+}
+
+.head-content {
+    font-size: 35px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    display: inline-block;
+}
+
+.state-all {
+    position: absolute;
+    bottom: 22px;
+    right: 0px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    background-color: #f5f5f5;
+    border-radius: 13.5px;
+    width: 95px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.info-trip-term {
+    width: 100%;
+    letter-spacing: normal;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+}
+
+.info-term {
+    width: 100%;
+    height: 41px;
+    line-height: 41px;
+    background-color: #eff9e9;
+    border: solid 1px #dddddd;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #569156;
+    text-align: center;
+}
+
+.bold-term {
+    font-weight: bold;
+}
+
+.label-form {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.nama-trip {
+    width: 100%;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    height: 42px;
+}
+
+.wrap-form-trip {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.sort {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.kategori {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.kategori-tittle {
+    width: 115px;
+    float: left;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.kategori-tittle-lanjutan {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-category-item {
+    width: 303px;
+    height: 127px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    padding: 15px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.durasi {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.form-sort {
+    width: 100%;
+    height: 36px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+}
+
+.form-kategori {
+    display: inline-block;
+    margin-left: 10px;
+    width: 156px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+}
+
+.form-durasi {
+    right: 0px;
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+}
+
+.img-paket {
+    width: 100%;
+    height: 165px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    padding: 20px;
+    padding-left: 39px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.img-paket-core {
+    width: 100%;
+    height: 100%;
+}
+
+.img-add {
+    width: 88px;
+    height: 88px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: dashed 1px #ab47bc;
+    text-align: center;
+    line-height: 85px;
+    cursor: pointer;
+}
+
+.add {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.tittle-img-core {
+    width: 88px;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a4a4a;
+}
+
+.img-paket-gallery {
+    width: 570px;
+    height: 100%;
+    position: absolute;
+    border-left: 1px solid #dddddd;
+    top: 0px;
+    left: 165px;
+    padding: 20px 25px 0px 45px;
+}
+
+.tittle-img-gallery {
+    font-size: 11px;
+    margin-top: 7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #9e9e9e;
+}
+
+.img-quality {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #9e9e9e;
+    position: absolute;
+    top: -4px;
+}
+
+.quality-bar {
+    width: 563px;
+    height: 9px;
+    border-radius: 3.5px;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.progress-bar {
+    width: 75%;
+    background-color: #00c853;
+}
+
+.wrap-option {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.wrap-label-date {
+    position: relative;
+    height: 60px;
+}
+
+.label-date {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.radio label {
+    margin-right: 13px;
+}
+
+.radio {
+    margin-top: -2px;
+    margin-bottom: 0px;
+}
+
+.wrap-label-fasilitas {
+    position: relative;
+    height: 80px;
+}
+
+.tittle-fasilitas {
+    position: absolute;
+    margin-left: 13px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-fasilitas {
+    width: 100%;
+    height: 271px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    padding: 25px;
+}
+
+.label-fasilitas {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.label-checkbox {
+    position: absolute;
+    width: 383px;
+    bottom: 106px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.head-category {
+    padding: 0px;
+}
+
+.head-category li {
+    display: inline;
+    margin-right: 80px;
+    position: relative;
+    padding-left: 0px;
+}
+
+.checkbox-label-fasilitas {
+    position: relative;
+    bottom: 6px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.margin-fasilitas {
+    margin-bottom: 15px;
+}
+
+.wrap-btn {
+    margin: 20px auto;
+    text-align: right;
+}
+
+.btn-content {
+    width: 195px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #dddddd;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.wrap-category-item .col-md-6 {
+    margin-bottom: 5px;
+}
+
+.tittle-tanggal a {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    line-height: 32px;
+    margin-top: 25px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.tittle-tanggal a:hover {
+    text-decoration: none;
+}
+
+.waktu-bertemu-input {
+    text-align: center;
+    width: 216px;
+    height: 36px;
+    border-radius: 3px;
+}
+
+.tanggal-trip {
+    width: 216px;
+}
+
+
+/* content2 */
+
+agm-map {
+    height: 305px;
+}
+
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.state-back a {
+    position: absolute;
+    bottom: 22px;
+    right: 90px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    cursor: pointer;
+}
+
+.state-back span {
+    margin-left: 12px;
+    margin-right: 14px;
+    color: #dddddd;
+}
+
+.state-back a:hover {
+    text-decoration: none;
+}
+
+.deskripsi-trip {
+    width: 100%;
+    height: 147px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.catatan-trip {
+    width: 100%;
+    height: 191px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-catatan {
+    margin-bottom: 35px;
+}
+
+.wrap-mepo {
+    margin-bottom: 25px;
+}
+
+.btn-mepo {
+    width: 77px;
+    height: 49px;
+}
+
+.mepo-trip {
+    border-radius: 0px !important;
+    height: 49px;
+}
+
+.glyphicon-search:before {
+    color: #ab47bc
+}
+
+.note-mepo {
+    font-size: 12.7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    float: left;
+    margin-left: 13px;
+    margin-right: 20px;
+    color: #4a4a4a;
+    margin-top: 7px;
+}
+
+.catatan-mepo {
+    width: 100%;
+    height: 37px;
+    border-bottom: solid 1px #dddddd;
+    border-left: solid 1px #dddddd;
+    border-right: solid 1px #dddddd;
+    font-size: 12.7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 32px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #9e9e9e;
+    padding: 2px;
+    margin-bottom: 15px;
+}
+
+.wrap-petunjuk {
+    margin-bottom: 25px;
+}
+
+.petunjuk-trip {
+    width: 100%;
+    height: 68px;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    border: solid 1px #dddddd;
+    resize: none;
+}
+
+.wrap-waktu {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.tittle-waktu {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    display: inline-block;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+    padding: 8px 0;
+    margin-right: 10px;
+}
+
+.note-waktu {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    display: inline-block;
+    letter-spacing: normal;
+    text-align: left;
+    color: #9e9e9e;
+    margin-bottom: 25px;
+    margin-left: 15px;
+    width: 300px;
+    line-height: 14px;
+}
+
+.form-waktu {
+    width: 82px;
+    display: inline-block;
+    background-color: #f5f5f5;
+}
+
+.tittle-tanggal a {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.tittle-tanggal a:hover {
+    text-decoration: none;
+}
+
+.waktu-bertemu-input {
+    text-align: center;
+    width: 64px;
+    border-radius: 3px;
+    display: inline-block !important;
+    margin-left: 2px;
+    background-color: #fdfdfd;
+}
+
+.tanggal-trip {
+    width: 216px;
+}
+
+.waktu-bertemu::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu::-moz-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu:-ms-input-placeholder {
+    text-align: center;
+}
+
+.waktu-bertemu:-moz-placeholder {
+    text-align: center;
+}
+
+.input-group-addon {
+    background-color: #fdfdfd;
+}
+
+.rupiah {
+    font-weight: bold;
+}
+
+.wrap-harga {
+    position: relative;
+    width: 100%;
+    height: 127px;
+    border-radius: 3px;
+    border: solid 1px #ab47bc;
+    background-color: #f7f7f7;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.perorang {
+    position: absolute;
+    right: -60px;
+    top: 34px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.publish-trip {
+    width: 225px;
+    border-radius: 3px;
+}
+
+.wrap-publish {
+    display: inline-block;
+    position: relative;
+}
+
+.publish-price {
+    width: 335px;
+}
+
+.wrap-kuota {
+    float: right;
+}
+
+.wrap-checkbox {
+    position: relative;
+}
+
+.label-checkbox {
+    position: absolute;
+    width: 660px;
+    top: -4px;
+    left: 25px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-btn {
+    margin: 20px auto;
+    text-align: right;
+}
+
+.btn-content {
+    width: 189px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #dddddd;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.read-more {
+    color: #9c27b0;
+    display: inline;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    cursor: pointer;
+}
+
+.textpink {
+    color: #e91e63;
+    display: block;
+    font-weight: bold;
+}
