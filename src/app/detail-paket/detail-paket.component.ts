@@ -24,48 +24,27 @@ export class DetailPaketComponent implements OnInit {
   totalHarga;
   totalHargaBayar: any = 1;
   hargaProduct; 
-  number: number;
-  date;
-  idB : any;
 
   book: any = {
-    id_trip : '',
-    id_booking: '',
-    id_user:'',
     id_type_trip:'',
-    id_paymentMethod:'',
-    id_statusPayment:'',
-    id_statusBooking:'',
-    order_name:'',
-    quota_trip:'',
     quantity: '',
-    name_traveler:'',
-    age_traveler:'',
-    identity_number:'',
     publish_price: '',
     startDate_trip: '',
-    endDate_trip:'',
-    uniq_code:'',
-    coded_amount:'',
-    trip_name:'',
+    _id:'',
   }
 
-  day;
-  month;
-  year;
+  
   
 
-  idBook;
-  idT;
+  
 
   diskus;
-  booking;
-  bookId;
 
   name;
   photo;
   error = HttpErrorResponse;
   loaded : boolean = true;
+  kat
 
   
   constructor(private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
@@ -89,7 +68,8 @@ export class DetailPaketComponent implements OnInit {
 
   
   getTrip(): void{
-    this.http.get('http://travinesia.com:3000/get/detail_trip/' + this.dataTrip)
+    this.book._id = this.dataTrip;
+    this.http.get('http://travinesia.com:3000/get/trip_detail/' + this.dataTrip)
         .subscribe(
           // trip =>{ 
           //   console.log(trip);
@@ -97,14 +77,12 @@ export class DetailPaketComponent implements OnInit {
           (res:Response)=>{
             let trip = res.json();
             this.detailTrip = trip.data;
-            this.date = trip.data.date_trip;
             this.hargaProduct = trip.data.publish_price;
-            this.idBook = trip.data.id_trip;
-            this.name = trip.data.trip_name;
             this.totalHarga = this.totalHargaBayar * this.hargaProduct;
             this.photo = trip.data.photo_trip;
-            console.log(this.detailTrip)
-
+            this.kat = trip.data.category;
+            this.book.id_type_trip = trip.data.id_type_trip._id
+            console.log(this.detailTrip);
             this.loaded = false;
           }          
         )
@@ -125,20 +103,18 @@ export class DetailPaketComponent implements OnInit {
     
     this.book.quantity = this.totalHargaBayar;
     this.book.publish_price = this.totalHarga;
-    console.log(this.book.publish_price);
-    this.book.id_trip = this.idBook;
-    this.idtrip = e.target.id;
-    this.book.trip_name = this.name
+    console.log(this.book);
+    this.idtrip = e.target.id
     
    if(!(localStorage.token == null)){
     this.appServis.booking(this.book).subscribe(book => {
-      this.bookId = book.data;
-      this.idT = book.data._id;
-      // console.log(this.bookId);
+      // this.bookId = book.data;
+      // this.idT = book.data._id;
+      console.log(this.book);
       
-        if(book.status = true){
-          this.router.navigate(['/ProsesPemesanan', this.idT ]); 
-        }
+      if (book.status == 200){
+        this.router.navigate(['/ProsesPemesanan'], {queryParams: {data : JSON.stringify(book.data)}});
+      }
     });
 
    }else {
@@ -168,8 +144,5 @@ export class DetailPaketComponent implements OnInit {
 
       }
   }
-
  
-
-  
 }

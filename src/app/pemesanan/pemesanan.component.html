@@ -15,20 +15,20 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="status-pembayaran">
-            <div class="box-wrap-pemesanan">
+            <div class="box-wrap-pemesanan" *ngFor="let order of pagedItems; last as isLast">
                 <div class="content-box">
-                    <img src="./assets/img/6.jpg" class="img-trip">
-                    <a class="detail-pack" role="button"> Pulau Pahawang </a>
-                    <p class="list-content">Nomor Pesanan <span class="semicolon-margin">:</span> <span class="content-value"> Kuylah Travel </span> </p>
+                    <img src="{{order.id_trip.photo_trip['0']}}" class="img-trip">
+                    <a class="detail-pack" role="button"> {{order.id_trip.trip_name}} </a>
+                    <p class="list-content">Nomor Pesanan <span class="semicolon-margin">:</span> <span class="content-value"> {{order.no_booking}} </span> </p>
                     <p class="list-content">Meeting Point <span class="semicolon-margin">:</span> <span class="content-value"> Angke (07.00 WIB)</span> </p>
-                    <p class="list-content">Tanggal Berangkat <span class="semicolon-margin">:</span> <span class="content-value"> Sabtu, 05 Mei 2018</span> </p>
-                    <p class="list-content">Jenis Trip <span class="semicolon-margin">:</span> <span class="content-value"> Open Trip (2 Hari 1 Malam) </span> </p>
-                    <div>
-                        <a role="button" class="other" (click)="showContent()"> Lainnya </a>
-                        <div *ngIf="otherContent"class="other-content" >
-                                <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value"> Kuylah Travel </span> </p>
-                                <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Angke (07.00 WIB)</span> </p>
-                                <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> Sabtu, 05 Mei 2018</span> </p>
+                    <p class="list-content">Tanggal Berangkat <span class="semicolon-margin">:</span> <span class="content-value"> {{order.startDate_trip | date:'fullDate'}}</span> </p>
+                    <p class="list-content">Jenis Trip <span class="semicolon-margin">:</span> <span class="content-value"> Open Trip ({{order.id_trip.days}} Hari {{order.id_trip.night}} Malam) </span> </p>
+                    <div class="dropdown-setting">
+                        <span role="button" class="other" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Lainnya </span>
+                        <div class="dropdown-menu other-content" aria-labelledby="dropdownMenu1">
+                                <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ order?.id_trip?.provider?.travel_name }}</span> </p>
+                                <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ order.coded_amount.toLocaleString('id') }}</span> </p>
+                                <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{order.quantity}}</span> </p>
                                 <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
                                 <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
                         </div>
@@ -36,8 +36,8 @@
                 </div>
                 <div class="content-box-right">
                     <p class="status"> Status :</p>
-                    <p class="wait-pay"> Menunggu Pembayaran </p>
-                    <button class="btn-trv-pemesanan" [routerLink]="['/traveler/ProsesBayar2']"> Bayar Sekarang </button>
+                    <p class="wait-pay"> {{order.id_statusTrip.status_trip}} </p>
+                    <button class="btn-trv-pemesanan" (click)="button(order.id_statusTrip.id_status)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
                     <p class="see-status" data-toggle="modal" data-target="#status">Lihat Detail Status</p>
 
                     <!-- modal detail status -->
@@ -99,7 +99,24 @@
                     <p class="detail-paket" [routerLink]="['/traveler/DetailPaket']" >Lihat Detail Paket</p>
                 </div>
             </div>
-
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>
             <!-- <div class="box-wrap-pemesanan">
                 <div class="content-box">
                     <img src="./assets/img/6.jpg" class="img-trip">

@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgModule, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgModule, NgZone, OnInit, ViewChild, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -63,6 +63,11 @@ import {LoaderService} from './loader/loader-service';
 import { TrvSearchNavbarModule } from './trv-search-navbar/trv-search-navbar.module';
 import {JualTripModule} from './jual-trip/jual-trip.module';
 import { PromoComponent } from './promo/promo.component';
+import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
+
+import { PagerService } from './_service/index';
+import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.component';
+
 
 
 
@@ -108,6 +113,8 @@ import { PromoComponent } from './promo/promo.component';
     MiniFooterComponent,
     LoaderComponent,
     PromoComponent,
+    RatingUlasanComponent,
+    IsiDataPesertaComponent
 
   ],
   imports: [
@@ -127,7 +134,7 @@ import { PromoComponent } from './promo/promo.component';
   
     
   ],
-  providers: [AppService, DataService, AuthService, GuardService, DatePipe, LoaderService],
+  providers: [AppService, DataService, AuthService, GuardService, DatePipe, LoaderService,{provide:LOCALE_ID,useValue:'id'}, PagerService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

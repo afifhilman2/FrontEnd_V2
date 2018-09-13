@@ -38,6 +38,8 @@ import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
 import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PromoComponent } from './promo/promo.component';
+import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
+import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.component';
 
 
 export const routes :Routes = [
@@ -115,7 +117,9 @@ export const routes :Routes = [
                 {path:'Favorit', component:FavoritUserComponent},
                 {path:'PesanMasuk', component:PesanMasukComponent},
                 {path:'DiskusiTrip', component:DiskusiTripComponent},
-                {path:'Promo', component:PromoComponent}
+                {path:'Promo', component:PromoComponent},
+                {path:'Ulasan', component:RatingUlasanComponent },
+                {path:'isiDataPeserta', component:IsiDataPesertaComponent}
                     ]
                     },
             {path:'JualTrip', component:JualTripComponent,
@@ -141,9 +145,9 @@ export const routes :Routes = [
                 loadChildren: 'app/register/register.module#RegisterModule'},
             {   path:'LupaPassword', component:LupaKataSandiComponent},
             
-            {   path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},
-            {   path:'ProsesBayar2/:id', component:ProsesBayar2Component},
-            {   path:'ProsesBayar/:id', component:ProsesBayarComponent},
+            {   path:'ProsesPemesanan', component:ProsesPemesananComponent, canActivate:[GuardService]},
+            {   path:'ProsesBayar2', component:ProsesBayar2Component},
+            {   path:'ProsesBayar', component:ProsesBayarComponent},
         ]
     },
 

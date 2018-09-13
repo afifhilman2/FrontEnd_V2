@@ -43,11 +43,11 @@
               <div role="tabpanel" class="tab-pane active" id="transfer">
                 <p class="pilih-bank">Pilih Bank:</p>
                 
-                <ul class="ul-transver">
-                  <li class="transver" tabindex="1" (click)="sendValueBank($event)" value="1"><img src="assets/img/bca.png"></li>
-                  <li class="transver" tabindex="2" (click)="sendValueBank($event)" value="2"><img src="assets/img/BNI.png"></li>
-                  <li class="transver" tabindex="3" (click)="sendValueBank($event)" value="3"><img src="assets/img/mandiri.png"></li>
-                  <li class="transver" tabindex="4" (click)="sendValueBank($event)" value="4"><img src="assets/img/BRI.png"></li>
+                <ul class="ul-transver" *ngFor="let p of payment">
+                  <!-- <li class="transver" tabindex="1" (click)="sendValueBank($event)" value="1"><img src="{{bca}}"></li> -->
+                  <li class="transver" tabindex="1" (click)="choosePayment(p._id,p.id_type_payment._id)" *ngIf="(p.id_payment_method == '1')"><img src="{{p.photo_payment}}"></li>
+                  <!-- <li class="transver" tabindex="3" (click)="sendValueBank($event)" value="3"><img src="{{p[4].photo_payment}}"></li> -->
+                  <!-- <li class="transver" tabindex="4" (click)="sendValueBank($event)" value="4"><img src="{{p[3].photo_payment}}"></li> -->
                 </ul>
                 <p class="info-no">Nomer rekening tujuan muncul setelah menekan tombol Bayar Dengan Transfer</p>
                 
@@ -78,20 +78,19 @@
               </div>
               <div role="tabpanel" class="tab-pane" id="indomart">
                 <div class="kredit-form">
-                  <ul class="indo-alfa">
-                      <li class="gambar" tabindex="5" (click)="sendValueBank($event)" value="5">
-                          <img src="assets/img/indo.png">
+                  <ul class="indo-alfa" *ngFor="let indo of payment">
+                      <li class="gambar" tabindex="5" *ngIf="(indo.id_payment_method == '4')">
+                          <img src="{{indo.photo_payment}}">
                       </li>
                   </ul>
-                  
                   <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
                 </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="alfamart">
                 <div class="kredit-form">
-                  <ul class="indo-alfa">
-                      <li class="gambar" tabindex="6" (click)="sendValueBank($event)" value="6">
-                        <img src="assets/img/alfa.png">
+                  <ul class="indo-alfa" *ngFor="let alfa of payment">
+                      <li class="gambar" tabindex="6" *ngIf="( alfa.id_payment_method=='3')">
+                        <img src="{{alfa.photo_payment}}">
                       </li>
                   </ul>
                   <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
@@ -111,15 +110,15 @@
         </div>
         <div class="panel-body">
           <div class="detail">
-              <p>Harga Paket<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{bayar === null ? '' : 'Rp ' + bayar}}</span></p>
-              <!-- <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">Rp {{promo}}</span></p> -->
-              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking?.uniq_code === null ? '' : 'Rp ' + dataBooking?.uniq_code}}</span></p>
-              <!-- <p>Asuransi<span class="jumlah">x {{dataBooking?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{hargaAsuransi}}</span></p> -->
-              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right">{{price === undifined ? '' : 'Rp ' + price}}</span></p>
+              <p>Harga Paket<span class="jumlah">x {{dataBooking.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{price === null? '': 'Rp ' + price.toLocaleString('id')}}</span></p> 
+              <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking.promo_fee === null? '': 'Rp ' + dataBooking.promo_fee }}</span></p>
+              <p>Asuransi<span class="jumlah">x {{dataBooking.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{hargaAsuransi === null? '': 'Rp ' + hargaAsuransi.toLocaleString('id')}}</span></p>
+              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking.uniq_code === null? '': 'Rp ' + dataBooking.uniq_code}}</span></p>              
+              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right"></span></p>
           </div>
           <hr>
           <div class="total">
-            <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="boking.coded_amount">{{totalBayar === undifined ? '' : 'Rp ' + totalBayar}}</span></p>
+            <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">{{totalBayar === null? '': 'Rp ' + totalBayar.toLocaleString('id')}}</span></p>
           </div>
         </div>
       </div>
@@ -140,15 +139,15 @@
         </div>
         <div class="panel-body">
           <div class="no">
-            <p class="no-resi" ([ngModel])="boking.no_booking">{{noPesanan}} <span class="salin pull-right">Salin</span></p>
+            <p class="no-resi" ([ngModel])="boking.no_booking">{{boking.no_booking}}<span class="salin pull-right">Salin</span></p>
             <p class="pesan">Nomor Pesanan digunakan untuk mewakili paket trip yang dipesan</p>
           </div>
         </div>
         <div class="panel-footer detail-pesanan">
           <p class="total-bayar"><span class="glyphicon glyphicon-briefcase"></span>Pulau Harapan</p>
-          <p class="tanggal"> {{startDay}} {{startMonth}} {{startYear}} - {{endDay}} {{endMonth}} {{endYear}}</p>
-          <p class="pemesan">Nama Pemesan : <span>{{dataBooking?.order_name}}</span></p>
-          <p class="jumlah-orang">Jumlah yang dipesan : <span>{{dataBooking?.quantity}}</span></p>
+          <p class="tanggal"></p>
+          <p class="pemesan">Nama Pemesan : <span>{{dataBooking.order_name}}</span></p>
+          <p class="jumlah-orang">Jumlah yang dipesan : <span>{{dataBooking.quantity}}</span></p>
         </div>
       </div>
     </div>

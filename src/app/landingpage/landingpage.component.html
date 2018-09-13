@@ -156,7 +156,7 @@
                                                 <span class="icon-star"></span>
                                             </div>
                                             <div class="price pull-right">
-                                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price}}</div>
+                                                <div class="caption-price">{{(trip.publish_price === null ? '' : 'Rp ' + trip.publish_price).toLocaleString('id')}}</div>
                                             </div>
                                         </div>
                                         <div class="caption-tittle"> {{ trip.trip_name }} </div>

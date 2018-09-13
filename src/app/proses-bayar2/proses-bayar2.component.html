@@ -30,18 +30,18 @@
       </div>
       <div class="panel-body">
         <div class="no">
-          <p class="text-center no-resi">9009 0987 7892 13268</p>
-          <p class="text-center pesan">an. PT Travinesia</p>
+          <p class="text-center no-resi">{{(dataBooking.id_paymentMethod.no_rek_owner | slice:0:4) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:5:9) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:10:end) }}</p>
+          <p class="text-center pesan">{{'a.n ' + dataBooking.id_paymentMethod.owner_name}}</p>
         </div>
       </div>
       <div class="panel-footer detail-pesanan">
-        <img src="assets/img/bca.png">    
+        <img src="{{dataBooking.id_paymentMethod.photo_payment}}">    
       </div>
     </div>
 
     <div class="total">
       <!-- <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp 3.000.<span class="code">000</span></span></p> -->
-      <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">{{coded_amount === undifined ? '' : 'Rp ' + coded_amount}}</span></p>
+      <p class="total-bayar">Total Harga<span class="titik-dua">:</span><span class="nominal pull-right">Rp {{dataBooking.coded_amount.toLocaleString('id')}}</span><span class="code"></span></p>
     </div>
     <div class="notice">
       <p><span class="perhatikan">Perhatikan !</span> Transfer hingga 3 digit terakhir</p>      
@@ -54,7 +54,7 @@
       </label>
     </div> -->
     <div>
-      <button type="button" class="btn btn-bayar" (click)="goToPemesanan()">Kembali ke Halaman Pemesanan</button>
+      <button type="button" class="btn btn-bayar" (click)="goToPemesanan()">Cek Setatus Pemesanan </button>
     </div>
 
   </div>
