@@ -175,7 +175,7 @@ th {
 }
 
 .item img {
-    object-fit: contain;
+    object-fit: cover;
     height: 349px !important;
     margin: auto;
     width: 100%;

@@ -5,13 +5,14 @@
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active" *ngFor="let poto of detailTrip?.photo_trip; let i=index"></li>
+          <li data-target="#myCarousel" *ngFor="let poto of detailTrip?.photo_trip; let i=index" class="{{(i==0)? 'active':''}}"></li>
+          <!-- <li *ngFor="let photo of detailTrip?.photo_trip;let i = index" data-target="#myCarousel"  class="{{(i==0)? 'active':''}}"></li> -->
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <div class="item active" *ngFor="let photo of detailTrip?.photo_trip; let i=index">
-              <img src="{{photo['i']}}" class="img-slider" alt="pulau">
+          <div *ngFor="let photo of detailTrip?.photo_trip; let i=index" class="item {{(i == 0)?'active':''}}">
+              <img src="{{photo}}" class="img-slider" alt="pulau">
           </div>
 
           <!-- <div class="item">
@@ -35,10 +36,10 @@
       </div>
       <div class="jenis-paket">
         <span class="glyphicon glyphicon-tag"></span>
-        <span class="jenis-trip">Open Trip</span>
+        <span class="jenis-trip" ([ngModel])="book.id_type_trip">{{detailTrip?.id_type_trip?.type_trip}}</span>
         <span class="waktu-trip">( {{detailTrip.days}} Hari {{detailTrip.night}} Malam) <p class="pembatas">|</p></span>
         <span class="lokasi">Lokasi : <p class="lokasi-detail">DKI Jakarta </p> <p class="pembatas">|</p></span>
-        <span class="kategori">Kategori : <p class="kategori-detail">{{detailTrip.category}}</p></span>
+        <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name + ', '}}</p></span>
         <div class="share pull-right">
           
           <div class="img-share">
@@ -74,8 +75,8 @@
         <div class="kanan-fasilitas">
           <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-down"></span></a>
           <span class="kanan">Fasilitas</span>
-          <div id="fasilitas" class="collapse">
-            fasilitas yang disediakan.......
+          <div id="fasilitas" class="collapse" *ngFor="let fas of detailTrip.facility">
+           {{fas.facility_name}}
           </div>
         </div>
         <div class="kanan-meeting">
@@ -97,7 +98,7 @@
         <div class="kanan-catatan">
           <a data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-down"></span></a>
           <span class="kanan">Catatan untuk Travel</span>
-          <div id="catatan" class="collapse">
+          <div id="catatan" class="collapse"  >
             fasilitas yang disediakan.......
           </div>
         </div>
@@ -165,12 +166,12 @@
       </div>
     </div>
     
-    <form (submit)="goToProsespemesanan($event)" id="{{idT}}" #pesan="ngForm">
+    <form (submit)="goToProsespemesanan($event)" id="{{id}}" #pesan="ngForm">
       <div class="col-md-4" >
         <div class="kolom-kanan">
           <div class="harga-tanggal">
             <div class="harga">
-              <span class="harga-diskon"> Rp {{detailTrip.publish_price}} </span> 
+              <span class="harga-diskon"> Rp {{(detailTrip.publish_price)?.toLocaleString('id')}} </span> 
               <span class="orang"> / Orang </span>
               <!-- <p class="harga-normal"> Rp 300.000/orang <span class="diskon"> Diskon 10%</span> </p> -->
             </div>
@@ -191,11 +192,11 @@
             <!-- <app-calendar></app-calendar> -->
             <select class="form-control tanggal-tersedia" [(ngModel)]="book.startDate_trip" name="startDate_trip" #startDate ="ngModel" required>
                 <option value="" disabled selected>Pilih Tanggal</option>
-                <option *ngFor="let d of date" [value]="d">{{ d | date:'fullDate'}} </option>  
+                <option *ngFor="let d of detailTrip.date_trip" [value]="d">{{ d | date:'fullDate'}} </option>  
           </select>
-           <div *ngIf="startDate.invalid" class="alert trv-alert">
+           <!-- <div *ngIf="startDate.invalid" class="alert trv-alert">
              Tanggal Belum Terisi
-           </div>
+           </div> -->
 
           </div>
 
@@ -224,9 +225,9 @@
                 </div> 
                 <div class="harga-perorang">
                   <p class="text-harga">Harga per orang</p>
-                  <p class="harga-satuorang"> Rp {{detailTrip.publish_price}} </p>
+                  <p class="harga-satuorang"> Rp {{(detailTrip.publish_price)?.toLocaleString('id')}} </p>
                   <p class="text-harga">Total Harga</p>
-                  <p class="harga-satuorang" ([ngModel])="book.publish_price"> Rp {{totalHarga}}</p> 
+                  <p class="harga-satuorang" ([ngModel])="book.publish_price"> Rp {{(totalHarga)?.toLocaleString('id')}}</p> 
                 </div>   
               </div>
               <div>

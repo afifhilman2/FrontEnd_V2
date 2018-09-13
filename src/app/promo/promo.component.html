@@ -1,0 +1,51 @@
+<main id="page-content-wrapper" role="main">
+  <p class="profil">Promo</p>
+  <p class="masukan-profil">Tanyakan semua hal terkait Trip kepada Agen Travel di Pesan Masuk. Ciptakan komuniasi dan Trip yang menyenangkan
+    dimulai dari Pesan Masuk.</p>
+
+  <div class="history-chat">
+    <a class="link" (click)="showChat()">
+    <div class="chat">
+        <div class="keterangan">
+          <span>Kuylah Travel Indonesia</span><span class="time">Baru</span>
+          <p class="text-chat">masih ada gan silahkan book lagi</p>
+        </div>
+    </div>
+    </a>
+    <div class="chat">
+      <div class="keterangan">
+        <span>Kuylah Travel Indonesia</span><span class="time">Baru</span>
+        <p class="text-chat">masih ada gan silahkan book lagi</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf='showChatText' class="content-chat">
+    <div class="header-chat">
+      <img src="assets/img/1.jpg" class="akun-image">
+    </div>
+    <div class="percakapan">
+      <p>Promo Idul Fitri dari Travinesia</p>
+      <span>Simply dummy text of the printing and typesetting industry. Lorem Ipsum
+        has been the industry's standard dummy text ever since the 1500s, when
+        an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap
+        into electronic typesetting, remaining essentially unchanged. It was
+        popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing
+        software like Aldus PageMaker including versions of Lorem Ipsum</span>
+    </div>
+    <div class="send-chat">
+        <div class="send">
+          <p class="period"><i class="glyphicon glyphicon-time glp"></i>
+          <span class="title">Periode Promo <span class="titik-dua">:</span> <span class="content">10 Juli - 10 Agustus</span></span></p>
+
+          <p class="code"><i class="glyphicon glyphicon-dashboard glp"></i>
+          <span class="title">Kode Promo <span class="titik-dua">:</span> <span class="content">TRAVILEBARAN!</span></span></p>
+        </div>
+    </div>
+  </div>
+</main>
+
+

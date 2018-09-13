@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritUserComponent implements OnInit {
 
+  alert: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  openAlert():void{
+    this.alert = !this.alert;
+  }
 }

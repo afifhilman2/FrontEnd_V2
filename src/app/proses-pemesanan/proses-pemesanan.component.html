@@ -23,7 +23,7 @@
           <p>Trip Pesanan Anda</p>
         </div>
         <div class="gambar">
-          <img src="assets/img/edit.jpg" align="center">
+          <img src="{{dataTrip.id_trip.photo_trip['0']}}" align="center">
         </div>
         <div class="detail-pesanan">
           <div class="isi-pesanan-star">
@@ -34,13 +34,13 @@
             <span class="icon-star"></span>
           </div>
           <div class="isi-pesanan-nama-pulau">
-            <p>{{booking?.trip_name}}</p>
+            <p>{{dataTrip?.id_trip?.trip_name}}</p>
           </div>
           <div class="isi-pesanan-waktu">
-            <span class="glyphicon glyphicon-time"></span> <span class="waktu">{{detailTrip?.days}} Hari {{detailTrip?.night}} Malam</span>
+            <span class="glyphicon glyphicon-time"></span> <span class="waktu">{{dataTrip.id_trip.days}} Hari {{dataTrip.id_trip.night}} Malam</span>
           </div>
           <div class="isi-pesanan-travel">
-            <span class="glyphicon glyphicon-user"></span> <span class="travel">Kuylah Travel</span>
+            <span class="glyphicon glyphicon-user"></span> <span class="travel">{{dataTrip?.id_trip?.provider?.travel_name}}</span>
           </div>
         </div>
       </div>
@@ -52,11 +52,11 @@
           <div class="panel-body">
             <div class="detail-pelaksanaan">
               <span>Pelaksanaan :</span>
-              <p>{{startDay}} {{startMonth}} {{startYear}} - {{endDay}} {{endMonth}} {{endYear}}</p>
+              <p>{{dataTrip.startDate_trip | date: "d MMMM"}} - {{dataTrip.endDate_trip | date: "d MMMM"}}</p>
             </div>
             <div class="detail-jumlah">
               <span>Jumlah Peserta (yang anda pesan) :</span>
-              <p>{{jumlahOrang}}</p>
+              <p>{{dataTrip.quantity}}</p>
             </div>
             <div class="detail-keterangan">
               <p>Data peserta dilengkapi setelah melakukan pembayaran</p>
@@ -81,13 +81,13 @@
               <div class="form-email">
                 <div class="form-group">
                   <label class="label-form-pemesanan">Email</label>
-                  <input type="email" class="form-control" [(ngModel)]="nbook.email" name="email">
+                  <input type="email" class="form-control" [(ngModel)]="nbook.order_email" name="email" >
                 </div>
               </div>
               <div class="form-telepon pull-right">
                 <div class="form-group">
                   <label class="label-form-pemesanan">No Telepon</label>
-                  <input type="number" class="form-control" [(ngModel)]="nbook.telephone" name="telephone">
+                  <input type="number" class="form-control" [(ngModel)]="nbook.order_telephone" name="telephone">
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@
           <div class="panel-body">
             <div class="form-data-pemesan">
               <div class="form-group">
-                <textarea class="form-control" [(ngModel)]="nbook.catatan_provider" name="catatan_provider"> </textarea>
+                <textarea class="form-control" [(ngModel)]="nbook.notes" name="catatan_provider"> </textarea>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="cbx">
-              <input type="checkbox" class="checkbox">
+              <input type="checkbox" class="checkbox" name="check" [(ngModel)]="nbook.asuransi_price" (change)="check($event)">
               <label class="label--checkbox">
                 Asuransi perjalanan
               </label>
@@ -151,21 +151,21 @@
           <div class="panel-body">
             <div class="detail">
               <div class="harga">
-                <span>Harga Paket</span><span class="jumlah">x {{jumlahOrang}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{bayar}}</span>
+                <span>Harga Paket</span><span class="jumlah">x {{dataTrip.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(bayar).toLocaleString('id')}}</span>
               </div>
-              <!-- <div class="diskon">
-                <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right"> - Rp {{promo}}</span>
-              </div> -->
+              <div class="diskon">
+                <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right"> Rp {{nbook.promo_fee}}</span>
+              </div>
+              <div class="asuransi">
+                <span>Asuransi</span><span class="jumlah"> {{(nbook.asuransi_price)!=0? 'x'+dataTrip.quantity:''}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(nbook.asuransi_price).toLocaleString('id')}}</span>
+              </div>
               <div class="kode">
-                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">Rp {{random}}</span>
+                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">Rp {{(random).toLocaleString('id')}}</span>
               </div>
-              <!-- <div class="asuransi">
-                <span>Asuransi</span><span class="jumlah">x {{jumlahOrang}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{hargaAsuransi}}</span>
-              </div> -->
             </div>
             <hr>
             <div class="total">
-              <p class="total-bayar" >Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.publish_price">Rp {{totalBayar}}</span></p>
+              <p class="total-bayar" >Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.publish_price">Rp {{(totalBayar).toLocaleString('id')}}</span></p>
             </div>
           </div>
         </div>

@@ -156,7 +156,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);       
 
-        return this.http.post('http://travinesia.com:3000/v1/user/addbooking', book, { headers: headers })
+        return this.http.post('http://travinesia.com:3000/v1/user/booking/add', book, { headers: headers })
         .map(res => res.json())
         
         
@@ -211,19 +211,32 @@ export class AppService {
         .map(res => res.json());
     }
 
-    getBookingId(){
+    addPayment(boking){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/detailBooking/', {headers: headers})
-        .map(this.extractData)
+        return this.http.put('http://travinesia.com:3000/v1/user/booking/add_payment', boking, {headers: headers})
+        .map(res => res.json())
     }
 
     nextBooking(nbook){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.put('http://travinesia.com:3000/v1/user/detailBooking', nbook, {headers: headers})
-        .map(this.extractData);
+        return this.http.put('http://travinesia.com:3000/v1/user/booking/add_detail', nbook , {headers: headers})
+        .map(res => res.json());
     }
     
+    paymentBooking(){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.get('http://travinesia.com:3000/get/payment_method', {headers: headers})
+        .map(res => res.json());
+    }
+
+    bookingUser(){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.get('http://travinesia.com:3000/v1/user/booking/booking_user', {headers: headers})
+        .map(res => res.json());
+    }
 
 }

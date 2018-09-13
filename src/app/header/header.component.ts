@@ -158,11 +158,8 @@ export class HeaderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
-      console.log(user);
-      this.login = localStorage.token;
-      console.log(this.login);
       if (user.success== true) {
-        
+        this.login = user.token;
         
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;

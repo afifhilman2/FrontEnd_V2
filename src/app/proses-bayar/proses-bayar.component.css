@@ -287,6 +287,7 @@ hr{
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .gambar:active,
@@ -420,4 +421,5 @@ li a{
 
 .indo-alfa{
     padding: 0px;
+    display: inline-block
 }
