@@ -43,6 +43,11 @@ export class DaftarTripComponent implements OnInit {
     this.router.navigate(['/JualTrip/UbahTrip', this.idTrip]);
   }
 
+  salinTrip(e){
+    this.idTrip = e.target.id;
+    this.router.navigate(['/JualTrip/SalinTrip', this.idTrip]);
+  }
+
   hapusTrip(e, trip) {
     // this.idTrip = e.target.id;
     // console.log(this.idTrip);

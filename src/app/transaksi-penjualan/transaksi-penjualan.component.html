@@ -18,144 +18,160 @@
         </div>
     </div>
 
-    <div class="wrap-paket-trip">
+    <div class="wrap-paket-trip" *ngFor="let data of transaction; let i = index">
         <div class="wrap-content-paket-trip">
             <img class="img-paket-trip" src="../assets/img/trip.jpg">
 
             <div class="wrap-info-paket-trip">
-                <p class="tittle-paket-trip">Kepulaun Raja Ampat </p>
+                <p class="tittle-paket-trip">{{data.trip_name}} </p>
 
                 <div class="tittle-info">Durasi
                     <span class="colon-info">:</span>
-                    <div class="tittle-info-value">3 Hari 2 Malam</div>
+                    <div class="tittle-info-value">{{data.days}} Hari {{data.night}} Malam</div>
                 </div>
 
                 <div class="tittle-info">Kategori
                     <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Beach</div>
+                    <div class="tittle-info-value">{{data.category[0].category_name}}</div>
                 </div>
 
                 <div class="tittle-info">Jenis Trip
                     <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Open Trip</div>
+                    <div class="tittle-info-value">{{data.id_type_trip.type_trip}}</div>
                 </div>
             </div>
 
             <div class="wrap-info-harga">
                 <div class="tittle-info-harga">Harga per orang :</div>
-                <div class="info-harga">Rp 900.000,-</div>
-                <div class="info-kuota">Kuota : 50</div>
+                <div class="info-harga">Rp {{data.publish_price}}</div>
+                <div class="info-kuota">Kuota : {{data.quota_trip}}</div>
                 <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
             </div>
 
         </div>
 
         <div class="wrap-btn-trv">
-            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select class="form-control form-tgl">
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>	
+            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="dateChange($event.target.value,i)" class="form-control form-tgl">
+              <option *ngFor="let date of data.date_trip; let j = index" value="{{j}}">{{date | date:"fullDate"}}</option>
             </select>
-            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> 36</span> </span>
-            <button class="btn-trv-daftar" (click)="togglePesan()">Lihat Daftar Pemesan </button>
-        </div>
-    </div>
-
-
-    <div class="wrap-paket-trip">
-        <div class="wrap-content-paket-trip">
-            <img class="img-paket-trip" src="../assets/img/trip.jpg">
-
-            <div class="wrap-info-paket-trip">
-                <p class="tittle-paket-trip">Kepulaun Raja Ampat </p>
-
-                <div class="tittle-info">Durasi
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">3 Hari 2 Malam</div>
-                </div>
-
-                <div class="tittle-info">Kategori
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Beach</div>
-                </div>
-
-                <div class="tittle-info">Jenis Trip
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Open Trip</div>
-                </div>
-            </div>
-
-            <div class="wrap-info-harga">
-                <div class="tittle-info-harga">Harga per orang :</div>
-                <div class="info-harga">Rp 900.000,-</div>
-                <div class="info-kuota">Kuota : 50</div>
-                <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
-            </div>
-
-        </div>
-
-        <div class="wrap-btn-trv">
-            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select class="form-control form-tgl">
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>	
-            </select>
-            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> 36</span> </span>
-            <button class="btn-trv-daftar" (click)="togglePesan()">Lihat Daftar Pemesan </button>
-        </div>
-    </div>
-
-
-    <div class="wrap-paket-trip">
-        <div class="wrap-content-paket-trip">
-            <img class="img-paket-trip" src="../assets/img/trip.jpg">
-
-            <div class="wrap-info-paket-trip">
-                <p class="tittle-paket-trip">Kepulaun Raja Ampat </p>
-
-                <div class="tittle-info">Durasi
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">3 Hari 2 Malam</div>
-                </div>
-
-                <div class="tittle-info">Kategori
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Beach</div>
-                </div>
-
-                <div class="tittle-info">Jenis Trip
-                    <span class="colon-info">:</span>
-                    <div class="tittle-info-value">Open Trip</div>
-                </div>
-            </div>
-
-            <div class="wrap-info-harga">
-                <div class="tittle-info-harga">Harga per orang :</div>
-                <div class="info-harga">Rp 900.000,-</div>
-                <div class="info-kuota">Kuota : 50</div>
-                <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
-            </div>
-
-        </div>
-
-        <div class="wrap-btn-trv">
-            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select class="form-control form-tgl">
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>
-              <option>Sabtu, 14 Desember 2018</option>	
-            </select>
-            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> 36</span> </span>
-            <button class="btn-trv-daftar" (click)="togglePesan()">Lihat Daftar Pemesan </button>
+            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> {{quantity[i]}}</span> </span>
+            <button class="btn-trv-daftar" (click)="togglePesan($event)" id="{{data._id}}">Lihat Daftar Pemesan </button>
         </div>
     </div>
 </div>
 
 <div *ngIf='content2'>
-    <app-daftar-pemesan></app-daftar-pemesan>
+    <a (click)="toggleBack()" class="kembali-transaksi"><span class="glyphicon glyphicon-arrow-left"></span> Kembali ke Transaksi Penjualan</a>
+
+    <div class="wrap-paket-trip-daftar">
+        <div class="wrap-content-paket-trip">
+            <img class="img-paket-trip" src="../assets/img/trip.jpg">
+
+            <div class="wrap-info-paket-trip">
+                <p class="tittle-paket-trip">{{trip_name}} </p>
+
+                <div class="tittle-info">Durasi
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{days}} Hari {{night}} Malam</div>
+                </div>
+
+                <div class="tittle-info">Kategori
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{category}}</div>
+                </div>
+
+                <div class="tittle-info">Jenis Trip
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{id_type_trip}}</div>
+                </div>
+            </div>
+
+            <div class="wrap-info-harga">
+                <div class="tittle-info-harga">Harga per orang :</div>
+                <div class="info-harga">Rp {{publish_price}}</div>
+                <div class="info-kuota">Kuota : {{quota_trip}}</div>
+                <a href="#" class="info-detail-trip">Lihat Detail Trip</a>
+            </div>
+
+        </div>
+
+        <div class="wrap-btn-trv">
+            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select class="form-control form-tgl">
+                <option *ngFor="let date of date_trip" > {{date | date:"fullDate"}}</option>
+              </select>
+            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> 36</span> </span>
+        </div>
+    </div>
+
+    <div class="wrap-sort-pesan">
+        <span class="sort-by">Urutkan Berdasarkan : </span>
+        <select class="form-control form-sort">
+            <option>Pesanan Baru (Waktu Diterima)</option>
+            <option>Sabtu, 14 Desember 2018</option>
+            <option>Sabtu, 14 Desember 2018</option>
+            <option>Sabtu, 14 Desember 2018</option>
+            <option>Sabtu, 14 Desember 2018</option>	
+          </select>
+
+        <button class="unduh-data-peserta">Unduh Data Peserta </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Pemesan</th>
+                <th>Waktu Pemesanan</th>
+                <th>Kuota Dipesan</th>
+                <th>Status</th>
+                <th>Tenggat Waktu</th>
+                <th>Konfirmasi Travel</th>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Afif Hilman Habibi (10134BTYUIK218)</td>
+                    <td>Minggu, 30-12-2018</td>
+                    <td>6</td>
+                    <td>Belum dibayar</td>
+                    <td>2 Hari Lagi</td>
+                    <td>
+                        <a href="" class="accept-table">Terima</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Azmi Iqbal Furqoni (10134BTYUIK218)</td>
+                    <td>Minggu, 30-12-2018</td>
+                    <td>6</td>
+                    <td>Belum dibayar</td>
+                    <td>2 Hari Lagi</td>
+                    <td>
+                        <a href="" class="accept-table">Terima</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Haraldi Ikhsan (10134BTYUIK218)</td>
+                    <td>Minggu, 30-12-2018</td>
+                    <td>6</td>
+                    <td>Belum dibayar</td>
+                    <td>2 Hari Lagi</td>
+                    <td>
+                        <a href="" class="accept-table">Terima</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Bagus Ali Mahsyar (10134BTYUIK218)</td>
+                    <td>Minggu, 30-12-2018</td>
+                    <td>6</td>
+                    <td>Belum dibayar</td>
+                    <td>2 Hari Lagi</td>
+                    <td>
+                        <a href="" class="accept-table">Terima</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

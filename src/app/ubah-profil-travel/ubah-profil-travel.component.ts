@@ -26,6 +26,7 @@ export class UbahProfilTravelComponent implements OnInit {
 
   constructor(public appService:AppService, private http:Http, private router:Router) {
     this.appService.getProvider().subscribe(profile => {
+      console.log(profile.provider)
       this.provider.slogan = profile.provider.slogan;
       this.provider.description = profile.provider.description;
       this.provider.office_address = profile.provider.office_address;

@@ -29,6 +29,7 @@ export class JualTripContent2Component implements OnInit {
   createAuthorizationHeader (headers:Headers) {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 }
+
   idParams:any;
   categoryTrip:any[];
   provinceTrip:any[];

@@ -64,6 +64,24 @@ export class AppService {
         .map(res => res.json());
     }
 
+    getTransactionProvider() {
+        let headers = new Headers();
+        
+        this.createAuthorizationHeader (headers);
+        return this.http.get('http://travinesia.com:3000/v1/provider/transaction_trip',
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    getDaftarPemesan(id_trip) {
+        let headers = new Headers();
+        
+        this.createAuthorizationHeader (headers);
+        return this.http.get('http://travinesia.com:3000/v1/provider/detail_transaction/'+ id_trip,
+        {headers: headers}) 
+        .map(res => res.json());
+    }
+
     getCategoryTrip() {
         return this.http.get('http://travinesia.com:3000/get/category')
         .map(res => res.json());

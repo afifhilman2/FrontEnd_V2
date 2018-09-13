@@ -66,9 +66,9 @@
         <div class="row">
             <div class="col-md-4">
                 <label class="label-form" for="provinsi"> Provinsi </label>
-                <select class="form-control form-sort" [(ngModel)]="provider.province" name="provinsi">
+                <select class="form-control form-sort" [(ngModel)]="provider.province._id" name="province">
                                                           <option >Pilih Provinsi</option>
-                                                            <option *ngFor="let province of provinceTrip" value="{{province.province_name}}"> {{province.province_name}} </option>
+                                                            <option *ngFor="let province of provinceTrip" value="{{province._id}}"> {{province.province_name}} </option>
                                                           <!-- <option >Sumatra Utara</option>
                                                           <option >Sumatra Selatan </option>
                                                           <option >Sumatra Barat</option>
@@ -108,7 +108,7 @@
             <div class="col-md-5">
                 <label class="label-form" for="NoTelepon"> Nomor Handphone Travel </label>
 
-                <input type="number" class="phone-trip form-control" [(ngModel)]="provider.office_phone_number" name="notelp" placeholder="Tuliskan Nomor Hanphone Travel">
+                <input type="number" class="phone-trip form-control" [(ngModel)]="provider.office_phone_number" name="office_phone_number" placeholder="Tuliskan Nomor Hanphone Travel">
 
             </div>
         </div>

@@ -11,6 +11,7 @@ import { UbahProfilTravelComponent } from ".././ubah-profil-travel/ubah-profil-t
 import { DaftarTripComponent } from ".././daftar-trip/daftar-trip.component";
 import { JualTripContent2Component } from ".././jual-trip-content2/jual-trip-content2.component";
 import { EtalaseTravelComponent } from ".././etalase-travel/etalase-travel.component";
+import { SalinTripComponent } from '.././salin-trip/salin-trip.component';
 
 const JualTrip: Routes = [
     {
@@ -41,6 +42,9 @@ const JualTrip: Routes = [
                         component:DaftarTripComponent},
                     {   path:'UbahTrip/:id', 
                         component:JualTripContent2Component
+                    },
+                    {   path:'SalinTrip/:id', 
+                        component:SalinTripComponent
                     },
                 ]
             },
