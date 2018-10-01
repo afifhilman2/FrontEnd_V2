@@ -4,7 +4,7 @@
 
 <p class="info-paket">Berikut adalah daftar trip yang Anda jual. Anda dapat mengubah informasi paket trip Anda. Beri Diskon, Ubah Trip, Salin Trip, Kosongkan Kuota atau Hapus Trip dapat Anda Lakukan disini.</p>
 
-<div class="wrap-paket-trip" *ngFor="let trip of tripProvider">
+<div class="wrap-paket-trip" *ngFor="let trip of tripProvider; let i = index">
     <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
 
     <div class="wrap-content-paket-trip">
@@ -24,7 +24,7 @@
 
             <div class="tittle-info">Jenis Trip
                 <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.id_type_trip.type_trip}}</div>
+                <div class="tittle-info-value">{{trip.id_type_trip.type_trip == null? "" : trip.id_type_trip.type_trip}}</div>
             </div>
 
             <div class="tittle-info">Harga (Publish)
@@ -44,10 +44,10 @@
                 <span class="glyphicon glyphicon-cog info-setting" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a class="dropdown-list" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
+                    <li><a class="dropdown-list" (click)="beriDiskon(i, $event)" id="{{trip._id}}" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
                     <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
                     <li><a class="dropdown-list" (click)="salinTrip($event)" id="{{trip._id}}">Salin Trip</a></li>
-                    <li><a class="dropdown-list" data-toggle="modal" data-target="#kosongkankuotaModal">Kosongkan Kuota</a></li>
+                    <li><a class="dropdown-list" (click)="kosong(i, $event)" data-toggle="modal" data-target="#kosongkankuotaModal" id="{{trip._id}}">Kosongkan Kuota</a></li>
                     <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal" (click)="idHapus($event)" id="{{trip._id}}">Hapus Trip</a></li>
                 </ul>
             </div>
@@ -64,7 +64,7 @@
 
                             <p class="confirm-delete"> Apakah Anda yakin akan menghapus Trip ini?
                             </p>
-                            <div class="wrap-btn">
+                            <div class="wrap-btn-hapus">
                                 <span data-dismiss="modal" class="batal">Batal</span>
                                 <button class="btn-trv-hapus" data-dismiss="modal" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus</button>
                             </div>
@@ -75,108 +75,76 @@
 
             <!-- modal kosongkan kuota -->
             <div class="modal fade" id="kosongkankuotaModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="wrap-modal-content">
-                        <div class="wrap-modal-header">
-                            Kosongkan Kuota
-                        </div>
-                        <div class="wrap-modal-body">
-
-                            <div class="confirm-delete"> Kosongkan Kuota untuk mengubah kondisi sisa kuota Trip Anda menjadi 0 atau menghabiskan sisa kuota.</div>
-                            <a class="purpletext">Pelajari lebih lanjut</a>
-
-                            <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
-
-                            <div class="col-md-12">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Sabtu, 1 Desember </label>
+                <form (submit)="onSubmitKosong()">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="wrap-modal-content">
+                            <div class="wrap-modal-header">
+                                Kosongkan Kuota
                             </div>
+                            <div class="wrap-modal-body">
 
-                            <div class="col-md-12">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                <div class="confirm-delete"> Kosongkan Kuota untuk mengubah kondisi sisa kuota Trip Anda menjadi 0 atau menghabiskan sisa kuota.</div>
+                                <a class="purpletext">Pelajari lebih lanjut</a>
 
-                            <div class="col-md-12">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
 
-                            <div class="col-md-12">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                <div class="col-md-12" *ngFor="let date of tripProvider[data].date_trip; let y= index">
+                                    <input type="checkbox" class="checkbox" value="0" (click)="checked($event,y, $event.target.value)">
+                                    <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
+                                </div>
 
-                            <div class="wrap-btn">
-                                <span data-dismiss="modal" class="batal">Batal</span>
-                                <button class="btn-trv-hapus" data-dismiss="modal" (click)="kosongkanTrip($event)" id="{{trip._id}}">Kosongkan</button>
+                                <div class="wrap-btn">
+                                    <span data-dismiss="modal" class="batal">Batal</span>
+                                    <button class="btn-trv-hapus" data-dismiss="modal" (click)="onSubmitKosong()" type="submit" id="{{trip._id}}">Kosongkan</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- modal Beri Diskon -->
             <div class="modal fade" id="beridiskonModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="wrap-modal-content-diskon">
-                        <div class="wrap-modal-header">
-                            Beri Diskon
-                        </div>
-                        <div class="wrap-modal-body">
-
-                            <div class="confirm-delete"> Beri Diskon untuk meningkatkan penjualan Trip Anda. Atur dan pertimbangkan fasilitas yang ditawarkan di menu Ubah Trip.</div>
-                            <div class="pinktext">Besarnya diskon berlaku untuk semua tanggal trip yang dipilih.</div>
-
-
-                            <div class="wrap-content-body">
-
-                                <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
-
-                                <div class="text-diskon">Besarnya Diskon :</div>
-                                <input class="form-control input-diskon" type=number> <span class="percent-diskon"> % </span>
-                                <div class="price-diskon">Rp. </div>
-
+                <form (submit)="onSubmitDiskon()">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="wrap-modal-content-diskon">
+                            <div class="wrap-modal-header">
+                                Beri Diskon
                             </div>
-                            <div class="col-md-9">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Sabtu, 1 Desember </label>
-                            </div>
+                            <div class="wrap-modal-body">
 
-                            <div class="col-md-9">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                <div class="confirm-delete"> Beri Diskon untuk meningkatkan penjualan Trip Anda. Atur dan pertimbangkan fasilitas yang ditawarkan di menu Ubah Trip.</div>
+                                <div class="pinktext">Besarnya diskon berlaku untuk semua tanggal trip yang dipilih.</div>
 
-                            <div class="col-md-9">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                <div class="wrap-content-body">
 
-                            <div class="col-md-9">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                    <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
 
-                            <div class="col-md-9">
-                                <input type="checkbox" class="checkbox">
-                                <label class="label-checkbox-search"> Senin, 3 Desember </label>
-                            </div>
+                                    <div class="text-diskon">Besarnya Diskon :</div>
+                                    <input class="form-control input-diskon" (keyup)="discPrice($event)" type=number> <span class="percent-diskon"> % </span>
+                                    <div class="price-diskon">Rp. </div>
 
-                            <div class="wrap-btn">
-                                <span data-dismiss="modal" class="batal">Batal</span>
-                                <button class="btn-trv-hapus" data-dismiss="modal">Simpan</button>
+                                </div>
+                                <div class="col-md-9" *ngFor="let date of tripProvider[data].date_trip; let y = index">
+                                    <input type="checkbox" value="{{discount_price}}" (click)="checkedDiscount($event, $event.target.value, y)" class="checkbox">
+                                    <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
+                                </div>
+
+                                <div class="wrap-btn">
+                                    <span data-dismiss="modal" class="batal">Batal</span>
+                                    <button class="btn-trv-hapus" type="submit" (click)="onSubmitDiskon()" data-dismiss="modal">Simpan</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
 
 
-            <a class="info-detail-trip">Lihat Detail Trip</a>
+            <a class="info-detail-trip" (click)="goDetail($event)" id="{{trip._id}}">Lihat Detail Trip</a>
         </div>
     </div>
 </div>

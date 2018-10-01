@@ -154,7 +154,7 @@
 }
 
 .form-sort {
-    width: 100%;
+    width: 198px;
     height: 36px;
     border-radius: 3px;
     background-color: #fdfdfd;
@@ -164,7 +164,7 @@
 .form-kategori {
     display: inline-block;
     margin-left: 10px;
-    width: 156px;
+    width: 198px;
     height: 35px;
     border-radius: 3px;
     background-color: #fdfdfd;
@@ -173,7 +173,7 @@
 
 .form-durasi {
     right: 0px;
-    width: 100%;
+    width: 198px;
     height: 35px;
     border-radius: 3px;
     background-color: #fdfdfd;
@@ -272,7 +272,7 @@
 
 .wrap-option {
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 10px
 }
 
 .wrap-label-date {
@@ -423,6 +423,7 @@
 
 .tanggal-trip {
     width: 216px;
+    margin-bottom: 15px;
 }
 
 

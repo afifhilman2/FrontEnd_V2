@@ -11,11 +11,17 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 export class EtalaseTravelComponent implements OnInit {
 
+  etalaseProvider:any[];
   tripProvider:any[];
 
-  constructor(private appService:AppService) {
-    this.appService.getTripProvider().subscribe(tripProvider => {
-      //console.log(tripProvider);
+  constructor(private appService:AppService, public activeRoute:ActivatedRoute) {
+
+    let id = this.activeRoute.snapshot.params['id']
+    this.appService.getEtalseProvider(id).subscribe(etalase => {
+
+      this.etalaseProvider = etalase.provider;
+      this.tripProvider = etalase.provider.trips;
+      console.log(this.etalaseProvider);
     })
    }
 

@@ -114,7 +114,7 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
     LoaderComponent,
     PromoComponent,
     RatingUlasanComponent,
-    IsiDataPesertaComponent
+    IsiDataPesertaComponent,
 
   ],
   imports: [

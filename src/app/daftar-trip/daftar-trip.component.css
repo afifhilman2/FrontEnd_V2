@@ -148,6 +148,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    cursor: pointer;
 }
 
 .info-detail-trip:hover {
@@ -220,7 +221,6 @@
     margin-top: 180px;
     margin-left: 60px;
     width: 473px;
-    height: 372px;
     border-radius: 3px;
     background-color: white
 }
@@ -320,6 +320,12 @@
 }
 
 .wrap-btn {
+    position: relative;
+    text-align: right;
+    margin-top: 80px;
+}
+
+.wrap-btn-hapus {
     position: relative;
     text-align: right;
     margin-top: 20px;

@@ -145,6 +145,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #ab47bc;
+    cursor: pointer;
 }
 
 .info-detail-trip:hover {
@@ -268,6 +269,7 @@ td:nth-child(1) {
     font-stretch: normal;
     letter-spacing: normal;
     color: #58b957;
+    cursor: pointer;
 }
 
 a:hover {
@@ -387,19 +389,6 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.info-detail-trip {
-    font-size: 11px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
-    color: #ab47bc;
-}
-
-.info-detail-trip:hover {
-    text-decoration: none;
-}
-
 .wrap-btn-trv {
     padding-left: 12px;
     margin-top: 7px;
@@ -479,4 +468,32 @@ a:hover {
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
+}
+
+
+/* pagination */
+
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover {
+    color: #9c27b0;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #d7d7d7;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #9C27AF;
+    border-color: #9c27b0;
 }

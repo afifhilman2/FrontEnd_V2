@@ -10,16 +10,16 @@
 
         <div class="wrap-info">
             <div class="wrap-tittle">
-                <div class="tittle-head">Kuylah Travel Indonesia </div> <span class="glyphicon glyphicon-education"></span>
-                <div class="slogan-head">Mencari dan Memberi yang Terbaik </div>
+                <div class="tittle-head">{{etalaseProvider?.travel_name}} </div> <span class="glyphicon glyphicon-education"></span>
+                <div class="slogan-head">{{etalaseProvider?.slogan}} </div>
 
                 <div class="number-success-trip"> 89 </div>
                 <div class="success-trip"> Trip Berhasil </div>
 
                 <button class="chat-travel"> Chat Travel </button>
             </div>
-            <p class="info-travel"> <span class="glyphicon glyphicon-home"> </span> Dramaga Cantik Residence Blok K51, Dramaga, Kabupaten Bogor Jawa Barat, Indonesia </p>
-            <p class="info-travel"> <span class="glyphicon glyphicon-time"> </span> Bergabung Sejak 30 Desember 2012 </p>
+            <p class="info-travel"> <span class="glyphicon glyphicon-home"> </span> {{etalaseProvider?.office_address}} </p>
+            <p class="info-travel"> <span class="glyphicon glyphicon-time"> </span> Bergabung Sejak {{etalaseProvider?.created_at | date:"fullDate"}} </p>
 
         </div>
 
@@ -50,11 +50,11 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let trip of tripProvider">
                 <div class="thumb-promo">
                     <img src="../assets/img/1.jpg" class="img-promo">
                     <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
+                    <div class="trip"></div>
                     <div class="body-caption">
                         <div class="row">
                             <div class="col-md-6 col-sm-6 ">
@@ -63,127 +63,12 @@
                                 <span class="icon-star"></span>
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
+                                <div class="caption-price">Rp {{trip.publish_price}}</div>
                             </div>
                         </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
-                    <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
-                    <div class="body-caption">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
-                            </div>
-                        </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
-                    <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
-                    <div class="body-caption">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
-                            </div>
-                        </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
-                    <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
-                    <div class="body-caption">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
-                            </div>
-                        </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6 ">
-                <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
-                    <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
-                    <div class="body-caption">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
-                            </div>
-                        </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
-                    <div class="disc">-10%</div>
-                    <div class="trip">Open</div>
-                    <div class="body-caption">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="caption-price">Rp 300.000</div>
-                            </div>
-                        </div>
-                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
+                        <div class="caption-tittle">{{trip.trip_name}}</div>
+                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
+                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{etalaseProvider?.travel_name}}</div>
                     </div>
                 </div>
             </div>

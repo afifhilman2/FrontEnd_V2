@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import { Http,Headers, Response } from '@angular/http';
 import {Router, ActivatedRoute} from "@angular/router";
 import { AppService} from '../app.service';
+import { PagerService } from '../_service/index';
 
 @Component({
   selector: 'app-transaksi-penjualan',
@@ -11,14 +12,15 @@ import { AppService} from '../app.service';
 })
 export class TransaksiPenjualanComponent implements OnInit {
 
-  content1:boolean = true;
-  content2:boolean = false;
   idParams:any;
   transaction:any[];
-  daftar:any[];
-
   quantity:number[] = [];
+  
+  id_transaction = {
+    _id:''
+  }
 
+  // trip
   trip_name;
   days;
   night;
@@ -27,53 +29,62 @@ export class TransaksiPenjualanComponent implements OnInit {
   publish_price;
   quota_trip;
   date_trip:any[] ;
+  daftar_quota_left:any[];
+  quota_left;
 
+  // booking
+  booking:any[];
 
+   // array of all items to be paged
+   private allItems: any[];
 
-  constructor(private appService:AppService, private http:Http, public route:Router ) { 
+   // pager object
+   pager: any = {};
+
+   // paged items
+   pagedItems: any[];
+
+  constructor(private appService:AppService, private http:Http, public route:Router, private pagerService: PagerService ) { 
     this.appService.getTransactionProvider().subscribe (transaction => {
       this.transaction = transaction.data;
+
+      this.allItems = transaction.data;
 
       for( let x=0; x<transaction.data.length; x++ ) {
         this.quantity [x] = transaction.data[x].quota_left[0]; 
       }
 
-      console.log(this.quantity);
+      this.setPage(1);
     })
 
   }
 
   togglePesan(e):void {
 
-    this.content1 = !this.content1;
-    this.content2 = !this.content2;
-
     this.idParams= e.target.id;
-     this.appService.getDaftarPemesan(this.idParams).subscribe( daftar => {
-      
-      console.log(daftar);
-
-      this.daftar = daftar.trip; 
-      this.trip_name = daftar.trip.trip_name;
-      this.days = daftar.trip.days;
-      this.night = daftar.trip.night;
-      this.category = daftar.trip.category[0].category_name;
-      this.id_type_trip = daftar.trip.id_type_trip.type_trip;
-      this.publish_price = daftar.trip.publish_price;
-      this.quota_trip = daftar.trip.quota_trip;
-      this.date_trip = daftar.trip.date_trip
-
-    })
+    this.route.navigate(['/JualTrip/DaftarPemesanan/' + this.idParams])
     
-  }
-
-  toggleBack():void {
-    this.content1 = !this.content1;
-    this.content2 = !this.content2;
   }
 
   dateChange(value,i) {
     this.quantity[i] = this.transaction[i].quota_left[value]
+  }
+
+  daftarChange(value) {
+    this.quota_left = this.daftar_quota_left[value];
+  }
+
+  goDetail(e){
+    let id = e.target.id
+    this.route.navigate(['/traveler/DetailPaket/' + id])
+  }
+
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.allItems.length, page);
+
+    // get current page of items
+    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
   ngOnInit() {

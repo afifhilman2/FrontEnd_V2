@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import { AppService } from '../app.service';
 import { Http } from '@angular/http';
@@ -17,6 +17,8 @@ export class JualTripComponent implements OnInit {
 
   loaded:boolean = true;
 
+  id;
+
 
   profileProvider = {
     nameTrip :'',
@@ -24,15 +26,16 @@ export class JualTripComponent implements OnInit {
     photo:'',
   }
 
-  constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http) { 
+  constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http, private route:Router) { 
     this.appService.getProvider().subscribe(profile => {
+
+      this.id = profile.provider._id
 
       if(profile.success == false) {
 
         alert('Belum Login ');
       }
 
-      // console.log(profile);
       this.profileProvider.nameTrip = profile.provider.travel_name;
       this.profileProvider.cover = profile.provider.cover;
      // this.profileProvider.photo = profile.provider.photo;
@@ -40,7 +43,10 @@ export class JualTripComponent implements OnInit {
     //  this.loaded = false;
     })
 
-    
+  }
+
+  goEtalase() {
+    this.route.navigate(['/EtalaseTravel/'+ this.id]);
   }
 
   ngOnInit() {

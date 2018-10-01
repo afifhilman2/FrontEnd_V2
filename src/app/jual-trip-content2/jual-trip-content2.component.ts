@@ -3,8 +3,10 @@ import { Http,Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from "@angular/router";
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { AppService} from '../app.service';
 import { DatePipe } from '@angular/common';
+import {IMyDpOptions} from 'mydatepicker';
 
 
 @Injectable ()
@@ -19,7 +21,94 @@ export class JualTripContent2Component implements OnInit {
   content1:boolean = true;
   content2:boolean = false;
 
-  // content2
+  d: Date = new Date();
+
+  idParams:any;
+  categoryTrip:any[];
+  provinceTrip:any[];
+  typeTrip:any[];
+  idOpenTrip:any;
+  idPrivateTrip:any;
+  service:any;
+  publish:any;
+  fixed:any;
+  days:any;
+  night:any;
+  idTrip:any;
+  dateLength;
+
+  myForm = this.fb.group({
+    trip_name : '', 
+    id_type_trip : '', 
+    days : '',
+    night : '', 
+    date_trip : this.fb.array([]), 
+    publish_price : '', 
+    fixed_price : '', 
+    service_fee : '', 
+    quota_trip : '', 
+    description : '', 
+    notes_traveler : '', 
+    notes_meeting_point :'',
+    id_province :'',
+    id_category : '', 
+    id_facility : '', 
+    id_status_trip : '',
+    publish_price_group : '', 
+    service_fee_group : '', 
+
+  })
+
+
+  trip = {
+    photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
+    photo:[],
+  }
+
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd mmm yyyy',
+    sunHighlight: true,
+    inline: false,
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+1},
+    editableDateField: false,
+    openSelectorOnInputClick: true,
+};
+
+  constructor( public router :Router, public fb:FormBuilder, private routeActive:ActivatedRoute, private appService: AppService, private http:Http, private datePipe:DatePipe ) 
+  {
+  
+
+    // get categori trip
+    this.appService.getCategoryTrip().subscribe( category => {
+      this.categoryTrip = category.data;
+     
+    });
+
+    // get province
+    this.appService.getProvinceTrip().subscribe( province => {
+      this.provinceTrip = province.data;
+    });
+
+    // get type trip
+    this.appService.getTypeTrip().subscribe( type => {
+      this.typeTrip = type.data;
+      this.idPrivateTrip = type.data[1]._id;
+      this.idOpenTrip = type.data[0]._id;
+     
+    });
+
+
+    //params id
+    let id = this.routeActive.snapshot.params['id'];
+    this.idParams = id;
+   }
+
+   counter(i:Number) {
+    return new Array(i);
+  }
+
+   // content2
 
   toggleJual():void {
     this.content1 = !this.content1;
@@ -30,96 +119,30 @@ export class JualTripContent2Component implements OnInit {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 }
 
-  idParams:any;
-  categoryTrip:any[];
-  provinceTrip:any[];
-  typeTrip:any[];
-  service:any;
-  publish:any;
-  fixed:any;
-  days:any;
-  night:any;
-  idTrip:any;
+onSubmitTrip() {
 
-
-  trip = {
-    trip_name : '', 
-    id_type_trip : '', 
-    days : '',
-    night : '', 
-    date_trip : [], 
-    publish_price : '', 
-    fixed_price : '', 
-    service_fee : '', 
-    quota_trip : '', 
-    description : '', 
-    notes_traveler : '', 
-    notes_meeting_point :'',
-    id_province :'',
-    id_category : [], 
-    id_facility : '', 
-    id_status_trip : '',
-    publish_price_group : '', 
-    service_fee_group : '', 
-    photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
-    photo:[],
-    fixed_price_grorup : '', 
-  }
-
-  constructor( public router :Router, private routeActive:ActivatedRoute, private appService: AppService, private http:Http, private datePipe:DatePipe ) {
-   
-    // get categori trip
-    this.appService.getCategoryTrip().subscribe( category => {
-      this.categoryTrip = category.data;
-     
-    });
-
-    // get province
-    this.appService.getProvinceTrip().subscribe( province => {
-      this.provinceTrip = province.data;
-     
-    });
-
-    //params id
-    let id = this.routeActive.snapshot.params['id'];
-    this.idParams = id;
-
-    
-   }
-
-   onSubmitEditTrip() {
-
-
-    this.trip.photo_trip[2] = this.trip.photo[2];
-
-    console.log(this.trip);
-        let headers = new Headers();
+  // console.log(this.myForm.value);
+  let headers = new Headers();
         
-        this.createAuthorizationHeader (headers);
-        return this.http.put('http://travinesia.com:3000/v1/provider/edit_trip/'+ this.idParams, this.trip,
-        {headers: headers})
-        .subscribe(
-          (res:Response)=> {
-            let nullTrip = res.json();
+  this.createAuthorizationHeader (headers);
+  return this.http.put('http://travinesia.com:3000/v1/provider/edit_trip/'+ this.idParams, this.myForm.value,
+  {headers: headers})
+  .subscribe(
+    (res:Response)=> {
+      let nullTrip = res.json();
 
-          
-
-            // console.log(nullTrip);
-            if(nullTrip.status == 200) {
-              this.successedTrip = true;
-              this.content1 = !this.content1;
-              this.content2 = !this.content2;
-        
-             }
-          }
-        )
-
-        
-  }
-
+      console.log(nullTrip);
+      if(nullTrip.status == 200) {
+        this.successedTrip = true;
+        this.content1 = !this.content1;
+        this.content2 = !this.content2;
+  
+       }
+    }
+  )
+}
 
    //upload image
-
    uploadImage1(evt) {
     let files = evt.target.files;
       let file = files[0];
@@ -219,66 +242,54 @@ export class JualTripContent2Component implements OnInit {
           // end upload image
 
 
-      onSelectDuration(e) {
-        this.trip.days = e.target.value;
-        this.days = this.trip.days;
-        this.night = this.days - 1;
-        this.trip.night = this.night;
-        
-      }
-
-      onSelectCategory(e) {
-        this.trip.id_category = e.target.value;
-       
-      }
-
-      onSelectProvince(e) {
-        this.trip.id_province = e.target.value;
-       
-      }
-
-      onRadioType(event :any) {
-        this.trip.id_type_trip = event.target.value; 
-        
-      }
-
   ngOnInit() {
   
-    return this.http.get('http://travinesia.com:3000/get/detail_trip/'+ this.idParams,
-  
-  )
+    return this.http.get('http://travinesia.com:3000/get/detail_trip/'+ this.idParams,)
     .subscribe(
       (res:Response)=> {
-        let ubahTrip = res.json();
-      
+
+        let ubahTrip = res.json();        
+
+          this.myForm.patchValue({
+            trip_name: ubahTrip.data.trip_name,
+            id_type_trip: ubahTrip.data.id_type_trip,
+            days: ubahTrip.data.days,
+            publish_price : ubahTrip.data.publish_price, 
+            quota_trip : ubahTrip.data.quota_trip, 
+            description : ubahTrip.data.description, 
+            notes_traveler : ubahTrip.data.notes_traveler, 
+            notes_meeting_point : ubahTrip.data.notes_meeting_point,
+            id_province : ubahTrip.data.id_province,
+            id_category : ubahTrip.data.category[0], 
+            id_facility : ubahTrip.data.facility, 
+            time: ubahTrip.data.time,
+            zone_time: ubahTrip.data.zone_time, 
+            publish_price_group : [], 
+            service_fee_group : [], 
+            photo:[],
+            fixed_price_grorup : [],
+            photo_trip :[], 
+          })
+
+            let dateGroup = ubahTrip.data.date_trip.map (date_trip => this.fb.control(date_trip));
+            this.myForm.setControl('date_trip', this.fb.array(dateGroup));
+
+            console.log(this.myForm.value);
+
+          // this.myForm.controls['date_trip'] = this.fb.array(ubahTrip.data.date_trip.map(date_trip => this.fb.control(date_trip)));
+
+          // for (let i=0; i< this.myForm.value.date_trip.length; i++) {
+
+          //   this.myForm.value.date_trip[i] = this.datePipe.transform(this.myForm.value.date_trip[i], 'yyyy-MM-dd');
+          // }
+          // console.log(this.myForm.value.date_trip);
+
         this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
         this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
         this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
         this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
         this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
-        this.trip.trip_name = ubahTrip.data.trip_name;
-       
-        this.trip.id_type_trip = ubahTrip.data.id_type_trip;
-        this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip[0], 'yyyy-MM-dd'); 
-        this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip[1], 'yyyy-MM-dd');
-        this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip[2], 'yyyy-MM-dd');
-        this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip[3], 'yyyy-MM-dd');
-        this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip[4], 'yyyy-MM-dd');
-       
-        this.trip.id_category = ubahTrip.data.id_category;
-        // this.trip.id_category = ubahTrip.data.id_category;
-        // this.trip.id_category[2] = ubahTrip.data.id_category[2];
-        // this.trip.id_category[3] = ubahTrip.data.id_category[3];
-        // this.trip.id_category[4] = ubahTrip.data.id_category[4];
-        this.trip.days = ubahTrip.data.days;
-        this.trip.id_province = ubahTrip.data.id_province_trip;
-        this.trip.description = ubahTrip.data.description;
-        this.trip.notes_meeting_point = ubahTrip.data.notes_meeting_point;
-        this.trip.notes_traveler = ubahTrip.data.notes_traveler;
-        this.trip.publish_price = ubahTrip.data.publish_price;
-        this.trip.quota_trip = ubahTrip.data.quota_trip;  
-       
       }
     )
   

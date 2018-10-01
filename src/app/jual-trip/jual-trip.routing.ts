@@ -12,6 +12,10 @@ import { DaftarTripComponent } from ".././daftar-trip/daftar-trip.component";
 import { JualTripContent2Component } from ".././jual-trip-content2/jual-trip-content2.component";
 import { EtalaseTravelComponent } from ".././etalase-travel/etalase-travel.component";
 import { SalinTripComponent } from '.././salin-trip/salin-trip.component';
+import { PesanMasukProviderComponent } from '.././pesan-masuk-provider/pesan-masuk-provider.component';
+import { DiskusiProviderComponent } from '.././diskusi-provider/diskusi-provider.component';
+
+import { DaftarPemesanComponent } from '.././daftar-pemesan/daftar-pemesan.component';
 
 const JualTrip: Routes = [
     {
@@ -35,6 +39,9 @@ const JualTrip: Routes = [
                     {   path:'TransaksiPenjualan', 
                         component:TransaksiPenjualanComponent
                     },
+                    {   path:'DaftarPemesanan/:id', 
+                        component:DaftarPemesanComponent
+                    },
                     {   path:'UbahProfilTravel', 
                         component:UbahProfilTravelComponent
                     },
@@ -46,9 +53,15 @@ const JualTrip: Routes = [
                     {   path:'SalinTrip/:id', 
                         component:SalinTripComponent
                     },
+                    {   path:'PesanMasuk', 
+                        component:PesanMasukProviderComponent
+                    },
+                    {   path:'DiskusiProvider', 
+                        component:DiskusiProviderComponent
+                    },
                 ]
             },
-            {   path:'EtalaseTravel', 
+            {   path:'EtalaseTravel/:id', 
                 component:EtalaseTravelComponent,
             }
 

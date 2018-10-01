@@ -31,6 +31,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.mydp .mydpicon:before {
+    font-family: mydatepicker !important;
+}
+
 .icon-fishing-sign:before {
     content: "\e900";
     color: #f44336;
@@ -227,7 +231,7 @@ input[type=number] {
 }
 
 .margin-content {
-    margin-top: 136px;
+    margin-top: 126px;
 }
 
 

@@ -3,9 +3,10 @@ import { Http,Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from "@angular/router";
-import { FormBuilder, FormArray, FormControl, FormGroup } from '@angular/forms'
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { AppService} from '../app.service';
 import { DatePipe } from '@angular/common';
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 
 @Component({
   selector: 'app-salin-trip',
@@ -17,30 +18,29 @@ export class SalinTripComponent implements OnInit {
   content1:boolean = true;
   content2:boolean = false;
 
+  d: Date = new Date();
+
   idParams:any;
   categoryTrip:any[];
   provinceTrip:any[];
   typeTrip:any[];
-  facilityTrip:any[];
+  idOpenTrip:any;
+  idPrivateTrip:any;
   service:any;
   publish:any;
   fixed:any;
   days:any;
   night:any;
   idTrip:any;
-  idTypeOpen:any;
-  idTypePrivate:any;
-  jam:any;
-  menit:any;
+  dateLength;
+  facilityTrip:any[];
 
-  myForm:FormGroup;
-  formFacility:FormGroup;
-
-  trip = {
+  myForm = this.fb.group({
     trip_name : '', 
     id_type_trip : '', 
     days : '',
-    date_trip : [], 
+    night : '', 
+    date_trip : this.fb.array([]), 
     publish_price : '', 
     fixed_price : '', 
     service_fee : '', 
@@ -48,22 +48,37 @@ export class SalinTripComponent implements OnInit {
     description : '', 
     notes_traveler : '', 
     notes_meeting_point :'',
-    id_province_trip :'',
-    id_category : [], 
-    id_facility : [], 
-    zone_time:'',
-    time:'10:20',
-    min_qty_group:[],
-    latitude:'',
-    longitude:'',
+    id_province :'',
+    id_category : '', 
+    id_facility : '', 
+    id_status_trip : '',
     publish_price_group : '', 
     service_fee_group : '', 
+    time:'',
+    zone_time:''
+
+  })
+
+
+  trip = {
     photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
     photo:[],
-    fixed_price_grorup : '', 
   }
 
-  constructor( public router :Router, private routeActive:ActivatedRoute, public fb:FormBuilder, private appService: AppService, private http:Http, private datePipe:DatePipe ) { 
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd mmm yyyy',
+    sunHighlight: true,
+    inline: false,
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+1},
+    editableDateField: false,
+    openSelectorOnInputClick: true,
+};
+
+  constructor( public router :Router, public fb:FormBuilder, private routeActive:ActivatedRoute, private appService: AppService, private http:Http, private datePipe:DatePipe ) 
+  {
+  
+
     // get categori trip
     this.appService.getCategoryTrip().subscribe( category => {
       this.categoryTrip = category.data;
@@ -73,70 +88,63 @@ export class SalinTripComponent implements OnInit {
     // get province
     this.appService.getProvinceTrip().subscribe( province => {
       this.provinceTrip = province.data;
-     
     });
 
-    // get type
-
+    // get type trip
     this.appService.getTypeTrip().subscribe( type => {
       this.typeTrip = type.data;
-      this.idTypeOpen = this.typeTrip[0]._id;
-      this.idTypePrivate = this.typeTrip[1]._id;
+      this.idPrivateTrip = type.data[1]._id;
+      this.idOpenTrip = type.data[0]._id;
      
     });
 
+    // get facility
     this.appService.getFacilityTrip().subscribe( facility => {
       this.facilityTrip = facility.data;
       // console.log(this.facilityTrip);
      
     });
 
+
     //params id
     let id = this.routeActive.snapshot.params['id'];
     this.idParams = id;
-    
    }
    
+   counter(i:Number) {
+    return new Array(i);
+  }
+
    // content2
 
-   toggleJual():void {
+  toggleJual():void {
     this.content1 = !this.content1;
     this.content2 = !this.content2;
   }
 
-  // createAuthorizationHeader (headers:Headers) {
-  //   headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-  //     }
+  createAuthorizationHeader (headers:Headers) {
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+}
 
+onSubmitTrip() {
 
-   onSubmitSalinTrip() {
+  this.appService.addTripProvider(this.myForm.value).subscribe(trip => {
+       
+    // console.log(trip); 
 
-    this.trip.description = this.trip.description.replace(/\n/g, "<br>");
-    this.trip.notes_traveler = this.trip.notes_traveler.replace(/\n/g, "<br>");
-    this.trip.notes_meeting_point = this.trip.notes_meeting_point.replace(/\n/g, "<br>");
-    // this.trip.time = this.jam + ":" + this.menit;
+    if(trip.status == 200) {
+      this.successedTrip = true;
+      this.content1 = !this.content1;
+      this.content2 = !this.content2;
 
-    this.publish = this.trip.publish_price;
-    this.service = (5 * this.publish) / 100;
-    this.trip.service_fee = this.service
-    this.fixed = this.publish - this.service;
-    this.trip.fixed_price = this.fixed;
-    console.log(this.trip)
-    
-    this.appService.addTripProvider(this.trip).subscribe(trip => {
-   
-      console.log(trip); 
-   
-   if(trip.status == 200) {
-    this.router.navigate(['/JualTrip/DaftarTrip']);
-      
-   }
- })
-      
-  }
+      this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/JualTrip/DaftarTrip']));
+       
+    }
+  })
+}
 
    //upload image
-
    uploadImage1(evt) {
     let files = evt.target.files;
       let file = files[0];
@@ -233,111 +241,63 @@ export class SalinTripComponent implements OnInit {
            this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
-          
           // end upload image
 
-      onSelectDuration(e) {
-        this.trip.days = e.target.value;
-        this.days = this.trip.days;
-        
-      }
+          dateValue(event: IMyDateModel) {
 
-      onSelectCategory(e) {
-        this.trip.id_category = e.target.value;
-       
-      }
-
-      onSelectProvince(e) {
-        this.trip.id_province_trip = e.target.value;
-       
-      }
-
-      onRadioType(event :any) {
-        this.trip.id_type_trip = event.target.value; 
-        
-      }
+            const dateArray = <FormArray>this.myForm.controls.date_trip;
+            dateArray.push(new FormControl(event.jsdate));
+          }
 
   ngOnInit() {
-
-    this.myForm = this.fb.group({
-      category_id:this.fb.array([])
-  });
-
-    this.formFacility = this.fb.group({
-      facility_id:this.fb.array([])
-  });
   
-    return this.http.get('http://travinesia.com:3000/get/trip_detail/'+ this.idParams,
-  )
+    return this.http.get('http://travinesia.com:3000/get/trip_detail/'+ this.idParams,)
     .subscribe(
       (res:Response)=> {
-        let ubahTrip = res.json();
-        // console.log(this.trip);
-      
+
+        let ubahTrip = res.json();        
+
+          this.myForm.patchValue({
+            trip_name: ubahTrip.data.trip_name,
+            id_type_trip: ubahTrip.data.id_type_trip._id,
+            days: ubahTrip.data.days,
+            publish_price : ubahTrip.data.publish_price, 
+            quota_trip : ubahTrip.data.quota_trip, 
+            description : ubahTrip.data.description, 
+            notes_traveler : ubahTrip.data.notes_traveler, 
+            notes_meeting_point : ubahTrip.data.notes_meeting_point,
+            id_province : ubahTrip.data.id_province._id,
+            id_category : ubahTrip.data.category[0]._id, 
+            id_facility : ubahTrip.data.facility, 
+            time: ubahTrip.data.time,
+            zone_time: ubahTrip.data.zone_time, 
+            publish_price_group : [], 
+            service_fee_group : [], 
+            photo:[],
+            fixed_price_grorup : [],
+            photo_trip :[], 
+          })
+
+            let dateGroup = ubahTrip.data.date_trip.map (date_trip => this.fb.control(date_trip));
+            this.myForm.setControl('date_trip', this.fb.array(dateGroup));
+
+
+          // this.myForm.controls['date_trip'] = this.fb.array(ubahTrip.data.date_trip.map(date_trip => this.fb.control(date_trip)));
+
+          // for (let i=0; i< this.myForm.value.date_trip.length; i++) {
+
+          //   this.myForm.value.date_trip[i] = this.datePipe.transform(this.myForm.value.date_trip[i], 'yyyy-MM-dd');
+          // }
+          // console.log(this.myForm.value.date_trip);
+
         this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
         this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
         this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
         this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
         this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
-        this.trip.trip_name = ubahTrip.data.trip_name;
-        this.trip.zone_time = ubahTrip.data.zone_time;
-       
-        this.trip.id_type_trip = ubahTrip.data.id_type_trip._id;
-        this.trip.date_trip[0] = this.datePipe.transform(ubahTrip.data.date_trip[0], 'yyyy-MM-dd'); 
-        this.trip.date_trip[1] = this.datePipe.transform(ubahTrip.data.date_trip[1], 'yyyy-MM-dd');
-        this.trip.date_trip[2] = this.datePipe.transform(ubahTrip.data.date_trip[2], 'yyyy-MM-dd');
-        this.trip.date_trip[3] = this.datePipe.transform(ubahTrip.data.date_trip[3], 'yyyy-MM-dd');
-        this.trip.date_trip[4] = this.datePipe.transform(ubahTrip.data.date_trip[4], 'yyyy-MM-dd');
-       
-        this.trip.id_category = ubahTrip.data.category[0]._id;
-        // this.trip.id_category = ubahTrip.data.id_category;
-        // this.trip.id_category[2] = ubahTrip.data.id_category[2];
-        // this.trip.id_category[3] = ubahTrip.data.id_category[3];
-        // this.trip.id_category[4] = ubahTrip.data.id_category[4];
-        this.trip.days = ubahTrip.data.days;
-        this.trip.id_province_trip = ubahTrip.data.id_province._id;
-        this.trip.description = ubahTrip.data.description.replace(/<br\s*\/?>/mg, "\n" );;
-        this.trip.notes_meeting_point = ubahTrip.data.notes_meeting_point.replace(/<br\s*\/?>/mg, "\n" );;
-        this.trip.notes_traveler = ubahTrip.data.notes_traveler.replace(/<br\s*\/?>/mg, "\n" );;
-        
-        this.trip.publish_price = ubahTrip.data.publish_price;
-        this.trip.quota_trip = ubahTrip.data.quota_trip;  
-       
       }
     )
   
     }
-
-    checked(e,i) {
-      const categoryArray = <FormArray>this.myForm.controls.category_id; 
-
-      if(e.target.checked) {
-        categoryArray.push(new FormControl(i));
-      }
-      else  {
-        let index = categoryArray.controls.findIndex(x=> x.value == i)
-        categoryArray.removeAt(index);
-      }
-
-      this.trip.id_category = this.myForm.value.category_id;
-      // console.log(this.trip.id_category);
-    }
-
-    checkedFacility(e,i){
-      const categoryArray = <FormArray>this.formFacility.controls.facility_id; 
-
-      if(e.target.checked) {
-        categoryArray.push(new FormControl(i));
-      }
-      else  {
-        let index = categoryArray.controls.findIndex(x=> x.value == i)
-        categoryArray.removeAt(index);
-      }
-
-      this.trip.id_facility = this.formFacility.value.facility_id;
-      // console.log(this.trip.id_facility);
-
-    }
-
 }

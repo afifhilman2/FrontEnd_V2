@@ -13,8 +13,6 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import { Subject }           from 'rxjs/Subject';
 import { Product } from '../product';
 
-import { Pipe, PipeTransform} from '@angular/core'
-import { SearchFilterPipe } from './search-pipe'
 
 @Component({
   selector: 'app-header',
@@ -97,7 +95,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openLogout(): void{
-    this.dropLogout = !this.dropLogout;
+    localStorage.removeItem('token');
   }
 
   
@@ -127,12 +125,12 @@ export class HeaderComponent implements OnInit {
 
     // cek login
 
-    // if(!(localStorage.token == null)){
-    //   this.loginUser = true; //true jika toke ada
-    // }else{
-    //   this.loginUser = false; //jika token gak ada
-    // }
-    // this.login;
+    if(!(localStorage.token == null)){
+      this.loginUser = true; //true jika toke ada
+    }else{
+      this.loginUser = false; //jika token gak ada
+    }
+    this.login
 
     this.initForm();
 
@@ -158,14 +156,18 @@ export class HeaderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
+      console.log(user);
+      
+      // this.login = user.success;
+      console.log(this.login)
       if (user.success== true) {
         this.login = user.token;
         
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;
-        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate([''])
-      )
+      //   this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+      //   this.router.navigate([''])
+      // )
         
       }
       else {

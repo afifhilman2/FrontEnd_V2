@@ -5,14 +5,10 @@
 <p class="current-saldo">Saldo Travel Anda saat ini :</p>
 
 <div class="wrap-saldo">
-    <span class="rupiah">Rp</span> <span class="saldo-price">137.100.000</span>
+    <span class="rupiah">Rp </span> <span class="saldo-price">{{balance?.total_balance}}</span>
 
     <div class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </div>
     <div class="petunjuk-pencarian" data-toggle="modal" data-target="#ModalPencarian"> Lihat Petunjuk Pencairan </div>
-    <!-- <div class="wrap-search">
-        <a data-toggle="modal" data-target="#ModalPencarian" class="petunjuk-pencarian">Lihat Petunjuk Pencairan </a>
-        <a class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </a>
-    </div> -->
 </div>
 
 <div class="modal fade" id="ModalPencarian" role="dialog">
@@ -36,45 +32,47 @@
             <div class="wrap-modal-header">
                 Ajukan Pencairan
             </div>
-            <div class="wrap-modal-body">
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="tittle-label-modal">Pilih Bank</div>
-                        <select class="form-control pilih-bank ">
-                            <option >Pilih Bank</option>
-                            <option >Mandiri</option>
-                            <option >BRI</option>
-                            <option >BNI</option>
-                            <option >BCA</option>
-                        </select>
+            <form [formGroup]="withdrawForm" (ngSubmit)="onSubmitWithdraw()">
+                <div class="wrap-modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="tittle-label-modal">Pilih Bank</div>
+                            <select class="form-control pilih-bank" formControlName="bank_name">
+                                <option value="" selected disabled>Pilih Bank</option>
+                                <option value="Mandiri" >Mandiri</option>
+                                <option value="BRI">BRI</option>
+                                <option value="BNI">BNI</option>
+                                <option value="BCA">BCA</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="tittle-label-modal">Nomor Rekening :</div>
+                            <input type="number" class="form-control margin-tittle-ikon" formControlName="account_number">
+                        </div>
                     </div>
 
-                    <div class="col-md-8">
-                        <div class="tittle-label-modal">Nomor Rekening :</div>
-                        <input type="number" class="form-control margin-tittle-ikon">
+                    <div class="tittle-label-modal">Atas Nama :</div>
+                    <input class="form-control margin-tittle-ikon" formControlName="account_owner">
+
+                    <div class="tittle-label-modal">Nominal :</div>
+                    <div class="input-group margin-tittle-ikon">
+                        <span class="input-group-addon bold"> Rp. </span>
+                        <input class="form-control margin-tittle-label" type="number" formControlName="withdraw_total">
+                    </div>
+                    <div class="tittle-label-modal">Kata Sandi Akun Travinesia :</div>
+                    <input type="password" class="form-control margin-tittle-ikon" formControlName="password">
+
+                    <!-- <span class="glyphicon glyphicon-info-sign"></span>
+                    <div class="tittle-sign">Pengajuan pencairan dapat dilakukan pada pukul 08.00 - 14.00 WIB</div> -->
+
+                    <div class="wrap-btn">
+                        <span data-dismiss="modal" class="batal">Batal</span>
+                        <button class="btn-trv-kirim" type="submit">Kirim</button>
                     </div>
                 </div>
-
-                <div class="tittle-label-modal">Atas Nama :</div>
-                <input class="form-control margin-tittle-ikon">
-
-                <div class="tittle-label-modal">Nominal :</div>
-                <div class="input-group margin-tittle-ikon">
-                    <span class="input-group-addon bold"> Rp. </span>
-                    <input class="form-control margin-tittle-label" type="number">
-                </div>
-                <div class="tittle-label-modal">Kata Sandi Akun Travinesia :</div>
-                <input type="password" class="form-control margin-tittle-ikon">
-
-                <!-- <span class="glyphicon glyphicon-info-sign"></span>
-                <div class="tittle-sign">Pengajuan pencairan dapat dilakukan pada pukul 08.00 - 14.00 WIB</div> -->
-
-                <div class="wrap-btn">
-                    <span data-dismiss="modal" class="batal">Batal</span>
-                    <button class="btn-trv-kirim">Kirim</button>
-                </div>
-            </div>
+            </form>
         </div>
 
     </div>
@@ -94,33 +92,30 @@
             <th>Keterangan</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Minggu, 30 Januari 2019</td>
-                <td>+ Rp.3.000.000</td>
-                <td>Rp.137.100.000</td>
-                <td>Pulau Harapan Kepulauan Seribu ( No. Pemesanan : 000xbvcw122018 )</td>
-            </tr>
-
-            <tr>
-                <td>Minggu, 30 Januari 2019</td>
-                <td>+ Rp.3.000.000</td>
-                <td>Rp.137.100.000</td>
-                <td>Pulau Harapan Kepulauan Seribu ( No. Pemesanan : 000xbvcw122018 )</td>
-            </tr>
-
-            <tr>
-                <td>Minggu, 30 Januari 2019</td>
-                <td>+ Rp.3.000.000</td>
-                <td>Rp.137.100.000</td>
-                <td>Pulau Harapan Kepulauan Seribu ( No. Pemesanan : 000xbvcw122018 )</td>
-            </tr>
-
-            <tr>
-                <td>Minggu, 30 Januari 2019</td>
-                <td>+ Rp.3.000.000</td>
-                <td>Rp.137.100.000</td>
-                <td>Pulau Harapan Kepulauan Seribu ( No. Pemesanan : 000xbvcw122018 )</td>
+            <tr *ngFor="let arr of balanceFlag">
+                <td>{{arr.created_at | date:"fullDate"}}</td>
+                <td>{{arr.mutation_flag? "+" : "-"}} Rp {{arr.mutation_flag? arr.total_payment : arr.total_withdraw}}</td>
+                <td>Rp {{arr.balance_history}}</td>
+                <td>{{arr.mutation_flag? arr.id_trip.trip_name : "Penarikan"}} {{arr.mutation_flag? '( No. Pemesanan' + ' : '+ arr.id_booking.no_booking +' )' : ''}}</td>
             </tr>
         </tbody>
     </table>
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+        <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
+    <a (click)="setPage(1)">First</a>
+</li> -->
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+        </li>
+        <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+    <a (click)="setPage(pager.totalPages)">Last</a>
+</li> -->
+    </ul>
 </div>

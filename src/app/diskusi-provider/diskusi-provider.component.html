@@ -1,0 +1,112 @@
+<main id="page-content-wrapper" role="main">
+    <p class="profil">Diskusi Trip</p>
+    <p class="masukan-profil">Tanyakan semua pertanyaan yang bersifat umum dan terbuka kepada Agen Travel. Travinesia menyediakan Diskusi Trip untuk kamu yang juga ingin mendapatkan atau memberikan tanggapan sebuah Trip.</p>
+    <!-- <div class="diskusi"> -->
+    <div class="content-diskusi" *ngFor="let discussion of discussion">
+        <div class="isi-tahapan-pesanan">
+            <div class="gambar">
+                <img src="assets/img/edit.jpg" align="center">
+            </div>
+            <div class="detail-pesanan">
+                <div class="isi-pesanan-star">
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                </div>
+                <span class="harga">Rp {{discussion.id_trip.publish_price}}</span>
+                <div class="isi-pesanan-nama-pulau">
+                    <p>{{discussion.id_trip.trip_name}}</p>
+                </div>
+                <div class="isi-pesanan-waktu">
+                    <span class="glyphicon glyphicon-time"></span> <span class="waktu">{{discussion.id_trip.days}} Hari {{discussion.id_trip.night}} Malam</span>
+                </div>
+                <div class="isi-pesanan-travel">
+                    <span class="glyphicon glyphicon-user"></span> <span class="travel">{{discussion.provider.travel_name}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+        <!-- <div class="card-diskusi"> -->
+        <div class="diskusi-pesan">
+            <div class="akun">
+                <div class="akun-image">
+                    <img src="assets/img/foto.png">
+                </div>
+                <div class="akun-text">
+                    <span class="akun-name">{{discussion.id_user.name}} <span class="date-time pull-right">{{discussion.created_at | date:'dd MMMM yyyy, hh:mm z'}}</span></span>
+                    <p class="my-akun">Traveler</p>
+                </div>
+                <div class="isi-pesan">
+                    <span [innerHTML]="discussion.content"></span>
+                </div>
+            </div>
+
+            <p class="comment-more">Lihat Komentar Sebelumnya </p>
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <div class="akun-comment">KUYlah</div>
+            </div>
+
+            <div class="type-diskusi">
+                <input type="text" class="form-diskusi" placeholder="Tulis Pesan Disini ...">
+                <div class="send">
+                    Kirim
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- </div> -->
+</main>

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MyDatePickerModule } from 'mydatepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JualTripComponent} from '../jual-trip/jual-trip.component';
@@ -15,6 +15,8 @@ import { UbahProfilTravelComponent } from '.././ubah-profil-travel/ubah-profil-t
 import { TransaksiPenjualanComponent } from '.././transaksi-penjualan/transaksi-penjualan.component';
 import { DaftarPemesanComponent } from '.././daftar-pemesan/daftar-pemesan.component';
 import { SalinTripComponent } from '.././salin-trip/salin-trip.component';
+import { PesanMasukProviderComponent } from '.././pesan-masuk-provider/pesan-masuk-provider.component';
+import { DiskusiProviderComponent } from '.././diskusi-provider/diskusi-provider.component';
 
 // import { MiniFooterComponent } from '.././mini-footer/mini-footer.component';
 
@@ -33,6 +35,7 @@ import {JualTripRouting } from '../jual-trip/jual-trip.routing';
         HttpModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        MyDatePickerModule,
     ],
 
     declarations:[
@@ -45,6 +48,8 @@ import {JualTripRouting } from '../jual-trip/jual-trip.routing';
         EtalaseTravelComponent,
         DaftarPemesanComponent,
         SalinTripComponent,
+        PesanMasukProviderComponent,
+        DiskusiProviderComponent
         // MiniFooterComponent,
     ]
 

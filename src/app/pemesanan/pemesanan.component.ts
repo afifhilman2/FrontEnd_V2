@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import { AppService } from '../app.service';
-
 import { PagerService } from '../_service/index';
 
 

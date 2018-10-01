@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { filter } from 'rxjs/operators';
-// import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
-// import { BrowserModule } from "@angular/platform-browser";
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 
 import {Router} from "@angular/router";
 import { AppService} from '../app.service';
+import { FormGroup, FormBuilder, FormControl, FormArray, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-jual-trip-content',
@@ -19,6 +18,7 @@ export class JualTripContentComponent implements OnInit {
 
   opentrip:boolean = true;
   privatetrip:boolean = false;
+  d: Date = new Date();
 
   categoryTrip:any[];
   provinceTrip:any[];
@@ -31,12 +31,13 @@ export class JualTripContentComponent implements OnInit {
   idTypeOpen:any;
   idTypePrivate:any;
 
-  // var jual trip
-  trip = {
-    trip_name : '', 
-    id_type_trip : '', 
-    days : this.days,
-    date_trip : [], 
+
+  myForm = this.fb.group({
+    trip_name : ['', Validators.required], 
+    id_type_trip :['', Validators.required], 
+    days : ['', Validators.required],
+    night : '', 
+    date_trip : this.fb.array([]), 
     publish_price : '', 
     fixed_price : '', 
     service_fee : '', 
@@ -45,21 +46,64 @@ export class JualTripContentComponent implements OnInit {
     notes_traveler : '', 
     notes_meeting_point :'',
     id_province_trip :'',
-    id_category : [], 
-    id_facility : [], 
-    zone_time:'',
+    id_category : '', 
+    id_facility : this.fb.array([]), 
+    id_status_trip : '',
+    publish_price_group : '', 
+    service_fee_group : '', 
+    zone_time:'WIB',
     time:'',
-    min_qty_group:[],
-    latitude:'',
-    longitude:'',
-    publish_price_group : [], 
-    service_fee_group : [], 
+
+  })
+
+
+  // var jual trip
+  trip = {
     photo_trip : [],
     photo : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
-    fixed_price_grorup : [], 
   }
 
-  constructor( public router :Router, private appService: AppService ) {
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd mmm yyyy',
+    sunHighlight: true,
+    inline: false,
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+1},
+    editableDateField: false,
+    openSelectorOnInputClick: true,
+};
+
+// validation function
+
+isFieldValid(field: string) {
+  return !this.myForm.get(field).valid && this.myForm.get(field).touched;
+}
+
+displayFieldCss(field: string) {
+  return {
+    'has-error': this.isFieldValid(field),
+    'has-feedback': this.isFieldValid(field)
+  };
+}
+
+// validate submit
+  validateAllFormFields(formGroup: FormGroup) {         //{1}
+    Object.keys(formGroup.controls).forEach(field => {  //{2}
+      const control = formGroup.get(field);             //{3}
+      
+      if (control instanceof FormControl) {             //{4}
+        control.markAsTouched({ onlySelf: true });
+
+      } else if (control instanceof FormGroup) {        //{5}
+        this.validateAllFormFields(control);            //{6}
+      }
+    });
+  }
+
+
+
+
+  constructor( public router :Router, private appService: AppService, private fb:FormBuilder ) {
     this.appService.getCategoryTrip().subscribe( category => {
       this.categoryTrip = category.data;
       // console.log(this.categoryTrip);
@@ -87,15 +131,23 @@ export class JualTripContentComponent implements OnInit {
 
    }
 
-    // content2
+   counter(i:Number) {
+    return new Array(i);
+  }
 
+    // content2
     toggleJual():void {
-      this.content1 = !this.content1;
-      this.content2 = !this.content2;
+
+      if (this.myForm.valid) {
+        this.content1 = !this.content1;
+         this.content2 = !this.content2;
+      } else {
+        this.validateAllFormFields(this.myForm);
+      }
+
     }
-  
+
     //toggle open private 
-  
     openclick():void {
       this.opentrip = true;
       this.privatetrip= false;
@@ -107,15 +159,9 @@ export class JualTripContentComponent implements OnInit {
     }
 
     // submit jual trip
-
    onSubmitTrip1() {
 
-        this.publish = this.trip.publish_price;
-        this.service = (5 * this.publish) / 100;
-        this.trip.service_fee = this.service
-        this.fixed = this.publish - this.service;
-        this.trip.fixed_price = this.fixed;
-        this.appService.addTripProvider(this.trip).subscribe(trip => {
+        this.appService.addTripProvider(this.myForm.value).subscribe(trip => {
        
           console.log(trip); 
        
@@ -226,47 +272,33 @@ export class JualTripContentComponent implements OnInit {
            this.trip.photo_trip[4]= btoa(binaryString); 
            this.trip.photo[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
-
           // end upload image
 
+          checked(e,i) {
+            const facilityArray = <FormArray>this.myForm.controls.id_facility; 
+                    
+            if(e.target.checked) {
+              facilityArray.push(new FormControl(i));
+            }
+            else  {
+              let index = facilityArray.controls.findIndex(x=> x.value == i)
+              facilityArray.removeAt(index);
+            }
 
-      // event value
+          }
 
-      onSelectDuration(e) {
-        this.days = e.target.value;
-        this.trip.days = parseInt(this.days);
-        
-      }
+          dateValue(event: IMyDateModel) {
 
-      onSelectCategory(e) {
-        this.trip.id_category[0] = e.target.value;
-       
-      }
-
-      onSelectProvince(e) {
-        this.trip.id_province_trip = e.target.value;
-       
-      }
-
-      onRadioType(event :any) {
-        this.trip.id_type_trip = event.target.value; 
-        
-      }
-
-      checked(e) {
-        if(e.target.checked) {
-          this.trip.id_facility = e.target.value;
-          console.log(this.trip.id_facility);
-        }
-        
-      }
-
-    //   filterItemsOfType(type) {
-    //     return this.facilityTrip.filter(x => x.facility_category == type);
-    // }
+            const dateArray = <FormArray>this.myForm.controls.date_trip;
+            dateArray.push(new FormControl(event.jsdate));
+          }
 
   ngOnInit() {
-  
+
+    this.myForm.patchValue({
+      id_type_trip:this.idTypeOpen
+    });
+
     }
 
 }

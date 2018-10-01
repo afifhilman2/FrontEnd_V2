@@ -37,6 +37,7 @@ export class LandingpageComponent implements OnInit {
 
     this.appService.getProvinceTrip().subscribe (province => {
       this.profinsi = province.data;
+      // console.log(this.profinsi)
     });
 
     this.appService.getCategoryTrip().subscribe ( kategori =>{
@@ -68,11 +69,12 @@ export class LandingpageComponent implements OnInit {
 
   getprovinsi(e){
     this.profin = e.target.value;
-    
+    console.log(this.profin);
   }
 
   getcategory(e){
     this.catego = e.target.value;
+    // console.log(this.catego)
   }
 
   goToSearch(){
