@@ -1,19 +1,19 @@
 /* content */
 
-.masukan-profil {
+.masukan-profil{
     font-size: 13px;
     width: 100%;
     line-height: 1.56;
 }
 
-.profil {
+.profil{
     font-weight: bold;
     font-size: 40px;
     font-family: sans-serif;
     display: initial;
 }
 
-.trv-notice {
+.trv-notice{
     width: 100%;
     height: 41px;
     border-radius: 3px;
@@ -23,7 +23,7 @@
     margin-bottom: 15px;
 }
 
-.txt-notice {
+.txt-notice{
     width: 500px;
     height: 13px;
     font-family: sans-serif;
@@ -64,7 +64,6 @@
     background: #f5f5f5;
     width: 100%;
 }
-
 
 /* .nav-tabs>li>a::after {
     content: "";
@@ -153,9 +152,10 @@
     position: relative;
     width: 70%;
     display: inline-block;
+
 }
 
-.other {
+.other{
     font-size: 11px;
     margin-left: 15px;
     font-weight: normal;
@@ -174,7 +174,7 @@
     display: inline-block;
 }
 
-.status {
+.status{
     font-size: 11px;
     margin-bottom: 0;
     font-weight: normal;
@@ -185,7 +185,7 @@
     color: #4a4a4a;
 }
 
-.wait-pay {
+.wait-pay{
     font-size: 13px;
     font-weight: bold;
     font-style: normal;
@@ -195,7 +195,7 @@
     color: #e91e63;
 }
 
-.see-status {
+.see-status{
     font-size: 11px;
     font-weight: normal;
     font-style: normal;
@@ -207,12 +207,12 @@
     cursor: pointer;
 }
 
-.footer-box {
+.footer-box{
     border-top: solid 1px #dddddd;
     padding: 13px;
 }
 
-.quetion {
+.quetion{
     width: 168px;
     font-size: 10px;
     margin-bottom: 0;
@@ -230,6 +230,7 @@
     width: 141px;
     height: 133px;
     float: left;
+    object-fit: cover;
 }
 
 .list-content {
@@ -284,7 +285,7 @@
     margin-top: 9px;
 }
 
-.btn-send-chat {
+.btn-send-chat{
     width: 91px;
     height: 27px;
     border-radius: 3px;
@@ -300,7 +301,7 @@
     margin-left: 15px;
 }
 
-.detail-paket {
+.detail-paket{
     font-size: 11px;
     font-weight: normal;
     font-style: normal;
@@ -344,23 +345,22 @@
     }
 }
 
-
 /* modal detail status */
 
-div.modal-content.status {
+div.modal-content.status{
     width: 429px;
     padding-bottom: 50px;
-    left: 100px;
-    top: 50px;
+    left:100px;
+    top:50px;
 }
 
-.status-header {
+.status-header{
     background-color: #f5f5f5;
     height: 69px;
     padding: 15px 30px;
 }
 
-.title {
+.title{
     line-height: 1.56;
     font-size: 25px;
     font-weight: bold;
@@ -371,11 +371,11 @@ div.modal-content.status {
     color: #4a4a4a;
 }
 
-.status-body {
+.status-body{
     padding: 45px;
 }
 
-span.text-content {
+span.text-content{
     font-size: 13px;
     margin-bottom: 5px;
     font-weight: normal;
@@ -387,12 +387,12 @@ span.text-content {
     display: block;
 }
 
-.glyphicon-ok {
+.glyphicon-ok{
     margin-right: 20px;
     color: #3aff2e;
 }
 
-.close {
+.close{
     width: 23px;
     height: 23px;
     border-radius: 50%;
@@ -404,7 +404,7 @@ span.text-content {
     margin-top: 9px;
 }
 
-.btn-aksiModal {
+.btn-aksiModal{
     width: 291px;
     height: 31px;
     border-radius: 3px;
@@ -415,12 +415,12 @@ span.text-content {
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    margin: auto;
+    margin:auto;
     display: block;
-    border: none;
+    border:none;
 }
 
-.label-pesan {
+.label-pesan{
     display: inline-block;
     width: 55px;
 }
@@ -428,25 +428,25 @@ span.text-content {
 
 /* modal pesan */
 
-div.modal-content.pesan {
+div.modal-content.pesan{
     width: 429px;
     left: 100px;
-    top: 50px;
+    top:50px;
     padding-bottom: 25px;
 }
 
-.form-group {
+.form-group{
     margin-bottom: 15px;
 }
 
-.header-pesan {
+.header-pesan{
     width: 427px;
     height: 69px;
     padding: 15px 30px;
     background-color: #f5f5f5;
 }
 
-.title-pesan {
+.title-pesan{
     font-size: 25px;
     font-weight: bold;
     font-style: normal;
@@ -457,33 +457,30 @@ div.modal-content.pesan {
     color: #4a4a4a;
 }
 
-.pesan-body {
+.pesan-body{
     padding: 30px;
 }
 
-.pesan-untuk {
+.pesan-untuk{
     width: 296px;
     height: 36px;
     display: inline-block;
 }
 
-.isi-status {
-    line-height: 1;
-}
-
-.isi-pesan {
+.isi-pesan{
     height: 140px;
     width: 296px;
     display: inline-block;
     resize: none;
 }
 
-.label-pesan-isi {
+.label-pesan-isi{
     display: inline-block;
     width: 55px;
+    vertical-align: top;
 }
 
-.btn-kirim-pesan {
+.btn-kirim-pesan{
     width: 145px;
     height: 31px;
     border-radius: 3px;
@@ -494,11 +491,11 @@ div.modal-content.pesan {
     font-stretch: normal;
     letter-spacing: normal;
     color: #ffffff;
-    border: none;
+    border:none;
     margin-right: 12px;
 }
 
-.other-content {
+.other-content{
     width: 320px;
     border-radius: 2px;
     background-color: #ffffff;
@@ -510,7 +507,7 @@ div.modal-content.pesan {
     margin-top: -13px;
 }
 
-.other-name {
+.other-name{
     font-size: 11px;
     font-weight: normal;
     font-style: normal;
@@ -521,12 +518,40 @@ div.modal-content.pesan {
     margin-bottom: 6px;
 }
 
-.semicolon {
+.semicolon{
     position: absolute;
     left: 150px;
 }
 
-.other-value {
+.other-value{
     position: absolute;
     left: 165px;
+}
+
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #4a4a4a;
+    border-radius: 50%;
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+    cursor:pointer;
+}
+
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: #ab47bc;
+    border-color: #ab47bc;
 }

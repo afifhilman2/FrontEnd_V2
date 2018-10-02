@@ -32,21 +32,26 @@ export class PemesananComponent implements OnInit {
    // paged items
    pagedItems: any[];
 
-
+  id : any;
+  idBooking;
   ngOnInit() {
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
       // console.log(params); // {order: "popular"}
 
       this.order = params.order;
       // console.log(this.order); // popular
+      this.idBooking = params.order._id;
+      console.log(this.idBooking); 
+      
     });
 
     this.appService.bookingUser().subscribe(booking =>{
       this.allItems = booking.data;
-      console.log(this.allItems);
+      // console.log(this.allItems);
       // this.pages = new Array(booking);
 
       this.setPage(1);
+      this.history();
 
     });
 
@@ -60,17 +65,39 @@ export class PemesananComponent implements OnInit {
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
+  goToDetail(trip_id){
+    this.id = trip_id;
+    this.router.navigate(['/traveler/DetailPaket', this.id]);
+  }
+
+  dataHistory;
+  history(){
+    this.appService.getHistoryBooking().subscribe(history =>{
+      this.dataHistory = history.data;
+      console.log(this.dataHistory);
+    })
+  }
+
+
   showContent(_id): void{
     if(this.otherContent = _id)
     this.otherContent = !this.otherContent;
   }
 
-  button(id){
-    console.log("cek")
-    if(id == 1){
-      this.router.navigate(['/ProsesBayar2'])
+
+  button(idStatus, booking){
+    if(idStatus == 1){
+      this.appService.getPaymentDetail(booking._id).subscribe(detailPayment =>{
+        console.log(detailPayment);
+        this.router.navigate(['/ProsesBayar2'], {queryParams: {data: JSON.stringify(detailPayment.data)}})
+      })
+      
+    }else if( idStatus == 3 ){
+      this.router.navigate(['/Akun/isiDataPeserta'], {queryParams: {data: JSON.stringify(booking)}});
+    }else if( idStatus == 7){
+      this.router.navigate(['/Akun/Ulasan'], {queryParams:{data: JSON.stringify(booking._id)}})
     }
+
   }
   
-
 }

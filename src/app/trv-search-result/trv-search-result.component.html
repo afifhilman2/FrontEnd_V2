@@ -219,28 +219,30 @@
             </div>
         </div>
 
-        <div *ngFor="let data of getTripSearch" class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
+        <div *ngFor="let data of dataSearch" class="col-md-2 col-sm-4 col-xs-6">
+                <div class="thumb-promo">
+                    <img src="{{data.photo_trip[0]}}" class="img-promo">
+                    <div class="disc">-10%</div>
+                    <span class="glyphicon glyphicon-heart fav" (click)="favorit()"></span>
+                    <div class="trip" *ngIf="(data.id_type_trip._id == '5a8539010ee623c4311ba67e')">Open</div>
+                    <div class="trip-private" *ngIf="(data.id_type_trip._id == '0')">Private</div>
+                    <div class="body-caption">
+                        <div class="row">
+                            <div class="col-md-6 colpe-sm-6 ">
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="caption-price">Rp {{data.publish_price.toLocaleString('id')}}</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
+                        <div class="caption-tittle">{{data.trip_name}}</div>
+                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{data.days}}H{{data.night}}M</div>
+                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{data.travel_name}}</div>
                     </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
                 </div>
             </div>
-        </div>
 
         <!-- <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="thumb-promo">

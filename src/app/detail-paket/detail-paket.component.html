@@ -35,8 +35,10 @@
         </a>
       </div>
       <div class="jenis-paket">
-        <span class="glyphicon glyphicon-tag"></span>
-        <span class="jenis-trip" ([ngModel])="book.id_type_trip">{{detailTrip?.id_type_trip?.type_trip}}</span>
+        <div class="type-trip">
+            <span class="glyphicon glyphicon-tag"></span>
+            <span class="jenis-trip" ([ngModel])="book.id_type_trip">{{detailTrip?.id_type_trip?.type_trip}}</span>
+        </div>
         <span class="waktu-trip">( {{detailTrip.days}} Hari {{detailTrip.night}} Malam) <p class="pembatas">|</p></span>
         <span class="lokasi">Lokasi : <p class="lokasi-detail">DKI Jakarta </p> <p class="pembatas">|</p></span>
         <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name + ', '}}</p></span>
@@ -66,21 +68,21 @@
 
       <div class="penjelasan">
         <div class="kanan-deskripsi">
-          <a data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-down"></span></a>
+          <a data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-right panah"></span></a>
           <span class="kanan">Deskripsi</span>
           <div id="deskripsi" class="collapse">
             {{detailTrip.description}}
           </div>
         </div>
         <div class="kanan-fasilitas">
-          <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-down"></span></a>
+          <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-right panah"></span></a>
           <span class="kanan">Fasilitas</span>
           <div id="fasilitas" class="collapse" *ngFor="let fas of detailTrip.facility">
            {{fas.facility_name}}
           </div>
         </div>
         <div class="kanan-meeting">
-          <a data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-down"></span></a>
+          <a data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-right panah"></span></a>
           <span class="kanan">Meeting Point</span>
           
           <div id="meetingpoint" class="collapse">
@@ -96,7 +98,7 @@
           </div>
         </div>
         <div class="kanan-catatan">
-          <a data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-down"></span></a>
+          <a data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-right panah"></span></a>
           <span class="kanan">Catatan untuk Travel</span>
           <div id="catatan" class="collapse"  >
             fasilitas yang disediakan.......
@@ -104,7 +106,7 @@
         </div>
       </div>
       <div class="kanan-catatan">
-        <a data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-down"></span></a>
+        <a data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-right panah"></span></a>
         <span class="kanan">Informasi Travel Agen</span>
         <div id="infoAgen" class="collapse">
           <div class="body-info">
@@ -117,7 +119,31 @@
           </div>
           <div class="button-body">
             <button class="btn btn-lihatProfil">Lihat Profil Travel</button>
-            <button class="btn btn-kirimPesan">Kirim Pesan</button>
+            <button class="btn btn-kirimPesan" data-toggle="modal" data-target="#pesan">Kirim Pesan</button>
+            <div class="modal fade" id="pesan" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content pesan">
+                  <div class="modal-header header-pesan">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title title-pesan">Pesan</h4>
+                  </div>
+                  <div class="modal-body pesan-body">
+                      <form>
+                          <div class="form-group">
+                              <label class="label-pesan">Untuk :</label>
+                              <input class="form-control pesan-untuk" type="text">
+                          </div>
+                          <div class="form-group">
+                              <label class="label-pesan-isi">isi :</label>
+                              <textarea class="form-control isi-pesan" type="text"></textarea>
+                          </div>
+                      </form>
+                      <button class="btn-kirim-pesan pull-right" data-dismiss="modal">Kirim Pesan</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div> 
@@ -129,11 +155,11 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="status-pembayaran">
-              <div class="komen">
-                <img src="assets/img/foto.png" class="komen-image">
+              <div class="komen" *ngFor="let r of review">
+                <img src="{{r.id_user.photo}}" class="komen-image">
                 <div class="komen-user">
-                  <p class="komen-user-name">Paulo Torres</p>
-                  <p class="komen-tanggal">15 Februari 2018, 11.17 WIB</p>
+                  <p class="komen-user-name">{{r.id_user.name}}</p>
+                  <p class="komen-tanggal">{{r.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p>
                   <div class="komen-star">
                     <span class="icon-star"></span>
                     <span class="icon-star"></span>
@@ -141,26 +167,37 @@
                     <span class="icon-star"></span>
                     <span class="icon-star"></span>
                   </div> 
-                  <p class="komen-tanggapan">"kualitas terbaik dan sangat sesuai dengan ekspetasi"</p>
+                  <p class="komen-tanggapan" [innerHTML]="r.content"></p>
                 </div>
               </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="daftar-transaksi">
-              <div class="komen">
-                <img src="assets/img/foto.png" class="komen-image">
+              <div class="komen" *ngFor="let d of diskus">
+                <img src="{{d.id_user.photo}}" class="komen-image">
                 <div class="komen-user">
-                  <p class="komen-user-name">Paulo Neymar</p>
-                  <p class="komen-tanggal">15 Februari 2018, 11.17 WIB</p>
-                  <div class="komen-star">
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                  </div> 
-                  <p class="komen-tanggapan">"kualitas terbaik dan sangat sesuai dengan ekspetasi"</p>
+                  <p class="komen-user-name">{{d.id_user.name}}</p>
+                  <p class="komen-user-tanggal">{{d.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p> 
+                  <p class="komen-user-tanggapan" [innerHTML]="d.content"></p>
+                    <div class="komen-agen">
+                      <img src="{{d.id_user.photo}}" class="komen-image-agen"> 
+                      <div class="agen">
+                          <p class="komen-agen-name">{{d.id_user.name}}</p>
+                          <p class="komen-agen-tanggal">{{d.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p> 
+                          <p class="komen-agen-tanggapan" [innerHTML]="d.content"></p>
+                          <div *ngIf="isLogin">
+                            <textarea class="content-agent"></textarea>
+                            <button class="btn btn-agen">Kirim Pesan</button>
+                          </div>
+                      </div>
+                    </div>
                 </div>
               </div>
+              <form (submit)="sendComment()">
+                <div class="submit-komen">
+                  <textarea *ngIf="isLogin" class="tanya-user" [(ngModel)]="text.content" name="content"></textarea>
+                  <button type="submit" class="btn btn-send">Tulis Pertanyaan</button>
+                </div>
+              </form>
             </div>
         </div>
       </div>
@@ -229,9 +266,6 @@
                   <p class="text-harga">Total Harga</p>
                   <p class="harga-satuorang" ([ngModel])="book.publish_price"> Rp {{(totalHarga)?.toLocaleString('id')}}</p> 
                 </div>   
-              </div>
-              <div>
-  
               </div>
             </div>
           <!-- </div> -->

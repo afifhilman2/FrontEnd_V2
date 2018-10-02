@@ -1,7 +1,7 @@
 <!-- <app-loader *ngIf="showSpinner"></app-loader> -->
 <app-loader *ngIf="loaded"></app-loader>
 <div class="container-fluid-page">
-
+    
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -49,7 +49,7 @@
                                 <label for="lokasi">Lokasi : </label>
                                 <select class="form-control" (change)="getprovinsi($event)">
                                             <option value="" disabled selected>Pilih Lokasi</option>
-									 		<option *ngFor="let p of profinsi" [value]="p._id">{{ p.province_name }}</option>
+									 		<option *ngFor="let p of profinsi" [value]="p.province_name">{{ p.province_name }}</option>
 									 		
 									 	</select>
                             </div>
@@ -60,7 +60,7 @@
                                 <label for="kategori">Kategori : </label>
                                 <select class="form-control" (change)="getcategory($event)">
                                             <option value="" disabled selected>Pilih Kategori</option>
-									 		<option id="Beach" *ngFor="let k of category" [value]="k._id">{{ k.category_name}}</option>
+									 		<option id="Beach" *ngFor="let k of category" [value]="k.category_name">{{ k.category_name}}</option>
 									 		<!-- <option id="City Tour" >City Tour</option>
 									 		<option id="Culture">Culture</option>
 									 		<option id="Fishing">Fishing</option>
@@ -105,8 +105,8 @@
                             <div class="form-group">
                                 <label for="optradio">Jenis Trip : </label>
                                 <div class="radio">
-                                    <label class="radio"><input type="radio" name="radios" value="1"><span class="outer"><span class="inner"></span></span>Open</label>
-                                    <label class="radio"><input type="radio" name="radios" value="2"><span class="outer"><span class="inner"></span></span>Private</label>
+                                    <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Open</label>
+                                    <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Private</label>
                                 </div>
                             </div>
                         </div>
@@ -140,14 +140,15 @@
             <a class="diskon-category lihat-diskon" routerLink="/search">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
-                <div *ngFor="let trip of dataTrip; let i=index">
-                    <div *ngIf="i<6">
+                <div *ngFor="let trip of dataTrip; let i=index" >
+                    <div *ngIf="i<6" >
                         <div class="col-md-2 col-sm-4 col-xs-6" (click)="goDetail($event)">
-                            <a>
+                            <a >
                                 <div class="thumb-promo">
                                     <img src="{{trip.photo_trip['0']}}" class="img-promo" id="{{trip._id}}">
                                     <div class="disc">-10%</div>
                                     <div class="trip">Open</div>
+                                    <!-- <div class="private-trip">Private</div> -->
                                     <div class="body-caption">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-6 ">
@@ -156,7 +157,7 @@
                                                 <span class="icon-star"></span>
                                             </div>
                                             <div class="price pull-right">
-                                                <div class="caption-price">{{(trip.publish_price === null ? '' : 'Rp ' + trip.publish_price).toLocaleString('id')}}</div>
+                                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
                                             </div>
                                         </div>
                                         <div class="caption-tittle"> {{ trip.trip_name }} </div>

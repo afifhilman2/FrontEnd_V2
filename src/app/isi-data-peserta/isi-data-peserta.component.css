@@ -60,3 +60,35 @@
     width: 330px;
     margin-left: 26px;
 }
+
+.btn-save{
+    width: 130px;
+    height: 29px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ab47bc;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    float: right !important;
+    margin-right: 23px;
+    margin-top: 10px;
+}
+
+.btn-submit{
+    width: 156px;
+    height: 29px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    font-size: 11px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    float: right !important;
+    margin-top: 10px;
+}

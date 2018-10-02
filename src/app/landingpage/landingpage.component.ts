@@ -28,7 +28,7 @@ export class LandingpageComponent implements OnInit {
     this.appService.getDataTrip().subscribe (dataTrip => {
      
       this.dataTrip = dataTrip.data;
-      // console.log(dataTrip);
+      console.log(dataTrip);
       this.photo = dataTrip.data.photo_trip
       // console.log(this.photo)
 
@@ -37,7 +37,6 @@ export class LandingpageComponent implements OnInit {
 
     this.appService.getProvinceTrip().subscribe (province => {
       this.profinsi = province.data;
-      // console.log(this.profinsi)
     });
 
     this.appService.getCategoryTrip().subscribe ( kategori =>{
@@ -46,20 +45,26 @@ export class LandingpageComponent implements OnInit {
     })
   }
 
+  getDiskon(){
+    this.appService.getDiscountTrip().subscribe(diskon =>{
+      console.log(diskon)
+    })
+  }
+
   goLogin(){
     this.router.navigate(['login']);
   }
 
   ngOnInit() {
+    this.getDiskon()
     // this.load.subcribe(() => this.showSpinner = false)
   }
 
   goDetail(e){
     this.idDetail = e.target.id;
-    console.log(localStorage.token)
     if(!(localStorage.token == null)){
         // console.log('login')
-      this.router.navigate(['traveler/DetailPaket', this.idDetail]);
+      this.router.navigate(['/DetailPaket', this.idDetail]);
     }else{
       // console.log('belom login')
       this.router.navigate(['/DetailPaket', this.idDetail]);
@@ -69,12 +74,11 @@ export class LandingpageComponent implements OnInit {
 
   getprovinsi(e){
     this.profin = e.target.value;
-    console.log(this.profin);
+    
   }
 
   getcategory(e){
     this.catego = e.target.value;
-    // console.log(this.catego)
   }
 
   goToSearch(){

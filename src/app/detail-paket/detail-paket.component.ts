@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import 'rxjs/add/operator/switchMap';
 import { Product } from '../product';
 
-import { DatePipe } from '@angular/common';
+import { DatePipe, LOCATION_INITIALIZED } from '@angular/common';
 
 
 @Component({
@@ -33,6 +33,11 @@ export class DetailPaketComponent implements OnInit {
     _id:'',
   }
 
+  text: any = {
+    _id:'',
+    content:'',
+  }
+
   
   
 
@@ -51,9 +56,10 @@ export class DetailPaketComponent implements OnInit {
     let id = this.active.snapshot.params['id'];
     this.dataTrip = id;
 
-    this.appServis.diskusi().subscribe(disk => {
-      this.diskus = disk.data;
-    })
+    // this.appServis.diskusi().subscribe(disk => {
+    //   this.diskus = disk.data;
+    //   console.log(this.diskus);
+    // })
 
   
     
@@ -64,6 +70,7 @@ export class DetailPaketComponent implements OnInit {
 
   ngOnInit() {
     this.getTrip();
+    this.getDiskusi();
   }
 
   
@@ -88,6 +95,21 @@ export class DetailPaketComponent implements OnInit {
         )
 
         
+  }
+
+  getDiskusi(){
+    this.text._id = this.dataTrip;
+    this.appServis.diskusi(this.dataTrip).subscribe(discus =>{
+      this.diskus = discus.data;
+      console.log(this.diskus)
+    })
+  }
+
+  review;
+  getReview(){
+    this.appServis.review(this.dataTrip).subscribe(riview =>{
+      this.review = riview.data;
+    })
   }
 
 
@@ -143,6 +165,33 @@ export class DetailPaketComponent implements OnInit {
         this.totalHarga = this.totalHargaBayar * this.hargaProduct;
 
       }
+  }
+
+  showComment: boolean = false;
+
+  textContent;
+  sendComment(){
+    if(!(localStorage.token == null)){
+      // console.log(this.text._id);
+      // console.log(this.text.content);
+      // console.log('login')
+      // this.showComment = !this.showComment;
+    // this.router.navigate(['/LoginPage']);
+    this.appServis.sendDiskusi(this.dataTrip,this.text).subscribe(text =>{
+      console.log(text);
+    })
+  }else{
+    // console.log('belom login')
+    
+    this.router.navigate(['/LoginPage']);
+    }
+  }
+
+  cekLogin: boolean = false;
+  get isLogin(){
+    if(!(localStorage.token == null)){
+      return this.cekLogin = true;
+    }
   }
  
 }

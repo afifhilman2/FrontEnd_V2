@@ -95,7 +95,7 @@ export const routes :Routes = [
 
     //with login
     {
-        path :'traveler', 
+        path :'', 
         component:HeaderComponent,
         children: [
             {path:'', component:LandingpageComponent},

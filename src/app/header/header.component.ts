@@ -23,6 +23,7 @@ import { Product } from '../product';
 })
 export class HeaderComponent implements OnInit {
 
+  
   tripData;
   user = {
     email:'',
@@ -65,7 +66,7 @@ export class HeaderComponent implements OnInit {
   name;
   loginUser: boolean = false;
 
-  login;
+  
 
   profile:any =[];
   provider:any=[];
@@ -95,25 +96,28 @@ export class HeaderComponent implements OnInit {
   }
 
   openLogout(): void{
-    localStorage.removeItem('token');
+    this.dropLogout = !this.dropLogout;
   }
 
   
   // private results: Observable<SearchItem[]>;
   private searchField: FormControl;
   
+  results: Object;
+  searchTerm$ = new Subject<string>();
+
   constructor( public data:DataService, private http:Http, private fb: FormBuilder, public appService: AppService, private authService:AuthService, private router:Router, myElement: ElementRef) {
 
     // get all category trip
     this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
       this.categoryAllTrip = categoryAllTrip.data; 
+      console.log(this.categoryAllTrip)
     });
     
 
-    this.appService.getDataTrip().subscribe(dataTrip => {
-      this.filterTrip = dataTrip.data;
-      this.name = dataTrip.data.trip_name;
-      // console.log(this.filterTrip);
+    this.appService.search(this.searchTerm$).subscribe(results => {
+        this.results = results.data;
+        // console.log(this.results);
     });
 
     //validation
@@ -123,25 +127,37 @@ export class HeaderComponent implements OnInit {
       'email':['', Validators.required],
     });
 
-    // cek login
-
-    if(!(localStorage.token == null)){
-      this.loginUser = true; //true jika toke ada
-    }else{
-      this.loginUser = false; //jika token gak ada
-    }
-    this.login
-
     this.initForm();
 
   }
 
-   //searchById
+  
+  goToSearch(trip_name){
+    this.appService.searchName(trip_name).subscribe(trip_name =>{
+      // console.log(trip_name)
+      if(trip_name.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/searchNavbar'], {queryParams: {data : JSON.stringify(trip_name.data)}}));
+      }
+    })
+   }
    
-   searchTrip(e) {
-    this.idCategory = e.target.id;
-    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-    this.router.navigate(['/search', this.idCategory]))
+   searchCategory;
+   searchTrip(_id) {
+    // this.idCategory = e.target.id;
+    
+    
+    this.appService.searchCategory(_id).subscribe(searchCategory =>{
+      this.searchCategory = searchCategory.data;
+      console.log(this.searchCategory)
+      // console.log(this.categoryAllTrip);
+      if(searchCategory.status = 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['traveler/search'], {queryParams :{data : JSON.stringify(this.searchCategory)}}))
+      }
+    })
+    // this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    // this.router.navigate(['traveler/search', this.idCategory]))
   }
 
 
@@ -156,18 +172,14 @@ export class HeaderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
-      console.log(user);
-      
-      // this.login = user.success;
-      console.log(this.login)
       if (user.success== true) {
-        this.login = user.token;
+        // this.login = user.token;
         
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;
-      //   this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-      //   this.router.navigate([''])
-      // )
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate([''])
+      )
         
       }
       else {
@@ -194,52 +206,16 @@ export class HeaderComponent implements OnInit {
     this.myToken = this.authService.AccessToken;
 
     this.data.currentMessage.subscribe(trip => this.trip = trip);
-       
-      // this.filter();
-      this.heroes = this.searchTerms
-      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the http search observable
-        ? this.appService.search(term)
-        // or the observable of empty heroes if there was no search term
-        : Observable.of<Product[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Product[]>([]);
-      });
-  }
-
-  
     
-
+     
+  }
 
   search(term: string): void {
     
     this.searchTerms.next(term);
   }
 
-  // search = (text$: Observable<string>) =>
-  //   text$.pipe(
-  //     debounceTime(200),
-  //     distinctUntilChanged(),
-  //     map(term => term.length < 2 ? []
-  //       : this.filterTrip.filter(v => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10))
-  //   );
-  
-  
-
-  
-  states = ['Alabama', 'Alaska',  'Arizona', 'Arkansas', 'California', 'Colorado',
-  'Connecticut', 'Delaware', 'District of Columbia', 'Florida'
-  , 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky'
-  , 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina',
-  'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-  'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington',
-   'West Virginia', 'Wisconsin', 'Wyoming']; 
-   
+ 
    initForm(): FormGroup {
     return this.stateForm = this.fb.group({
       search: [null]
@@ -247,7 +223,9 @@ export class HeaderComponent implements OnInit {
   }
 
   selectValue(value) {
+    
     this.stateForm.patchValue({"search": value});
+    
     this.showDropDown = false;
   }
    closeDropDown() {
@@ -259,10 +237,14 @@ export class HeaderComponent implements OnInit {
    }
  
    getSearchValue() {
-     return this.stateForm.value.search;
+     return this.stateForm.value.search.debounceTime(300).distinctUntilChanged();
    }
 
-
-
-  
+  get isLogin(){
+    if(!(localStorage.token == null)){
+      // this.loginUser = !this.loginUser;
+      return this.loginUser = true;
+    }
+     
+   }
 }

@@ -1,16 +1,21 @@
+<div>
   <p class="profil">Isi Data Peserta</p>
-  <p class="masukan-profil">Lengkapi informasi peserta Trip disini. Nama lengkap, umur dan Nomor identitas (Nomor KTP atau Paspor).  Tekan tombol
-    Kiirm Data Peserta jika informasi sudah terisi semua dan benar, Lanjutkan Nanti jika melengkapi nanti.</p>
+  <button type="submit" class="btn btn-submit" (click)="addTravellerDetail(1)">Kirim Data Peserta</button>
+  <button type="submit" class="btn btn-save" (click)="addTravellerDetail(0)">Lanjutkan Nanti</button>
+</div>
+<p class="masukan-profil">Lengkapi informasi peserta Trip disini. Nama lengkap, umur dan Nomor identitas (Nomor KTP atau Paspor).  Tekan tombol
+  Kiirm Data Peserta jika informasi sudah terisi semua dan benar, Lanjutkan Nanti jika melengkapi nanti.</p>
 
-    <form>
-      <div class="label-form">
-        <p> Nama Lengkap</p>
-        <p class="label-age"> Umur(Tahun) </p>
-        <p class="label-no"> No.Identitas </p>
-      </div>
-      <div class="input-form">
-        <input class="form-control input-name" type="text">
-        <input class="form-control input-age" type="text">
-        <input class="form-control input-no" type="text">
-      </div>
-    </form>
+  <form >
+    <div class="label-form">
+      <p> Nama Lengkap</p>
+      <p class="label-age"> Umur(Tahun) </p>
+      <p class="label-no"> No.Identitas </p>
+    </div>
+    <div class="input-form" *ngFor="let order of counter(dataBooking.quantity); let i = index">
+      <input class="form-control input-name" type="text" [(ngModel)]="booking.traveller_name[i]" name="traveller_name">
+      <input class="form-control input-age" type="text" [(ngModel)]="booking.traveller_age[i]" name="traveller_age">
+      <input class="form-control input-no" type="text" [(ngModel)]="booking.traveller_identity[i]" name="traveller_identity">
+    </div>
+  </form>
+  

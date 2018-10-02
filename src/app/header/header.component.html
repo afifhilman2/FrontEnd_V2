@@ -19,28 +19,24 @@
 
             <form class="navbar-form navbar-left">
                 <div class="input-group stylish-input-group">
-                    <!-- <input placeholder="Cari Wisata" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-                    <div *ngFor="let hero of heroes  | async" (click)="gotoDetail()" class="search-result" >
-                        {{hero?.trip_name}}
-                    </div> -->
-                    <input type="text" id='search' (click)=' openDropDown() ' #txtName [(ngModel)]="filtertext" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Cari Wisata">
-                    <div class="search-dropdown" *ngIf='showDropDown'>
-                        <div class="item-search" *ngFor="let name of filterTrip | filter: filtertext : 'trip_name'">
-                            {{name?.trip_name}}
-                        </div>
-                    </div>
+                    
+                    <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control" placeholder="Cari Wisata">
+                        <ul *ngIf="results" class="search-dropdown">
+                            <li *ngFor="let result of results | slice:0:9" class="item-search">
+                                <a (click)="goToSearch(result.trip_name)">
+                                {{ result.trip_name }}
+                                </a>
+                            </li>
+                        </ul>
                     <span class="input-group-addon">
-                                <button [routerLink]="['/searchNavbar/1']" type="submit" (click)=search()>
-                                    <span class="glyphicon glyphicon-search"></span>
+                    <button [routerLink]="['/searchNavbar/1']" type="submit" (click)=search()>
+                        <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
-
                 </div>
-                <!-- <label for="typeahead-config">Search for a state:</label>
-                <input id="typeahead-config" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" /> -->
             </form>
 
-            <ul *ngIf="!loginUser" class="nav navbar-nav navbar-right">
+            <ul *ngIf="!isLogin" class="nav navbar-nav navbar-right">
                 <li>
                     <a [routerLink]="['/Daftar']">Daftar</a>
                 </li>
@@ -50,16 +46,15 @@
                 </li>
             </ul>
 
-            <ul *ngIf="loginUser" class="nav navbar-nav navbar-right">
+            <ul *ngIf="isLogin" class="nav navbar-nav navbar-right">
                 <li>
-                    <a [routerLink]="['/traveler/Akun/Pemesanan']" role="button">Pemesanan</a>
+                    <a [routerLink]="['/Akun/Pemesanan']" role="button">Pemesanan</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/traveler/Notifikasi']" role="button">Notifikasi</a>
+                    <a [routerLink]="['/Notifikasi']" role="button">Notifikasi</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/traveler/Notifikasi']" role="button">Travel Saya</a>
-                    <!-- <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span> -->
+                    <button [routerLink]="['/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span>
                 </li>
                 <li>
                     <a (click)="openLogout()" role="button" class="profil">
@@ -77,10 +72,28 @@
 
 <div class="container-fluid-bar-fixed">
     <ul class="head-category">
-        <li *ngFor="let category of categoryAllTrip" (click)="searchTrip($event)">
-            <a id="{{category.id_category}}" name="{{category.category_name}}" class="btn-search"> <span class="{{category.icon}}"></span> {{category.category_name}} </a>
+        <li *ngFor="let category of categoryAllTrip" >
+            <a (click)="searchTrip(category._id)" name="{{category.category_name}}" class="btn-search"> <span class="{{category.icon}}"></span> {{category.category_name}} </a>
         </li>
-
+        <!-- <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'City Tour'}"> <span class="icon-hotel-with-three-floors"></span> {{cityTour}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Culture'}"> <span class="icon-theatre-masks"></span> {{culture}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Fishing'}"> <span class="icon-fishing-sign"></span> {{fishing}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Hiking'}"> <span class="icon-mountains-with-trees"></span> {{hiking}}</a>
+        </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Honeymoon'}"> <span class="icon-love-hot-air-balloon"></span> {{honeymoon}}</a>
+        </li>
+        <li><a [routerLink]="['/search']" [queryParams]="{order:'Tracking'}"><span class="icon-human-foot-prints"></span> {{tracking}}</a> </li>
+        <li>
+            <a [routerLink]="['/search']" [queryParams]="{order:'Sailing'}"> <span class="icon-sea-ship-with-containers"></span> {{sailing}}</a>
+        </li> -->
         <li class="kanan">
             <a href=""> <span class="icon-question">
                                 <span class="path1"></span><span class="path2"></span>

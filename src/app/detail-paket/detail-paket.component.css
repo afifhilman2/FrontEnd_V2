@@ -183,9 +183,13 @@ th {
 
 .jenis-trip {
     font-weight: bold;
-    color: #ff9800;
-    font-size: 13.4px;
-    margin-left: 11px;
+    color: white;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.glyphicon-tag{
+    color:  white;
 }
 
 .jenis-paket {
@@ -254,7 +258,7 @@ th {
 
 .komen {
     width: 814px;
-    height: 106px;
+    height: auto;
     border: solid 0.8px #dddddd;
     padding: 12px;
     display: -webkit-inline-box;
@@ -267,21 +271,20 @@ th {
     border-radius: 50%;
     border: solid 1.5px #dddddd;
     padding: 1.5px;
-    display: block;
 }
 
 .komen-star {
     margin-left: 18px;
 }
 
-.komen-tanggal {
+.komen-user-tanggal {
     font-size: 11px;
     color: #4a4a4a;
     margin-left: 18px;
     font-family: sans-serif;
 }
 
-.komen-tanggapan {
+.komen-user-tanggapan {
     font-size: 13.4px;
     color: #4a4a4a;
     margin-left: 18px;
@@ -294,7 +297,49 @@ th {
     font-family: sans-serif;
     color: #9c27b0;
     display: inline;
+    vertical-align: top;
     margin-left: 18px;
+}
+
+.agen{
+    padding-left: 50px;
+}
+
+.komen-image-agen {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    border: solid 1.5px #dddddd;
+    padding: 1.5px;
+    float: left;
+}
+
+.komen-agen-tanggal {
+    font-size: 11px;
+    color: #4a4a4a;
+    font-family: sans-serif;
+}
+
+.komen-agen-tanggapan {
+    font-size: 13.4px;
+    color: #4a4a4a;
+    font-family: sans-serif;
+}
+
+.komen-agen-name {
+    font-size: 13.4px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #9c27b0;
+    display: inline;
+    vertical-align: top;
+}
+
+.content-agent{
+    width: 695px;
+    height: 90px;
+    resize: none;
+    border-color: #dddddd;
 }
 
 .lokasi-detail {
@@ -361,6 +406,9 @@ th {
 .nav-tabs>li>a {
     border: none;
     background-color: transparent;
+    color: #4a4a4a;
+    font-size: 13.4px;
+    font-weight: bold;
 }
 
 .nav-tabs>li.active>a,
@@ -559,3 +607,143 @@ th {
     margin-bottom: 0px;
     padding: 10px;
 }
+
+
+.btn-send {
+    background-color: #ab47bc;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 150px;
+    float: right !important;
+}
+
+.btn-agen{
+    background-color: #ab47bc;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 130px;
+    float: right !important;
+    margin-right: 44px;
+}
+
+.submit-komen{
+    margin-top: 20px;
+}
+
+.type-trip{
+    display: inline-block;
+    background-color: #536dfe;
+    padding: 4px 15px;
+    border-radius: 20px;
+}
+
+.tanya-user{
+    width: 813px;
+    height: 90px;
+    resize: none;
+    border-color: #dddddd;
+}
+
+
+/* modal */
+div.modal-content.pesan{
+    width: 429px;
+    left: 100px;
+    top:50px;
+    padding-bottom: 25px;
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+.header-pesan{
+    width: 427px;
+    height: 69px;
+    padding: 15px 30px;
+    background-color: #f5f5f5;
+}
+
+.title-pesan{
+    font-size: 25px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+}
+
+.pesan-body{
+    padding: 30px;
+}
+
+.pesan-untuk{
+    width: 296px;
+    height: 36px;
+    display: inline-block;
+    margin-left: 11px;
+}
+
+.isi-pesan{
+    height: 140px;
+    width: 296px;
+    display: inline-block;
+    resize: none;
+}
+
+.label-pesan-isi{
+    display: inline-block;
+    width: 55px;
+    vertical-align: top;
+}
+
+.btn-kirim-pesan{
+    width: 145px;
+    height: 31px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    border:none;
+    margin-right: 12px;
+}
+
+.close{
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background-color: #d24d57;
+    color: white;
+    opacity: 1;
+    font-size: 23px;
+    font-weight: normal;
+    margin-top: 9px;
+}
+
+/* akhir modal */
+
+.panah {
+    -webkit-transition-duration: 1s;
+        -moz-transition-duration: 1s;
+        -o-transition-duration: 1s;
+        transition-duration: 1s;
+        -webkit-transition-property: -webkit-transform;
+        -moz-transition-property: -moz-transform;
+        -o-transition-property: -o-transform;
+        transition-property: transform;
+      outline: 0;
+    }
+    
+    .panah:focus {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }

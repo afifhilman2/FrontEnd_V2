@@ -1,20 +1,23 @@
-  <p class="profil">Beri Rating & Ulasan</p>
-  <p class="masukan-profil">Masukkan profil Anda dengan benar. Travinesia akan menghubungi sesuai dengan informasi yang Anda masukkan. Pastikan informasi pada Halaman Profil selalu update jika ada perubahan informasi terkait Anda.</p>
-  
+<p class="profil">Beri Rating & Ulasan</p>
+<p class="masukan-profil">Masukkan profil Anda dengan benar. Travinesia akan menghubungi sesuai dengan informasi yang Anda masukkan. Pastikan informasi pada Halaman Profil selalu update jika ada perubahan informasi terkait Anda.</p>
+
+<form (submit)="sendreview()">
   <div class="rating">
-    <p>Rating</p>
-    <div>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
+      <p>Rating</p>
+      <div>
+        <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">  
+          <span class="glyphicon" [ngClass]="{'glyphicon-star-empty':item,'glyphicon-star':!item}"></span>   
+          </a> 
+      </div>
     </div>
-  </div>
-  <div class="ulasan">
-    <p>Ulasan</p>
-    <textarea class="form-control" placeholder="Ungkapkan semua yang Anda dan teman-teman rasakan selama mengikuti Trip ini."></textarea>
-  </div>
-  
+    <div class="ulasan">
+      <p>Ulasan</p>
+      <textarea class="form-control" [(ngModel)]="review.field" name="field" placeholder="Ungkapkan semua yang Anda dan teman-teman rasakan selama mengikuti Trip ini."></textarea>
+      <button type="submit" class="btn btn-submitUlasan">Kirim Ulasan</button>
+    </div>
+</form>
+
+
+
 
 

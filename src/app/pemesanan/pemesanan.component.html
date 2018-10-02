@@ -1,8 +1,9 @@
 <main id="page-content-wrapper" role="main">
     <p class="profil">Pemesanan</p>
-    <p class="masukan-profil">Masukkan profil Anda dengan benar. Travinesia akan menghubungi sesuai dengan informasi yang Anda masukkan. Pastikan informasi pada Halaman Profil selalu update jika ada perubahan informasi terkait Anda.</p>
+    <p class="masukan-profil">Masukkan profil Anda dengan benar. Travinesia akan menghubungi sesuai dengan informasi yang Anda masukkan. 
+       Pastikan informasi pada Halaman Profil selalu update jika ada perubahan informasi terkait Anda.</p>
     <div class="trv-notice">
-        <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
+      <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
     </div>
     <!-- Nav tabs -->
     <div class="card">
@@ -10,7 +11,7 @@
             <li role="presentation" class="active"><a href="#status-pembayaran" aria-controls="home" role="tab" data-toggle="tab">Status Pemesanan</a></li>
             <li role="presentation"><a href="#daftar-transaksi" aria-controls="settings" role="tab" data-toggle="tab">History Transaksi</a></li>
         </ul>
-
+    
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="status-pembayaran">
@@ -25,76 +26,77 @@
                         <div class="dropdown-setting">
                             <span role="button" class="other" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Lainnya </span>
                             <div class="dropdown-menu other-content" aria-labelledby="dropdownMenu1">
-                                <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ order?.id_trip?.provider?.travel_name }}</span> </p>
-                                <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ order.coded_amount.toLocaleString('id') }}</span> </p>
-                                <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{order.quantity}}</span> </p>
-                                <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
-                                <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                                    <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ order?.id_trip?.provider?.travel_name }}</span> </p>
+                                    <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ order.coded_amount.toLocaleString('id') }}</span> </p>
+                                    <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{order.quantity}}</span> </p>
+                                    <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                                    <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
                             </div>
                         </div>
                     </div>
                     <div class="content-box-right">
                         <p class="status"> Status :</p>
                         <p class="wait-pay"> {{order.id_statusTrip.status_trip}} </p>
-                        <button class="btn-trv-pemesanan" (click)="button(order.id_statusTrip.id_status)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
+                        <button class="btn-trv-pemesanan" (click)="button(order.id_statusTrip.id_status, order)" *ngIf="!(order.id_statusTrip == 2 && order.id_statusTrip == 6)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
                         <p class="see-status" data-toggle="modal" data-target="#status">Lihat Detail Status</p>
-
+    
                         <!-- modal detail status -->
                         <div class="modal fade" id="status" role="dialog">
                             <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content status">
-                                    <div class="modal-header status-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title title">Status Pemesanan</h4>
-                                    </div>
-                                    <div class="modal-body status-body">
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Pembayaran </span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Sudah dibayar, Menunggu Konfirmasi Agen</span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Transaksi Diterima, Isi Data Peserta </span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Etiket Terbit </span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Konfirmasi di Meeting Point </span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Berlangsung</span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Review dan Rating </span>
-                                        <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Selesai</span>
-                                    </div>
-                                    <button class="btn-aksiModal">Tombol</button>
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content status">
+                                <div class="modal-header status-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title title">Status Pemesanan</h4>
                                 </div>
-
+                                <div class="modal-body status-body">
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Pembayaran </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Sudah dibayar, Menunggu Konfirmasi Agen</span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Transaksi Diterima, Isi Data Peserta </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Etiket Terbit </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Konfirmasi di Meeting Point </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Berlangsung</span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Review dan Rating </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Selesai</span>
+                                </div>
+                                <button class="btn-aksiModal">Tombol</button>
+                              </div>
+                              
                             </div>
                         </div>
                     </div>
-                    <div class="footer-box">
-                        <p class="quetion">Ada pertanyaan untuk agen travel ? Cobalah Kirim Pesan</p>
+                    <div class="footer-box"> 
+                        <p class="quetion">Ada pertanyaan untuk agen travel ?
+                           Cobalah Kirim Pesan</p>
                         <button class="btn-send-chat" data-toggle="modal" data-target="#pesan">Kirim Pesan</button>
                         <!-- modal kirim pesan -->
                         <div class="modal fade" id="pesan" role="dialog">
                             <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content pesan">
-                                    <div class="modal-header header-pesan">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title title-pesan">Pesan</h4>
-                                    </div>
-                                    <div class="modal-body pesan-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label class="label-pesan">Untuk :</label>
-                                                <input class="form-control pesan-untuk" type="text">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="label-pesan-isi">isi :</label>
-                                                <textarea class="form-control isi-pesan" type="text"></textarea>
-                                            </div>
-                                        </form>
-                                        <button class="btn-kirim-pesan pull-right" data-dismiss="modal">Kirim Pesan</button>
-                                    </div>
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content pesan">
+                                <div class="modal-header header-pesan">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title title-pesan">Pesan</h4>
                                 </div>
+                                <div class="modal-body pesan-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="label-pesan">Untuk :</label>
+                                            <input class="form-control pesan-untuk" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-pesan-isi">isi :</label>
+                                            <textarea class="form-control isi-pesan" type="text"></textarea>
+                                        </div>
+                                    </form>
+                                    <button class="btn-kirim-pesan pull-right" data-dismiss="modal">Kirim Pesan</button>
+                                </div>
+                              </div>
                             </div>
                         </div>
-                        <p class="detail-paket" [routerLink]="['/traveler/DetailPaket']">Lihat Detail Paket</p>
+                        <p class="detail-paket" (click)="goToDetail(order.id_trip._id)" >Lihat Detail Paket</p>
                     </div>
                 </div>
                 <!-- pager -->
@@ -116,21 +118,106 @@
                     </li>
                 </ul>
                 <!-- <div class="box-wrap-pemesanan">
-                <div class="content-box">
-                    <img src="./assets/img/6.jpg" class="img-trip">
-                    <a class="detail-pack" role="button"> Gunung Bromo Paket Sunrise Paket Lengkap </a>
-                    <p class="list-content">Nama Trip <span class="semicolon-margin">:</span> <span class="content-value"> Pulau Harapan Kepulauan Seribu</span> </p>
-                    <p class="list-content">Tanggal Berangkat <span class="semicolon-margin">:</span> <span class="content-value"> Sabtu, 14 Februari 2018</span> </p>
-                    <p class="list-content">Total <span class="semicolon-margin">:</span> <span class="content-value"> Rp 3.600.000</span> </p>
-                    <p class="list-content">Metode Pembayaran <span class="semicolon-margin">:</span> <span class="content-value"> Transfer (Bank Mandiri) </span> </p>
-                    <p class="list-content">Nama Pemesan <span class="semicolon-margin">:</span> <span class="content-value"> Ney Nack DC</span> </p>
-
-                    <button class="btn-trv-pemesanan"> Batalkan Trip</button>
-                    <button class="btn-trv-pemesanan"> Kirim Pesan</button>
-                </div>
-            </div> -->
+                    <div class="content-box">
+                        <img src="./assets/img/6.jpg" class="img-trip">
+                        <a class="detail-pack" role="button"> Gunung Bromo Paket Sunrise Paket Lengkap </a>
+                        <p class="list-content">Nama Trip <span class="semicolon-margin">:</span> <span class="content-value"> Pulau Harapan Kepulauan Seribu</span> </p>
+                        <p class="list-content">Tanggal Berangkat <span class="semicolon-margin">:</span> <span class="content-value"> Sabtu, 14 Februari 2018</span> </p>
+                        <p class="list-content">Total <span class="semicolon-margin">:</span> <span class="content-value"> Rp 3.600.000</span> </p>
+                        <p class="list-content">Metode Pembayaran <span class="semicolon-margin">:</span> <span class="content-value"> Transfer (Bank Mandiri) </span> </p>
+                        <p class="list-content">Nama Pemesan <span class="semicolon-margin">:</span> <span class="content-value"> Ney Nack DC</span> </p>
+    
+                        <button class="btn-trv-pemesanan"> Batalkan Trip</button>
+                        <button class="btn-trv-pemesanan"> Kirim Pesan</button>
+                    </div>
+                </div> -->
             </div>
-            <div role="tabpanel" class="tab-pane" id="daftar-transaksi">Belum ada Transaksi</div>
+            <div role="tabpanel" class="tab-pane" id="daftar-transaksi">
+                <div class="box-wrap-pemesanan" *ngFor="let histori of dataHistory">
+                    <div class="content-box">
+                        <img src="{{histori.id_trip.photo_trip['0']}}" class="img-trip">
+                        <a class="detail-pack" role="button"> {{histori.id_trip.trip_name}} </a>
+                        <p class="list-content">Nomor Pesanan <span class="semicolon-margin">:</span> <span class="content-value"> {{histori.no_booking}} </span> </p>
+                        <p class="list-content">Meeting Point <span class="semicolon-margin">:</span> <span class="content-value"> Angke (07.00 WIB)</span> </p>
+                        <p class="list-content">Tanggal Berangkat <span class="semicolon-margin">:</span> <span class="content-value"> {{histori.startDate_trip | date:'fullDate'}}</span> </p>
+                        <p class="list-content">Jenis Trip <span class="semicolon-margin">:</span> <span class="content-value"> Open Trip ({{histori.id_trip.days}} Hari {{histori.id_trip.night}} Malam) </span> </p>
+                        <div class="dropdown-setting">
+                            <span role="button" class="other" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Lainnya </span>
+                            <div class="dropdown-menu other-content" aria-labelledby="dropdownMenu1">
+                                    <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ histori?.id_trip?.provider?.travel_name }}</span> </p>
+                                    <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ histori.coded_amount }}</span> </p>
+                                    <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{histori.quantity}}</span> </p>
+                                    <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                                    <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="content-box-right">
+                        <p class="status"> Status :</p>
+                        <p class="wait-pay"> {{histori.id_statusTrip.status_trip}} </p>
+                        <button class="btn-trv-pemesanan" (click)="histori(order.id_statusTrip.id_status, order)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
+                        <p class="see-status" data-toggle="modal" data-target="#status">Lihat Detail Status</p> -->
+    
+                        <!-- modal detail status -->
+                        <!-- <div class="modal fade" id="status" role="dialog">
+                            <div class="modal-dialog"> -->
+                            
+                              <!-- Modal content-->
+                              <!-- <div class="modal-content status">
+                                <div class="modal-header status-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title title">Status Pemesanan</h4>
+                                </div>
+                                <div class="modal-body status-body">
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Pembayaran </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Sudah dibayar, Menunggu Konfirmasi Agen</span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Transaksi Diterima, Isi Data Peserta </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Etiket Terbit </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Konfirmasi di Meeting Point </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Berlangsung</span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Menunggu Review dan Rating </span>
+                                    <span class="text-content"><i class="glyphicon glyphicon-ok"></i>Trip Selesai</span>
+                                </div>
+                                <button class="btn-aksiModal">Tombol</button>
+                              </div>
+                              
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="footer-box"> 
+                        <p class="quetion">Ada pertanyaan untuk agen travel ?
+                           Cobalah Kirim Pesan</p>
+                        <button class="btn-send-chat" data-toggle="modal" data-target="#pesan">Kirim Pesan</button>
+                        <!-- modal kirim pesan -->
+                        <div class="modal fade" id="pesan" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content pesan">
+                                <div class="modal-header header-pesan">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title title-pesan">Pesan</h4>
+                                </div>
+                                <div class="modal-body pesan-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="label-pesan">Untuk :</label>
+                                            <input class="form-control pesan-untuk" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-pesan-isi">isi :</label>
+                                            <textarea class="form-control isi-pesan" type="text"></textarea>
+                                        </div>
+                                    </form>
+                                    <button class="btn-kirim-pesan pull-right" data-dismiss="modal">Kirim Pesan</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <p class="detail-paket" (click)="goToDetail(order.id_trip._id)" >Lihat Detail Paket</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</main>
+    </main>

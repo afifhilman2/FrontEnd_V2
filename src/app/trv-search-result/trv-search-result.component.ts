@@ -19,28 +19,30 @@ export class TrvSearchResultComponent implements OnInit {
 
   categoryAllTripId:any[];
 
-  constructor (private routeActive :ActivatedRoute, public appService:AppService, public http:Http) { 
+  constructor (private routeActive :ActivatedRoute, private appService:AppService, public http:Http, private router: Router) { 
 
-    let id = this.routeActive.snapshot.params['id'];
-    console.log(this.routeActive);
+  //   let id = this.routeActive.snapshot.params['id'];
+  //   console.log(this.routeActive);
 
-   this.categoryId = id;
-    console.log(this.categoryId);
+  //  this.categoryId = id;
+  //   console.log(this.categoryId);
   }
 
   
 
-
+  dataSearch;
   ngOnInit() {
     
-      this.http.get('http://travinesia.com:3000/get/category/'+this.categoryId)
-      .subscribe(
-        (res:Response)=> {
-          let tripSearch = res.json();
-          this.getTripSearch = tripSearch.data;
-         console.log(this.getTripSearch);
-        }
-      )
+      // this.http.get('http://travinesia.com:3000/get/category/'+this.categoryId)
+      // .subscribe(
+      //   (res:Response)=> {
+      //     let tripSearch = res.json();
+      //     this.getTripSearch = tripSearch.data;
+      //    console.log(this.getTripSearch);
+      //   }
+      // )
+      this.dataSearch = JSON.parse(this.routeActive.snapshot.queryParams['data'])
+      console.log(this.dataSearch)
  
 
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
