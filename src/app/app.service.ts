@@ -3,14 +3,19 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import 'rxjs/add/operator/toPromise';
+
 import { Product } from './product'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { tokenNotExpired } from 'angular2-jwt';
 
+declare const FB:any;
 
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { EventEmitter } from 'events';
 
 
 
@@ -22,10 +27,20 @@ export class AppService {
     url: string;
     idCategory:'';
 
+    emmiter : EventEmitter = new EventEmitter();
     private totalharga: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
     constructor (public http:Http, public http2: HttpClient) {
-        this.url  = 'https://api.datamuse.com/words?ml='
+        this.url  = 'https://api.datamuse.com/words?ml=';
+
+        FB.init({
+            appId      : 161487567865775,
+            status     : false, // the SDK will attempt to get info about the current user immediately after init
+            cookie     : false,  // enable cookies to allow the server to access
+            // the session
+            xfbml      : false,  // With xfbml set to true, the SDK will parse your page's DOM to find and initialize any social plugins that have been added using XFBML
+            version    : 'v2.12' // use graph api version 2.5
+          });
     }
 
     //token localstorage
@@ -227,7 +242,6 @@ export class AppService {
     booking(book){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);       
-
         return this.http.post('http://travinesia.com:3000/v1/user/booking/add', book, { headers: headers })
         .map(res => res.json())
         
@@ -351,7 +365,7 @@ export class AppService {
     addFavorit(dataFavorite){
         let headers = new Headers();
         this,this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/us er/add_favorite', dataFavorite, {headers: headers})
+        return this.http.post('http://travinesia.com:3000/v1/user/add_favorite', dataFavorite, {headers: headers})
         .map(res => res.json());
     }
 
@@ -381,4 +395,67 @@ export class AppService {
         .map(res => res.json())
       }
 
+
+    // loginFb
+    fbLogin() {
+        return new Promise((resolve, reject) => {
+          FB.login(result => {
+            if (result.authResponse) {
+              return this.http.post(`http://localhost:3000/api/v1/auth/facebook`, {access_token: result.authResponse.accessToken})
+                  .toPromise()
+                  .then(response => {
+                    var token = response.headers.get('x-auth-token');
+                    if (token) {
+                      localStorage.setItem('id_token', token);
+                    }
+                    resolve(response.json());
+                  })
+                  .catch(() => reject());
+            } else {
+              reject();
+            }
+          }, {scope: 'public_profile,email'})
+        });
+      }
+      logout() {
+        localStorage.removeItem('id_token');
+      }
+    
+      isLoggedIn() {
+        return new Promise((resolve, reject) => {
+          this.getCurrentUser().then(user => resolve(true)).catch(() => reject(false));
+        });
+      }
+    
+      getCurrentUser() {
+        return new Promise((resolve, reject) => {
+          return this.http.get(`http://localhost:3000/api/v1/auth/me`).toPromise().then(response => {
+            resolve(response.json());
+          }).catch(() => reject());
+        });
+      }
+    // tutup loginFb
+
+    loggedIn(){
+        return tokenNotExpired();
+    }
+
+    getAllDiscountTrip(){
+        return this.http.get('http://travinesia.com:3000/get/trip/all_discount')
+        .map(res => res.json())
+      }
+
+      deleleDiscussion(id_discussion){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('http://travinesia.com:3000/v1/discussion/delete/' + id_discussion,'', {headers: headers})
+        .map(res => res.json())
+      }
+  
+      addComment(comments){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('http://travinesia.com:3000/v1/discussion/post_comment/' + comments.id_diskusi, comments, {headers: headers})
+        .map(res => res.json())
+      }
 }

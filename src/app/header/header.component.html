@@ -57,7 +57,7 @@
                     <button [routerLink]="['/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span>
                 </li>
                 <li>
-                    <a (click)="openLogout()" role="button" class="profil">
+                    <a routerLink="/Akun/Profile" role="button" class="profil">
                         <img [src]="photos" class="foto-profil">
                     </a>
 
@@ -123,7 +123,9 @@
         </div>
 
         <div class="trv-form-login">
-            <input id="password" class="form-control" placeholder="Password" type="password" data-toggle="password" formControlName="password" [(ngModel)]="user.password" name="password">
+            <input id="password" class="form-control" placeholder="Password" [type]="show ? 'text' : 'password'" data-toggle="password" formControlName="password" [(ngModel)]="user.password" name="password">
+            <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="pwd()"></span>
+            <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="pwd()"></span>
             <div class="trv-alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{passwordAlertMessage}}</div>
         </div>
 

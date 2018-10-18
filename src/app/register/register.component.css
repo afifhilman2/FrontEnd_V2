@@ -32,7 +32,6 @@
     width: 414px;
     height: 44px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
 }
 
 
@@ -173,4 +172,13 @@ small{
     left: 50%;
     margin-left: -3px;
     margin-top: -29px;
+}
+
+.mata{
+    position: absolute;
+    right: 156px;
+    top: 354px;
+    font-size: 20px;
+    color: #dddddd;
+    cursor: pointer;
 }

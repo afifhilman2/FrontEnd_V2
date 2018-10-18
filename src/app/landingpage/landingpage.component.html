@@ -59,15 +59,8 @@
                             <div class="form-group">
                                 <label for="kategori">Kategori : </label>
                                 <select class="form-control" (change)="getcategory($event)">
-                                            <option value="" disabled selected>Pilih Kategori</option>
-									 		<option id="Beach" *ngFor="let k of category" [value]="k.category_name">{{ k.category_name}}</option>
-									 		<!-- <option id="City Tour" >City Tour</option>
-									 		<option id="Culture">Culture</option>
-									 		<option id="Fishing">Fishing</option>
-									 		<option id="Hiking">Hiking</option>
-									 		<option id="Honeymoon">Honeymoon</option>
-									 		<option id="Tracking">Tracking</option>
-									 		<option id="Sailing">Sailing</option>	 -->
+                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    <option id="Beach" *ngFor="let k of category" [value]="k.category_name">{{ k.category_name}}</option>
 								</select>
                             </div>
                         </div>
@@ -90,12 +83,12 @@
                             <div class="form-group">
                                 <label for="kategori">Hari : </label>
                                 <select class="form-control">
-									 		<option>1 Hari</option>
-									 		<option>2 Hari</option>
-									 		<option>3 Hari</option>
-									 		<option>4 Hari</option>
-									 		<option>5 Hari</option>	
-										 </select>
+                                    <option>1 Hari</option>
+                                    <option>2 Hari</option>
+                                    <option>3 Hari</option>
+                                    <option>4 Hari</option>
+                                    <option>5 Hari</option>	
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -140,7 +133,7 @@
             <a class="diskon-category lihat-diskon" routerLink="/search">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
-                <div *ngFor="let trip of dataTrip; let i=index" >
+                <div *ngFor="let trip of diskon; let i=index" >
                     <div *ngIf="i<6" >
                         <div class="col-md-2 col-sm-4 col-xs-6" (click)="goDetail($event)">
                             <a >
@@ -149,7 +142,7 @@
                                     <div class="disc">-10%</div>
                                     <div class="trip">Open</div>
                                     <!-- <div class="private-trip">Private</div> -->
-                                    <div class="body-caption">
+                                    <div class="body-caption" id="{{trip._id}}">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-6 ">
                                                 <span class="icon-star"></span>

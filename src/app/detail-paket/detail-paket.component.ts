@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute,  ParamMap } from "@angular/router";
+import { Router, ActivatedRoute,  ParamMap, NavigationExtras } from "@angular/router";
 import { AppService} from '../app.service';
 import { Http, Headers, Response} from '@angular/http';
 
@@ -8,6 +8,7 @@ import 'rxjs/add/operator/switchMap';
 import { Product } from '../product';
 
 import { DatePipe, LOCATION_INITIALIZED } from '@angular/common';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -20,62 +21,72 @@ export class DetailPaketComponent implements OnInit {
   public counter : number;
   idtrip: any[];
   dataTrip: any[];
-  detailTrip: any[] = [];
-  totalHarga;
-  totalHargaBayar: any = 1;
+  detailTrip;
   hargaProduct; 
 
-  book: any = {
+  formBooking = this.fb.group({
     id_type_trip:'',
-    quantity: '',
+    quantity: 1,
     publish_price: '',
     startDate_trip: '',
     _id:'',
-  }
+  })
+
 
   text: any = {
     _id:'',
     content:'',
   }
 
-  
-  
-
-  
-
   diskus;
 
   name;
   photo;
   error = HttpErrorResponse;
-  loaded : boolean = true;
-  kat
+  // loaded : boolean = true;
+  kat;
+  date: string[];
+  fasilitas;
 
   
-  constructor(private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
+  constructor(private fb: FormBuilder, private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
     let id = this.active.snapshot.params['id'];
     this.dataTrip = id;
-
-    // this.appServis.diskusi().subscribe(disk => {
-    //   this.diskus = disk.data;
-    //   console.log(this.diskus);
-    // })
-
-  
-    
   }
 
-
+  isFieldValid(field: string) {
+    return !this.formBooking.get(field).valid && this.formBooking.get(field).touched;
+  }
   
-
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field),
+      'has-feedback': this.isFieldValid(field)
+    };
+  }
+  
+  // validate submit
+    validateAllFormFields(formGroup: FormGroup) {         //{1}
+      Object.keys(formGroup.controls).forEach(field => {  //{2}
+        const control = formGroup.get(field);             //{3}
+        
+        if (control instanceof FormControl) {             //{4}
+          control.markAsTouched({ onlySelf: true });
+  
+        } else if (control instanceof FormGroup) {        //{5}
+          this.validateAllFormFields(control);            //{6}
+        }
+      });
+    }
   ngOnInit() {
     this.getTrip();
     this.getDiskusi();
+    
   }
 
-  
+  idAgen;
   getTrip(): void{
-    this.book._id = this.dataTrip;
+    // this.book._id = this.dataTrip;
     this.http.get('http://travinesia.com:3000/get/trip_detail/' + this.dataTrip)
         .subscribe(
           // trip =>{ 
@@ -84,17 +95,40 @@ export class DetailPaketComponent implements OnInit {
           (res:Response)=>{
             let trip = res.json();
             this.detailTrip = trip.data;
+            // console.log(this.detailTrip)
             this.hargaProduct = trip.data.publish_price;
-            this.totalHarga = this.totalHargaBayar * this.hargaProduct;
+            // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
             this.photo = trip.data.photo_trip;
             this.kat = trip.data.category;
-            this.book.id_type_trip = trip.data.id_type_trip._id
-            console.log(this.detailTrip);
-            this.loaded = false;
-          }          
-        )
+            // this.formBooking.value.id_type_trip = trip.data.id_type_trip._id;
+            this.quota_left = trip.data.quota_left; 
+            this.date = trip.data.date_trip;
+            this.fasilitas = trip.data.facility;
+            this.idAgen = trip.data.provider._id
+            // console.log(this.fasilitas)
+            // this.loaded = false;
 
-        
+          }          
+        )   
+  }
+
+  coment = this.fb.group({
+    id_diskusi:'',
+    comment:''
+  })
+
+  idDiskusi;
+  sendId(e){
+    this.idDiskusi = e.target.id;
+  }
+  addComent(){
+    this.coment.patchValue({
+      id_diskusi: this.idDiskusi
+    })
+    
+    this.appServis.addComment(this.coment.value).subscribe(comment => {
+      console.log(comment)  
+    })
   }
 
   getDiskusi(){
@@ -111,58 +145,54 @@ export class DetailPaketComponent implements OnInit {
       this.review = riview.data;
     })
   }
-
-
-
-
   sendDate(e){
-    this.book.startDate_trip = e.target.value;
+    // this.book.startDate_trip = e.target.value;
     
   }
-
-
-  goToProsespemesanan(e){
-    
-    this.book.quantity = this.totalHargaBayar;
-    this.book.publish_price = this.totalHarga;
-    console.log(this.book);
-    this.idtrip = e.target.id
-    
+  bookId;
+  goToProsespemesanan(){
    if(!(localStorage.token == null)){
-    this.appServis.booking(this.book).subscribe(book => {
-      // this.bookId = book.data;
-      // this.idT = book.data._id;
-      console.log(this.book);
-      
-      if (book.status == 200){
-        this.router.navigate(['/ProsesPemesanan'], {queryParams: {data : JSON.stringify(book.data)}});
-      }
-    });
-
+     if(this.formBooking.valid){
+      this.formBooking.patchValue({
+        _id: this.dataTrip, 
+        publish_price: this.detailTrip.publish_price,
+        id_type_trip: this.detailTrip.id_type_trip._id,
+        
+        // id_type_trip : 
+      })
+        this.appServis.booking(this.formBooking.value).subscribe(book => {
+        let navigationExtras : NavigationExtras={
+          queryParams : { data: JSON.stringify(book.data) }
+        }
+        if (book.status == 200){
+          this.router.navigate(['/ProsesPemesanan'], navigationExtras);
+        }
+      });
+     }else{
+      this.validateAllFormFields(this.formBooking);
+     }
    }else {
     alert('Please log in')
     this.router.navigate(['/LoginPage']);
     return false;
    }
-     
-    
   }
 
   increment() { 
     // this.appServis.updateProduct(this.totalHargaBayar+1)
     // this.totalHargaBayar = 1; 
-    this.totalHargaBayar++;
-    this.totalHarga = this.totalHargaBayar * this.hargaProduct;
+    this.formBooking.value.quantity++;
+    // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
     // console.log(this.totalHarga)
 
   }
 
   decrement() {
     // this.totalHargaBayar = 1;
-      if(this.totalHargaBayar >1){
+      if(this.formBooking.value.quantity >1){
         // this.appServis.updateProduct(this.totalHargaBayar-1)
-        this.totalHargaBayar--;
-        this.totalHarga = this.totalHargaBayar * this.hargaProduct;
+        this.formBooking.value.quantity--;
+        // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
 
       }
   }
@@ -172,19 +202,22 @@ export class DetailPaketComponent implements OnInit {
   textContent;
   sendComment(){
     if(!(localStorage.token == null)){
-      // console.log(this.text._id);
-      // console.log(this.text.content);
-      // console.log('login')
-      // this.showComment = !this.showComment;
-    // this.router.navigate(['/LoginPage']);
     this.appServis.sendDiskusi(this.dataTrip,this.text).subscribe(text =>{
       console.log(text);
     })
   }else{
-    // console.log('belom login')
-    
     this.router.navigate(['/LoginPage']);
     }
+  }
+
+  quota_left : number[];
+  quota_dateTrip: number = null
+  dateTrip: string ;
+  // showLeft : boolean = false;
+  onChange(event){
+    this.quota_dateTrip = this.quota_left[event-1];
+    this.dateTrip = this.date[event-1];
+    console.log(this.dateTrip);
   }
 
   cekLogin: boolean = false;
@@ -192,6 +225,9 @@ export class DetailPaketComponent implements OnInit {
     if(!(localStorage.token == null)){
       return this.cekLogin = true;
     }
+  } 
+
+  goToAgen(){
+    this.router.navigate(['/EtalaseTravel/' + this.idAgen])
   }
- 
 }

@@ -48,7 +48,7 @@ import { ProsesBayarComponent } from './proses-bayar/proses-bayar.component';
 import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
 import { ProsesPemesananComponent } from './proses-pemesanan/proses-pemesanan.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { RegisterComponent } from './register/register.component';
+// import { RegisterComponent } from './register/register.component';
 import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
 import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
 import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
@@ -58,7 +58,7 @@ import { SearchFilterPipe } from './header/search-pipe';
 import { ClickOutsideDirective } from './header/directive-dropdown';
 import { MiniFooterComponent } from './mini-footer/mini-footer.component';
 import { LoaderComponent } from './loader/loader.component';
-import {LoaderService} from './loader/loader-service';
+import { LoaderService } from './loader/loader-service';
 
 import { TrvSearchNavbarModule } from './trv-search-navbar/trv-search-navbar.module';
 import {JualTripModule} from './jual-trip/jual-trip.module';
@@ -104,7 +104,7 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
     ProsesBayar2Component,
     ProsesPemesananComponent,
     CalendarComponent,
-    RegisterComponent,
+    // RegisterComponent,
     PesanMasukComponent,
     DiskusiTripComponent,
     HeaderNologinComponent,

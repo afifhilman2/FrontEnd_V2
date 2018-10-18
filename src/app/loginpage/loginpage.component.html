@@ -1,4 +1,7 @@
 <div class="container">
+    <div class="trv-notice" *ngIf="notifEmail">
+        <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
+      </div>
         <div class="trv-tema-atas">
           <h2><strong> Masuk di Travinesia </strong></h2>
           <div class="garis-vertical"></div>
@@ -7,17 +10,21 @@
           </div>
         </div>
         <div class="col-md-6">
-          <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label for="email"> Email </label>
-              <input id="email" type="email" class="form-control" [(ngModel)]="loginUser.email" name="email" #newUserEmail="ngModel" required> 
-              <div *ngIf="newUserEmail.errors?.required && newUserEmail.touched" class="alert trv-alert">Email Tidak Boleh Kosong</div> 
+              <input id="email" type="email" class="form-control" formControlName="email"> 
+              <div class="alert trv-alert" *ngIf="formLogin.get('email').hasError('required') && formLogin.get('email').touched"> Email Tidak Boleh Kosong </div>
+              
+      
             </div>
             <div class="form-group">
               <label for="password"> Password </label>
-              <input id="password" type="password" class="form-control" [(ngModel)]="loginUser.password" name="password" #newUserPassword="ngModel" required minlength="8"> 
-              <div *ngIf="newUserPassword.errors?.required && newUserPassword.touched" class="alert trv-alert">Password Tidak Boleh Kosong</div> 
-              <div *ngIf="newUserPassword.errors?.minlength && newUserPassword.touched" class="alert trv-alert">Minimal 8 Karakter</div> 
+              <input id="password" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"> 
+              <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
+              <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="password()"></span>
+              <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('required') && formLogin.get('password').touched"> Password Tidak Boleh Kosong </div>
+              <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('minlength') && formLogin.get('password').touched"> Minimal 8 Karakter </div> 
             </div>
             <div>
               <div class="col-md-6">

@@ -99,6 +99,11 @@ export class HeaderComponent implements OnInit {
     this.dropLogout = !this.dropLogout;
   }
 
+  show: boolean = false;
+  pwd() {
+    this.show = !this.show;
+  }
+
   
   // private results: Observable<SearchItem[]>;
   private searchField: FormControl;
@@ -137,7 +142,7 @@ export class HeaderComponent implements OnInit {
       // console.log(trip_name)
       if(trip_name.status == 200){
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/searchNavbar'], {queryParams: {data : JSON.stringify(trip_name.data)}}));
+        this.router.navigate(['/search'], {queryParams: {data : JSON.stringify(trip_name.data)}}));
       }
     })
    }
@@ -145,15 +150,13 @@ export class HeaderComponent implements OnInit {
    searchCategory;
    searchTrip(_id) {
     // this.idCategory = e.target.id;
-    
-    
     this.appService.searchCategory(_id).subscribe(searchCategory =>{
       this.searchCategory = searchCategory.data;
       console.log(this.searchCategory)
       // console.log(this.categoryAllTrip);
       if(searchCategory.status = 200){
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['traveler/search'], {queryParams :{data : JSON.stringify(this.searchCategory)}}))
+        this.router.navigate(['/search'], {queryParams :{data : JSON.stringify(this.searchCategory)}}))
       }
     })
     // this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
@@ -173,7 +176,7 @@ export class HeaderComponent implements OnInit {
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
       if (user.success== true) {
-        // this.login = user.token;
+        this.loginUser = true;
         
         // this.changeHead = !this.changeHead;
         // this.changeHeadUser = !this.changeHeadUser;
@@ -241,7 +244,7 @@ export class HeaderComponent implements OnInit {
    }
 
   get isLogin(){
-    if(!(localStorage.token == null)){
+    if(this.appService.loggedIn()){
       // this.loginUser = !this.loginUser;
       return this.loginUser = true;
     }

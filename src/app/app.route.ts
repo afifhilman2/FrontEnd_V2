@@ -16,7 +16,7 @@ import { LoginpageComponent } from "./loginpage/loginpage.component";
 import { FavoritUserComponent } from "./favorit-user/favorit-user.component";
 import { TrvSidebarComponent } from "./trv-sidebar/trv-sidebar.component";
 import { TrvSearchResultComponent } from "./trv-search-result/trv-search-result.component";
-import { TrvSearchNavbarComponent} from "./trv-search-navbar/trv-search-navbar.component";
+// import { TrvSearchNavbarComponent} from "./trv-search-navbar/trv-search-navbar.component";
 import { EtalaseTravelComponent} from "./etalase-travel/etalase-travel.component";
 import { DaftarTravelComponent} from "./daftar-travel/daftar-travel.component";
 import { JualTripComponent} from "./jual-trip/jual-trip.component";
@@ -46,7 +46,7 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
 export const routes :Routes = [
 
     // without login header
-    {   path:'searchNavbar/:query', 
+    {   path:'searchNavbar/', 
         loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'
     },
     
@@ -99,9 +99,9 @@ export const routes :Routes = [
         component:HeaderComponent,
         children: [
             {path:'', component:LandingpageComponent},
-            {path:'search/:id', component:TrvSearchResultComponent},
-            {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
-            {path:'searchBar/:category/:province', component:TrvSearchNavbarComponent},
+            {path:'search', component:TrvSearchResultComponent},
+            // {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
+            // {path:'searchBar/:category/:province', component:TrvSearchNavbarComponent},
             {path:'Notifikasi', component:EksternalComponent},
             {path:'JadiTravel', component:DaftarTravelComponent,},
             {path:'EtalaseTravel', component:EtalaseTravelComponent},

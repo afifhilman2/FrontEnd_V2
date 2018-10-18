@@ -92,7 +92,7 @@ export class ProsesBayar2Component implements OnInit {
 
   
   goToPemesanan(){
-    this.router.navigate(['traveler/Akun/Pemesanan']);
+    this.router.navigate(['/Akun/Pemesanan']);
   }
 
 

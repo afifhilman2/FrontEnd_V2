@@ -325,3 +325,10 @@ options li:hover {
     background-color:#ab47bc;
     color:white;
 }
+
+.mata{
+    right: 27px;
+    top: 2px;
+    cursor: pointer;
+    color: #dddddd;
+}

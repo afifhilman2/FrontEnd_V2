@@ -45,7 +45,7 @@ export class UbahProfilComponent implements OnInit {
   }
 
   
-  password;
+ 
   new_password;
   repeadPassword;
 
@@ -81,7 +81,29 @@ export class UbahProfilComponent implements OnInit {
     });
   }
 
-  
+  show: boolean = false;
+  pwdLama(){
+    this.show = !this.show;
+  }
+
+  showBaru:boolean = false
+  updatePwdBaru(){
+    this.showBaru = !this.showBaru;
+  }
+
+  showUBaru:boolean = false
+  pwdBaru(){
+    this.showUBaru = !this.showUBaru;
+  }  
+
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
   ngOnInit() {
     

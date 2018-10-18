@@ -153,11 +153,13 @@ ul>li>a:focus .glyphicon-chevron-down {
 .search-dropdown{
     position: absolute;
     z-index: 1;
-    width: 92.5%;
+    width: 90%;
     max-height: 300px;
     background: white;
     margin-top: 33px;
     overflow-y: auto;
+    list-style: none;
+    padding-left: 10px;
 }
 
 .item-search{
@@ -248,5 +250,14 @@ ul>li>a:focus .glyphicon-chevron-down {
     border-radius: 0 0 0 10px;
     border: solid 1px #dddddd;
     text-align: right;
+    cursor: pointer;
+}
+
+.mata{
+    position: absolute;
+    right: 37px;
+    top: 97px;
+    font-size: 15px;
+    color: #dddddd;
     cursor: pointer;
 }

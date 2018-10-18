@@ -9,28 +9,30 @@
     </div>
   </div>
   <div class="col-md-6">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-      <div class="form-group">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+      <div class="form-group" [ngClass]="displayFieldCss('name')">
         <label for="name" class="label_form"> Nama Lengkap </label>
-        <input id="name" type="text" class="form-control" [(ngModel)]="newUser.name" name="name" #newUserName="ngModel" required autofocus>
-        <div *ngIf="newUserName.errors?.required && newUserName.touched" class="alert trv-alert">Nama Tidak Boleh Kosong</div> 
+        <input id="name" type="text" class="form-control" formControlName="name" autofocus >
+        <div *ngIf="formRegister.get('name').hasError('required') && formRegister.get('name').touched" class="alert trv-alert">Nama Tidak Boleh Kosong</div> 
       </div> 
-      <div class="form-group">
+      <div class="form-group" [ngClass]="displayFieldCss('telephone')">
         <label for="telephone"> Nomor Telepon </label>
-        <input type="text" class="form-control" [(ngModel)]="newUser.telephone" name="telephone" #newUserTelephone="ngModel" required>
+        <input type="text" class="form-control" formControlName="telephone">
         <small>Harap mengisi nomor telepon yang aktif untuk keamanan transaksi</small>
-        <div *ngIf="newUserTelephone.errors?.required && newUserTelephone.touched" class="alert trv-alert">No Telepon Tidak Boleh Kosong</div> 
+        <div *ngIf="formRegister.get('telephone').hasError('required') && formRegister.get('telephone').touched" class="alert trv-alert">No Telepon Tidak Boleh Kosong</div> 
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="displayFieldCss('email')">
         <label for="email"> Email </label>
-        <input id="email" type="email" class="form-control" [(ngModel)]="newUser.email" name="email" #newUserEmail="ngModel" required> 
-        <div *ngIf="newUserEmail.errors?.required && newUserEmail.touched" class="alert trv-alert">Email Tidak Boleh Kosong</div> 
+        <input id="email" type="email" class="form-control" formControlName="email"> 
+        <div *ngIf="formRegister.get('email').hasError('required') && formRegister.get('email').touched" class="alert trv-alert">Email Tidak Boleh Kosong</div> 
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="displayFieldCss('password')">
         <label for="password"> Password </label>
-        <input id="password" type="password" class="form-control" [(ngModel)]="newUser.password" name="password" #newUserPassword="ngModel" required minlength="8"> 
-        <div *ngIf="newUserPassword.errors?.required && newUserPassword.touched" class="alert trv-alert">Password Tidak Boleh Kosong</div> 
-        <div *ngIf="newUserPassword.errors?.minlength && newUserPassword.touched" class="alert trv-alert">Minimal 8 Karakter</div> 
+        <input id="password" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"> 
+        <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
+        <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="password()"></span>
+        <div *ngIf="formRegister.get('password').hasError('required') && formRegister.get('password').touched" class="alert trv-alert">Password Tidak Boleh Kosong</div> 
+        <div *ngIf="formRegister.get('password').hasError('minlength') && formRegister.get('password').touched" class="alert trv-alert">Minimal 8 Karakter</div> 
       </div>
       <div>
         <input type="checkbox" class="checkbox">
@@ -38,7 +40,7 @@
           Saya mengkonfirmasi telah menyetujui Syarat dan ketentuan,serta Kebijakan Privasi Travinesia. Baca Selengkapnya
         </label>  
       </div>
-      <button class="btn btn-daftar pull-right" type="submit" [disabled]="!f.valid" >Daftar</button>
+      <button class="btn btn-daftar pull-right" type="submit" >Daftar</button>
     </form>
   </div>
   <div class="col-md-6">

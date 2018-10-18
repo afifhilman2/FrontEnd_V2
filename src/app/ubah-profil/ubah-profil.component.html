@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label for="name" class=" form-label"> Nama Lengkap <p class="pull-right">:</p></label>
                     <div class="form-nama">
-                        <input type="text" class="form-control" name="name" [(ngModel)]="edit.name">
+                        <input type="text" class="form-control" name="name" [(ngModel)]="edit.name" readonly>
                     </div>
                 </div>
                 <div class="form-group">
@@ -123,7 +123,7 @@
                 <div class="form-group">
                     <label for="telephone" class="form-label"> No. HP <p class="pull-right">:</p></label>
                     <div class="form-telepone">
-                        <input id="telephone" type="text" class="form-control" name="telephone"  [(ngModel)]="edit.telephone">
+                        <input id="telephone" type="string" (keypress)="keyPress($event)" class="form-control" name="telephone"  [(ngModel)]="edit.telephone">
                     </div>
                 </div>
                 <div class="form-group">
@@ -168,15 +168,21 @@
                     
                         <div class="form-group">
                             <label class="label-modal">Password Lama</label>
-                            <input type="password" class="form-control modal-form" [(ngModel)]="pwd.password" name="password">
+                            <input [type]="show ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.password" name="password">
+                            <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="pwdLama()"></span>
+                            <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="pwdLama()"></span>
                         </div>
                         <div class="form-group">
                             <label class="label-modal">Password Baru</label>
-                            <input type="password" class="form-control modal-form" [(ngModel)]="pwd.new_password" name="new_password">
+                            <input [type]="showUBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.new_password" name="new_password">
+                            <span *ngIf="showUBaru === false" class="glyphicon glyphicon-eye-open mata" (click)="pwdBaru()"></span>
+                            <span *ngIf="showUBaru === true" class="glyphicon glyphicon-eye-close mata" (click)="pwdBaru()"></span>
                         </div>
                         <div class="form-group">
                             <label class="label-modal">Ulangi Password Baru</label>
-                            <input type="password" class="form-control modal-form" [(ngModel)]="pwd.repeatPassword" name="repeatPassword">
+                            <input [type]="showBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.repeatPassword" name="repeatPassword">
+                            <span *ngIf="showBaru === false" class="glyphicon glyphicon-eye-open mata" (click)="updatePwdBaru()"></span>
+                            <span *ngIf="showBaru === true" class="glyphicon glyphicon-eye-close mata" (click)="updatePwdBaru()"></span>
                         </div>
                     
                 </div>

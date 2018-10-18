@@ -28,7 +28,7 @@ export class LandingpageComponent implements OnInit {
     this.appService.getDataTrip().subscribe (dataTrip => {
      
       this.dataTrip = dataTrip.data;
-      console.log(dataTrip);
+      // console.log(dataTrip);
       this.photo = dataTrip.data.photo_trip
       // console.log(this.photo)
 
@@ -45,8 +45,10 @@ export class LandingpageComponent implements OnInit {
     })
   }
 
+  diskon;
   getDiskon(){
     this.appService.getDiscountTrip().subscribe(diskon =>{
+      this.diskon = diskon.data
       console.log(diskon)
     })
   }

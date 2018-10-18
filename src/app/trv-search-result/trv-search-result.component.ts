@@ -30,20 +30,16 @@ export class TrvSearchResultComponent implements OnInit {
 
   
 
-  dataSearch;
+  dataSearchCategory;
+  dataSearchName;
   ngOnInit() {
-    
-      // this.http.get('http://travinesia.com:3000/get/category/'+this.categoryId)
-      // .subscribe(
-      //   (res:Response)=> {
-      //     let tripSearch = res.json();
-      //     this.getTripSearch = tripSearch.data;
-      //    console.log(this.getTripSearch);
-      //   }
-      // )
-      this.dataSearch = JSON.parse(this.routeActive.snapshot.queryParams['data'])
-      console.log(this.dataSearch)
- 
+      
+      this.dataSearchCategory = JSON.parse(this.routeActive.snapshot.queryParams['data'])
+      console.log(this.dataSearchCategory)
+      this.favorite._id = this.dataSearchCategory._id;
+      console.log(this.favorite._id)
+       
+
 
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
       //  console.log(params);
@@ -51,5 +47,21 @@ export class TrvSearchResultComponent implements OnInit {
       this.order = params.order;
       // console.log(this.order);
     });
+  }
+
+  favorite = { 
+    _id:''
+  }
+  favorit(id){
+    this.favorite._id = id;
+    this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
+      console.log(dataFavorite)
+    })
+  }
+
+  id_trip;
+  goToDetail(e){
+    this.id_trip = e.target.id;
+    this.router.navigate(['/DetailPaket', this.id_trip])
   }
 }

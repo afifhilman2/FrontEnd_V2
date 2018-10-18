@@ -115,15 +115,14 @@ th {
     border-radius: 2.4px;
     background-color: #ffffff;
     border: solid 0.8px #9c27b0;
-    padding-top: 19px;
+    padding: 15px 10px;
+    text-align: center;
 }
 
 .harga-diskon {
     font-size: 24.9px;
     color: #9c27b0;
     font-weight: bold;
-    margin-left: 50px;
-    margin-top: 15px;
     font-family: sans-serif;
 }
 
@@ -144,10 +143,11 @@ th {
 }
 
 .img-agen {
-    width: 50px;
+    width: 50px; 
     height: 59px;
     float: left;
     margin-right: 22px;
+    object-fit: cover;
 }
 
 .img-share {
@@ -190,6 +190,10 @@ th {
 
 .glyphicon-tag{
     color:  white;
+}
+
+.addMinus{
+    color: #4a4a4a;
 }
 
 .jenis-paket {
@@ -271,6 +275,7 @@ th {
     border-radius: 50%;
     border: solid 1.5px #dddddd;
     padding: 1.5px;
+    vertical-align: top;
 }
 
 .komen-star {
@@ -338,6 +343,7 @@ th {
 .content-agent{
     width: 695px;
     height: 90px;
+    margin-left: 8px;
     resize: none;
     border-color: #dddddd;
 }
@@ -373,6 +379,10 @@ th {
 
 .tempat {
     display: inline-block;
+}
+
+.tempat p{
+    width: 100%;
 }
 
 .text-description {
@@ -476,7 +486,7 @@ th {
 .table {
     margin-left: 50px;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 23px;
     width: 90%;
 }
 
@@ -534,7 +544,7 @@ th {
     height: auto;
     margin-left: 50px;
     border: 1px solid #dddddd;
-    margin-top: 10px;
+    margin-top: 23px;
 }
 
 .jumlah-orang {
@@ -573,8 +583,16 @@ th {
     border: 1px solid #dddddd;
 }
 
+.tanggal-tersedia{
+    border-radius: 0;
+    background-color: white;
+    height: 50px;
+    margin-top: -1px;
+    border: 1px solid #dddddd;
+}
+
 .nominal {
-    color: #9c27b0;
+    color: #4a4a4a;
     font-weight: bold;
     text-align: center;
 }
@@ -747,3 +765,7 @@ div.modal-content.pesan{
     -ms-transform: rotate(90deg);
       transform: rotate(90deg);
     }
+
+.fasilitas{
+    margin-right: 10px;
+}
