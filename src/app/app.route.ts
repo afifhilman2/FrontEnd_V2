@@ -11,7 +11,6 @@ import { SidebarAkunProfilComponent } from './sidebar-akun-profil/sidebar-akun-p
 import { FooterComponent } from './footer/footer.component';
 import { EksternalComponent } from './eksternal/eksternal.component';
 import { LupaKataSandiComponent } from './lupa-kata-sandi/lupa-kata-sandi.component';
-import { UbahKataSandiComponent } from './ubah-kata-sandi/ubah-kata-sandi.component';
 import { LoginpageComponent } from "./loginpage/loginpage.component";
 import { FavoritUserComponent } from "./favorit-user/favorit-user.component";
 import { TrvSidebarComponent } from "./trv-sidebar/trv-sidebar.component";
@@ -46,9 +45,7 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
 export const routes :Routes = [
 
     // without login header
-    {   path:'searchNavbar/', 
-        loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'
-    },
+    
     
     {   path:'JualTrip', 
         loadChildren: './jual-trip/jual-trip.module#JualTripModule'
@@ -98,31 +95,32 @@ export const routes :Routes = [
         path :'', 
         component:HeaderComponent,
         children: [
-            {path:'', component:LandingpageComponent},
+            // {path:'', component:LandingpageComponent},
             {path:'search', component:TrvSearchResultComponent},
-            // {path:'searchNavbar/:query', component:TrvSearchNavbarComponent},
+            {path:'searchNavbar/', loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'},
             // {path:'searchBar/:category/:province', component:TrvSearchNavbarComponent},
             {path:'Notifikasi', component:EksternalComponent},
             {path:'JadiTravel', component:DaftarTravelComponent,},
             {path:'EtalaseTravel', component:EtalaseTravelComponent},
-            {path:'DetailPaket/:id', component:DetailPaketComponent},
-            {path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},
+            // {path:'DetailPaket/:id', component:DetailPaketComponent},
+            // {path:'ProsesPemesanan/:id', component:ProsesPemesananComponent, canActivate:[GuardService]},
             // {path:'ProsesBayar', component:ProsesBayarComponent},
-            // {path:'ProsesBayar2', component:ProsesBayar2Component},
+            { path: 'DetailPaket/:id', loadChildren: './detail-paket/detail-paket.module#DetailPaketModule'},
+            {path:'Diskon', component:SidebarAkunProfilComponent},
             {path:'Calendar', component:CalendarComponent},
-            {path:'Akun', component:TrvSidebarComponent,
-            children:[
-                {path:'', component:PemesananComponent},
-                {path:'Profile', component:UbahProfilComponent},
-                {path:'Pemesanan', component:PemesananComponent},
-                {path:'Favorit', component:FavoritUserComponent},
-                {path:'PesanMasuk', component:PesanMasukComponent},
-                {path:'DiskusiTrip', component:DiskusiTripComponent},
-                {path:'Promo', component:PromoComponent},
-                {path:'Ulasan', component:RatingUlasanComponent },
-                {path:'isiDataPeserta', component:IsiDataPesertaComponent}
-                    ]
-                    },
+            // {path:'Akun', component:TrvSidebarComponent,
+            // children:[
+            //     {path:'', component:PemesananComponent},
+            //     {path:'Profile', component:UbahProfilComponent},
+            //     {path:'Pemesanan', component:PemesananComponent},
+            //     {path:'Favorit', component:FavoritUserComponent},
+            //     {path:'PesanMasuk', component:PesanMasukComponent},
+            //     {path:'DiskusiTrip', component:DiskusiTripComponent},
+            //     {path:'Promo', component:PromoComponent},
+            //     {path:'Ulasan', component:RatingUlasanComponent },
+            //     {path:'isiDataPeserta', component:IsiDataPesertaComponent}
+            //         ]
+            //         },
             {path:'JualTrip', component:JualTripComponent,
             children:[
                 {path:'', component:JualTripContentComponent},
@@ -138,12 +136,13 @@ export const routes :Routes = [
     
     //lupa sandi
 
+     
+    {   path:'',
+    loadChildren: 'app/register/register.module#RegisterModule'},
+    {   path:'Akun', loadChildren:'./trv-sidebar/trv-sidebar.module#TrvSidebarModule'},
     {path:'', component:HeaderNologinComponent,
         children:[
-            {   path:'lupakatasandi', component:LupaKataSandiComponent},
             {   path:'LoginPage', component:LoginpageComponent},
-            {   path:'Daftar',
-                loadChildren: 'app/register/register.module#RegisterModule'},
             {   path:'LupaPassword', component:LupaKataSandiComponent},
             
             {   path:'ProsesPemesanan', component:ProsesPemesananComponent, canActivate:[GuardService]},

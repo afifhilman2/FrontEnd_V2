@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
       this.appService.registerUser(this.formRegister.value).subscribe(newUser =>{
           console.log(newUser)
           if(newUser.status = 200){
+            sessionStorage.setItem("newUser.stauts", newUser.status)
             this.router.navigate(['/LoginPage']); 
           }
       })

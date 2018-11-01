@@ -87,15 +87,28 @@
     color: white;
     font-size: 13px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .trip {
     color: white;
     position: absolute;
     margin: 0 auto;
-    background-color: orange;
-    top: 42%;
-    left: 35%;
+    background-color: #536dfe;
+    top: 45%;
+    left: 5%;
+    width: 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+.private-trip{
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+    background-color: #ff9800;
+    top: 47.5%;
+    left: 5%;
     width: 70px;
     text-align: center;
     border-radius: 25px;
@@ -217,13 +230,23 @@
 .modal-hapus{
     /* display: none; Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 9999; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.disc {
+    position: absolute;
+    width: 50px;
+    background-color: #ab47bc;
+    text-align: center;
+    top: 0;
+    left: 0;
+    color: white;
+    border-radius: 5px 0 5px 0;
 }

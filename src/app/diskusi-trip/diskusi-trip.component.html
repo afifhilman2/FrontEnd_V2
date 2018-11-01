@@ -3,25 +3,21 @@
   <p class="masukan-profil">Tanyakan semua pertanyaan yang bersifat umum dan terbuka kepada Agen Travel. Travinesia menyediakan Diskusi Trip
     untuk kamu yang juga ingin mendapatkan atau memberikan tanggapan sebuah Trip.</p>
   <!-- <div class="diskusi"> -->
-    <div class="row content-diskusi" >
+    <div class="row content-diskusi" *ngFor="let content of diskusi">
       <div class="isi-tahapan-pesanan">
         <div class="gambar">
-          <img src="assets/img/edit.jpg" align="center">
+          <img src="{{content.id_trip.photo_trip[0]}}" >
         </div>
         <div class="detail-pesanan">
           <div class="isi-pesanan-star">
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="harga">Rp 62.000.000</span>
+            <span class="icon-star" *ngFor="let stars of counterStars((content.id_trip.rate_div!=0)? (content.id_trip.rate_total/content.id_trip.rate_div) : 0);let i = index" id="{{i}}"></span>
           </div>
+          <span class="harga">Rp {{content.id_trip.publish_price.toLocaleString('id')}}</span>
           <div class="isi-pesanan-nama-pulau">
-            <p>Pulau Harapan Kepulauan Seribu Jakarta Utara</p>
+            <p>{{content.id_trip.trip_name}}</p>
           </div>
           <div class="isi-pesanan-waktu">
-            <span class="glyphicon glyphicon-time"></span> <span class="waktu">2 Hari 1 Malam</span>
+            <span class="glyphicon glyphicon-time"></span> <span class="waktu">{{content.id_trip.days}} Hari {{content.id_trip.night}} Malam</span>
           </div>
           <div class="isi-pesanan-travel">
             <span class="glyphicon glyphicon-user"></span> <span class="travel">Kuylah Travel</span>
@@ -33,36 +29,33 @@
       <div class="diskusi-pesan">
         <div class="akun">
           <div class="akun-image">
-              <img src="assets/img/foto.png">
+              <img src="{{content.id_user.photo}}">
           </div>
           <div class="akun-text">
-            <span class="akun-name">Irfan Harianto <span class="date-time pull-right">12 Maret 2018 - 08.00 WIB</span></span>
+            <span class="akun-name">{{content.id_user.name}}<span class="date-time pull-right">{{content.id_user.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</span></span>
             <p class="my-akun">Traveler</p> 
           </div>
           <div class="isi-pesan">
-            <span>Paket ini masih ada gan?</span>
+            <span [innerHTML]="content.content"></span>
           </div>
         </div>
-        <div class="percakapan">
-          <div class="percakapan-akun">
-            <p class="lihat-percakapan">lihat percakapan sebelumnya</p> 
-            <div class="image-percakapan">
-                <img src="assets/img/foto.png">
+        <div class="wrap-content-comment">
+            <span class="comment-more">Lihat Komentar Sebelumnya </span>
+            <div *ngFor="let count of content.comments" class="content-comment">
+                <img src="assets/img/user.png" alt="" class="img-comment">
+                <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm Z' }}</span>
+                <span class="akun-comment">{{count.name_comment}}</span>
+                <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
+                <span class="comment-msg"> {{count.comment}} </span>
             </div>
-            <div class="akun-text">
-              <span class="akun-name">Kuylah Travel <span class="date-time pull-right">12 Maret 2018 - 08.00 WIB</span></span>
-              <p class="my-akun">Agen Travel</p> 
-            </div>
-            <div class="isi">
-              <span>masih gan</span>
-            </div>
-          </div>
         </div>
         <div class="type-diskusi">
-          <input type="text" class="form-control form-diskusi">
-          <div class="send">
-            <i class="glyphicon glyphicon-send"></i>
-          </div>
+          <form [formGroup]="myForm" (submit)="onSubmitComment(content._id)">
+            <input type="text" class="form-control form-diskusi" formControlName="comment">
+            <button class="send" type="submit">
+              <i class="glyphicon glyphicon-send"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div>

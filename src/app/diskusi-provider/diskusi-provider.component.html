@@ -5,15 +5,15 @@
     <div class="content-diskusi" *ngFor="let discussion of discussion">
         <div class="isi-tahapan-pesanan">
             <div class="gambar">
-                <img src="assets/img/edit.jpg" align="center">
+                <img src="{{discussion.id_trip.photo_trip}}" align="center">
             </div>
             <div class="detail-pesanan">
                 <div class="isi-pesanan-star">
+                    <span class="icon-star" *ngFor="let stars of counterStars((discussion.id_trip.rate_div!=0)? (discussion.id_trip.rate_total/discussion.id_trip.rate_div) : 0);let i = index" id="{{i}}"></span>
+                    <!-- <span class="icon-star"></span>
                     <span class="icon-star"></span>
                     <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
-                    <span class="icon-star"></span>
+                    <span class="icon-star"></span> -->
                 </div>
                 <span class="harga">Rp {{discussion.id_trip.publish_price}}</span>
                 <div class="isi-pesanan-nama-pulau">
@@ -42,69 +42,27 @@
                     <span [innerHTML]="discussion.content"></span>
                 </div>
             </div>
+            <div>
 
-            <p class="comment-more">Lihat Komentar Sebelumnya </p>
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
             </div>
+            <div class="wrap-content-comment">
+                <span class="comment-more">Lihat Komentar Sebelumnya </span>
 
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="content-comment">
-                <img src="assets/img/user.png" alt="" class="img-comment">
-                <div class="akun-comment">KUYlah</div>
-            </div>
-
-            <div class="type-diskusi">
-                <input type="text" class="form-diskusi" placeholder="Tulis Pesan Disini ...">
-                <div class="send">
-                    Kirim
+                <div *ngFor="let count of discussion.comments" class="content-comment">
+                    <img src="assets/img/user.png" alt="" class="img-comment">
+                    <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm z' }}</span>
+                    <span class="akun-comment">{{count.name_comment}}</span>
+                    <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
+                    <span class="comment-msg"> {{count.comment}} </span>
                 </div>
             </div>
+
+            <form [formGroup]="myForm" (ngSubmit)="onSubmitComment()">
+                <div class="type-diskusi">
+                    <input type="text" formControlName="comment" class="form-diskusi" placeholder="Tulis Pesan Disini ...">
+                    <button type="submit" (click)="clickId($event)" id="{{discussion._id}}" class="send">Kirim </button>
+                </div>
+            </form>
         </div>
 
     </div>

@@ -5,15 +5,26 @@
             <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
         </div>
 <div class="row">
-    <div class="col-md-3 col-sm-4">
+    <div class="col-md-3 col-sm-4" *ngFor="let fav of favorite">
         <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a href="">
-                <a (click)="openAlert()" role="button">
-                    <div class="exit"> X </div>
-                </a>
-            </a>
+            <img src="{{fav.id_trip.photo_trip['0']}}" class="img-promo">
+            <div class="exit" (click)="openAlert(fav._id)" > x </div>
+            <div class="modal-hapus" *ngIf="alert" (click)="closeAlert()">
+                <div class="hapus-trip">
+                    <div class="header">
+                        <p>Hapus Trip</p>
+                    </div>
+                    <div class="body">
+                        <p>Apakah Anda yakin akan menghapus Trip ini dari Favorit Anda?</p>
+                        
+                        <button type="button" class="btn hapus" (click)="deleteFav(fav._id)">Hapus</button>
+                        <button type="button" class="btn batal" (click)="closeAlert()">Batal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="disc">-10%</div>
             <div class="trip">Open</div>
+            <!-- <div class="private-trip">Private</div> -->
             <div class="body-caption">
                 <div class="row">
                     <div class="col-md-6">
@@ -22,94 +33,23 @@
                         <span class="icon-star"></span>
                     </div>
                     <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
+                        <div class="caption-price">Rp {{fav.id_trip.publish_price}}</div>
                     </div>
                 </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
+                <div class="caption-tittle">{{fav.id_trip.trip_name}}</div>
+                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{fav.id_trip.days}}H{{fav.id_trip.night}}M</div>
                 <a [routerLink]="['/EtalaseTravel']">
                     <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
                 </a>
             </div>
-            <a href="#" class="pesan">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
+            <div class="pesan-travel text-center" (click)="goToDetail(fav.id_trip._id)"> Pesan Sekarang</div>
+            
         </div>
     </div>
 
-    <div class="col-md-3 col-sm-4">
-        <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a (click)="openAlert()" role="button">
-                <div class="exit"> X </div>
-            </a>
-            <div class="trip">Open</div>
-            <div class="body-caption">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
-                    </div>
-                </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                <a [routerLink]="['/EtalaseTravel']">
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </a>
-            </div>
-            <a (click)="openAlert()">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-3 col-sm-4">
-        <div class="thumb-promo">
-            <img src="../assets/img/1.jpg" class="img-promo">
-            <a (click)="openAlert()" role="button">
-                <div class="exit"> X </div>
-            </a>
-            <div class="trip">Open</div>
-            <div class="body-caption">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                        <span class="icon-star"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="caption-price">Rp 300.000</div>
-                    </div>
-                </div>
-                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                <a [routerLink]="['/EtalaseTravel']">
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </a>
-            </div>
-            <a href="#" class="pesan">
-                <div class="pesan-travel text-center"> Pesan Sekarang</div>
-            </a>
-        </div>
-    </div>
+    
 
 </div>
 </main>
 
-<div class="modal-hapus" *ngIf="alert" (click)="openAlert()">
-    <div class="hapus-trip">
-        <div class="header">
-            <p>Hapus Trip</p>
-        </div>
-        <div class="body">
-            <p>Apakah Anda yakin akan menghapus Trip ini dari Favorit Anda?</p>
-            
-            <button type="button" class="btn hapus">Hapus</button>
-            <button type="button" class="btn batal" (click)="openAlert()">Batal</button>
-        </div>
-    </div>
-</div>
+

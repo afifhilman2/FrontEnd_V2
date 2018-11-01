@@ -26,7 +26,7 @@ export class DetailPaketComponent implements OnInit {
 
   formBooking = this.fb.group({
     id_type_trip:'',
-    quantity: 1,
+    quantity: '',
     publish_price: '',
     startDate_trip: '',
     _id:'',
@@ -87,7 +87,7 @@ export class DetailPaketComponent implements OnInit {
   idAgen;
   getTrip(): void{
     // this.book._id = this.dataTrip;
-    this.http.get('http://travinesia.com:3000/get/trip_detail/' + this.dataTrip)
+    this.http.get('https://travinesia.com:1210/get/trip_detail/' + this.dataTrip)
         .subscribe(
           // trip =>{ 
           //   console.log(trip);
@@ -104,7 +104,8 @@ export class DetailPaketComponent implements OnInit {
             this.quota_left = trip.data.quota_left; 
             this.date = trip.data.date_trip;
             this.fasilitas = trip.data.facility;
-            this.idAgen = trip.data.provider._id
+            this.idAgen = trip.data.provider._id;
+            this.totalHarga = this.quantity * this.hargaProduct;
             // console.log(this.fasilitas)
             // this.loaded = false;
 
@@ -149,51 +150,53 @@ export class DetailPaketComponent implements OnInit {
     // this.book.startDate_trip = e.target.value;
     
   }
-  bookId;
+  quantity=1;
   goToProsespemesanan(){
+    
    if(!(localStorage.token == null)){
      if(this.formBooking.valid){
       this.formBooking.patchValue({
         _id: this.dataTrip, 
-        publish_price: this.detailTrip.publish_price,
+        publish_price: this.totalHarga,
         id_type_trip: this.detailTrip.id_type_trip._id,
+        quantity: this.quantity,
         
-        // id_type_trip : 
       })
+      console.log(this.formBooking.value)
         this.appServis.booking(this.formBooking.value).subscribe(book => {
-        let navigationExtras : NavigationExtras={
-          queryParams : { data: JSON.stringify(book.data) }
-        }
+        sessionStorage.setItem("book_trip", JSON.stringify(book.data));
         if (book.status == 200){
-          this.router.navigate(['/ProsesPemesanan'], navigationExtras);
+          this.router.navigate(['/ProsesPemesanan']);
         }
       });
      }else{
       this.validateAllFormFields(this.formBooking);
      }
    }else {
-    alert('Please log in')
+    alert('Please log in') 
     this.router.navigate(['/LoginPage']);
     return false;
    }
   }
 
+  totalHarga;
   increment() { 
     // this.appServis.updateProduct(this.totalHargaBayar+1)
     // this.totalHargaBayar = 1; 
-    this.formBooking.value.quantity++;
-    // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
+    this.quantity++;
+    this.totalHarga = this.quantity * this.hargaProduct;
+    this.formBooking.value.publish_price = this.totalHarga;
     // console.log(this.totalHarga)
 
   }
 
   decrement() {
     // this.totalHargaBayar = 1;
-      if(this.formBooking.value.quantity >1){
+      if(this.quantity >1){
         // this.appServis.updateProduct(this.totalHargaBayar-1)
-        this.formBooking.value.quantity--;
-        // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
-
+        this.quantity--;
+        this.totalHarga = this.quantity * this.hargaProduct;
+        this.formBooking.value.publish_price = this.totalHarga;
       }
   }
 

@@ -5,7 +5,9 @@ import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 
 
 import { RegisterComponent } from './register.component';
-import { RegisterRouterModule } from './register-routing.modules'
+import { RegisterRouterModule } from './register-routing.modules';
+import { HeaderNologinComponent } from '../header-nologin/header-nologin.component';
+
 
 
 @NgModule({
@@ -13,9 +15,12 @@ import { RegisterRouterModule } from './register-routing.modules'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RegisterRouterModule
+    RegisterRouterModule,
   ],
-  declarations: [ RegisterComponent ],
+  declarations: [ 
+    RegisterComponent,
+    HeaderNologinComponent,
+   ],
  
 })
 export class RegisterModule { }

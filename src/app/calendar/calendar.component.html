@@ -1,5 +1,5 @@
 
-<div class="flex-container flex-center">
+<!-- <div class="flex-container flex-center">
     <div  class="calendar"> 
         <div class="month">      
         <ul>
@@ -21,6 +21,19 @@
         </ul>
         </div> 
     </div>
-</div>
-  
+</div> -->
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Countdown timer</h2>
+    </div>
+    <div class="panel-body">
+      <div>
+        <label>value: </label> {{message}}
+      </div>
+      <div>
+        <button (click)="startCountdownTimer()" class="btn btn-success">Start</button>
+      </div>
+    </div>
+  </div>
   

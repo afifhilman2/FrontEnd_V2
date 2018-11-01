@@ -62,7 +62,7 @@ export class ProsesBayar2Component implements OnInit {
   ngOnInit() {
     this.getBookingId();
 
-    this.dataBooking = JSON.parse(this.active.snapshot.queryParams['data']);
+    this.dataBooking = JSON.parse(sessionStorage.getItem("booking"));
     console.log(this.dataBooking);
 
 

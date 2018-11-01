@@ -1,4 +1,4 @@
-<app-loader *ngIf="loaded"></app-loader>
+<!-- <app-loader *ngIf="loaded"></app-loader> -->
 <div class="container-fluid-page" >
   <div class="row">
     <div class="col-md-8 ">
@@ -169,9 +169,9 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="daftar-transaksi">
               <div class="komen" *ngFor="let d of diskus">
-                <img src="{{d.id_user.photo}}" class="komen-image">
+                <img src="{{d?.id_user?.photo}}" class="komen-image">
                 <div class="komen-user">
-                  <p class="komen-user-name">{{d.id_user.name}}</p>
+                  <p class="komen-user-name">{{d?.id_user?.name}}</p>
                   <p class="komen-user-tanggal">{{d.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p> 
                   <p class="komen-user-tanggapan" [innerHTML]="d.content"></p>
                     <div class="komen-agen" *ngFor="let comments of d.comments">
@@ -185,7 +185,7 @@
                     <div *ngIf="isLogin">
                       
                       <form (submit)="addComent()" [formGroup]="coment" >
-                          <img src="{{d.id_user.photo}}" class="komen-image">
+                          <img src="{{d?.id_user?.photo}}" class="komen-image">
                         <textarea class="content-agent" formControlName="comment"></textarea>
                         <button class="btn btn-agen" (click)="sendId($event)" id="{{d._id}}" type="submit" >Kirim Pesan</button>
                       </form>
@@ -248,7 +248,7 @@
                     </a>
                 </div>
                 <div class="jumlah-input">
-                  <input class="form-control nominal" readonly value="{{ formBooking.value.quantity }}" formControlName="quantity">
+                  <input class="form-control nominal" readonly value="{{ quantity }}" formControlName="quantity">
                 </div>
                 <div class="plus">
                   <a (click)="increment()" role="button">
@@ -259,7 +259,7 @@
                   <p class="text-harga">Harga per orang</p>
                   <p class="harga-satuorang"> Rp {{(detailTrip?.publish_price)?.toLocaleString('id')}} </p>
                   <p class="text-harga">Total Harga</p>
-                  <p class="harga-satuorang"> Rp {{(detailTrip?.publish_price*formBooking.value.quantity)?.toLocaleString('id')}}</p> 
+                  <p class="harga-satuorang"> Rp {{(totalHarga)?.toLocaleString('id')}}</p> 
                 </div>   
               </div>
             </div>
@@ -270,5 +270,5 @@
   </div>
   
 </div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 

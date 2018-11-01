@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -27,16 +28,6 @@ export class UbahProfilComponent implements OnInit {
     photo: '../assets/img/user.png'
   }
 
-  // name:any;
-  // email:any;
-  // telephone:any;
-  // gender:string = '';
-  // identity_number:string = '';
-  // day:string = '';
-  // month:string = '';
-  // year:string = '';
-  // birthday:string = '';
-  // photo:string = '';
 
   pwd = {
     password :'', 
@@ -44,8 +35,6 @@ export class UbahProfilComponent implements OnInit {
     repeatPassword:''
   }
 
-  
- 
   new_password;
   repeadPassword;
 
@@ -56,7 +45,7 @@ export class UbahProfilComponent implements OnInit {
   date;
   daraUser;
 
-  constructor( private appServis: AppService, private datePipe: DatePipe) { 
+  constructor( private appServis: AppService, private datePipe: DatePipe, private router: Router) { 
     this.appServis.getUsers().subscribe(edit=>{
       this.edit.name = edit.data.name;
       this.edit.email = edit.data.email;
@@ -69,11 +58,8 @@ export class UbahProfilComponent implements OnInit {
 
       this.daraUser = edit.data;
       this.edit.day = this.datePipe.transform(edit.data.birthday, 'dd');
-      
       this.edit.month = this.datePipe.transform(edit.data.birthday, 'MM');
-      
       this.edit.year = this.datePipe.transform(edit.data.birthday, 'yyyy');
-      
       this.edit.photo = edit.data.photo;
       this.edit.gender = edit.data.gender;
 
@@ -129,45 +115,49 @@ export class UbahProfilComponent implements OnInit {
     
   }
 
-  onSubmit(edit){
+  onSubmit(){
     this.edit.birthday =  this.edit.month + '/' + this.edit.day + '/' + this.edit.year;
       
     this.appServis.editUser(this.edit).subscribe(edit => {
-      console.log(edit);
+      if(edit.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/Akun/Profile']));
+      }
     })
   }
 
 
-  getFiles(event) {
-    var files = event.target.files;
-    var reader = new FileReader();
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsBinaryString(files[0]);
+  getFiles(evt) {
+    let files = evt.target.files;
+    let image = files[0];
+    //   let ext = files[0].name.match(/\.(.+)$/)[1];
+
+  // if (files && image && (ext.toLowerCase()==='jpg' || ext.toLowerCase()==='png' || ext.toLowerCase()==='jpeg')) {
+  //   // this.ng2ImgMax.compressImage(image, 0.250).subscribe(
+  //   //   result => {
+  //   //     this.uploadedImage = new File([result], result.name);
+        let reader = new FileReader();
+        reader.onload =this._handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(image);
+    //   },
+    //   error => {
+    //     console.log('😢 Oh no!', error);
+    //   }
+    // );
+  
+    // }
   }
 
   _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.filestring = btoa(binaryString); 
-    this.filestring = "data:image/jpeg;base64,"+btoa(binaryString); // Converting binary string data.
-    // console.log(this.filestring)
+    let binaryString = readerEvt.target.result;
+    this.edit.photo = btoa(binaryString);
+    this.appServis.editProfilePictureUser(this.edit).subscribe(user => {
+      console.log(user)
+    })
+    this.edit.photo = "data:image/jpeg;base64,"+ btoa(binaryString);
+    
   }
-  // onSelectPhoto(evt){
-  //   let files = evt.target.files;
-  //   let file = files[0];
-
-  //   if(files && file) {
-  //     let reader = new FileReader();
-  //     reader.onload = this._handleReaderLoaded1.bind(this);
-  //     reader.readAsBinaryString(file);
-  //   }
-  // }
-
-  // _handleReaderLoaded1(readerEvt){
-  //   let binaryString = readerEvt.target.reasult;
-  //   this.poto = btoa(binaryString);
-  //   this.poto = "data:image/jpg;base64,"+btoa(binaryString);
-  //   console.log(this.poto);
-  // }
+  
 
 
   changePassword(pwd){
@@ -184,6 +174,10 @@ export class UbahProfilComponent implements OnInit {
     // this.appServis.changePassword(this.pwd).subscribe(pwd =>{
     //   console.log(pwd)
     // })
+  }
+
+  changePhotoProfile(){
+
   }
 }
 

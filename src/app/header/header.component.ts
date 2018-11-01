@@ -79,8 +79,7 @@ export class HeaderComponent implements OnInit {
 
   // categoryAllTrip;
   dataUser;
-  photo;
-  photos = ("../assets/img/user.png");
+  photos :"../assets/img/user.png";
 
   querySearch(e) {
     this.query= e.target.value;
@@ -116,9 +115,12 @@ export class HeaderComponent implements OnInit {
     // get all category trip
     this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
       this.categoryAllTrip = categoryAllTrip.data; 
-      console.log(this.categoryAllTrip)
     });
     
+    this.appService.getUsers().subscribe(profile => {
+      this.photos = profile.data.photo;
+      console.log(profile);
+    });
 
     this.appService.search(this.searchTerm$).subscribe(results => {
         this.results = results.data;
@@ -138,12 +140,12 @@ export class HeaderComponent implements OnInit {
 
   
   goToSearch(trip_name){
-    this.appService.searchName(trip_name).subscribe(trip_name =>{
-      // console.log(trip_name)
-      if(trip_name.status == 200){
-        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/search'], {queryParams: {data : JSON.stringify(trip_name.data)}}));
-      }
+    this.appService.searchName(trip_name).subscribe(trip =>{
+      sessionStorage.setItem("keyword", JSON.stringify(trip.data));
+      // if(trip_name.status == 200){
+        // this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/search']);
+      // }
     })
    }
    
@@ -178,8 +180,6 @@ export class HeaderComponent implements OnInit {
       if (user.success== true) {
         this.loginUser = true;
         
-        // this.changeHead = !this.changeHead;
-        // this.changeHeadUser = !this.changeHeadUser;
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
         this.router.navigate([''])
       )
@@ -187,7 +187,7 @@ export class HeaderComponent implements OnInit {
       }
       else {
         alert("Login Gagal");
-        // this.router.navigate(['']);
+        this.router.navigate(['']);
       }
     })
    }
@@ -210,7 +210,7 @@ export class HeaderComponent implements OnInit {
 
     this.data.currentMessage.subscribe(trip => this.trip = trip);
     
-     
+    
   }
 
   search(term: string): void {

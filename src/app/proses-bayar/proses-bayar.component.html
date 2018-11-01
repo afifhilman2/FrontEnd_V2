@@ -79,8 +79,8 @@
               <div role="tabpanel" class="tab-pane" id="indomart">
                 <div class="kredit-form">
                   <ul class="indo-alfa" *ngFor="let indo of payment">
-                      <li class="gambar" tabindex="5" *ngIf="(indo.id_payment_method == '4')">
-                          <img src="{{indo.photo_payment}}">
+                      <li class="gambar" tabindex="5" *ngIf="(indo.id_payment_method == '4')" (click)="sendValueBank(indo._id,indo.id_type_payment._id, indo.id_payment_method)">
+                        <img src="{{indo.photo_payment}}">
                       </li>
                   </ul>
                   <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
@@ -89,7 +89,7 @@
               <div role="tabpanel" class="tab-pane" id="alfamart">
                 <div class="kredit-form">
                   <ul class="indo-alfa" *ngFor="let alfa of payment">
-                      <li class="gambar" tabindex="6" *ngIf="( alfa.id_payment_method=='3')">
+                      <li class="gambar" tabindex="6" *ngIf="( alfa.id_payment_method=='3')" (click)="sendValueBank(alfa._id,alfa.id_type_payment._id, alfa.id_payment_method)">
                         <img src="{{alfa.photo_payment}}">
                       </li>
                   </ul>
@@ -113,8 +113,8 @@
               <p>Harga Paket<span class="jumlah">x {{dataBooking.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{price === null? '': 'Rp ' + price.toLocaleString('id')}}</span></p> 
               <p>Diskon atau Promo<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking.promo_fee === null? '': 'Rp ' + dataBooking.promo_fee }}</span></p>
               <p>Asuransi<span class="jumlah">x {{dataBooking.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">{{hargaAsuransi === null? '': 'Rp ' + hargaAsuransi.toLocaleString('id')}}</span></p>
-              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking.uniq_code === null? '': 'Rp ' + dataBooking.uniq_code}}</span></p>              
-              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right"></span></p>
+              <p>Kode Unik<span class="titik-dua">:</span><span class="nominal pull-right">{{dataBooking.uniq_code === null? '': '- Rp ' + dataBooking.uniq_code}}</span></p>              
+              <p>Biaya Admin<span class="titik-dua">:</span><span class="nominal pull-right">{{boking.admin_fee === null ?'': 'Rp ' + boking.admin_fee.toLocaleString('id')}}</span></p>
           </div>
           <hr>
           <div class="total">

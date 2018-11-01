@@ -1,5 +1,5 @@
 <app-loader *ngIf="loaded"></app-loader>
-<div class="container">
+<div *ngIf="dataTrip" class="container">
   <div class="tahapan-proses">
     <div class="tahapan-proses1">
       <div class="no-proses1">
@@ -23,7 +23,7 @@
           <p>Trip Pesanan Anda</p>
         </div>
         <div class="gambar">
-          <img src="{{dataTrip.id_trip.photo_trip['0']}}" align="center">
+          <img src="{{dataTrip.id_trip.photo_trip['0']}}">
         </div>
         <div class="detail-pesanan">
           <div class="isi-pesanan-star">
@@ -160,7 +160,7 @@
                 <span>Asuransi</span><span class="jumlah"> {{(nbook.asuransi_price)!=0? 'x'+dataTrip.quantity:''}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(nbook.asuransi_price).toLocaleString('id')}}</span>
               </div>
               <div class="kode">
-                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">Rp {{(random).toLocaleString('id')}}</span>
+                <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">- Rp {{(random).toLocaleString('id')}}</span>
               </div>
             </div>
             <hr>

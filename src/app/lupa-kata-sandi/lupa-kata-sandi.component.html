@@ -1,10 +1,12 @@
-
-
+<div class="trv-notice" *ngIf="succes">
+    <span class="txt-notice"> Silahkan Cek Email Anda</span>
+  </div>
 <div class="wrapper-lupa-sandi text-center">
+    
     <h2 class="head-kata-sandi">Lupa Password ?</h2>
     <p class="content-kata-sandi">Masukkan email login Anda, Travinesia akan mengirimkan email dan tautan untuk reset password Anda</p>
     <form (submit)="onSubmitEmail()">
-        <input type="text" placeholder="Email Anda" class="input-kata-sandi" [(ngModel)]="user.email" name="email">
+        <input type="text" placeholder="Email Anda" class="input-kata-sandi text-center" [(ngModel)]="user.email" name="email">
         <button type="submit" class="btn btn-kata-sandi">Ubah Password</button>
     </form>
 </div>

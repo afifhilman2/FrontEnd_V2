@@ -1,5 +1,5 @@
 <!-- <app-loader *ngIf="showSpinner"></app-loader> -->
-<app-loader *ngIf="loaded"></app-loader>
+<!-- <app-loader *ngIf="loaded"></app-loader> -->
 <div class="container-fluid-page">
     
     <div class="row">
@@ -130,34 +130,37 @@
         <div class="row">
             <div class="diskon-category text-diskon">
                 Diskon Minggu Ini </div>
-            <a class="diskon-category lihat-diskon" routerLink="/search">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
+            <a class="diskon-category lihat-diskon" (click)="goCalendar()">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
                 <div *ngFor="let trip of diskon; let i=index" >
                     <div *ngIf="i<6" >
-                        <div class="col-md-2 col-sm-4 col-xs-6" (click)="goDetail($event)">
+                        <div class="col-md-2 col-sm-4 col-xs-6">
                             <a >
                                 <div class="thumb-promo">
-                                    <img src="{{trip.photo_trip['0']}}" class="img-promo" id="{{trip._id}}">
-                                    <div class="disc">-10%</div>
-                                    <div class="trip">Open</div>
-                                    <!-- <div class="private-trip">Private</div> -->
-                                    <div class="body-caption" id="{{trip._id}}">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6 ">
-                                                <span class="icon-star"></span>
-                                                <span class="icon-star"></span>
-                                                <span class="icon-star"></span>
+                                    <div class="favorit">
+                                        <span class="glyphicon glyphicon-heart fav" (click)="favorit(trip._id)" [ngClass]="{'change' : change}"></span>
+                                    </div>
+                                    <div (click)="goToDetail(trip._id)">
+                                        <img src="{{trip.photo_trip['0']}}" class="img-promo">
+                                        <div class="disc">{{trip.discount_date[0] === undefined ? '' : '- ' + trip.discount_date[0] + '% '}}</div>
+                                        <div class="trip">Open</div>
+                                        <!-- <div class="private-trip">Private</div> -->
+                                        <div class="body-caption" id="{{trip._id}}">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 ">
+                                                    <span class="icon-star" *ngFor="let stars of counterStars((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span>
+                                                </div>
+                                                <div class="price pull-right">
+                                                    <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
+                                                </div>
                                             </div>
-                                            <div class="price pull-right">
-                                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
-                                            </div>
+                                            <div class="caption-tittle"> {{ trip.trip_name }} </div>
+                                            <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
+                                            <a [routerLink]="['/EtalaseTravel']">
+                                                <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{trip.provider.travel_name}}</div>
+                                            </a>
                                         </div>
-                                        <div class="caption-tittle"> {{ trip.trip_name }} </div>
-                                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
-                                        <a [routerLink]="['/EtalaseTravel']">
-                                            <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                        </a>
                                     </div>
                                 </div>
                             </a>
@@ -304,4 +307,4 @@
     </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

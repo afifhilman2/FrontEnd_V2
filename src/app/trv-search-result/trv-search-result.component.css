@@ -109,13 +109,26 @@
     color: white;
     position: absolute;
     margin: 0 auto;
-    background-color: orange;
-    top: 47%;
-    left: 30%;
+    background-color: #536dfe;
+    top: 45%;
+    left: 5%;
     width: 70px;
     text-align: center;
     border-radius: 25px;
 }
+
+.private-trip{
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+    background-color: #ff9800;
+    top: 47.5%;
+    left: 5%;
+    width: 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+
 
 .caption-price {
     color: #ab47bc;
@@ -373,6 +386,20 @@
 
 .fav{
     position: absolute;
+    font-size: 21px;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+
+.change{
+    position: absolute;
+    font-size: 21px;
+    color: #e91e63;
+    cursor: pointer;
+}
+
+.favorit{
+    position: absolute;
     left: 133px;
     top: 6px;
     font-size: 21px;
@@ -380,6 +407,6 @@
     cursor: pointer;
 }
 
-.click{
-    position: absolute;
+.price{
+    margin-right: 15px;
 }

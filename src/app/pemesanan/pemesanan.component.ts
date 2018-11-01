@@ -17,6 +17,16 @@ export class PemesananComponent implements OnInit {
 
   idPemesanan = ["Bayar Sekarang","","Isi Data Peserta","Download E Tiket", "Konfirmasi Kehadiran", "", "Beri Review & Rating"];
   // private pages : Array<any>;
+  statusPemesanan = [
+  "Menunggu Pembayaran", 
+  "Sudah dibayar, Menunggu Konfirmasi Agen",
+  "Transaksi Diterima, Silahkan Isi Data Peserta",
+  "Etiket Terbit",
+  "Menunggu Konfirmasi di Meeting Point",
+  "Trip Berlangsung",
+  "Menunggu Review dan Rating",
+  "Trip Selesai"
+  ]
 
 
   constructor(private routeActive : ActivatedRoute, private appService : AppService, private pagerService: PagerService, private router: Router) { 
@@ -67,7 +77,7 @@ export class PemesananComponent implements OnInit {
 
   goToDetail(trip_id){
     this.id = trip_id;
-    this.router.navigate(['/traveler/DetailPaket', this.id]);
+    this.router.navigate(['/DetailPaket', this.id]);
   }
 
   dataHistory;

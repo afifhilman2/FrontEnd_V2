@@ -387,6 +387,18 @@ span.text-content{
     display: block;
 }
 
+span.text-content-dissable{
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #dddddd;
+    display: block;
+}
+
 .glyphicon-ok{
     margin-right: 20px;
     color: #3aff2e;

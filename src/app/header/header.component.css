@@ -217,6 +217,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     position: absolute;
     top: 7px;
     right: 0px;
+    object-fit: contain;
 }
 
 .profil {

@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { tokenNotExpired } from 'angular2-jwt';
+import { AuthHttp } from 'angular2-jwt';
 
 declare const FB:any;
 
@@ -31,10 +32,10 @@ export class AppService {
     private totalharga: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
     constructor (public http:Http, public http2: HttpClient) {
-        this.url  = 'https://api.datamuse.com/words?ml=';
+        this.url  = 'api.datamuse.com/words?ml=';
 
         FB.init({
-            appId      : 161487567865775,
+            appId      : 261462964525976,
             status     : false, // the SDK will attempt to get info about the current user immediately after init
             cookie     : false,  // enable cookies to allow the server to access
             // the session
@@ -55,7 +56,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/profile',
+        return this.http.get('https://travinesia.com:1210/v1/user/profile',
         {headers: headers})
         .map(res => res.json());
     }
@@ -65,7 +66,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/provider/profile',
+        return this.http.get('https://travinesia.com:1210/v1/provider/profile',
         {headers: headers})
         .map(res => res.json());
     }
@@ -74,7 +75,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/provider/all_trip',
+        return this.http.get('https://travinesia.com:1210/v1/provider/all_trip',
         {headers: headers})
         .map(res => res.json());
     }
@@ -83,7 +84,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/provider/transaction_trip',
+        return this.http.get('https://travinesia.com:1210/v1/provider/transaction_trip',
         {headers: headers})
         .map(res => res.json());
     }
@@ -92,7 +93,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/provider/balance',
+        return this.http.get('https://travinesia.com:1210/v1/provider/balance',
         {headers: headers})
         .map(res => res.json());
     }
@@ -101,7 +102,7 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/provider/detail_transaction/'+ id_trip,
+        return this.http.get('https://travinesia.com:1210/v1/provider/detail_transaction/'+ id_trip,
         {headers: headers}) 
         .map(res => res.json());
     }
@@ -110,38 +111,38 @@ export class AppService {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.get('http://travinesia.com:3000/v1/discussion/provider',
+        return this.http.get('https://travinesia.com:1210/v1/discussion/provider',
         {headers: headers}) 
         .map(res => res.json());
     }
 
     getCategoryTrip() {
-        return this.http.get('http://travinesia.com:3000/get/category')
+        return this.http.get('https://travinesia.com:1210/get/category')
         .map(res => res.json());
     }
 
     getEtalseProvider(id) {
-        return this.http.get('http://travinesia.com:3000/get/etalase_provider/'+ id)
+        return this.http.get('https://travinesia.com:1210/get/etalase_provider/'+ id)
         .map(res => res.json());
     }
 
     getFacilityTrip() {
-        return this.http.get('http://travinesia.com:3000/get/facility')
+        return this.http.get('https://travinesia.com:1210/get/facility')
         .map(res => res.json());
     }
 
     getProvinceTrip() {
-        return this.http.get('http://travinesia.com:3000/get/province')
+        return this.http.get('https://travinesia.com:1210/get/province')
         .map(res => res.json());
     }
 
     getTypeTrip() {
-        return this.http.get('http://travinesia.com:3000/get/type')
+        return this.http.get('https://travinesia.com:1210/get/type')
         .map(res => res.json());
     }   
 
     getDataTrip() {
-        return this.http.get('http://travinesia.com:3000/get/trip/')
+        return this.http.get('https://travinesia.com:1210/get/trip/')
         .map(res => res.json())
     }
     
@@ -149,13 +150,13 @@ export class AppService {
     //post
     //register
     registerUser(newUser) {
-        return this.http.post('http://travinesia.com:3000/v1/user/users', newUser)
+        return this.http.post('https://travinesia.com:1210/v1/user/users', newUser)
         .map(res => res.json());
     }
 
     //login
     addUser(user) {
-        return this.http.post('http://travinesia.com:3000/v1/user/authenticate', user)
+        return this.http.post('https://travinesia.com:1210/v1/user/authenticate', user)
         .map(res => res.json());
     }
 
@@ -165,7 +166,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
         // console.log(headers)
-        return this.http.post('http://travinesia.com:3000/v1/user/register_provider',travel,
+        return this.http.post('https://travinesia.com:1210/v1/user/register_provider',travel,
         {headers: headers})
         .map(res => res.json());
     }
@@ -174,7 +175,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.post('http://travinesia.com:3000/v1/provider/add_trip',trip,
+        return this.http.post('https://travinesia.com:1210/v1/provider/add_trip',trip,
         {headers: headers})
         .map(res => res.json());
     }
@@ -183,7 +184,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.post('http://travinesia.com:3000/v1/provider/withdraw',withdraw,
+        return this.http.post('https://travinesia.com:1210/v1/provider/withdraw',withdraw,
         {headers: headers})
         .map(res => res.json());
     }
@@ -192,7 +193,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.put('http://travinesia.com:3000/v1/provider/profile',provider,
+        return this.http.put('https://travinesia.com:1210/v1/provider/profile',provider,
         {headers: headers})
         .map(res => res.json());
     }
@@ -201,7 +202,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.put('http://travinesia.com:3000/v1/provider/quota_null/' + id, kosong,
+        return this.http.put('https://travinesia.com:1210/v1/provider/quota_null/' + id, kosong,
         {headers: headers})
         .map(res => res.json());
     }
@@ -210,7 +211,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.put('http://travinesia.com:3000/v1/provider/discountby_provider/' + id, diskon,
+        return this.http.put('https://travinesia.com:1210/v1/provider/discountby_provider/' + id, diskon,
         {headers: headers})
         .map(res => res.json());
     }
@@ -219,7 +220,7 @@ export class AppService {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
 
-        return this.http.put('http://travinesia.com:3000/v1/provider/confirm_transaction/',confirm,
+        return this.http.put('https://travinesia.com:1210/v1/provider/confirm_transaction/',confirm,
         {headers: headers})
         .map(res => res.json());
     }
@@ -242,7 +243,7 @@ export class AppService {
     booking(book){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);       
-        return this.http.post('http://travinesia.com:3000/v1/user/booking/add', book, { headers: headers })
+        return this.http.post('https://travinesia.com:1210/v1/user/booking/add', book, { headers: headers })
         .map(res => res.json())
         
         
@@ -251,7 +252,7 @@ export class AppService {
     getBooking(){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/bookinguser', {headers: headers})
+        return this.http.get('https://travinesia.com:1210/v1/user/bookinguser', {headers: headers})
         .map(res => res.json());
     }
 
@@ -264,14 +265,14 @@ export class AppService {
     editUser(edit){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.put('http://travinesia.com:3000/v1/user/profile', edit , {headers: headers})
+        return this.http.put('https://travinesia.com:1210/v1/user/profile', edit , {headers: headers})
         .map(res => res.json());
     }
 
     // getProfil(){
     //     let headers = new Headers();
     //     this.createAuthorizationHeader(headers);
-    //     return this.http.put('http://travinesia.com:3000/v1/user/profile', {headers: headers})
+    //     return this.http.put('https://travinesia.com:1210/v1/user/profile', {headers: headers})
     //     .map(res => res.json());
     // }
 
@@ -279,7 +280,7 @@ export class AppService {
     changePwd(pwd){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/user/change_password', pwd, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/user/change_password', pwd, {headers: headers})
         .map(this.extractData);
     }
 
@@ -291,12 +292,12 @@ export class AppService {
     }
     
       getTripName(term){
-        return this.http.get('http://travinesia.com:3000/get/trip_name' + this.queryUrl + term)
+        return this.http.get('https://travinesia.com:1210/get/trip_name' + this.queryUrl + term)
         .map(res => res.json());
     }
 
     searchName(trip_name){
-        return this.http.get('http://travinesia.com:3000/get/search_trip/' + trip_name)
+        return this.http.get('https://travinesia.com:1210/get/search_trip/' + trip_name)
         .map(res => res.json());
     }
      
@@ -304,94 +305,94 @@ export class AppService {
     diskusi(trip_id){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/get/trip/discussion/'+ trip_id, {headers: headers})
+        return this.http.get('https://travinesia.com:1210/get/trip/discussion/'+ trip_id, {headers: headers})
         .map(res => res.json());
     }
 
     addPayment(boking){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.put('http://travinesia.com:3000/v1/user/booking/add_payment', boking, {headers: headers})
+        return this.http.put('https://travinesia.com:1210/v1/user/booking/add_payment', boking, {headers: headers})
         .map(res => res.json())
     }
 
     sendDiskusi(trip_id,text){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/discussion/post/'+ trip_id, text, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post/'+ trip_id, text, {headers: headers})
         .map(res => res.json());
     }
 
     nextBooking(nbook){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.put('http://travinesia.com:3000/v1/user/booking/add_detail', nbook , {headers: headers})
+        return this.http.put('https://travinesia.com:1210/v1/user/booking/add_detail', nbook , {headers: headers})
         .map(res => res.json());
     }
 
     review(trip_id){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/get/trip/review/' + trip_id, {headers: headers})
+        return this.http.get('https://travinesia.com:1210/get/trip/review/' + trip_id, {headers: headers})
         .map(res => res.json());
     }
 
     sendReview(review){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('http://trvinesia.com:3000/v1/user/review/', review, {headers: headers})
+        return this.http.post('https://trvinesia.com:1210/v1/user/review/', review, {headers: headers})
         .map(res=> res.json());
     }
     
     paymentBooking(){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/get/payment_method', {headers: headers})
+        return this.http.get('https://travinesia.com:1210/get/payment_method', {headers: headers})
         .map(res => res.json());
     }
 
     bookingUser(){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/booking/booking_user', {headers: headers})
+        return this.http.get('https://travinesia.com:1210/v1/user/booking/booking_user', {headers: headers})
         .map(res => res.json());
     }
 
     searchCategory(_id){
-        return this.http.get('http://travinesia.com:3000/get/search_category/' + _id)
+        return this.http.get('https://travinesia.com:1210/get/search_category/' + _id)
         .map(res => res.json());
     }
 
     addFavorit(dataFavorite){
         let headers = new Headers();
         this,this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/user/add_favorite', dataFavorite, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/user/add_favorite', dataFavorite, {headers: headers})
         .map(res => res.json());
     }
 
     getHistoryBooking(){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/booking/history', {headers: headers})
+        return this.http.get('https://travinesia.com:1210/v1/user/booking/history', {headers: headers})
         .map(res => res.json())
       }
 
     getPaymentDetail(id_booking){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.get('http://travinesia.com:3000/v1/user/booking/detail_payment/' +id_booking, {headers: headers})
+        return this.http.get('https://travinesia.com:1210/v1/user/booking/detail_payment/' +id_booking, {headers: headers})
         .map(res => res.json())
     }
 
     getDiscountTrip() {
-        return this.http.get('http://travinesia.com:3000/get/trip/discount')
+        return this.http.get('https://travinesia.com:1210/get/trip/discount')
         .map(res => res.json())
       }
 
       addTravellerDetail(booking){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.put('http://travinesia.com:3000/v1/user/booking/add_traveller_detail', booking, {headers: headers})
+        return this.http.put('https://travinesia.com:1210/v1/user/booking/add_traveller_detail', booking, {headers: headers})
         .map(res => res.json())
       }
 
@@ -401,7 +402,7 @@ export class AppService {
         return new Promise((resolve, reject) => {
           FB.login(result => {
             if (result.authResponse) {
-              return this.http.post(`http://localhost:3000/api/v1/auth/facebook`, {access_token: result.authResponse.accessToken})
+              return this.http.post(`https://travinesia.com:1210/v1/user/auth/facebook`, {access_token: result.authResponse.accessToken})
                   .toPromise()
                   .then(response => {
                     var token = response.headers.get('x-auth-token');
@@ -429,7 +430,7 @@ export class AppService {
     
       getCurrentUser() {
         return new Promise((resolve, reject) => {
-          return this.http.get(`http://localhost:3000/api/v1/auth/me`).toPromise().then(response => {
+          return this.http.get(`https://localhost:1210/api/v1/auth/me`).toPromise().then(response => {
             resolve(response.json());
           }).catch(() => reject());
         });
@@ -441,21 +442,51 @@ export class AppService {
     }
 
     getAllDiscountTrip(){
-        return this.http.get('http://travinesia.com:3000/get/trip/all_discount')
+        return this.http.get('https://travinesia.com:1210/get/trip/all_discount')
+        .map(res => res.json())
+      }
+    
+      getDiscussionUser(){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.get('https://travinesia.com:1210/v1/discussion/user', {headers: headers})
         .map(res => res.json())
       }
 
       deleleDiscussion(id_discussion){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/discussion/delete/' + id_discussion,'', {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/delete/' + id_discussion,'', {headers: headers})
         .map(res => res.json())
       }
   
       addComment(comments){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('http://travinesia.com:3000/v1/discussion/post_comment/' + comments.id_diskusi, comments, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + comments.id_diskusi, comments, {headers: headers})
         .map(res => res.json())
       }
+
+      getAllFavorites(){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.get('https://travinesia.com:1210/v1/user/get_all_favorite', {headers: headers})
+        .map(res => res.json())
+      }
+
+      deleteFavoriteTrip(id_favorite){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('https://travinesia.com:1210/v1/user/delete_favorite/'+ id_favorite,'', {headers: headers})
+        .map(res => res.json())
+      }
+
+      editProfilePictureUser(user){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.put('https://travinesia.com:1210/v1/user/edit_photo_profile', user, {headers: headers})
+        .map(res => res.json())
+      }
+
+      
 }

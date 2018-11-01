@@ -91,7 +91,7 @@
 
 .diskusi-pesan {
     width: 612px;
-    height: 378px;
+    height: 370px;
     border-radius: 3px;
     border: solid 1px #dddddd;
     position: relative;
@@ -137,10 +137,31 @@
     margin-bottom: 0;
 }
 
+.wrap-content-comment {
+    position: relative;
+    overflow-y: auto;
+    height: 180px;
+}
+
 .content-comment {
     position: relative;
     padding-left: 75px;
     padding-right: 25px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.type-comment {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.4px;
+    color: #4a4a4a;
+    position: relative;
+    left: 50px;
+    bottom: 5px;
+    width: 120px;
 }
 
 .img-comment {
@@ -153,6 +174,7 @@
 
 .comment-more {
     left: 75px;
+    top: 6px;
     position: relative;
     margin-top: 8px;
     font-size: 11px;
@@ -164,22 +186,38 @@
 }
 
 .akun-comment {
-    position: absolute;
-    left: 117px;
+    position: relative;
+    left: 51px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.comment-msg {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    position: relative;
+    left: 50px;
 }
 
 .my-akun {
     margin-left: 15px;
     font-family: sans-serif;
     font-size: 11px;
-    margin-top: -5px;
+    margin-top: -1px;
 }
 
 .date-time {
     font-size: 10px;
     font-weight: normal;
     font-family: sans-serif;
-    line-height: 3.79;
 }
 
 .isi-pesan {
@@ -294,8 +332,9 @@
 }
 
 .send {
-    display: inline;
-    margin-left: 4px;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
     font-weight: bold;
     color: #ab47bc;
     text-decoration: none;

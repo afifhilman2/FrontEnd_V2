@@ -54,8 +54,8 @@ export class ProsesPemesananComponent implements OnInit {
 
   ngOnInit() {
 
-    
-    this.dataTrip = JSON.parse(this.route.snapshot.queryParams['data'])
+    if(sessionStorage.getItem("book_trip") != null){
+      this.dataTrip = JSON.parse(sessionStorage.getItem("book_trip"))
     console.log(this.dataTrip)
     this.bayar = this.dataTrip.publish_price * this.dataTrip.quantity;
     // console.log(this.type_trip)
@@ -66,6 +66,10 @@ export class ProsesPemesananComponent implements OnInit {
     this.nbook.order_name = this.dataTrip.id_user.name;
     this.nbook.order_email = this.dataTrip.id_user.email;
     this.nbook.order_telephone = this.dataTrip.id_user.telephone;
+    } else {
+      this.router.navigate(['/'])
+    }
+    
     
   
     
@@ -77,9 +81,9 @@ export class ProsesPemesananComponent implements OnInit {
     this.appService.nextBooking(this.nbook).subscribe(nbook => {
     
         console.log(nbook);
-
+        sessionStorage.setItem("booking", JSON.stringify(nbook.data) )
         if(nbook.status = true){
-          this.router.navigate(['/ProsesBayar'],{queryParams: {data : JSON.stringify(nbook.data)}}); 
+          this.router.navigate(['/ProsesBayar']); 
         }
       }
     )

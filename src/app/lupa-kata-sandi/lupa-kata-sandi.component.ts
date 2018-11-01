@@ -14,6 +14,7 @@ export class LupaKataSandiComponent implements OnInit {
     password:''
   }
 
+  succes : boolean = false;
   isEdit:boolean = false;
 
   constructor(public appService: AppService, private http:Http) { 
@@ -21,11 +22,14 @@ export class LupaKataSandiComponent implements OnInit {
   }
 
   onSubmitEmail(user){
-    this.http.put('http://travinesia.com:3000/v1/user/forgot_password', this.user)
+    this.http.put('https://travinesia.com:1210/v1/user/forgot_password', this.user)
     .subscribe(
       (res: Response) =>{
         let users = res.json();
         console.log(users);
+        if(users.status == 200){
+          this.succes = !this.succes;
+        }
       }
     )
   }

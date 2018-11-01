@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorit-user',
@@ -8,13 +10,35 @@ import { Component, OnInit } from '@angular/core';
 export class FavoritUserComponent implements OnInit {
 
   alert: boolean = false;
-
-  constructor() { }
+  favorite;
+  constructor(private appService: AppService, private router: Router) { }
 
   ngOnInit() {
+    this.appService.getAllFavorites().subscribe(dataFavorit=>{
+      this.favorite = dataFavorit.data
+      console.log(this.favorite)
+    })
   }
 
-  openAlert():void{
+  deleteFav(id){
+    console.log(id);
+    this.appService.deleteFavoriteTrip(id).subscribe(deleteFav=>{
+      if(deleteFav.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/Akun/Favorit']));
+      }
+    })
+  }
+
+  openAlert(id):void{
+    console.log(id)
     this.alert = !this.alert;
+  }
+  closeAlert():void{
+    this.alert = !this.alert;
+  }
+
+  goToDetail(id){
+    this.router.navigate(['/DetailPaket/', id])
   }
 }

@@ -34,11 +34,11 @@ export class TrvSearchResultComponent implements OnInit {
   dataSearchName;
   ngOnInit() {
       
-      this.dataSearchCategory = JSON.parse(this.routeActive.snapshot.queryParams['data'])
+      this.dataSearchCategory = JSON.parse(sessionStorage.getItem("keyword"))
       console.log(this.dataSearchCategory)
-      this.favorite._id = this.dataSearchCategory._id;
-      console.log(this.favorite._id)
-       
+      // this.favorite._id = this.dataSearchCategory._id;
+      // console.log(this.favorite._id)
+      // this.dataTrip = JSON.parse(sessionStorage.getItem("book_trip"))
 
 
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
@@ -50,18 +50,22 @@ export class TrvSearchResultComponent implements OnInit {
   }
 
   favorite = { 
-    _id:''
+    id_trip:''
   }
+  change: boolean = false;
   favorit(id){
-    this.favorite._id = id;
+    this.favorite.id_trip = id;
+    console.log(this.favorite.id_trip)
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
+      if(dataFavorite.data.flag_favorite = true){
+        this.change = !this.change;
+      }
       console.log(dataFavorite)
     })
   }
 
   id_trip;
-  goToDetail(e){
-    this.id_trip = e.target.id;
-    this.router.navigate(['/DetailPaket', this.id_trip])
+  goToDetail(id){
+    this.router.navigate(['/DetailPaket', id])
   }
 }

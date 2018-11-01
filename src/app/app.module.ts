@@ -9,12 +9,12 @@ import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
-import { LandingpageComponent } from './landingpage/landingpage.component';
+// import { LandingpageComponent } from './landingpage/landingpage.component';
 import { HeaderComponent } from './header/header.component';
 import { PemesananComponent } from './pemesanan/pemesanan.component';
 import { HeaderUserComponent } from './header-user/header-user.component';
 import { SidebarAkunProfilComponent } from './sidebar-akun-profil/sidebar-akun-profil.component';
-import { FooterComponent } from './footer/footer.component';
+// import { FooterComponent } from './footer/footer.component';
 import { EksternalComponent } from './eksternal/eksternal.component';
 import { LupaKataSandiComponent } from './lupa-kata-sandi/lupa-kata-sandi.component';
 import { UbahKataSandiComponent } from './ubah-kata-sandi/ubah-kata-sandi.component';
@@ -51,7 +51,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 // import { RegisterComponent } from './register/register.component';
 import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
 import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
-import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
+// import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { SearchFilterPipe } from './header/search-pipe';
@@ -62,11 +62,20 @@ import { LoaderService } from './loader/loader-service';
 
 import { TrvSearchNavbarModule } from './trv-search-navbar/trv-search-navbar.module';
 import {JualTripModule} from './jual-trip/jual-trip.module';
-import { PromoComponent } from './promo/promo.component';
-import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
+// import { PromoComponent } from './promo/promo.component';
+// import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
 
 import { PagerService } from './_service/index';
+// import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.component';
+import { RegisterModule } from './register/register.module';
+
+import { LandingpageModule } from './landingpage/landingpage.module';
+import { PromoComponent } from './promo/promo.component';
+import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
 import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.component';
+import { FooterComponent } from './footer/footer.component';
+import { TrvSidebarModule } from './trv-sidebar/trv-sidebar.module';
+import { DetailPaketModule } from './detail-paket/detail-paket.module';
 
 
 
@@ -75,17 +84,17 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
   declarations: [
     AppComponent,
     EksternalComponent,
-    LandingpageComponent,
-    HeaderComponent,
-    PemesananComponent,
+    // LandingpageComponent,
+    // HeaderComponent,
+    // PemesananComponent,
     HeaderUserComponent,
     SidebarAkunProfilComponent,
-    FooterComponent,
+    // FooterComponent,
     LupaKataSandiComponent,
     UbahKataSandiComponent,
     LoginpageComponent,
-    FavoritUserComponent,
-    TrvSidebarComponent,
+    // FavoritUserComponent,
+    // TrvSidebarComponent,
     TrvSearchResultComponent,
     DaftarTravelComponent,
     // TrvSearchNavbarComponent,
@@ -98,23 +107,23 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
     // TransaksiPenjualanComponent,
     // DaftarPemesanComponent,
     DaftarTripComponent,
-    DetailPaketComponent,
-    UbahProfilComponent,
+    // DetailPaketComponent,
+    // UbahProfilComponent,
     ProsesBayarComponent,
     ProsesBayar2Component,
     ProsesPemesananComponent,
     CalendarComponent,
     // RegisterComponent,
-    PesanMasukComponent,
-    DiskusiTripComponent,
-    HeaderNologinComponent,
+    // PesanMasukComponent,
+    // DiskusiTripComponent,
+    // HeaderNologinComponent,
     SearchFilterPipe,
     ClickOutsideDirective,
     MiniFooterComponent,
     LoaderComponent,
-    PromoComponent,
-    RatingUlasanComponent,
-    IsiDataPesertaComponent,
+    // PromoComponent,
+    // RatingUlasanComponent,
+    // IsiDataPesertaComponent,
 
   ],
   imports: [
@@ -129,6 +138,11 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
     BrowserAnimationsModule,
     TrvSearchNavbarModule,
     JualTripModule,
+    RegisterModule,
+    TrvSidebarModule,
+    LandingpageModule,
+    DetailPaketModule,
+
    
     RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: PreloadAllModules }),
   

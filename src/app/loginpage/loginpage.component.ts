@@ -53,6 +53,8 @@ export class LoginpageComponent implements OnInit {
     this.show = !this.show;
   }
 
+  massage;
+
   constructor(private service: AppService, private router: Router, private fb:FormBuilder){
     // this.searchTerm.valueChanges
     //     .debounceTime(400) 
@@ -68,6 +70,9 @@ export class LoginpageComponent implements OnInit {
     //             this.searchResult = response
     //         })
     //     })
+    this.massage = JSON.parse(sessionStorage.getItem("newUser.stauts"))
+    console.log(this.massage)
+
   }
 
   

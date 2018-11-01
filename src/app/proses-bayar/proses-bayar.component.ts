@@ -22,8 +22,6 @@ export class ProsesBayarComponent implements OnInit {
     _id:'',
   }
 
-
-  
   promo;
   totalBayar;
   random;
@@ -56,7 +54,7 @@ export class ProsesBayarComponent implements OnInit {
 
     this.getBookingId();
 
-    this.dataBooking = JSON.parse(this.active.snapshot.queryParams['data']);
+    this.dataBooking = JSON.parse(sessionStorage.getItem("booking"));
     // console.log(this.dataBooking);
     this.totalBayar = ((this.dataBooking.publish_price*this.dataBooking.quantity)+this.dataBooking.asuransi_price)-(this.dataBooking.uniq_code + this.dataBooking.promo_fee)
     this.price = this.dataBooking.publish_price*this.dataBooking.quantity;
@@ -85,15 +83,20 @@ export class ProsesBayarComponent implements OnInit {
 
   
  
-  sendValueBank(e){
-    this.dataBank = e.target.value;
-    // console.log(this.dataBank);
-    if(this.dataBank == 5){
-      this.price = 7000;
-    }else if(this.dataBank == 6){
-      this.price = 7500;
+  sendValueBank(id_payment, id_type_payment, id_payment_method){
+    
+    this.dataBank = id_payment_method;
+    console.log(this.dataBank);
+    if(this.dataBank == 3){
+      this.boking.id_paymentMethod = id_payment;
+      this.boking.id_typePayment = id_type_payment;
+      this.boking.admin_fee = 7000;
+    }else if(this.dataBank == 4){
+      this.boking.id_paymentMethod = id_payment;
+      this.boking.id_typePayment = id_type_payment;
+      this.boking.admin_fee = 7500;
     }else{
-      this.price = 0;
+      this.boking.admin_fee = 0;
     }
     // this.totalBayar = this.bayar + this.uniq + this.price;
     
@@ -101,10 +104,12 @@ export class ProsesBayarComponent implements OnInit {
 
   goToCheckout(){
     
+    // console.log(this.boking)
     this.appService.addPayment(this.boking).subscribe(boking=>{
       console.log(boking)
+      sessionStorage.setItem("booking", JSON.stringify(boking.data))
       if(boking.status == 200){
-        this.router.navigate(['/ProsesBayar2'],{queryParams: {data : JSON.stringify(boking.data)}})
+        this.router.navigate(['/ProsesBayar2'])
       }
       
     })

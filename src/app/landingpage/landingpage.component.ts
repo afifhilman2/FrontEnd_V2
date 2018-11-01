@@ -48,7 +48,8 @@ export class LandingpageComponent implements OnInit {
   diskon;
   getDiskon(){
     this.appService.getDiscountTrip().subscribe(diskon =>{
-      this.diskon = diskon.data
+      this.diskon = diskon.data;
+      
       console.log(diskon)
     })
   }
@@ -62,16 +63,23 @@ export class LandingpageComponent implements OnInit {
     // this.load.subcribe(() => this.showSpinner = false)
   }
 
-  goDetail(e){
-    this.idDetail = e.target.id;
-    if(!(localStorage.token == null)){
-        // console.log('login')
-      this.router.navigate(['/DetailPaket', this.idDetail]);
-    }else{
-      // console.log('belom login')
-      this.router.navigate(['/DetailPaket', this.idDetail]);
-    }
-       
+  favorite = { 
+    id_trip:''
+  }
+  change;
+  favorit(id){
+    this.favorite.id_trip = id;
+    console.log(this.favorite.id_trip)
+    this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
+      if(dataFavorite.data.flag_favorite = true){
+        this.change = true
+      }
+      console.log(dataFavorite)
+    })
+  }
+
+  goToDetail(id){
+    this.router.navigate(['/DetailPaket', id])
   }
 
   getprovinsi(e){
@@ -90,6 +98,14 @@ export class LandingpageComponent implements OnInit {
     this.profin;
     // console.log(this.profin);
     this.router.navigate(['/searchBar/', this.catego, this.profin])
+  }
+
+  counterStars(i: number){
+    return Array(Math.round(i)).fill(4);
+  }
+
+  goCalendar(){
+    this.router.navigate(['/Diskon']);
   }
 
 }

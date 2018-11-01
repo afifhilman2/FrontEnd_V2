@@ -109,7 +109,7 @@
                     <div class="radio-trv">
                         <label for="optradio" class="label-radio">Jenis Kelamin <p class="pull-right">:</p></label>
                         <div class="radio" >
-                            <label class="trv-radio"><input type="radio" name="radios" value="1" id="1" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
+                            <label class="trv-radio"><input type="radio" name="radios" value="Pria" id="1" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
                             <label class="trv-radio"><input type="radio" name="radios" value="2" id="2" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Perempuan</label>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <img src="../assets/img/user.png" class="image">
+        <img src="{{edit.photo}}" class="image">
         <div class="ubahPr">
             <label class="btn-ubahProfil"><input class="btn" type="file" hidden (change)="getFiles($event)" accept="image/x-png,image/gif,image/jpeg">Ubah Foto Profil</label>
             <p class="btn-deskripsi">Maksimum ukuran file 2 Mb format.JPG,.JPEG atau.PNG</p>
