@@ -1,120 +1,155 @@
-<form (submit)="onSubmitTravel()">
-    <div *ngIf='showLogin' (click)="toggleLogin()" class="blur"></div>
-    <div class="container-etalase">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="wrap-form-daftar">
-                    <div class="head-daftar">
-                        Daftarkan Travel
-                    </div>
-                    <div class="wrap-form-content">
-                        <label class="label-form" for="namaTravel">Nama Travel</label>
-                        <div class="input-group">
-                            <input type="text" class="namaTrv form-control" id="namaTravel" [(ngModel)]="travel.travel_name" name="travel_name">
+<form [formGroup]="myForm" (ngSubmit)="onSubmitTravel()">
+    <div (click)="toggleLogin()" *ngIf="blurModal" class="blur"></div>
+    <div>
+        <div class="container-etalase">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="wrap-form-daftar">
+                        <div class="head-daftar">
+                            Daftarkan Travel
                         </div>
-
-                        <label class="label-form" for="slogan">Slogan</label>
-                        <div class="input-group">
-                            <textarea type="textarea" class="sloganTrv form-control" id="slogan" [(ngModel)]="travel.slogan" name="slogan"> </textarea>
-                        </div>
-
-                        <label class="label-form" for="deskripsi">Deskripsi</label>
-                        <div class="input-group">
-                            <textarea type="textarea" class="deskripsiTrv form-control" id="deskripsi" [(ngModel)]="travel.description" name="description"> </textarea>
-                        </div>
-
-                        <div class="wrap-alamat">
-                            <label class="label-form" for="alamat">Alamat Kantor</label>
-                            <div class="input-group">
-                                <textarea type="textarea" class="alamatTrv form-control" id="alamat" [(ngModel)]="travel.office_address" name="office_address"> </textarea>
+                        <div class="wrap-form-content">
+                            <label class="label-form" for="namaTravel">Nama Travel</label>
+                            <div class="form-group" [ngClass]="displayFieldCss('travel_name')">
+                                <input type="text" class="namaTrv form-control" formControlName="travel_name">
+                                <div class="alert-error" *ngIf="isFieldValid('travel_name')"> Form tidak boleh kosong </div>
                             </div>
 
-                            <label class="sort" for="lokasi">Provinsi : </label>
-                            <select class="form-control form-sort" (change)='onSelectProv($event)'>
-                            <option selected disabled >Pilih Provinsi</option>
-                            <option *ngFor="let name of province" value="{{name._id}}">{{name.province_name}}  </option>
-                        </select>
+                            <label class="label-form" for="slogan">Slogan</label>
+                            <div class="input-group form-group" [ngClass]="displayFieldCss('slogan')">
+                                <textarea type="textarea" class="sloganTrv form-control" formControlName="slogan"> </textarea>
+                                <div class="alert-error" *ngIf="isFieldValid('slogan')"> Form tidak boleh kosong </div>
+                            </div>
+
+                            <label class="label-form" for="deskripsi">Deskripsi</label>
+                            <div class="input-group form-group" [ngClass]="displayFieldCss('description')">
+                                <textarea type="textarea" class="deskripsiTrv form-control" formControlName="description"> </textarea>
+                                <div class="alert-error" *ngIf="isFieldValid('description')"> Form tidak boleh kosong </div>
+                            </div>
+
+                            <div class="wrap-alamat">
+                                <label class="label-form" for="alamat">Alamat Kantor</label>
+                                <div class="input-group form-group" [ngClass]="displayFieldCss('office_address')">
+                                    <textarea type="textarea" class="alamatTrv form-control" formControlName="office_address"> </textarea>
+                                    <div class="alert-error" *ngIf="isFieldValid('office_address')"> Form tidak boleh kosong </div>
+                                </div>
+
+                                <label class="sort form-group" [ngClass]="displayFieldCss('province')" for="lokasi">Provinsi : </label>
+                                <select class="form-control form-sort" formControlName="province">
+                                        <option value="" selected disabled >Pilih Provinsi</option>
+                                        <option *ngFor="let name of province" value="{{name._id}}">{{name.province_name}}  </option>
+                                        </select>
+                                <div class="alert-error form-sort-alert" *ngIf="isFieldValid('province')"> Form tidak boleh kosong </div>
+                            </div>
+
+                            <label class="label-form" for="nomorTravel">Nomor Telepon Travel</label>
+                            <div class="input-group form-group" [ngClass]="displayFieldCss('office_phone_number')">
+                                <input (keypress)="keyPress($event)" maxlength="13" class="nomorTrv form-control" formControlName="office_phone_number">
+                                <div class="alert-error" *ngIf="myForm.get('office_phone_number').hasError('required') && myForm.get('office_phone_number').touched"> Form tidak boleh kosong </div>
+                                <div class="alert-error" *ngIf="myForm.get('office_phone_number').hasError('minlength') && myForm.get('office_phone_number').touched"> Nomor Telepon harus lebih dari 10 karakter </div>
+                            </div>
+
+                            <label class="label-form" for="domainTravel">Social Media</label>
+                            <p class="domain-name">Instagram.com/</p>
+                            <div class="wrap-domain" [ngClass]="displayFieldCss('medsoc_account')">
+                                <input type="text" (keypress)="socialPress($event)" class="domainTrv form-control" formControlName="medsoc_account">
+                                <div class="alert-error" *ngIf="isFieldValid('medsoc_account')"> Form tidak boleh kosong </div>
+                            </div>
+
+                            <label class="label-form" for="domainTravel">Domain</label>
+                            <p class="domain-name">travinesia.com/</p>
+                            <div class="input-group wrap-domain form-group" [ngClass]="displayFieldCss('domain')">
+                                <input type="text" (keypress)="domainPress($event)" class="domainTrv form-control" formControlName="domain">
+                                <div class="alert-error" *ngIf="isFieldValid('domain')"> Form tidak boleh kosong </div>
+                            </div>
+
+                            <input type="checkbox" class="checkbox">
+                            <label class="label-checkbox"> Dengan ini saya menyetujui bergabung dengan Travinesia sebagai agen
+                                Travel dan bersedia mengikuti segala bentuk kebijakan yang berlaku</label>
+
+                            <div class="btn-daftar-trv" (click)="onNext()"> Lanjutkan </div>
                         </div>
-
-                        <label class="label-form" for="nomorTravel">Nomor Telepon Travel</label>
-                        <div class="input-group">
-                            <input type="tel" max="13" class="nomorTrv form-control" id="nomorTravel" [(ngModel)]="travel.office_phone_number" name="office_phone_number">
-                        </div>
-
-                        <label class="label-form" for="domainTravel">Social Media</label>
-                        <p class="domain-name">Instagram.com/</p>
-                        <div class="input-group wrap-domain">
-                            <input type="text" class="domainTrv form-control" id="domainTravel" [(ngModel)]="travel.medsoc_account" name="medsoc_account">
-                        </div>
-
-                        <label class="label-form" for="domainTravel">Domain</label>
-                        <p class="domain-name">travinesia.com/</p>
-                        <div class="input-group wrap-domain">
-                            <input type="text" class="domainTrv form-control" id="domainTravel" [(ngModel)]="travel.domain" name="domain">
-                        </div>
-
-                        <input type="checkbox" class="checkbox">
-                        <label class="label-checkbox"> Dengan ini saya menyetujui bergabung dengan Travinesia sebagai agen
-                            Travel dan bersedia mengikuti segala bentuk kebijakan yang berlaku</label>
-
-                        <button data-toggle="modal" data-target="#myModal" class="btn-daftar-trv"> Lanjutkan </button>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <img src="../assets/img/travinesia-logo.png" class="logo">
-                <p class="tittle-head"> Kemudahan Pengembangan Bisnis Skala Besar untuk Travel Anda. </p>
-                <p class="title-content"> Kemudahan promosi untuk bisnis travel yang lebih besar. Travinesia membantu anda dalam promosi, ini itu, ini itu dan masih banyak lagi keuntungan menjadi Agen Travel di Travinesia. Promosikan paket wisata anda, ada banyak ategori yang
-                    sisediakan oleh Travinesia. </p>
+                <div class="col-md-6">
+                    <img src="../assets/img/travinesia-logo.png" class="logo">
+                    <p class="tittle-head"> Kemudahan Pengembangan Bisnis Skala Besar untuk Travel Anda. </p>
+                    <p class="title-content"> Kemudahan promosi untuk bisnis travel yang lebih besar. Travinesia membantu anda dalam promosi, ini itu, ini itu dan masih banyak lagi keuntungan menjadi Agen Travel di Travinesia. Promosikan paket wisata anda, ada banyak ategori yang
+                        sisediakan oleh Travinesia. </p>
 
-                <ul class="head-category">
-                    <li>
-                        <a> <span class="icon-island-with-palm-trees"></span></a>
-                    </li>
-                    <li>
-                        <a> <span class="icon-hotel-with-three-floors"></span></a>
-                    </li>
-                    <li>
-                        <a> <span class="icon-theatre-masks"></span></a>
-                    </li>
-                    <li>
-                        <a> <span class="icon-fishing-sign"></span></a>
-                    </li>
-                    <li>
-                        <a> <span class="icon-mountains-with-trees"></span></a>
-                    </li>
-                    <li>
-                        <a> <span class="icon-love-hot-air-balloon"></span></a>
-                    </li>
-                    <li>
-                        <a><span class="icon-human-foot-prints"></span> </a>
-                    </li>
-                    <li>
-                        <a><span class="icon-sea-ship-with-containers"></span></a>
-                    </li>
-                </ul>
+                    <ul class="head-category">
+                        <li>
+                            <a> <span class="icon-island-with-palm-trees"></span></a>
+                        </li>
+                        <li>
+                            <a> <span class="icon-hotel-with-three-floors"></span></a>
+                        </li>
+                        <li>
+                            <a> <span class="icon-theatre-masks"></span></a>
+                        </li>
+                        <li>
+                            <a> <span class="icon-fishing-sign"></span></a>
+                        </li>
+                        <li>
+                            <a> <span class="icon-mountains-with-trees"></span></a>
+                        </li>
+                        <li>
+                            <a> <span class="icon-love-hot-air-balloon"></span></a>
+                        </li>
+                        <li>
+                            <a><span class="icon-human-foot-prints"></span> </a>
+                        </li>
+                        <li>
+                            <a><span class="icon-sea-ship-with-containers"></span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+    </div>
 
+    <!-- modal photo -->
+    <div *ngIf="activeModal">
+        <div class="modal-dialog">
+            <div class="wrap-modal">
+                <a class="exit">
+                    <div data-dismiss="modal" class="close-modal" (click)="toggleLogin()"> X </div>
+                </a>
 
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="wrap-modal">
-                    <a class="exit">
-                        <div data-dismiss="modal" class="close-modal"> X </div>
-                    </a>
+                <label class="wrap-foto-content">
+                    <img class="img-modal" src="{{photo}}">
+                    <input type="file" hidden (change)="handleFileSelect($event)">
+                </label>
 
-                    <label class="wrap-foto-content">
-                        <img class="img-modal" src="../assets/img/user.png">
-                        <input type="file" hidden (change)="handleFileSelect($event)">
-                    </label>
+                <p class="tittle-foto">Tambahkan Foto</p>
+                <p class="detail-tittle"> dapat berupa logo, kantor atau yang berhubungan </p>
 
-                    <p class="tittle-foto">Tambahkan Foto</p>
-                    <p class="detail-tittle"> dapat berupa logo, kantor atau yang berhubungan </p>
+                <button type="submit" class="btn-trv-modal"> Kirim </button>
+            </div>
+        </div>
+    </div>
 
-                    <input data-toggle="modal" type="submit" value="kirim" class="btn-trv-modal">
+    <!-- modal respon -->
+    <div *ngIf="responModal">
+        <div class="modal-dialog">
+            <div class="wrap-modal-respon">
+                <p *ngIf="text200" class="tittle-respon">Permintaan anda telah dikirim, mohon tunggu untuk konfirmasi admin</p>
+                <p *ngIf="text400" class="tittle-respon">Anda telah melakukan registrasi sebelumnya</p>
+                <div class="wrap-btn-respon">
+                    <div data-dismiss="modal" class="btn-trv-respon" (click)="closeModal()"> Ok </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blur-error" (click)="close()" [hidden]="imgError"></div>
+    <div class="wrap-modal-imgError" [hidden]="imgError">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-success">
+                <p class="tittle-imgError">File bukan gambar, harap masukan gambar</p>
+                <div (click)="close()" class="btn-trv-ok">Ok </div>
             </div>
         </div>
     </div>

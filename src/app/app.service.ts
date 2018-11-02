@@ -46,11 +46,14 @@ export class AppService {
 
     //token localstorage
     createAuthorizationHeader (headers:Headers) {
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        // headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        
+        headers.append('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
     }
 
     //httpClient Headers
-    requestHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    // requestHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    requestHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
     //user
     getUsers() {
         let headers = new Headers();
@@ -212,6 +215,33 @@ export class AppService {
         this.createAuthorizationHeader (headers);
 
         return this.http.put('https://travinesia.com:1210/v1/provider/discountby_provider/' + id, diskon,
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    editPhotoTrip(id, trip) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.put('https://travinesia.com:1210/v1/provider/edit_photo_trip/' + id, trip,
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    editLogoProvider(provider) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.put('https://travinesia.com:1210/v1/provider/edit_logo',provider,
+        {headers: headers})
+        .map(res => res.json());
+    }
+
+    editCoverProvider(provider) {
+        let headers = new Headers();
+        this.createAuthorizationHeader (headers);
+
+        return this.http.put('https://travinesia.com:1210/v1/provider/edit_cover',provider,
         {headers: headers})
         .map(res => res.json());
     }

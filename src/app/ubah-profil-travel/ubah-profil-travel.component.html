@@ -1,3 +1,14 @@
+<div class="blur" (click)="close()" [hidden]="imgError"></div>
+<div class="wrap-modal-imgError" [hidden]="imgError">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-success">
+            <p class="tittle-imgError">File bukan gambar, harap masukan gambar</p>
+            <div (click)="close()" class="btn-trv-ok">Ok </div>
+        </div>
+    </div>
+</div>
+
 <div class="wrap-tittle">
     <p class="head-tittle">Ubah Profil Travel </p>
 </div>
@@ -5,7 +16,7 @@
 <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p class="info-paket">Logo dan Nama tidak dapat dirubah demi menjaga kredibelitas traveller terhadap Travel Anda. Baca selengkapnya di <a href="" class="highlight"> Syarat dan ketentuan </a> Travinesia</p>
 
-<form (submit)="onEditProfile()">
+<form [formGroup]="myForm" (ngSubmit)="onEditProfile()">
 
     <div class="row">
         <div class="col-md-4">
@@ -13,8 +24,8 @@
                 <label class="label-form">Foto Profil Travel </label>
                 <label>
                     <div class="wrap-img-profil">
-                        <img src="" alt="" class="img-profil">
-                        <input type="file" hidden>
+                        <img src="{{photoLogo}}" alt="" class="img-profil">
+                        <input type="file" hidden (change)="uploadImage1($event)">
                     </div>
                 </label>
             </div>
@@ -25,8 +36,8 @@
                 <label class="label-form">Foto Profil Travel </label>
                 <label>
                     <div class="wrap-cover-profil">
-                        <img src="" alt="" class="cover-profil">
-                        <input type="file" hidden>
+                        <img src="{{photoCover}}" alt="" class="cover-profil">
+                        <input type="file" hidden (change)="uploadImageCover($event)">
                     </div>
                 </label>
             </div>
@@ -37,7 +48,7 @@
     <div>
         <label class="label-form" for="Deskripsi">Deskripsi Travel </label>
 
-        <textarea class="deskripsi-trip form-control" id="Deskripsi" [(ngModel)]="provider.description" name="deskripsi" placeholder="Tuliskan Deskripsi Travel Anda"> </textarea>
+        <textarea class="deskripsi-trip form-control" id="Deskripsi" formControlName="description" placeholder="Tuliskan Deskripsi Travel Anda"> </textarea>
 
     </div>
 
@@ -46,7 +57,7 @@
             <div class="wrap-slogan">
                 <label class="label-form" for="Slogan">Slogan Travel </label>
 
-                <textarea class="slogan-trip form-control" id="Slogan" [(ngModel)]="provider.slogan" name="slogan" placeholder="Tuliskan Slogan Travel Anda"> </textarea>
+                <textarea class="slogan-trip form-control" id="Slogan" formControlName="slogan" placeholder="Tuliskan Slogan Travel Anda"> </textarea>
 
             </div>
         </div>
@@ -55,7 +66,7 @@
             <div class="wrap-alamat">
                 <label class="label-form" for="Alamat">Alamat Travel </label>
 
-                <textarea class="alamat-trip form-control" id="Alamat" [(ngModel)]="provider.office_address" name="alamat" placeholder="Tuliskan Alamat Kantor Anda"></textarea>
+                <textarea class="alamat-trip form-control" id="Alamat" formControlName="office_address" placeholder="Tuliskan Alamat Kantor Anda"></textarea>
 
             </div>
 
@@ -66,49 +77,16 @@
         <div class="row">
             <div class="col-md-4">
                 <label class="label-form" for="provinsi"> Provinsi </label>
-                <select class="form-control form-sort" [(ngModel)]="provider.province._id" name="province">
+                <select class="form-control form-sort" formControlName="province">
                                                           <option >Pilih Provinsi</option>
                                                             <option *ngFor="let province of provinceTrip" value="{{province._id}}"> {{province.province_name}} </option>
-                                                          <!-- <option >Sumatra Utara</option>
-                                                          <option >Sumatra Selatan </option>
-                                                          <option >Sumatra Barat</option>
-                                                          <option >Bengkulu</option>
-                                                          <option >Riau</option>
-                                                          <option >Kepulauan Riau</option>
-                                                          <option >Jambi</option>
-                                                          <option >Lampung</option>
-                                                          <option >Bangka Belitung</option>
-                                                          <option >Kalimantan Barat</option>
-                                                          <option >Kalimantan Timur</option>
-                                                          <option >Kalimantan Selatan</option>
-                                                          <option >Kalimantan Tengah</option>
-                                                          <option >Kalimantan Utara</option>
-                                                          <option >Banten </option>
-                                                          <option >DKI Jakarta  </option>
-                                                          <option >Jawa Barat </option>
-                                                          <option >Jawa Tengah </option>
-                                                          <option >DI Yogyakarta </option>
-                                                          <option >Jawa Timur </option>
-                                                          <option >Bali </option>
-                                                          <option >Nusa Tenggara Timur </option>
-                                                          <option >Nusa Tenggara Barat </option>
-                                                          <option >Gorontalo </option>
-                                                          <option >Sulawesi Barat </option>
-                                                          <option >Sulawesi Tengah </option>
-                                                          <option >Sulawesi Utara </option>
-                                                          <option >Sulawesi Tenggara </option>
-                                                          <option >Sulawesi Selatan </option>
-                                                          <option >Maluku Utara </option>
-                                                          <option >Maluku </option>
-                                                          <option >Papua Barat </option>
-                                                          <option >Papua  </option> -->
                                                       </select>
             </div>
 
             <div class="col-md-5">
                 <label class="label-form" for="NoTelepon"> Nomor Handphone Travel </label>
 
-                <input type="number" class="phone-trip form-control" [(ngModel)]="provider.office_phone_number" name="office_phone_number" placeholder="Tuliskan Nomor Hanphone Travel">
+                <input type="text" (keypress)="keyPress($event)" maxlength="13" class="phone-trip form-control" formControlName="office_phone_number" placeholder="Tuliskan Nomor Hanphone Travel">
 
             </div>
         </div>

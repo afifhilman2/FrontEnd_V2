@@ -1,20 +1,20 @@
 <div class="container-etalase">
     <div class="wrapper-content">
         <div class="wrap-img">
-            <img src="../assets/img/edit2.jpg" class="img-background">
+            <img src="{{etalaseProvider?.cover}}" class="img-background">
         </div>
 
         <div class="wrap-img-logo">
-            <img class="img-logo" src="../assets/img/kuylah.png">
+            <img class="img-logo" src="{{etalaseProvider?.logo}}">
         </div>
 
         <div class="wrap-info">
             <div class="wrap-tittle">
                 <div class="tittle-head">{{etalaseProvider?.travel_name}} </div> <span class="glyphicon glyphicon-education"></span>
                 <div class="slogan-head">{{etalaseProvider?.slogan}} </div>
-
+                <!-- 
                 <div class="number-success-trip"> 89 </div>
-                <div class="success-trip"> Trip Berhasil </div>
+                <div class="success-trip"> Trip Berhasil </div> -->
 
                 <button class="chat-travel"> Chat Travel </button>
             </div>
@@ -52,17 +52,15 @@
         <div class="row">
             <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let trip of tripProvider">
                 <div class="thumb-promo">
-                    <img src="../assets/img/1.jpg" class="img-promo">
+                    <img src="{{trip.photo_trip}}" class="img-promo">
                     <div class="disc">-10%</div>
-                    <div class="trip"></div>
+                    <div class="trip">{{trip.id_type_trip.type_trip}}</div>
                     <div class="body-caption">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 ">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
+                            <div class="col-md-6 kiri">
+                                <span class="icon-star" *ngFor="let stars of counter((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span>
                             </div>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 kanan">
                                 <div class="caption-price">Rp {{trip.publish_price}}</div>
                             </div>
                         </div>

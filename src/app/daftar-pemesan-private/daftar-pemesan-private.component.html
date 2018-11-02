@@ -1,0 +1,73 @@
+<a (click)="toggleBack()" class="kembali-transaksi"><span class="glyphicon glyphicon-arrow-left"></span> Kembali ke Transaksi Penjualan</a>
+
+<div class="wrap-paket-trip-daftar">
+    <div class="wrap-content-paket-trip">
+        <img class="img-paket-trip" src="{{photo}}">
+
+        <div class="wrap-info-paket-trip">
+            <p class="tittle-paket-trip">{{trip_name}} </p>
+
+            <div class="tittle-info">Durasi
+                <span class="colon-info">:</span>
+                <div class="tittle-info-value">{{days}} Hari {{night === 0 ? '' : night + ' Malam'}}</div>
+            </div>
+
+            <div class="tittle-info">Kategori
+                <span class="colon-info">:</span>
+                <div class="tittle-info-value">{{category}}</div>
+            </div>
+
+            <div class="tittle-info">Jenis Trip
+                <span class="colon-info">:</span>
+                <div class="tittle-info-value">{{id_type_trip}}</div>
+            </div>
+        </div>
+
+        <div class="wrap-info-harga">
+            <div class="tittle-info-harga">Harga per orang :</div>
+            <div class="info-harga">Rp {{(publish_price)}}</div>
+            <a class="info-detail-trip" (click)="goDetailPesan()">Lihat Detail Trip</a>
+        </div>
+
+    </div>
+
+    <div class="wrap-btn-trv">
+        <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="daftarChange($event.target.value)" class="form-control form-tgl">
+                    <option *ngFor="let date of date_trip; let x = index" value="{{x}}" > {{date | date:"fullDate"}}</option>
+                  </select>
+        <span class="sisa-kuota">Maksimal Kuota : <span class="highlight-kuota"> </span> {{quota_left}}</span>
+    </div>
+</div>
+
+<div class="wrap-private-box">
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Pemesan</th>
+                <th>Waktu Pemesanan</th>
+                <th>Dipesan</th>
+                <th>Status</th>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let booking of booking">
+                    <td>{{booking.order_name}}</td>
+                    <td>{{booking.created_at | date:"fullDate"}}</td>
+                    <td>{{booking.quantity}}</td>
+                    <td>{{booking.id_statusTrip.status_trip}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="msg-agen">Pesan untuk Agen Travel (Anda) : </p>
+    <div class="box-msg-agen"> </div>
+
+    <p class="info-msg-agen">Jangan terlambat, diskusikan lebih lanjut di Whatsapp, Ayo berikan pelayanan terbaik ! </p>
+    <p class="no-hp">No. HP Pemesan : </p>
+
+    <div class="box-number-phone">
+        085678254252
+    </div>
+</div>

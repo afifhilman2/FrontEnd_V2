@@ -14,17 +14,10 @@ export class JualTripComponent implements OnInit {
 
   order: string;
   order2: string;
-
   loaded:boolean = true;
 
   id;
-
-
-  profileProvider = {
-    nameTrip :'',
-    cover:'',
-    photo:'',
-  }
+  profileProvider;
 
   constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http, private route:Router) { 
     this.appService.getProvider().subscribe(profile => {
@@ -36,11 +29,7 @@ export class JualTripComponent implements OnInit {
         alert('Belum Login ');
       }
 
-      this.profileProvider.nameTrip = profile.provider.travel_name;
-      this.profileProvider.cover = profile.provider.cover;
-     // this.profileProvider.photo = profile.provider.photo;
-      
-    //  this.loaded = false;
+      this.profileProvider = profile.provider;
     })
 
   }

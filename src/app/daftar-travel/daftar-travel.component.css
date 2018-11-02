@@ -2,12 +2,62 @@
     display: none !important;
 }
 
+.blur-error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: black;
+    opacity: .8;
+}
+
+.wrap-modal-imgError {
+    position: fixed;
+    top: 35%;
+    left: 36%;
+    z-index: 999;
+}
+
+.modal-dialog {
+    background-color: white;
+    width: 420px;
+    padding: 35px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.modal-success {
+    background-color: white;
+}
+
+.tittle-imgError {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.btn-trv-ok {
+    border-radius: 3px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 auto;
+    background-color: #ab47bc;
+    color: white;
+    cursor: pointer;
+}
+
 .blur {
     position: fixed;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, .5);
-    z-index: 99;
+    z-index: 999;
     top: 0;
 }
 
@@ -47,16 +97,12 @@
     color: #4a4a4a;
 }
 
-.form-control {
-    margin-bottom: 24px;
-}
-
 .namaTrv {
     width: 396px;
     height: 33px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
 }
 
 .sloganTrv {
@@ -64,7 +110,7 @@
     height: 83px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
     resize: none;
 }
 
@@ -73,7 +119,7 @@
     height: 83px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
     resize: none;
 }
 
@@ -86,7 +132,7 @@
     height: 125px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
     resize: none;
 }
 
@@ -125,7 +171,7 @@
     height: 33px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
 }
 
 .domain-name {
@@ -146,7 +192,7 @@
     height: 33px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: solid 1px #dddddd;
+    /* border: solid 1px #dddddd; */
 }
 
 .wrap-domain {
@@ -180,6 +226,8 @@
 .btn-daftar-trv {
     width: 395px;
     height: 35px;
+    line-height: 32px;
+    text-align: center;
     margin-top: 55px;
     border-radius: 3px;
     background-color: #ab47bc;
@@ -238,9 +286,9 @@ li>a:hover {
 .wrap-modal {
     border: 1px solid #dddddd;
     position: fixed;
-    top: 75px;
-    left: 160px;
-    z-index: 99;
+    top: 126px;
+    left: 40%;
+    z-index: 9999;
     width: 342px;
     height: 450px;
     border-radius: 3px;
@@ -248,11 +296,21 @@ li>a:hover {
     padding: 11px;
 }
 
+.wrap-modal-respon {
+    border: 1px solid #dddddd;
+    position: fixed;
+    top: 200px;
+    left: 40%;
+    z-index: 9999;
+    width: 372px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    padding: 25px;
+}
+
 .close-modal {
-    display: block;
     position: relative;
     left: 143px;
-    margin-bottom: 100px;
     text-align: center;
     margin: auto;
     color: white;
@@ -283,11 +341,23 @@ li>a:hover {
 .img-modal {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .tittle-foto {
     text-align: center;
     font-size: 25px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.tittle-respon {
+    text-align: center;
+    font-size: 16px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -322,4 +392,41 @@ li>a:hover {
     color: #ffffff;
     cursor: pointer;
     text-align: center;
+}
+
+.wrap-btn-respon {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.btn-trv-respon {
+    width: 40px;
+    height: 25px;
+    line-height: 23px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 36px;
+}
+
+.alert-error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.form-sort-alert {
+    position: absolute;
+    top: 60px;
+    right: 25px;
 }

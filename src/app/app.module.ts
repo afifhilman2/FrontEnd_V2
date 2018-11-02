@@ -76,6 +76,7 @@ import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.com
 import { FooterComponent } from './footer/footer.component';
 import { TrvSidebarModule } from './trv-sidebar/trv-sidebar.module';
 import { DetailPaketModule } from './detail-paket/detail-paket.module';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 
 
@@ -121,6 +122,7 @@ import { DetailPaketModule } from './detail-paket/detail-paket.module';
     ClickOutsideDirective,
     MiniFooterComponent,
     LoaderComponent,
+    // HeaderProviderComponent,
     // PromoComponent,
     // RatingUlasanComponent,
     // IsiDataPesertaComponent,
@@ -142,6 +144,7 @@ import { DetailPaketModule } from './detail-paket/detail-paket.module';
     TrvSidebarModule,
     LandingpageModule,
     DetailPaketModule,
+    Ng4GeoautocompleteModule.forRoot(),
 
    
     RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: PreloadAllModules }),

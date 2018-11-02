@@ -15,6 +15,7 @@ export class TransaksiPenjualanComponent implements OnInit {
   idParams:any;
   transaction:any[];
   quantity:number[] = [];
+
   
   id_transaction = {
     _id:''
@@ -45,25 +46,21 @@ export class TransaksiPenjualanComponent implements OnInit {
    pagedItems: any[];
 
   constructor(private appService:AppService, private http:Http, public route:Router, private pagerService: PagerService ) { 
-    this.appService.getTransactionProvider().subscribe (transaction => {
-      this.transaction = transaction.data;
+   
 
-      this.allItems = transaction.data;
+  }
 
-      for( let x=0; x<transaction.data.length; x++ ) {
-        this.quantity [x] = transaction.data[x].quota_left[0]; 
-      }
+  togglePesanPrivate(e):void {
 
-      this.setPage(1);
-    })
-
+    this.idParams= e.target.id;
+    this.route.navigate(['/JualTrip/DaftarPemesananPrivate/' + this.idParams])
+    
   }
 
   togglePesan(e):void {
 
     this.idParams= e.target.id;
     this.route.navigate(['/JualTrip/DaftarPemesanan/' + this.idParams])
-    
   }
 
   dateChange(value,i) {
@@ -79,17 +76,33 @@ export class TransaksiPenjualanComponent implements OnInit {
     this.route.navigate(['/traveler/DetailPaket/' + id])
   }
 
-  setPage(page: number) {
+  
+  ngOnInit() {
+
+    this.appService.getTransactionProvider().subscribe (transaction => {
+      this.transaction = transaction.data;
+      
+      // console.log(this.transaction)
+
+      this.allItems = transaction.data;
+
+      for( let x=0; x<transaction.data.length; x++ ) {
+        this.quantity [x] = transaction.data[x].quota_left[0]; 
+      }
+
+
+      this.setPage(1);
+    })
+
+
+   }
+
+   setPage(page: number) {
     // get pager object from service
     this.pager = this.pagerService.getPager(this.allItems.length, page);
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-  }
-
-  ngOnInit() {
-
-   
   }
 
 }

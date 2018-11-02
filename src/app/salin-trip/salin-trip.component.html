@@ -152,7 +152,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="sort" for="lokasi"> Lokasi (Provinsi) </label>
-                    <select class="form-control form-sort" formControlName="id_province">
+                    <select class="form-control form-sort" formControlName="id_province_trip">
                     <option>Pilih Provinsi</option>
                     <option *ngFor="let province of provinceTrip" id="{{province.province_name}}" value="{{province._id}}">{{province.province_name}} </option>
                     </select>
@@ -181,7 +181,7 @@
 
                 <div *ngFor="let facility of facilityTrip">
                     <div class="col-md-3" *ngIf="(facility.facility_category=='1')">
-                        <input type="checkbox" class="checkbox" (change)="checked($event, facility._id)" value="{{facility._id}}" id="{{facility._id}}">
+                        <input type="checkbox" [checked]="(facility.flag_facility == 1)" class="checkbox" (change)="checked($event, facility._id)" value="{{facility._id}}" id="{{facility._id}}">
                         <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
             <div class="row">
                 <div *ngFor="let facility of facilityTrip">
                     <div class="col-md-3" *ngIf="(facility.facility_category=='2')">
-                        <input type="checkbox" class="checkbox" (change)="checked($event, facility._id)" value="{{facility._id}}" id="{{facility._id}}">
+                        <input type="checkbox" [checked]="(facility.flag_facility == 1)" class="checkbox" (change)="checked($event, facility._id)" value="{{facility._id}}" id="{{facility._id}}">
                         <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
             <div class="row">
                 <div *ngFor="let facility of facilityTrip">
                     <div class="col-md-3" *ngIf="(facility.facility_category=='3')">
-                        <input type="checkbox" (change)="checked($event, facility._id)" class="checkbox" value="{{facility._id}}" id="{{facility._id}}">
+                        <input type="checkbox" [checked]="(facility.flag_facility == 1)" (change)="checked($event, facility._id)" class="checkbox" value="{{facility._id}}" id="{{facility._id}}">
                         <span class="checkbox-label-fasilitas">{{facility.facility_name}}</span>
                     </div>
                 </div>
@@ -272,21 +272,83 @@
 
         </div>
 
-        <div class="wrap-harga">
-            <div class="wrap-publish">
-                <label class="label-form" for="harga">Harga Trip</label>
-                <div class="publish-trip input-group">
-                    <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                    <input type="number" min="0" formControlName="publish_price" class="form-control publish-price" placeholder="Harga Publish">
+        <div *ngIf='opentrip'>
+            <div class="wrap-harga">
+                <div class="wrap-publish">
+                    <label class="label-form" for="harga">Harga Trip</label>
+                    <div class="publish-trip input-group">
+                        <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                        <input type="number" min="0" formControlName="publish_price" class="form-control publish-price" placeholder="Harga Publish">
+                    </div>
+                    <span class="perorang">/ Orang </span>
                 </div>
-                <span class="perorang">/ Orang </span>
-            </div>
 
-            <div class="wrap-kuota">
-                <label class="label-form" for="harga">Kuota Trip</label>
-                <div class="publish-trip input-group">
-                    <input type="number" min="1" max="100" formControlName="quota_trip" class="form-control" placeholder="Jumlah">
-                    <span class=" input-group-addon" id="harga"> Peserta </span>
+                <div class="wrap-kuota">
+                    <label class="label-form" for="harga">Kuota Trip</label>
+                    <div class="publish-trip input-group">
+                        <input type="number" min="1" max="100" formControlName="quota_trip" class="form-control" placeholder="Jumlah">
+                        <span class=" input-group-addon" id="harga"> Peserta </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf='privatetrip'>
+            <div class="wrap-range-harga">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="wrap-publish-private">
+                            <label class="label-form" for="harga">Harga Trip</label>
+                            <div class="publish-trip input-group">
+                                <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                                <input type="text" (keypress)="keyPress($event)" maxlength="8" formControlName="publish_price" min="0" class="form-control publish-price-private" placeholder="Harga Publish">
+                            </div>
+                            <!-- <span class="perorang">/ Orang </span> -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="wrap-publish">
+                    <label class="label-form" for="harga">Harga Rombongan Trip</label>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            <div class="tittle-range-harga"> Peserta </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="tittle-range-harga"> Harga </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-range-harga" *ngFor="let private of counter(5); let i=index">
+                        <div class="col-md-1">
+                            <div class="more-than"> &ge; </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <div formArrayName="min_qty_group">
+                                    <input type="text" (keypress)="keyPress($event)" [formControlName]="i" class="range-price-trip form-control" placeholder="Jumlah Peserta">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="range-price-trip">
+                                <div formArrayName="publish_price_group">
+                                    <input type="text" (keypress)="keyPress($event)" maxlength="8" [formControlName]="i" class="form-control" placeholder="Harga Trip">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-range-kuota">
+                    <label class="label-form" for="harga">Kuota Trip</label>
+                    <div class="publish-range-trip">
+                        <input type="text" (keypress)="keyPress($event)" formControlName="quota_trip" min="1" max="100" class="form-control" placeholder="Kuota Maksimal">
+                    </div>
                 </div>
             </div>
         </div>
@@ -298,7 +360,7 @@
         </div>
 
         <div class="wrap-btn">
-            <button type="submit" class="btn-content"> Ubah Trip</button>
+            <button type="submit" class="btn-content"> Salin Trip</button>
         </div>
     </div>
 

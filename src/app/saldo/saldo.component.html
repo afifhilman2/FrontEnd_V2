@@ -7,7 +7,7 @@
 <div class="wrap-saldo">
     <span class="rupiah">Rp </span> <span class="saldo-price">{{balance?.total_balance}}</span>
 
-    <div class="btn-trv-ajukan" data-toggle="modal" data-target="#myModal"> Ajukan Pencairan </div>
+    <div class="btn-trv-ajukan" data-toggle="modal" (click)="open()" data-target="#myModal"> Ajukan Pencairan </div>
     <div class="petunjuk-pencarian" data-toggle="modal" data-target="#ModalPencarian"> Lihat Petunjuk Pencairan </div>
 </div>
 
@@ -25,7 +25,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" [hidden]="modalClose">
 
         <!-- Modal content-->
         <div class="wrap-modal-content">
@@ -36,7 +36,7 @@
             <form [formGroup]="withdrawForm" (ngSubmit)="onSubmitWithdraw()">
                 <div class="wrap-modal-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" [ngClass]="displayFieldCss('bank_name')">
                             <div class="tittle-label-modal">Pilih Bank</div>
                             <select class="form-control pilih-bank" formControlName="bank_name">
                                 <option value="" selected disabled>Pilih Bank</option>
@@ -45,24 +45,33 @@
                                 <option value="BNI">BNI</option>
                                 <option value="BCA">BCA</option>
                             </select>
+                            <div class="alert-error" *ngIf="isFieldValid('bank_name')"> Form tidak boleh kosong </div>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-8" [ngClass]="displayFieldCss('account_number')">
                             <div class="tittle-label-modal">Nomor Rekening :</div>
-                            <input type="number" class="form-control margin-tittle-ikon" formControlName="account_number">
+                            <input type="text" (keypress)="keyPress($event)" class="form-control margin-tittle-ikon" formControlName="account_number">
+                            <div class="alert-error" *ngIf="isFieldValid('account_number')"> Form tidak boleh kosong </div>
                         </div>
                     </div>
 
-                    <div class="tittle-label-modal">Atas Nama :</div>
-                    <input class="form-control margin-tittle-ikon" formControlName="account_owner">
-
-                    <div class="tittle-label-modal">Nominal :</div>
-                    <div class="input-group margin-tittle-ikon">
-                        <span class="input-group-addon bold"> Rp. </span>
-                        <input class="form-control margin-tittle-label" type="number" formControlName="withdraw_total">
+                    <div [ngClass]="displayFieldCss('account_owner')">
+                        <div class="tittle-label-modal">Atas Nama :</div>
+                        <input class="form-control margin-tittle-ikon" formControlName="account_owner">
+                        <div class="alert-error" *ngIf="isFieldValid('account_owner')"> Form tidak boleh kosong </div>
                     </div>
-                    <div class="tittle-label-modal">Kata Sandi Akun Travinesia :</div>
-                    <input type="password" class="form-control margin-tittle-ikon" formControlName="password">
+                    <div class="tittle-label-modal">Nominal :</div>
+                    <div class="input-group margin-tittle-ikon" [ngClass]="displayFieldCss('withdraw_total')">
+                        <span class="input-group-addon bold"> Rp. </span>
+                        <input class="form-control margin-tittle-label" type="text" (keypress)="keyPress($event)" formControlName="withdraw_total">
+                    </div>
+                    <div class="alert-error" *ngIf="isFieldValid('withdraw_total')"> Form tidak boleh kosong </div>
+                    <div [ngClass]="displayFieldCss('password')">
+                        <div class="tittle-label-modal">Kata Sandi Akun Travinesia :</div>
+                        <input type="password" class="form-control margin-tittle-ikon" formControlName="password">
+                        <div class="alert-error" *ngIf="isFieldValid('password')"> Form tidak boleh kosong </div>
+                        <div class="alert-error" *ngIf="wrong"> Password Salah </div>
+                    </div>
 
                     <!-- <span class="glyphicon glyphicon-info-sign"></span>
                     <div class="tittle-sign">Pengajuan pencairan dapat dilakukan pada pukul 08.00 - 14.00 WIB</div> -->
@@ -74,8 +83,18 @@
                 </div>
             </form>
         </div>
-
     </div>
+
+    <div class="wrap-modal-success" [hidden]="confirmSuccess">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-success">
+                <p class="tittle-modal-pencarian">Tunggu Konfirmasi Admin</p>
+                <button data-dismiss="modal" (click)="close()" class="btn-trv-ok">Ok</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="wrap-info-saldo">

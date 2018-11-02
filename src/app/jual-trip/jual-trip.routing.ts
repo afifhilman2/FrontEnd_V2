@@ -1,8 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HeaderComponent } from ".././header/header.component";
-import { HeaderUserComponent } from '.././header-user/header-user.component';
 import { JualTripComponent } from ".././jual-trip/jual-trip.component";
 import { JualTripContentComponent } from ".././jual-trip-content/jual-trip-content.component";
 import { SaldoComponent } from ".././saldo/saldo.component";
@@ -16,11 +14,13 @@ import { PesanMasukProviderComponent } from '.././pesan-masuk-provider/pesan-mas
 import { DiskusiProviderComponent } from '.././diskusi-provider/diskusi-provider.component';
 
 import { DaftarPemesanComponent } from '.././daftar-pemesan/daftar-pemesan.component';
+import { DaftarPemesanPrivateComponent } from '.././daftar-pemesan-private/daftar-pemesan-private.component';
+import { HeaderProviderComponent } from ".././header-provider/header-provider.component";
 
 const JualTrip: Routes = [
     {
         path: '', 
-        component: HeaderComponent,
+        component: HeaderProviderComponent,
         children :[
             {
                 path:'JualTrip',
@@ -41,6 +41,9 @@ const JualTrip: Routes = [
                     },
                     {   path:'DaftarPemesanan/:id', 
                         component:DaftarPemesanComponent
+                    },
+                    {   path:'DaftarPemesananPrivate/:id', 
+                        component:DaftarPemesanPrivateComponent
                     },
                     {   path:'UbahProfilTravel', 
                         component:UbahProfilTravelComponent

@@ -1,26 +1,27 @@
 .my-akun {
-    font-size:13px;
+    font-size: 13px;
     font-weight: normal;
-    margin-bottom: 0;
     text-align: left;
     color: #4a4a4a;
+    margin-bottom: 5px;
 }
 
-.akun-image{
+.akun-image {
     position: relative;
     left: 6px;
     display: inline-block;
 }
 
-.akun-text{
+.akun-text {
     padding-left: 15px;
     vertical-align: top;
     display: inline-block;
+    width: 200px;
 }
 
-.akun-image img{
-    width:45px;
-    height:45px;
+.akun-image img {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     border: solid 1px #ab47bc;
     padding: 1px;
@@ -28,13 +29,12 @@
     object-fit: contain;
 }
 
-.akun-name{
+.akun-name {
     margin-top: -7px;
     font-size: 20px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.95;
     letter-spacing: normal;
     text-align: left;
     color: #4a4a4a;
@@ -123,12 +123,12 @@
     text-indent: 15px;
 }
 
-.glyphicon-menu-right{
+.glyphicon-menu-right {
     margin-top: 15px;
     margin-right: 13px;
 }
 
-.kotak-masuk{
+.kotak-masuk {
     font-size: 13px;
     font-weight: bold;
     font-style: normal;
@@ -137,17 +137,16 @@
     letter-spacing: normal;
     text-align: left;
     color: #4a4a4a;
-    padding: 15px 10px 0px; 
+    padding: 15px 10px 0px;
     margin-bottom: 2px;
 }
 
 .content {
     width: 100%;
     padding-left: 85px;
-    
 }
 
-.badge{
+.badge {
     display: inline-block;
     min-width: 10px;
     padding: 3px 6px;
@@ -163,6 +162,7 @@
     top: 15px;
     right: 20px;
 }
+
 @media (min-width:450px) and (max-width: 992px) {
     .btn-toggle {
         display: none;

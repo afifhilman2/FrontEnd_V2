@@ -733,3 +733,89 @@ textarea {
     display: block;
     font-weight: bold;
 }
+
+.wrap-range-harga {
+    position: relative;
+    width: 100%;
+    border-radius: 3px;
+    border: solid 1px #ab47bc;
+    background-color: #f7f7f7;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.tittle-range-harga {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: 5px;
+}
+
+.row-range-harga {
+    margin-top: 5px;
+    margin-bottom: 13px;
+}
+
+.perorang {
+    position: absolute;
+    right: -60px;
+    top: 34px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.publish-trip {
+    width: 225px;
+    border-radius: 3px;
+}
+
+.publish-range-trip {
+    width: 190px;
+    border-radius: 3px;
+}
+
+.range-price-trip {
+    width: 100%;
+    border-radius: 3px;
+}
+
+.wrap-publish {
+    display: inline-block;
+    position: relative;
+}
+
+.wrap-publish-private {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.publish-price {
+    width: 335px;
+}
+
+.publish-price-private {
+    width: 160px;
+}
+
+.wrap-range-kuota {
+    text-align: left;
+    display: inline-grid;
+    position: relative;
+}
+
+.wrap-kuota {
+    float: right;
+}
+
+.more-than {
+    padding-top: 7px;
+    font-weight: bold;
+}

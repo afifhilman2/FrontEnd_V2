@@ -43,6 +43,32 @@ export class LandingpageComponent implements OnInit {
       this.category = kategori.data
       // console.log(this.category)
     })
+
+    var os = this.getMobileOperationSystem();
+    if(os == 'Android' || os == 'Windows Phone' || os == 'iOS'){
+      console.log("Bener")
+      window.location.href = 'https://m.travinesia.com'
+    }
+  }
+
+  getMobileOperationSystem(){
+    var userAgent = navigator.userAgent;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent)) {
+        return "iOS";
+    }
+
+    return "unknown";
   }
 
   diskon;
@@ -50,7 +76,7 @@ export class LandingpageComponent implements OnInit {
     this.appService.getDiscountTrip().subscribe(diskon =>{
       this.diskon = diskon.data;
       
-      console.log(diskon)
+      // console.log(diskon)
     })
   }
 

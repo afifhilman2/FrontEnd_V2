@@ -13,7 +13,8 @@ th {
     padding: 10px;
 }
 
-th:nth-child(1) {
+
+/* th:nth-child(1) {
     width: 110px;
 }
 
@@ -23,7 +24,7 @@ th:nth-child(2) {
 
 th:nth-child(3) {
     width: 115px;
-}
+} */
 
 td {
     font-size: 11px;
@@ -206,7 +207,7 @@ td {
 }
 
 .margin-tittle-ikon {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     background-color: #fdfdfd;
 }
 
@@ -217,7 +218,8 @@ td {
     font-stretch: normal;
     letter-spacing: normal;
     color: #4a4a4a;
-    margin-bottom: 3px
+    margin-bottom: 3px;
+    margin-top: 10px;
 }
 
 .pilih-bank {
@@ -286,6 +288,22 @@ td {
     border-radius: 3px;
 }
 
+.modal-success {
+    margin-left: 60px;
+    padding: 40px 60px;
+    width: 473px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+.wrap-modal-success {
+    position: absolute;
+    z-index: 9999;
+    top: 150px;
+    left: 29%;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -305,4 +323,9 @@ td {
     color: #4a4a4a;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.alert-error {
+    color: red;
+    font-size: 12px;
 }

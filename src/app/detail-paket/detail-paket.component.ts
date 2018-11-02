@@ -153,7 +153,7 @@ export class DetailPaketComponent implements OnInit {
   quantity=1;
   goToProsespemesanan(){
     
-   if(!(localStorage.token == null)){
+   if(!(sessionStorage.token == null)){
      if(this.formBooking.valid){
       this.formBooking.patchValue({
         _id: this.dataTrip, 
@@ -204,7 +204,7 @@ export class DetailPaketComponent implements OnInit {
 
   textContent;
   sendComment(){
-    if(!(localStorage.token == null)){
+    if(!(sessionStorage.token == null)){
     this.appServis.sendDiskusi(this.dataTrip,this.text).subscribe(text =>{
       console.log(text);
     })
@@ -225,7 +225,7 @@ export class DetailPaketComponent implements OnInit {
 
   cekLogin: boolean = false;
   get isLogin(){
-    if(!(localStorage.token == null)){
+    if(!(sessionStorage.token == null)){
       return this.cekLogin = true;
     }
   } 

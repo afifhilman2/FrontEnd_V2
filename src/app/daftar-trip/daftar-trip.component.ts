@@ -31,16 +31,11 @@ export class DaftarTripComponent implements OnInit {
   diskon = {
     discount_date:[]=[]
   }
+
+  diskonForm = this.fb.group({
+    value:['', Validators.required]
+  })
   
-
-  // kosongForm = this.fb.group({
-  //   quota_trip:this.fb.array([])
-  // })
-
-  // diskonForm = this.fb.group({
-  //   discount_date:this.fb.array([])
-  // })
-
 
   constructor( public appService:AppService, private http:Http, public router:Router, private fb:FormBuilder) { 
     this.appService.getTripProvider().subscribe (Trip =>{
@@ -48,6 +43,7 @@ export class DaftarTripComponent implements OnInit {
       this.tripProvider = Trip.trip;
       this.date = Trip.trip[this.data].date_trip
       
+      // console.log(this.tripProvider)
 
       if (Trip.success == false) {
         alert('Belum ada trip');
@@ -57,7 +53,7 @@ export class DaftarTripComponent implements OnInit {
 
    //token localstorage
    createAuthorizationHeader (headers:Headers) {
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    headers.append('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
 }
 
 kosong(i,e) {
@@ -72,6 +68,16 @@ beriDiskon(i,e) {
 
 discPrice(e){
   this.discount_price = e.target.value;
+  // console.log(this.discount_price);
+}
+
+keyPress(event: any) {
+  const pattern = /[0-9]/;
+
+  let inputChar = String.fromCharCode(event.charCode);
+  if (event.keyCode != 8 && !pattern.test(inputChar)) {
+    event.preventDefault();
+  }
 }
 
 checked(e,y) {
@@ -93,12 +99,13 @@ checkedDiscount(e,d,y) {
   // console.log(discountArray);
 
   if(e.target.checked) {
-    this.diskon.discount_date[y] = d;
+    this.diskon.discount_date[y] = this.diskonForm.value.value;
     // discountArray.push(new FormControl(d));
-    console.log(this.diskon.discount_date);
+    // console.log(this.diskon.discount_date);
   }
   else if(!e.target.checked)  {
     this.diskon.discount_date[y] = '';
+    // console.log(this.diskon.discount_date);
     // let index = discountArray.controls.findIndex(x=> x.value == d)
     // discountArray.removeAt(index);
   }
@@ -109,16 +116,17 @@ checkedDiscount(e,d,y) {
 
     this.appService.kosongkanKuotaProvider(this.idTrip, this.quota).subscribe(kosong => {
       
-      console.log(kosong);
+      // console.log(kosong);
     })
   }
 
   onSubmitDiskon() {
 
-    this.appService.beriDiskonProvider(this.idTrip, this.diskon).subscribe(diskon => {
+    // console.log(this.diskon);
+    // this.appService.beriDiskonProvider(this.idTrip, this.diskon).subscribe(diskon => {
       
-      console.log(diskon);
-    })
+      
+    // })
   }
 
   ubahTrip(e){
@@ -129,6 +137,7 @@ checkedDiscount(e,d,y) {
   salinTrip(e){
     this.idTrip = e.target.id;
     this.router.navigate(['/JualTrip/SalinTrip', this.idTrip]);
+    // console.log(this.idTrip);
   }
 
   hapusTrip(trip) {
@@ -136,13 +145,13 @@ checkedDiscount(e,d,y) {
         let headers = new Headers();
         
         this.createAuthorizationHeader (headers);
-        return this.http.post('http://travinesia.com:3000/v1/provider/delete_trip/'+ this.hapus, trip,
+        return this.http.post('https://travinesia.com:1210/v1/provider/delete_trip/'+ this.hapus, trip,
         {headers: headers})
         .subscribe(
           (res:Response)=> {
             let delTrip = res.json();
-            console.log(delTrip);
-            if(delTrip.status == 204) {
+            // console.log(delTrip);
+            if(delTrip.status == 200) {
         
                 this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
                   this.router.navigate(['/JualTrip/DaftarTrip']));

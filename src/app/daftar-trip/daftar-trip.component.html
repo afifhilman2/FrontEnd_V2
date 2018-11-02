@@ -14,7 +14,7 @@
 
             <div class="tittle-info">Durasi
                 <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.days===null || trip.days===undefined ? '' : trip.days +' Hari'}} {{trip.night===null || trip.night===-1 ? '' : trip.night +' Malam'}}</div>
+                <div class="tittle-info-value">{{trip.days===null || trip.days===undefined ? '' : trip.days +' Hari'}} {{trip.night===null || trip.night===-1 || trip.night === 0 ? '' : trip.night +' Malam'}}</div>
             </div>
 
             <div class="tittle-info">Kategori
@@ -106,7 +106,7 @@
 
             <!-- modal Beri Diskon -->
             <div class="modal fade" id="beridiskonModal" role="dialog">
-                <form (submit)="onSubmitDiskon()">
+                <form #f="ngForm" [formGroup]="diskonForm" (ngSubmit)="onSubmitDiskon()">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="wrap-modal-content-diskon">
@@ -123,12 +123,12 @@
                                     <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
 
                                     <div class="text-diskon">Besarnya Diskon :</div>
-                                    <input class="form-control input-diskon" (keyup)="discPrice($event)" type=number> <span class="percent-diskon"> % </span>
-                                    <div class="price-diskon">Rp. </div>
+                                    <input (keypress)="keyPress($event)" formControlName="value" class="form-control input-diskon" (keyup)="discPrice($event)" type="text" autofocus> <span class="percent-diskon"> % </span>
+                                    <div class="price-diskon">Rp. {{tripProvider[data].publish_price}} </div>
 
                                 </div>
                                 <div class="col-md-9" *ngFor="let date of tripProvider[data].date_trip; let y = index">
-                                    <input type="checkbox" value="{{discount_price}}" (click)="checkedDiscount($event, $event.target.value, y)" class="checkbox">
+                                    <input [disabled]="!f.valid" type="checkbox" value="{{discount_price}}" (click)="checkedDiscount($event, $event.target.value, y)" class="checkbox">
                                     <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
                                 </div>
 

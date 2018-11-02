@@ -23,6 +23,12 @@ import { Product } from '../product';
 })
 export class HeaderComponent implements OnInit {
 
+
+  noUser = false;
+  userTravel = true;
+  providerTravel = true;
+  
+
   
   tripData;
   user = {
@@ -74,16 +80,13 @@ export class HeaderComponent implements OnInit {
 
   dropLogout: boolean = false;
 
-  // changeHead:boolean = true;
-  // changeHeadUser:boolean = false;
-
-  // categoryAllTrip;
   dataUser;
   photos :"../assets/img/user.png";
+  photosProvider :"../assets/img/user.png";
 
   querySearch(e) {
     this.query= e.target.value;
-    console.log(this.query);
+    // console.log(this.query);
   }
 
   toggleLogin():void {
@@ -119,8 +122,14 @@ export class HeaderComponent implements OnInit {
     
     this.appService.getUsers().subscribe(profile => {
       this.photos = profile.data.photo;
-      console.log(profile);
+      // console.log(profile);
     });
+
+    this.appService.getProvider().subscribe(profile => {
+      // console.log(profile);
+      
+      this.photosProvider = profile.provider.logo;
+    })
 
     this.appService.search(this.searchTerm$).subscribe(results => {
         this.results = results.data;
@@ -136,6 +145,15 @@ export class HeaderComponent implements OnInit {
 
     this.initForm();
 
+  }
+
+
+  logout(): void{
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
+
+    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['']))
   }
 
   
@@ -154,7 +172,7 @@ export class HeaderComponent implements OnInit {
     // this.idCategory = e.target.id;
     this.appService.searchCategory(_id).subscribe(searchCategory =>{
       this.searchCategory = searchCategory.data;
-      console.log(this.searchCategory)
+      // console.log(this.searchCategory)
       // console.log(this.categoryAllTrip);
       if(searchCategory.status = 200){
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
@@ -176,15 +194,34 @@ export class HeaderComponent implements OnInit {
    onSubmit() {
   
     this.appService.addUser(this.user).subscribe(user => {
-      localStorage.setItem("token", user.token);
-      if (user.success== true) {
-        this.loginUser = true;
+      // console.log(user);
+    
+
+      sessionStorage.setItem("token", user.token);
+      sessionStorage.setItem("role", user.role);
+
+      if (sessionStorage.role == 1 ) {
         
+        this.userTravel = false;
+        this.noUser = true;
+        this.providerTravel = true;
+
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
         this.router.navigate([''])
       )
-        
       }
+
+      else if (sessionStorage.role == 2) {
+
+        this.providerTravel = false;
+        this.noUser = true;
+        this.userTravel = true;
+
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate([''])
+      )
+      }
+
       else {
         alert("Login Gagal");
         this.router.navigate(['']);
@@ -206,6 +243,25 @@ export class HeaderComponent implements OnInit {
   // }
 
   ngOnInit() {
+
+
+    if (sessionStorage.role == 1 ) {
+        
+      this.noUser = true;
+      this.userTravel = false;
+      this.providerTravel = true;
+
+    }
+
+    else if (sessionStorage.role == 2) {
+
+      this.noUser = true;
+      this.userTravel = true;
+      this.providerTravel = false;
+    
+    }
+
+
     this.myToken = this.authService.AccessToken;
 
     this.data.currentMessage.subscribe(trip => this.trip = trip);

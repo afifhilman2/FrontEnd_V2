@@ -17,11 +17,12 @@ import { DaftarPemesanComponent } from '.././daftar-pemesan/daftar-pemesan.compo
 import { SalinTripComponent } from '.././salin-trip/salin-trip.component';
 import { PesanMasukProviderComponent } from '.././pesan-masuk-provider/pesan-masuk-provider.component';
 import { DiskusiProviderComponent } from '.././diskusi-provider/diskusi-provider.component';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
+import { AgmCoreModule } from '@agm/core';
+import { DaftarPemesanPrivateComponent } from '.././daftar-pemesan-private/daftar-pemesan-private.component';
+import { HeaderProviderComponent } from ".././header-provider/header-provider.component";
 
 // import { MiniFooterComponent } from '.././mini-footer/mini-footer.component';
-
-
-
 import {JualTripRouting } from '../jual-trip/jual-trip.routing';
 
 
@@ -36,6 +37,10 @@ import {JualTripRouting } from '../jual-trip/jual-trip.routing';
         HttpClientModule,
         BrowserAnimationsModule,
         MyDatePickerModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBClUZWzmnXM-51wYSX22_lI2dBouzEDXM'
+          }),
+        Ng4GeoautocompleteModule.forRoot(),
     ],
 
     declarations:[
@@ -49,7 +54,9 @@ import {JualTripRouting } from '../jual-trip/jual-trip.routing';
         DaftarPemesanComponent,
         SalinTripComponent,
         PesanMasukProviderComponent,
-        DiskusiProviderComponent
+        DiskusiProviderComponent,
+        DaftarPemesanPrivateComponent,
+        HeaderProviderComponent
         // MiniFooterComponent,
     ]
 

@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-8">
         <div class="form">
-            <form (submit)="onSubmit()" >
+            <form (submit)="onSubmit()">
                 <div class="form-group">
                     <label for="name" class=" form-label"> Nama Lengkap <p class="pull-right">:</p></label>
                     <div class="form-nama">
@@ -108,7 +108,7 @@
                 <div class="form-group">
                     <div class="radio-trv">
                         <label for="optradio" class="label-radio">Jenis Kelamin <p class="pull-right">:</p></label>
-                        <div class="radio" >
+                        <div class="radio">
                             <label class="trv-radio"><input type="radio" name="radios" value="Pria" id="1" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Laki-Laki</label>
                             <label class="trv-radio"><input type="radio" name="radios" value="2" id="2" [(ngModel)]="edit.gender" name="gender"><span class="outer"><span class="inner"></span></span>Perempuan</label>
                         </div>
@@ -117,24 +117,24 @@
                 <div class="form-group">
                     <label for="email" class="form-label"> Email <p class="pull-right">:</p></label>
                     <div class="form-email">
-                        <input id="email" type="email" class="form-control"  name="email" [(ngModel)]="edit.email">
+                        <input id="email" type="email" class="form-control" name="email" [(ngModel)]="edit.email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="telephone" class="form-label"> No. HP <p class="pull-right">:</p></label>
                     <div class="form-telepone">
-                        <input id="telephone" type="string" (keypress)="keyPress($event)" class="form-control" name="telephone"  [(ngModel)]="edit.telephone">
+                        <input id="telephone" type="string" (keypress)="keyPress($event)" class="form-control" name="telephone" [(ngModel)]="edit.telephone" maxlength="13">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="identity" class="form-label"> No Identitas <p class="pull-right">:</p></label>
                     <div class="form-identitas">
-                        <input id="identity" type="text" class="form-control" name="identity_number" [(ngModel)]="edit.identity_number" required>
+                        <input id="identity" type="text" class="form-control" name="identity_number" [(ngModel)]="edit.identity_number" maxlength="20" required>
                         <!-- <div [hidden]="identity.valid || identity.pristine"
                             class="alert trv-alert"> -->
-                            <!-- <div [hidden]="!identity.hasError('minlength')">Mobile should be 10digit</div> -->
-                            <!-- <div [hidden]="!identity.hasError('required')">Mobile is required</div> -->
-                            <!-- <div [hidden]="!identity.hasError('pattern')">No Identitas hanya bisa diisi dengan angka saja</div>
+                        <!-- <div [hidden]="!identity.hasError('minlength')">Mobile should be 10digit</div> -->
+                        <!-- <div [hidden]="!identity.hasError('required')">Mobile is required</div> -->
+                        <!-- <div [hidden]="!identity.hasError('pattern')">No Identitas hanya bisa diisi dengan angka saja</div>
                         </div> -->
                     </div>
                 </div>
@@ -164,8 +164,8 @@
                     <p class="modal-title"><span class="glyphicon glyphicon-lock"></span> Ubah Password</p>
                 </div>
                 <form (submit)="changePassword()">
-                <div class="modal-body">
-                    
+                    <div class="modal-body">
+
                         <div class="form-group">
                             <label class="label-modal">Password Lama</label>
                             <input [type]="show ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.password" name="password">
@@ -184,13 +184,13 @@
                             <span *ngIf="showBaru === false" class="glyphicon glyphicon-eye-open mata" (click)="updatePwdBaru()"></span>
                             <span *ngIf="showBaru === true" class="glyphicon glyphicon-eye-close mata" (click)="updatePwdBaru()"></span>
                         </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-batal" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-save">Simpan</button>
-                </div>
-            </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-batal" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-save">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

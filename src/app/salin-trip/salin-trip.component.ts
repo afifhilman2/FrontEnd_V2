@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Http,Headers, Response } from '@angular/http';
-import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { AppService} from '../app.service';
 import { DatePipe } from '@angular/common';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Component({
   selector: 'app-salin-trip',
@@ -17,6 +18,8 @@ export class SalinTripComponent implements OnInit {
   successedTrip:boolean = false;
   content1:boolean = true;
   content2:boolean = false;
+  opentrip:boolean = true;
+  privatetrip:boolean = false;
 
   d: Date = new Date();
 
@@ -48,21 +51,23 @@ export class SalinTripComponent implements OnInit {
     description : '', 
     notes_traveler : '', 
     notes_meeting_point :'',
-    id_province :'',
+    id_province_trip :'',
     id_category : '', 
-    id_facility : '', 
-    id_status_trip : '',
-    publish_price_group : '', 
+    id_facility : this.fb.array([]), 
+    id_status_trip : '', 
     service_fee_group : '', 
     time:'',
-    zone_time:''
+    zone_time:'',
+    publish_price_group : this.fb.array(['','','','','']), 
+    min_qty_group: this.fb.array(['','','','','']),
+    photo_trip :this.fb.array([]),
 
   })
 
 
   trip = {
     photo_trip : ['../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png','../assets/img/add.png'],
-    photo:[],
+    // photo:[],
   }
 
   public myDatePickerOptions: IMyDpOptions = {
@@ -123,11 +128,12 @@ export class SalinTripComponent implements OnInit {
   }
 
   createAuthorizationHeader (headers:Headers) {
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    headers.append('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
 }
 
 onSubmitTrip() {
 
+  console.log(this.myForm.value);
   this.appService.addTripProvider(this.myForm.value).subscribe(trip => {
        
     // console.log(trip); 
@@ -160,7 +166,8 @@ onSubmitTrip() {
   
   _handleReaderLoaded1(readerEvt) {
      let binaryString = readerEvt.target.result; 
-            this.trip.photo[0]=btoa(binaryString);
+    //  console.log(binaryString);
+            this.myForm.value.photo_trip[0]=btoa(binaryString);
             this.trip.photo_trip[0]="data:image/jpeg;base64,"+ btoa(binaryString);  
             
     }
@@ -180,7 +187,7 @@ onSubmitTrip() {
     
     _handleReaderLoaded2(readerEvt) {
        let binaryString = readerEvt.target.result;
-       this.trip.photo[1]=btoa(binaryString);
+       this.myForm.value.photo_trip[0][1]=btoa(binaryString);
        this.trip.photo_trip[1]="data:image/jpeg;base64,"+ btoa(binaryString);         
       }
 
@@ -199,7 +206,7 @@ onSubmitTrip() {
     
     _handleReaderLoaded3(readerEvt) {
        let binaryString = readerEvt.target.result;
-       this.trip.photo[2]=btoa(binaryString);
+       this.myForm.value.photo_trip[0][2]=btoa(binaryString);
        this.trip.photo_trip[2]="data:image/jpeg;base64,"+ btoa(binaryString);          
       }
 
@@ -218,7 +225,7 @@ onSubmitTrip() {
       
       _handleReaderLoaded4(readerEvt) {
          let binaryString = readerEvt.target.result;
-         this.trip.photo[3]=btoa(binaryString);
+         this.myForm.value.photo_trip[0][3]=btoa(binaryString);
          this.trip.photo_trip[3]="data:image/jpeg;base64,"+ btoa(binaryString);          
         }
 
@@ -237,25 +244,67 @@ onSubmitTrip() {
         
         _handleReaderLoaded5(readerEvt) {
            let binaryString = readerEvt.target.result;
-           this.trip.photo[4]=btoa(binaryString);
+           this.myForm.value.photo_trip[0][4]=btoa(binaryString);
            this.trip.photo_trip[4]="data:image/jpeg;base64,"+ btoa(binaryString);         
           }
 
           // end upload image
 
-          dateValue(event: IMyDateModel) {
+      dateValue(event: IMyDateModel) {
 
-            const dateArray = <FormArray>this.myForm.controls.date_trip;
-            dateArray.push(new FormControl(event.jsdate));
+        const dateArray = <FormArray>this.myForm.controls.date_trip;
+        dateArray.push(new FormControl(event.jsdate));
+      }
+
+      keyPress(event: any) {
+        const pattern = /[0-9]/;
+    
+        let inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+          event.preventDefault();
+        }
+      }
+
+      getBase64ImageFromURL(url: string) {
+        return Observable.create((observer: Observer<string>) => {
+          let img = new Image();
+          img.crossOrigin = 'Anonymous';
+          img.src = url;
+          if (!img.complete) {
+            img.onload = () => {
+              observer.next(this.getBase64Image(img));
+              observer.complete();
+            };
+            img.onerror = (err) => {
+              observer.error(err);
+            };
+          } else {
+            observer.next(this.getBase64Image(img));
+            observer.complete();
           }
+        });
+      }
+    
+      getBase64Image(img: HTMLImageElement) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+      }
+
 
   ngOnInit() {
   
-    return this.http.get('http://travinesia.com:3000/get/trip_detail/'+ this.idParams,)
+    return this.http.get('https://travinesia.com:1210/get/detail_provider_trip/'+ this.idParams,)
     .subscribe(
       (res:Response)=> {
 
         let ubahTrip = res.json();        
+
+        // console.log(ubahTrip);
 
           this.myForm.patchValue({
             trip_name: ubahTrip.data.trip_name,
@@ -266,35 +315,54 @@ onSubmitTrip() {
             description : ubahTrip.data.description, 
             notes_traveler : ubahTrip.data.notes_traveler, 
             notes_meeting_point : ubahTrip.data.notes_meeting_point,
-            id_province : ubahTrip.data.id_province._id,
+            id_province_trip: ubahTrip.data.id_province._id,
             id_category : ubahTrip.data.category[0]._id, 
-            id_facility : ubahTrip.data.facility, 
+            // id_facility : ubahTrip.data.facility, 
             time: ubahTrip.data.time,
             zone_time: ubahTrip.data.zone_time, 
-            publish_price_group : [], 
+            // publish_price_group : [], 
             service_fee_group : [], 
             photo:[],
             fixed_price_grorup : [],
-            photo_trip :[], 
+            // photo_trip :[], 
           })
 
             let dateGroup = ubahTrip.data.date_trip.map (date_trip => this.fb.control(date_trip));
             this.myForm.setControl('date_trip', this.fb.array(dateGroup));
 
+            this.myForm.setControl('id_facility', this.fb.array(ubahTrip.data.facility || []));
+            this.myForm.setControl('min_qty_group', this.fb.array(ubahTrip.data.min_qty_group || []));
+            this.myForm.setControl('publish_price_group', this.fb.array(ubahTrip.data.publish_price_group || []));
+            this.myForm.setControl('photo_trip', this.fb.array(ubahTrip.data.photo_trip || []));
 
-          // this.myForm.controls['date_trip'] = this.fb.array(ubahTrip.data.date_trip.map(date_trip => this.fb.control(date_trip)));
+            for(let i=0; i < this.facilityTrip.length; i++) {
+              for(let j=0; j < this.myForm.value.id_facility.length; j++) {
+                if( this.facilityTrip[i]._id == this.myForm.value.id_facility[j]) {
+                  
+                  this.facilityTrip[i].flag_facility = 1;
+                }
 
-          // for (let i=0; i< this.myForm.value.date_trip.length; i++) {
+              }
+            }
 
-          //   this.myForm.value.date_trip[i] = this.datePipe.transform(this.myForm.value.date_trip[i], 'yyyy-MM-dd');
-          // }
-          // console.log(this.myForm.value.date_trip);
+            this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
+            this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
+            this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
+            this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
+            this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
 
-        this.trip.photo_trip[0] = ubahTrip.data.photo_trip[0];
-        this.trip.photo_trip[1] = ubahTrip.data.photo_trip[1];
-        this.trip.photo_trip[2] = ubahTrip.data.photo_trip[2];
-        this.trip.photo_trip[3] = ubahTrip.data.photo_trip[3];
-        this.trip.photo_trip[4] = ubahTrip.data.photo_trip[4];
+             // private trip
+          if(ubahTrip.data.id_type_trip._id == '5a85391c0ee623c4311ba6a4') {
+            this.privatetrip = true;
+            this.opentrip = false;
+          }
+
+          for(let x = 0; x < ubahTrip.data.photo_trip.length; x++) {
+            this.getBase64ImageFromURL(ubahTrip.data.photo_trip[x]).subscribe(base64data => {
+              // console.log(base64data);
+              this.myForm.value.photo_trip[x] = base64data;
+            });
+          }
 
       }
     )
