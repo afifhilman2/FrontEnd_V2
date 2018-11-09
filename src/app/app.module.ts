@@ -33,7 +33,7 @@ import { DaftarTravelComponent } from './daftar-travel/daftar-travel.component';
 import { AuthService } from './token/auth.service';
 import { DataService} from './data.service';
 import { GuardService } from './guard.service';
-import { routes } from './app.route';
+import { routes, AppRoutingModule } from './app.route';
 import { AppService } from './app.service';
 
 
@@ -48,10 +48,6 @@ import { ProsesBayarComponent } from './proses-bayar/proses-bayar.component';
 import { ProsesBayar2Component } from './proses-bayar2/proses-bayar2.component';
 import { ProsesPemesananComponent } from './proses-pemesanan/proses-pemesanan.component';
 import { CalendarComponent } from './calendar/calendar.component';
-// import { RegisterComponent } from './register/register.component';
-import { PesanMasukComponent } from './pesan-masuk/pesan-masuk.component';
-import { DiskusiTripComponent } from './diskusi-trip/diskusi-trip.component';
-// import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { SearchFilterPipe } from './header/search-pipe';
@@ -70,13 +66,11 @@ import { PagerService } from './_service/index';
 import { RegisterModule } from './register/register.module';
 
 import { LandingpageModule } from './landingpage/landingpage.module';
-import { PromoComponent } from './promo/promo.component';
-import { RatingUlasanComponent } from './rating-ulasan/rating-ulasan.component';
-import { IsiDataPesertaComponent } from './isi-data-peserta/isi-data-peserta.component';
-import { FooterComponent } from './footer/footer.component';
-import { TrvSidebarModule } from './trv-sidebar/trv-sidebar.module';
-import { DetailPaketModule } from './detail-paket/detail-paket.module';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
+import { ActivatedAcountComponent } from './activated-acount/activated-acount.component';
+import { SaldoModule } from './saldo/saldo.module';
+
+
 
 
 
@@ -86,7 +80,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     AppComponent,
     EksternalComponent,
     // LandingpageComponent,
-    // HeaderComponent,
+    HeaderComponent,
     // PemesananComponent,
     HeaderUserComponent,
     SidebarAkunProfilComponent,
@@ -96,7 +90,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     LoginpageComponent,
     // FavoritUserComponent,
     // TrvSidebarComponent,
-    TrvSearchResultComponent,
+    // TrvSearchResultComponent,
     DaftarTravelComponent,
     // TrvSearchNavbarComponent,
     // EtalaseTravelComponent,
@@ -122,6 +116,7 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     ClickOutsideDirective,
     MiniFooterComponent,
     LoaderComponent,
+    ActivatedAcountComponent,
     // HeaderProviderComponent,
     // PromoComponent,
     // RatingUlasanComponent,
@@ -141,13 +136,16 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
     TrvSearchNavbarModule,
     JualTripModule,
     RegisterModule,
-    TrvSidebarModule,
+    // TrvSidebarModule,
     LandingpageModule,
-    DetailPaketModule,
+    // TrvSearcResultModule,
+    // DetailPaketModule,
+    SaldoModule,
     Ng4GeoautocompleteModule.forRoot(),
+    AppRoutingModule
 
    
-    RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    // RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: PreloadAllModules }),
   
     
   ],

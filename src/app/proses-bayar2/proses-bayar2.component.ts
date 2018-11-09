@@ -16,7 +16,7 @@ import { Http, Headers, Response } from '@angular/http';
 export class ProsesBayar2Component implements OnInit {
 
   countDown;
-  count = 60 * 60 * 24;
+  count = 7200;
   c;
   counter= 0;
   dataBooking;

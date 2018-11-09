@@ -49,7 +49,7 @@
                                 <label for="lokasi">Lokasi : </label>
                                 <select class="form-control" (change)="getprovinsi($event)">
                                             <option value="" disabled selected>Pilih Lokasi</option>
-									 		<option *ngFor="let p of profinsi" [value]="p.province_name">{{ p.province_name }}</option>
+									 		<option *ngFor="let p of profinsi" [value]="p._id">{{ p.province_name }}</option>
 									 		
 									 	</select>
                             </div>
@@ -60,7 +60,7 @@
                                 <label for="kategori">Kategori : </label>
                                 <select class="form-control" (change)="getcategory($event)">
                                     <option value="" disabled selected>Pilih Kategori</option>
-                                    <option id="Beach" *ngFor="let k of category" [value]="k.category_name">{{ k.category_name}}</option>
+                                    <option id="Beach" *ngFor="let k of category" [value]="k._id">{{ k.category_name}}</option>
 								</select>
                             </div>
                         </div>
@@ -72,9 +72,9 @@
                                 <label for="tanggal">Tanggal Berangkat :</label>
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-calendar"></span></button>
+                                            <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions" required></my-date-picker>
+                                        <!-- <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
                                     </div>
-                                    <input type="date" class="date-form form-control">
                                 </div>
                             </div>
                         </div>
@@ -82,12 +82,9 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="kategori">Hari : </label>
-                                <select class="form-control">
-                                    <option>1 Hari</option>
-                                    <option>2 Hari</option>
-                                    <option>3 Hari</option>
-                                    <option>4 Hari</option>
-                                    <option>5 Hari</option>	
+                                <select class="form-control" (change)="getDays($event)">
+                                        <option value="" disabled selected>Pilih Kategori</option> 
+                                    <option *ngFor="let days of counter(5);let i = index" value="{{i+1}}">{{i+1}} Hari</option>
                                 </select>
                             </div>
                         </div>
@@ -97,9 +94,9 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="optradio">Jenis Trip : </label>
-                                <div class="radio">
-                                    <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Open</label>
-                                    <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Private</label>
+                                <div class="radio" (change)="getType($event)">
+                                    <label class="radio" *ngFor="let name of type_trip"><input type="radio" name="radios" value="{{name._id}}"><span class="outer"><span class="inner"></span></span>{{name.type_trip}}</label>
+                                    <!-- <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Private</label> -->
                                 </div>
                             </div>
                         </div>
@@ -108,7 +105,7 @@
                             <div class="form-group">
                                 <label for="kategori" class="sigmPeople">Jumlah :</label>
                                 <div class="input-group sigm">
-                                    <input type="number" min="1" max="100" class="jumlah form-control">
+                                    <input type="number" min="1" max="100" [(ngModel)]="search.quantity" name="quantity" class="jumlah form-control">
                                     <label class="jumlah-orang">Orang</label>
                                 </div>
                             </div>
@@ -130,7 +127,7 @@
         <div class="row">
             <div class="diskon-category text-diskon">
                 Diskon Minggu Ini </div>
-            <a class="diskon-category lihat-diskon" (click)="goCalendar()">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
+            <a class="diskon-category lihat-diskon" (click)="goDiskon()">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
                 <div *ngFor="let trip of diskon; let i=index" >
@@ -167,141 +164,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
-
-                <!-- <div class="col-md-2 col-sm-4 col-xs-6">
-                    <a [routerLink]="['DetailPaket']">
-                        <div class="thumb-promo">
-                            <img src="../assets/img/1.jpg" class="img-promo">
-                            <div class="disc">-10%</div>
-                            <div class="trip">Open</div>
-                            <div class="body-caption">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="caption-price">Rp 300.000</div>
-                                    </div>
-                                </div>
-                                <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                                <a [routerLink]="['/EtalaseTravel']">
-                                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
             </div>
         </div>
     </div>

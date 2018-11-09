@@ -17,7 +17,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" (submit)="goSearch(trip_name)">
                 <div class="input-group stylish-input-group">
 
                     <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control" placeholder="Cari Wisata">
@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                     <span class="input-group-addon">
-                    <button [routerLink]="['/searchNavbar/1']" type="submit" (click)=search()>
+                    <button type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
@@ -60,9 +60,19 @@
                         <button [routerLink]="['/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span>
                     </li>
                     <li>
-                        <a routerLink="/Akun/Profile" role="button" class="profil">
+                        <a role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
                             <img [src]="photos" class="foto-profil">
                         </a>
+                        <ul class="dropdown-menu user-drop" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-list" routerLink="/Akun/Profile">Profil</a></li>
+                            <li><a class="dropdown-list" routerLink="/Akun/Pemesanan">Pemesanan</a></li>
+                            <li><a class="dropdown-list" routerLink="/Akun/Favorit">Favorit</a></li>
+                            <li><a class="dropdown-list" routerLink="/Akun/PesanMasuk">Pesan Masuk</a></li>
+                            <li><a class="dropdown-list" routerLink="/Akun/DiskusiTrip">Diskusi Trip</a></li>
+                            <li><a class="dropdown-list" routerLink="/Akun/Promo">Promo</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a class="delete-trip dropdown-list" (click)=logout()>Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -111,7 +121,7 @@
 
         <li class="kanan">
             <a href=""> <span class="icon-question">
-                                <span class="path1"></span><span class="path2"></span>
+             <span class="path1"></span><span class="path2"></span>
                 </span>
                 Bantuan
             </a>
@@ -170,6 +180,3 @@
 <!-- end login form  -->
 
 <!-- dropdown profile -->
-<div *ngIf="dropLogout" class="logout pull-right">
-    <p (click)="logout()">Logout</p>
-</div>

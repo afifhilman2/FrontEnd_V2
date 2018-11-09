@@ -1,8 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router';
 
 import { JualTripComponent } from ".././jual-trip/jual-trip.component";
-import { JualTripContentComponent } from ".././jual-trip-content/jual-trip-content.component";
+// import { JualTripContentComponent } from ".././jual-trip-content/jual-trip-content.component";
 import { SaldoComponent } from ".././saldo/saldo.component";
 import { TransaksiPenjualanComponent } from ".././transaksi-penjualan/transaksi-penjualan.component";
 import { UbahProfilTravelComponent } from ".././ubah-profil-travel/ubah-profil-travel.component";
@@ -18,58 +19,64 @@ import { DaftarPemesanPrivateComponent } from '.././daftar-pemesan-private/dafta
 import { HeaderProviderComponent } from ".././header-provider/header-provider.component";
 
 const JualTrip: Routes = [
-    {
-        path: '', 
-        component: HeaderProviderComponent,
-        children :[
+    // {
+    //     path: '', 
+    //     component: HeaderProviderComponent,
+    //     children :[
             {
-                path:'JualTrip',
+                path:'',
                 component:JualTripComponent,
                 children:[
                     {
                         path:'',
-                        component:JualTripContentComponent,
+                        redirectTo: 'JualTrip', pathMatch: 'prefix',
                     },
                     {   path:'Saldo', 
-                        component:SaldoComponent
+                        loadChildren:'../saldo/saldo.module#SaldoModule'
                     },
                     {   path:'JualTrip', 
-                        component:JualTripContentComponent
+                        loadChildren:'../jual-trip-content/jual-trip-content.module#JualTripContentModule'
                     },
                     {   path:'TransaksiPenjualan', 
-                        component:TransaksiPenjualanComponent
+                        loadChildren:'../transaksi-penjualan/transaksi-penjualan.module#TransaksiPenjualanModule'
                     },
                     {   path:'DaftarPemesanan/:id', 
-                        component:DaftarPemesanComponent
+                        loadChildren:'../daftar-pemesan/daftar-pemesan.module#DaftarPemesanModule'
                     },
                     {   path:'DaftarPemesananPrivate/:id', 
-                        component:DaftarPemesanPrivateComponent
+                        loadChildren:'../daftar-pemesan-private/daftar-pemesan-private.module#DaftarPemesanPrivateModule'
                     },
                     {   path:'UbahProfilTravel', 
-                        component:UbahProfilTravelComponent
+                        loadChildren:'../ubah-profil-travel/ubah-profil-travel.module#UbahProfilTravelModule'
                     },
                     {   path:'DaftarTrip', 
-                        component:DaftarTripComponent},
+                        loadChildren:'../daftar-trip/daftar-trip.module#DaftarTripModule'
+                    },
                     {   path:'UbahTrip/:id', 
-                        component:JualTripContent2Component
+                        loadChildren: '../jual-trip-content2/jual-trip-content2.module#JualTripContent2Module'
                     },
                     {   path:'SalinTrip/:id', 
-                        component:SalinTripComponent
+                        loadChildren:'../salin-trip/salin-trip.module#SalinTripModule'
                     },
                     {   path:'PesanMasuk', 
-                        component:PesanMasukProviderComponent
+                        loadChildren: '../pesan-masuk-provider/pesan-masuk-provider.module#PesanMasukProviderModule'
                     },
                     {   path:'DiskusiProvider', 
-                        component:DiskusiProviderComponent
+                        loadChildren:'../diskusi-provider/diskusi-provider.module#DiskusiProviderModule'
                     },
                 ]
             },
             {   path:'EtalaseTravel/:id', 
-                component:EtalaseTravelComponent,
+                loadChildren:'../etalase-travel/etalase-travel.module#EtalaseTravelModule',
             }
 
-        ]
-    }
+    //     ]
+    // }
 ]
 
-export const JualTripRouting: ModuleWithProviders = RouterModule.forChild(JualTrip);
+
+@NgModule({
+    imports: [RouterModule.forChild(JualTrip)],
+    exports: [RouterModule]
+  })
+  export class JualTripRouterModule { }

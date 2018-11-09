@@ -34,14 +34,14 @@ export class AppService {
     constructor (public http:Http, public http2: HttpClient) {
         this.url  = 'api.datamuse.com/words?ml=';
 
-        FB.init({
-            appId      : 261462964525976,
-            status     : false, // the SDK will attempt to get info about the current user immediately after init
-            cookie     : false,  // enable cookies to allow the server to access
-            // the session
-            xfbml      : false,  // With xfbml set to true, the SDK will parse your page's DOM to find and initialize any social plugins that have been added using XFBML
-            version    : 'v2.12' // use graph api version 2.5
-          });
+        // FB.init({
+        //     appId      : 261462964525976,
+        //     status     : false, // the SDK will attempt to get info about the current user immediately after init
+        //     cookie     : false,  // enable cookies to allow the server to access
+        //     // the session
+        //     xfbml      : false,  // With xfbml set to true, the SDK will parse your page's DOM to find and initialize any social plugins that have been added using XFBML
+        //     version    : 'v2.12' // use graph api version 2.5
+        //   });
     }
 
     //token localstorage
@@ -148,6 +148,16 @@ export class AppService {
         return this.http.get('https://travinesia.com:1210/get/trip/')
         .map(res => res.json())
     }
+
+    getSearchTrip(trip_name){
+        return this.http.get('https://travinesia.com:1210/get/search_trip/'+ trip_name)
+        .map(res => res.json())
+      }
+  
+      getSearchAdvanceTrip(search){
+        return this.http.get('https://travinesia.com:1210/get/search_advance'+ '?location=' + search.id_provinsi + '&days=' + search.days + '&date=' + search.date + '&id_category=' + search.id_category + '&id_type=' + search.id_type_trip + '&quantity=' + search.quantity)
+        .map(res => res.json())
+      }
     
 
     //post
@@ -162,6 +172,21 @@ export class AppService {
         return this.http.post('https://travinesia.com:1210/v1/user/authenticate', user)
         .map(res => res.json());
     }
+
+    loginFacebook(authToken){
+        return this.http.post('https://travinesia.com:1210/v1/user/auth/facebook', {access_token: authToken})
+        .map(res => res.json())
+    }
+
+    loginGoogle(authToken){
+        return this.http.post('https://travinesia.com:1210/v1/user/auth/google/token', {access_token: authToken})
+        .map(res => res.json())
+    }
+    
+    activationAccount(token){
+        return this.http.put('https://travinesia.com:1210/v1/user/activate/'+ token, "")
+        .map(res => res.json())
+      }
 
     //with token
     postBeTravel(travel) {
@@ -428,43 +453,43 @@ export class AppService {
 
 
     // loginFb
-    fbLogin() {
-        return new Promise((resolve, reject) => {
-          FB.login(result => {
-            if (result.authResponse) {
-              return this.http.post(`https://travinesia.com:1210/v1/user/auth/facebook`, {access_token: result.authResponse.accessToken})
-                  .toPromise()
-                  .then(response => {
-                    var token = response.headers.get('x-auth-token');
-                    if (token) {
-                      localStorage.setItem('id_token', token);
-                    }
-                    resolve(response.json());
-                  })
-                  .catch(() => reject());
-            } else {
-              reject();
-            }
-          }, {scope: 'public_profile,email'})
-        });
-      }
-      logout() {
-        localStorage.removeItem('id_token');
-      }
+    // fbLogin() {
+    //     return new Promise((resolve, reject) => {
+    //       FB.login(result => {
+    //         if (result.authResponse) {
+    //           return this.http.post(`https://travinesia.com:1210/v1/user/auth/facebook`, {access_token: result.authResponse.accessToken})
+    //               .toPromise()
+    //               .then(response => {
+    //                 var token = response.headers.get('x-auth-token');
+    //                 if (token) {
+    //                   localStorage.setItem('id_token', token);
+    //                 }
+    //                 resolve(response.json());
+    //               })
+    //               .catch(() => reject());
+    //         } else {
+    //           reject();
+    //         }
+    //       }, {scope: 'public_profile,email'})
+    //     });
+    //   }
+    //   logout() {
+    //     localStorage.removeItem('id_token');
+    //   }
     
-      isLoggedIn() {
-        return new Promise((resolve, reject) => {
-          this.getCurrentUser().then(user => resolve(true)).catch(() => reject(false));
-        });
-      }
+    //   isLoggedIn() {
+    //     return new Promise((resolve, reject) => {
+    //       this.getCurrentUser().then(user => resolve(true)).catch(() => reject(false));
+    //     });
+    //   }
     
-      getCurrentUser() {
-        return new Promise((resolve, reject) => {
-          return this.http.get(`https://localhost:1210/api/v1/auth/me`).toPromise().then(response => {
-            resolve(response.json());
-          }).catch(() => reject());
-        });
-      }
+    //   getCurrentUser() {
+    //     return new Promise((resolve, reject) => {
+    //       return this.http.get(`https://localhost:1210/api/v1/auth/me`).toPromise().then(response => {
+    //         resolve(response.json());
+    //       }).catch(() => reject());
+    //     });
+    //   }
     // tutup loginFb
 
     loggedIn(){

@@ -386,9 +386,23 @@
 
 .fav{
     position: absolute;
-    font-size: 21px;
+    font-size: 20px;
     color: #f5f5f5;
     cursor: pointer;
+    top: 6px;
+    left: 4px;
+}
+
+.favorit{
+    position: absolute;
+    left: 130px;
+    top: 5px;
+    font-size: 21px;
+    cursor: pointer;
+    background-color: rgba(74, 74, 74, 0.4);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
 }
 
 .change{
@@ -398,14 +412,7 @@
     cursor: pointer;
 }
 
-.favorit{
-    position: absolute;
-    left: 133px;
-    top: 6px;
-    font-size: 21px;
-    color: #f5f5f5;
-    cursor: pointer;
-}
+
 
 .price{
     margin-right: 15px;

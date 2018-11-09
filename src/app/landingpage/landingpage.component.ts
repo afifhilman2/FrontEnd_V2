@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { AppService} from '../app.service';
 
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
+
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -22,26 +24,39 @@ export class LandingpageComponent implements OnInit {
   profin;
   subcribe = Subscription;
   loaded : boolean = true;
-  
+  d = new Date();
+  type_trip;
+  search:any = {
+    id_category:'',
+    id_provinsi : '',
+    id_type_trip:'',
+    days: '',
+    date: '',
+    quantity:''
+  }
+  // {date : {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+2} }
   constructor(private router: Router, private appService: AppService) { 
     // this.loaded = true;
     this.appService.getDataTrip().subscribe (dataTrip => {
-     
       this.dataTrip = dataTrip.data;
-      // console.log(dataTrip);
       this.photo = dataTrip.data.photo_trip
-      // console.log(this.photo)
-
       this.loaded = false;
     });
+
 
     this.appService.getProvinceTrip().subscribe (province => {
       this.profinsi = province.data;
     });
 
+
     this.appService.getCategoryTrip().subscribe ( kategori =>{
       this.category = kategori.data
       // console.log(this.category)
+    })
+
+    this.appService.getTypeTrip().subscribe(data=>{
+      this.type_trip = data.data;
+      console.log(this.type_trip);
     })
 
     var os = this.getMobileOperationSystem();
@@ -49,6 +64,21 @@ export class LandingpageComponent implements OnInit {
       console.log("Bener")
       window.location.href = 'https://m.travinesia.com'
     }
+  }
+
+
+  public myDatePickerOptions: IMyDpOptions = {
+      
+    dateFormat: 'dd mmm yyyy',
+    sunHighlight: true,
+    inline: false,
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()-1},
+    editableDateField: false,
+    openSelectorOnInputClick: true,
+  };
+
+  dateValue(event: IMyDateModel){
+    this.search.date = event.jsdate;
   }
 
   getMobileOperationSystem(){
@@ -97,10 +127,13 @@ export class LandingpageComponent implements OnInit {
     this.favorite.id_trip = id;
     console.log(this.favorite.id_trip)
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
-      if(dataFavorite.data.flag_favorite = true){
-        this.change = true
+      if(sessionStorage.token != null){
+        // if(dataFavorite.data.flag_favorite = true){
+      //   this.change = true
+      // }
+      } else{
+        this.router.navigate(['/LoginPage'])
       }
-      console.log(dataFavorite)
     })
   }
 
@@ -109,29 +142,42 @@ export class LandingpageComponent implements OnInit {
   }
 
   getprovinsi(e){
-    this.profin = e.target.value;
+    this.search.id_provinsi = e.target.value;
     
   }
 
   getcategory(e){
-    this.catego = e.target.value;
+    this.search.id_category = e.target.value;
   }
 
+  getType(e){
+    this.search.id_type_trip = e.target.value;
+  }
   goToSearch(){
-    this.catego;
     
-    // console.log(this.catego);
-    this.profin;
-    // console.log(this.profin);
-    this.router.navigate(['/searchBar/', this.catego, this.profin])
+    // console.log(this.search.id_category)
+    // console.log(this.search.id_provinsi)
+    // console.log(this.search.date)
+    // console.log(this.search.days)
+    // console.log(this.search.id_type_trip)
+    // console.log(this.search.quantity)
+    this.router.navigate(['/search'], {queryParams: {keyword: JSON.stringify(this.search),flag_search: 3}})
+  }
+
+  getDays(e){
+    this.search.days = e.target.value;
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 
   counterStars(i: number){
     return Array(Math.round(i)).fill(4);
   }
 
-  goCalendar(){
-    this.router.navigate(['/Diskon']);
+  goDiskon(){
+    this.router.navigate(['/Diskon'],{queryParams:{flag_search: 4}});
   }
 
 }
