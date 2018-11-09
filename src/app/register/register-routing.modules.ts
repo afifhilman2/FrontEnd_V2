@@ -4,17 +4,12 @@ import { RegisterComponent } from './register.component';
 import { HeaderNologinComponent } from '../header-nologin/header-nologin.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HeaderNologinComponent,
-    children:[
+  
       {
-        path:'Daftar', component:RegisterComponent,
+        path:'', component:RegisterComponent,
       }
       
     ]
-  }
-];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

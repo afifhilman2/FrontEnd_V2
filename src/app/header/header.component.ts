@@ -158,36 +158,23 @@ export class HeaderComponent implements OnInit {
 
   
   goToSearch(trip_name){
-    this.appService.searchName(trip_name).subscribe(trip =>{
-      sessionStorage.setItem("keyword", JSON.stringify(trip.data));
-      // if(trip_name.status == 200){
-        // this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/search']);
-      // }
-    })
+    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['/search'], {queryParams:{keyword: trip_name, flag_search: 1}}));
    }
    
-   searchCategory;
-   searchTrip(_id) {
-    // this.idCategory = e.target.id;
-    this.appService.searchCategory(_id).subscribe(searchCategory =>{
-      this.searchCategory = searchCategory.data;
-      // console.log(this.searchCategory)
-      // console.log(this.categoryAllTrip);
-      if(searchCategory.status = 200){
-        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/search'], {queryParams :{data : JSON.stringify(this.searchCategory)}}))
-      }
-    })
-    // this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-    // this.router.navigate(['traveler/search', this.idCategory]))
+  searchTrip(_id) {
+    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['/search'], {queryParams :{keyword : _id, flag_search: 2}}))  
   }
 
-
-   initializeErrorMessage() {
+  initializeErrorMessage() {
     this.emailAlertMessage = "Email harus diisi";
     this.passwordAlertMessage = "Password harus diisi";
     this.emailAtAlertMessage = "Alamat email salah"
+  }
+
+  goSearch(trip_name){
+   this.goToSearch(trip_name) 
   }
 
     //login
@@ -195,7 +182,6 @@ export class HeaderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       // console.log(user);
-    
 
       sessionStorage.setItem("token", user.token);
       sessionStorage.setItem("role", user.role);
@@ -238,10 +224,6 @@ export class HeaderComponent implements OnInit {
    tokenParams:TokenParams;
    myToken:string;
 
-  //  search(term: string): void {
-  //   this.searchTerms.next(term);
-  // }
-
   ngOnInit() {
 
 
@@ -265,15 +247,16 @@ export class HeaderComponent implements OnInit {
     this.myToken = this.authService.AccessToken;
 
     this.data.currentMessage.subscribe(trip => this.trip = trip);
-    
-    
   }
 
   search(term: string): void {
-    
     this.searchTerms.next(term);
   }
 
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   this.router.navigate(['/']); 
+  // }
  
    initForm(): FormGroup {
     return this.stateForm = this.fb.group({
@@ -282,22 +265,21 @@ export class HeaderComponent implements OnInit {
   }
 
   selectValue(value) {
-    
     this.stateForm.patchValue({"search": value});
-    
     this.showDropDown = false;
   }
-   closeDropDown() {
-     this.showDropDown = !this.showDropDown;
-   }
- 
-   openDropDown() {
-     this.showDropDown = !this.showDropDown;
-   }
- 
-   getSearchValue() {
-     return this.stateForm.value.search.debounceTime(300).distinctUntilChanged();
-   }
+
+  closeDropDown() {
+    this.showDropDown = !this.showDropDown;
+  }
+
+  openDropDown() {
+    this.showDropDown = !this.showDropDown;
+  }
+
+  getSearchValue() {
+    return this.stateForm.value.search.debounceTime(300).distinctUntilChanged();
+  }
 
   get isLogin(){
     if(this.appService.loggedIn()){

@@ -56,20 +56,7 @@ export class LoginpageComponent implements OnInit {
   massage;
 
   constructor(private service: AppService, private router: Router, private fb:FormBuilder){
-    // this.searchTerm.valueChanges
-    //     .debounceTime(400) 
-    //     .subscribe(data => {
-    //         this.service.search_word(data).subscribe(response =>{
-    //             this.searchResult = response
-    //         })
-    //     })
-
-    //     this.searchTerm.valueChanges
-    //     .subscribe(data => {
-    //         this.service.search_word(data).subscribe(response =>{
-    //             this.searchResult = response
-    //         })
-    //     })
+    
     this.massage = JSON.parse(sessionStorage.getItem("newUser.stauts"))
     console.log(this.massage)
 
@@ -79,15 +66,31 @@ export class LoginpageComponent implements OnInit {
   ngOnInit() {
   }
 
+  userTravel;
+  noUser;
+  providerTravel;
   onSubmit() {
   
     this.service.addUser(this.formLogin.value).subscribe(loginUser => {
-      localStorage.setItem("token", loginUser.token);
-      if (localStorage.token == loginUser.token) {
-        // this.changeHead = !this.changeHead;
-        // this.changeHeadUser = !this.changeHeadUser;
-        if(loginUser.status=200){
-          this.router.navigate(['/'])
+      sessionStorage.setItem("token", loginUser.token);
+      sessionStorage.setItem("role", loginUser.role);
+      if (sessionStorage.token == loginUser.token) {
+        if (sessionStorage.role == 1 ) {
+          this.userTravel = false;
+          this.noUser = true;
+          this.providerTravel = true;
+          this.router.navigate(['']);
+        }
+  
+        else if (sessionStorage.role == 2) {
+  
+          this.providerTravel = false;
+          this.noUser = true;
+          this.userTravel = true;
+  
+          this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+          this.router.navigate([''])
+        )
         }
       }
       else {

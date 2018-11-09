@@ -236,10 +236,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     position: fixed;
     width: 189px;
     background-color: #ffffff;
-    padding: 15px 31px 9px 18px;
-    right: 0;
-    top: 51px;
-    z-index: 1030;
+    padding: 15px;
     box-sizing: border-box;
     border-radius: 0 0 0 10px;
     border: solid 1px #dddddd;
@@ -281,6 +278,13 @@ ul>li>a:focus .glyphicon-chevron-down {
     cursor: pointer;
     padding-bottom: 6px;
     padding-top: 6px;
+}
+
+.user-drop{
+    top: 165%;
+    left: -245px;
+    width: 279px;
+    padding: 5px 30px;
 }
 
 .navbar-right {

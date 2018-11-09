@@ -34,11 +34,35 @@ export class TrvSearchResultComponent implements OnInit {
   dataSearchName;
   ngOnInit() {
       
-      this.dataSearchCategory = JSON.parse(sessionStorage.getItem("keyword"))
-      console.log(this.dataSearchCategory)
-      // this.favorite._id = this.dataSearchCategory._id;
-      // console.log(this.favorite._id)
-      // this.dataTrip = JSON.parse(sessionStorage.getItem("book_trip"))
+    let flag_search = this.routeActive.snapshot.queryParams['flag_search'];
+    if (flag_search == 1){
+      let keywords = this.routeActive.snapshot.queryParams['keyword'];
+      this.appService.getSearchTrip(keywords).subscribe(results_trip => {
+        // console.log(results_trip)
+        this.dataSearchCategory = results_trip.data;
+      })
+    }
+    else if (flag_search == 2){
+      let keywords = this.routeActive.snapshot.queryParams['keyword'];
+      // console.log(keywords)
+      this.appService.searchCategory(keywords).subscribe(results_trip => {
+        // console.log(results_trip)
+        this.dataSearchCategory = results_trip.data;
+      })
+    }
+    else if (flag_search == 3){
+      let keywords = JSON.parse(this.routeActive.snapshot.queryParams['keyword']);
+      // console.log(keywords)
+      this.appService.getSearchAdvanceTrip(keywords).subscribe(results_trip => {
+        // console.log(results_trip)
+        this.dataSearchCategory = results_trip.data;
+      })
+    }
+    else if(flag_search == 4){
+      this.appService.getAllDiscountTrip().subscribe(results_trip => {
+        this.dataSearchCategory = results_trip.data;
+      })
+    }
 
 
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
@@ -55,11 +79,11 @@ export class TrvSearchResultComponent implements OnInit {
   change: boolean = false;
   favorit(id){
     this.favorite.id_trip = id;
-    console.log(this.favorite.id_trip)
+    // console.log(this.favorite.id_trip)
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
-      if(dataFavorite.data.flag_favorite = true){
-        this.change = !this.change;
-      }
+      // if(dataFavorite.data.flag_favorite = true){
+      //   this.change = !this.change;
+      // }
       console.log(dataFavorite)
     })
   }

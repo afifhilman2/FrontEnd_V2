@@ -8,7 +8,7 @@ import { LandingpageComponent } from './landingpage.component';
 const routes: Routes = [
   {
     
-    path:'', component:LandingpageComponent, pathMatch: 'prefix' 
+    path:'', component:LandingpageComponent 
      
   }
 ];

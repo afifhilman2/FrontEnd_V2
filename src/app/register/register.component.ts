@@ -3,6 +3,10 @@ import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
 
+import { AuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,12 +20,14 @@ export class RegisterComponent implements OnInit {
     email:['', Validators.required],
     password:['',[Validators.required, Validators.minLength(8)]],
   })
-  // newUser = {
-  //   name:'',
-  //   telephone:'',
-  //   email:'',
-  //   password:''
-  // }
+
+
+  data = {
+    name:'',
+    telephone:'',
+    email:'',
+    photo:''
+  }
 
   show: boolean = false;
   password(){
@@ -52,10 +58,14 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
-  constructor( private fb: FormBuilder, private appService: AppService, private router:Router) { 
+  constructor( private fb: FormBuilder, private appService: AppService, private router:Router, private authService: AuthService) { 
   }
 
+  private userSocial: SocialUser;
+  private loggedIn: boolean;
+
   ngOnInit() {
+    
   }
   
   onSubmit(){
@@ -72,9 +82,48 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  fbLogin() {
-    this.appService.fbLogin().then(() => {
-      console.log('User has been logged in');
-      this.router.navigate(['/']);
-    });  }
+  // fbLogin() {
+  //   this.appService.fbLogin().then(() => {
+  //     console.log('User has been logged in');
+  //     this.router.navigate(['/']);
+  //   });  }
+
+    signInWithGoogle(): void {
+      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    }
+  
+    signInWithFB(): void {
+      this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+      this.authService.authState.subscribe((user) => {
+        this.userSocial = user;
+      });
+      this.appService.loginFacebook(this.userSocial.authToken).subscribe(user => {
+        console.log(user)
+        if(user.status==200){
+          this.data.name = user.name;
+          this.data.photo = user.photo;
+          this.data.email = user.email;
+          this.data.telephone = user.telephone;
+          sessionStorage.setItem("token", user.token);
+          sessionStorage.setItem("branch_session", JSON.stringify(this.data));
+          if(sessionStorage.getItem('url_login')){
+            this.router.navigate([sessionStorage.getItem('url_login')]);
+            sessionStorage.removeItem('url_login');
+          }
+          else{
+            this.router.navigate(['']);
+          }
+        }
+        else if(user.status==400){
+          console.log(user.message)
+        }
+        else if(user.status==403){
+          console.log(user.message)
+        }
+      })
+    } 
+  
+    signOut(): void {
+      this.authService.signOut();
+    }
 }  

@@ -14,31 +14,29 @@ import { IsiDataPesertaComponent } from '../isi-data-peserta/isi-data-peserta.co
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HeaderComponent,
-    children:[
+  
+    
       // {   path:'Akun', loadChildren:'./trv-sidebar/trv-sidebar-module#TrvSidebarModule'},
       // { path: 'DetailPaket/:id', loadChildren: '../detail-paket/detail-paket.module#DetailPaketModule'},
       {
-        path:'Akun', component:TrvSidebarComponent,
+        path:'', component:TrvSidebarComponent,
         children:
         [
-            { path:'Profile', component: UbahProfilComponent},
-            { path:'Pemesanan', component:PemesananComponent},
-            { path:'Favorit', component:FavoritUserComponent},
-            { path:'PesanMasuk', component:PesanMasukComponent},
-            { path:'DiskusiTrip', component:DiskusiTripComponent},
-            { path:'Promo', component:PromoComponent},
-            { path:'Ulasan', component:RatingUlasanComponent},
-            { path:'isiDataPeserta', component:IsiDataPesertaComponent},
+            { path:'', redirectTo: 'Profile', pathMatch: 'prefix'},
+            { path:'Profile', loadChildren:'../ubah-profil/ubah-profil.module#UbahProfilModule'},
+            { path:'Pemesanan', loadChildren:'../pemesanan/pemesanan.module#PemesananModule'},
+            { path:'Favorit', loadChildren:'../favorit-user/favorit-user.module#FavoritUserModule'},
+            { path:'PesanMasuk', loadChildren:'../pesan-masuk/pesan-masuk.module#PesanMasukModule'},
+            { path:'DiskusiTrip', loadChildren:'../diskusi-trip/diskusi-trip.module#DiskusiTripModule'},
+            { path:'Promo', loadChildren:'../promo/promo.module#PromoModule'},
+            { path:'Ulasan', loadChildren:'../rating-ulasan/rating-ulasan.module#RatingUlasanModule'},
+            { path:'isiDataPeserta', loadChildren:'../isi-data-peserta/isi-data-peserta.module#IsiDataPesertaModule'},
 
         ]
       }
       
     ]
-  }
-];
+  
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
