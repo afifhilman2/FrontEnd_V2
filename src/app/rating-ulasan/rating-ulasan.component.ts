@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rating-ulasan',
@@ -13,7 +15,7 @@ export class RatingUlasanComponent implements OnInit {
     field:''
   }
 
-  constructor() { }
+  constructor(private appService: AppService, private router : Router) { }
 
   @Input() rating: number;
   @Input() itemId: number;
@@ -48,10 +50,11 @@ export class RatingUlasanComponent implements OnInit {
 
   sendreview(){
 
-    console.log(this.review);
-    // this.appService.sendReview(this.review).subscribe(content =>{
-
-    // })
+    this.appService.sendReview(this.review).subscribe(content =>{
+      if(content.satus == 200){
+        this.router.navigate(['/Akun/Pemesanan'])
+      }
+    })
   }
 
 

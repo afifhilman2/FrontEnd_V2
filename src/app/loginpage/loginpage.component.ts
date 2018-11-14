@@ -75,22 +75,26 @@ export class LoginpageComponent implements OnInit {
       sessionStorage.setItem("token", loginUser.token);
       sessionStorage.setItem("role", loginUser.role);
       if (sessionStorage.token == loginUser.token) {
-        if (sessionStorage.role == 1 ) {
-          this.userTravel = false;
-          this.noUser = true;
-          this.providerTravel = true;
-          this.router.navigate(['']);
-        }
-  
-        else if (sessionStorage.role == 2) {
-  
-          this.providerTravel = false;
-          this.noUser = true;
-          this.userTravel = true;
-  
-          this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-          this.router.navigate([''])
-        )
+        if( loginUser.status == 200){
+          if (sessionStorage.role == 1 ) {
+            this.userTravel = false;
+            this.noUser = true;
+            this.providerTravel = true;
+            this.router.navigate(['']);
+          }
+    
+          else if (sessionStorage.role == 2) {
+    
+            this.providerTravel = false;
+            this.noUser = true;
+            this.userTravel = true;
+    
+            this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+            this.router.navigate([''])
+          )
+          }
+        } else if(loginUser.status == 403){
+          this.massage = !this.massage
         }
       }
       else {

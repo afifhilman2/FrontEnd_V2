@@ -9,6 +9,7 @@ import { Product } from '../product';
 
 import { DatePipe, LOCATION_INITIALIZED } from '@angular/common';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,7 +19,6 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 })
 export class DetailPaketComponent implements OnInit {
 
-  public counter : number;
   idtrip: any[];
   dataTrip: any[];
   detailTrip;
@@ -30,6 +30,7 @@ export class DetailPaketComponent implements OnInit {
     publish_price: '',
     startDate_trip: '',
     _id:'',
+    
   })
 
 
@@ -47,12 +48,15 @@ export class DetailPaketComponent implements OnInit {
   kat;
   date: string[];
   fasilitas;
-
-  
-  constructor(private fb: FormBuilder, private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
+  lat;
+  lng;
+  url = 'https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569';;
+  constructor(public sanitizer: DomSanitizer, private fb: FormBuilder, private router: Router,private datePipe: DatePipe, public active: ActivatedRoute, private http2: HttpClient, private http: Http, private appServis: AppService) { 
     let id = this.active.snapshot.params['id'];
     this.dataTrip = id;
+    
   }
+
 
   isFieldValid(field: string) {
     return !this.formBooking.get(field).valid && this.formBooking.get(field).touched;
@@ -81,7 +85,11 @@ export class DetailPaketComponent implements OnInit {
   ngOnInit() {
     this.getTrip();
     this.getDiskusi();
-    
+    // this.url = 'https://maps.google.com/maps?q='+this.lat+','+this.lng+'&hl=es;z=14&amp&output=embed';
+  }
+
+  counterStars(i: number){
+    return Array(Math.round(i)).fill(4);
   }
 
   idAgen;
@@ -95,18 +103,20 @@ export class DetailPaketComponent implements OnInit {
           (res:Response)=>{
             let trip = res.json();
             this.detailTrip = trip.data;
-            // console.log(this.detailTrip)
+            console.log(this.detailTrip)
             this.hargaProduct = trip.data.publish_price;
-            // this.formBooking.value.publish_price = this.formBooking.value.quantity * this.hargaProduct;
             this.photo = trip.data.photo_trip;
             this.kat = trip.data.category;
-            // this.formBooking.value.id_type_trip = trip.data.id_type_trip._id;
             this.quota_left = trip.data.quota_left; 
             this.date = trip.data.date_trip;
             this.fasilitas = trip.data.facility;
             this.idAgen = trip.data.provider._id;
             this.totalHarga = this.quantity * this.hargaProduct;
-            // console.log(this.fasilitas)
+            this.lat = trip.data.latitude;
+            console.log(this.lat)
+            this.lng = trip.data.longitude;
+            console.log(this.lng)
+            this.url = 'https://maps.google.com/maps?q='+this.lat+','+this.lng+'&hl=es;z=14&amp&output=embed';
             // this.loaded = false;
 
           }          
@@ -136,7 +146,6 @@ export class DetailPaketComponent implements OnInit {
     this.text._id = this.dataTrip;
     this.appServis.diskusi(this.dataTrip).subscribe(discus =>{
       this.diskus = discus.data;
-      console.log(this.diskus)
     })
   }
 
@@ -160,6 +169,7 @@ export class DetailPaketComponent implements OnInit {
         publish_price: this.totalHarga,
         id_type_trip: this.detailTrip.id_type_trip._id,
         quantity: this.quantity,
+        flag_type_trip: this.detailTrip.data.id_type_trip.id_type_trip
         
       })
       console.log(this.formBooking.value)

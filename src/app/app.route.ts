@@ -18,9 +18,9 @@ export const routes :Routes = [
             {path:'searchNavbar/', loadChildren: './trv-search-navbar/trv-search-navbar.module#TrvSearchNavbarModule'},
             {path:'Notifikasi', loadChildren:'./eksternal/eksternal.module#EksternalModule'},
             {path:'JadiTravel', loadChildren:'./daftar-travel/daftar-travel.module#DaftarTravelModule',},
-            { path: 'DetailPaket/:id', loadChildren: './detail-paket/detail-paket.module#DetailPaketModule'},
+            {path: 'DetailPaket/:id', loadChildren: './detail-paket/detail-paket.module#DetailPaketModule'},
             {path:'Akun', loadChildren:'./trv-sidebar/trv-sidebar.module#TrvSidebarModule'},
-            {   path:'JualTrip', loadChildren: './jual-trip/jual-trip.module#JualTripModule'},
+            {path:'Provider', loadChildren: './jual-trip/jual-trip.module#JualTripModule'},
         ]
     },
     

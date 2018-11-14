@@ -46,7 +46,7 @@ export class TrvSearchResultComponent implements OnInit {
       let keywords = this.routeActive.snapshot.queryParams['keyword'];
       // console.log(keywords)
       this.appService.searchCategory(keywords).subscribe(results_trip => {
-        // console.log(results_trip)
+        console.log(results_trip)
         this.dataSearchCategory = results_trip.data;
       })
     }
@@ -81,15 +81,15 @@ export class TrvSearchResultComponent implements OnInit {
     this.favorite.id_trip = id;
     // console.log(this.favorite.id_trip)
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
-      // if(dataFavorite.data.flag_favorite = true){
-      //   this.change = !this.change;
-      // }
-      console.log(dataFavorite)
     })
   }
 
   id_trip;
   goToDetail(id){
     this.router.navigate(['/DetailPaket', id])
+  }
+
+  counterStars(i: number){
+    return Array(Math.round(i)).fill(4);
   }
 }

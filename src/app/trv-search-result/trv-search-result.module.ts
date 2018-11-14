@@ -8,6 +8,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 import { TrvSearchResultRouterModule } from './trv-search-result-routing.module';
 import { TrvSearchResultComponent } from './trv-search-result.component';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -21,6 +22,7 @@ import { TrvSearchResultComponent } from './trv-search-result.component';
   ],
   declarations: [
     TrvSearchResultComponent,
+    FilterPipe
    ],
  
 })

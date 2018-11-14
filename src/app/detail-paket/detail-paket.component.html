@@ -38,7 +38,7 @@
         </div>
         <span class="waktu-trip">( {{detailTrip?.days}} Hari {{detailTrip?.night}} Malam) <p class="pembatas">|</p></span>
         <span class="lokasi">Lokasi : <p class="lokasi-detail">{{detailTrip?.id_province.province_name}} </p> <p class="pembatas">|</p></span>
-        <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name + ', '}}</p></span>
+        <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name}}</p></span>
         <div class="share pull-right">
           <div class="img-share">
             
@@ -52,26 +52,22 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
+            <!-- <span class="icon-star" *ngFor="let stars of counterStars((detailTrip?.rate_div!=0)? (detailTrip?.rate_total/detailTrip?.rate_div) : 0);let i = index" id="{{i}}"></span> -->
           </div>
         </div>
       </div>
 
       <div class="penjelasan">
         <div class="kanan-deskripsi">
-          <a data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Deskripsi</span>
+          <a data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Deskripsi</span></a>
+          
           <div id="deskripsi" class="collapse">
             {{detailTrip?.description}}
           </div>
         </div>
         <div class="kanan-fasilitas">
-          <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Fasilitas</span>
+          <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Fasilitas</span></a>
+          
           <div id="fasilitas" class="collapse" fasilitas >
            <span class="fasilitas" *ngFor="let fasilitas of fasilitas">
             {{fasilitas?.facility_name}}
@@ -79,31 +75,34 @@
           </div>
         </div>
         <div class="kanan-meeting">
-          <a data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Meeting Point</span>
+          <a data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Meeting Point</span></a>
           
+          <!-- class="map-responsive" -->
           <div id="meetingpoint" class="collapse">
             <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe  [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' width="380" height="300" frameborder="0" draggable="false" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" style="border:0"></iframe>
             </div>
-            <span class="facility"> Berangkat Pukul: <p>{{detailTrip?.time}} <span>{{detailTrip?.zone_time}}</span></p>
-              <span class="tempat">Tempat :
-                <p>{{detailTrip?.notes_meeting_point}}</p></span>
-            </span>
-            
+            <div class="keterangan">
+                <span class="facility"> Berangkat Pukul : <p>{{detailTrip?.time}} <span>{{detailTrip?.zone_time}}</span></p>
+                  <span class="tempat">Tempat :
+                    <p>{{detailTrip?.notes_meeting_point}}</p></span>
+                </span>
+                <div class="facility">Keterangan :
+                    <p>{{detailTrip?.direction}}</p></div>
+            </div>            
           </div>
         </div>
         <div class="kanan-catatan">
-          <a data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Catatan untuk Travel</span>
+          <a class="text-colapse" data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Catatan untuk Travel</span></a>
+          
           <div id="catatan" class="collapse"  >
-            fasilitas yang disediakan.......
+            {{detailTrip?.notes_traveler}}
           </div>
         </div>
       </div>
       <div class="kanan-catatan">
-        <a data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-        <span class="kanan">Informasi Travel Agen</span>
+        <a data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Informasi Travel Agen</span></a>
+        
         <div id="infoAgen" class="collapse">
           <div class="body-info">
             <img class="img-agen" src="{{detailTrip?.provider?.logo}}">

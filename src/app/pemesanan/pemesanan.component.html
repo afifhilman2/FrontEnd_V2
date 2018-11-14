@@ -51,7 +51,7 @@
                                   <h4 class="modal-title title">Status Pemesanan</h4>
                                 </div>
                                 <div class="modal-body status-body">
-                                    <span class="text-content" *ngFor="let status of statusPemesanan; let i=index" [ngClass]="{'text-content-dissable': i>status[(order.id_statusTrip.id_status-1)]}"><i class="glyphicon glyphicon-ok"></i>{{status}}</span>
+                                    <span class="text-content" *ngFor="let status of statusPemesanan; let i=index" [ngClass]="{'text-content-dissable': i<status[(order.id_statusTrip.id_status-1)]}"><i class="glyphicon glyphicon-ok"></i>{{status}}</span>
                                 </div>
                                 <button class="btn-aksiModal">Tombol</button>
                               </div>

@@ -86,7 +86,7 @@
                         <a role="button">Notifikasi</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/JualTrip']" role="button">Travel Saya</a>
+                        <a [routerLink]="['/Provider']" role="button">Travel Saya</a>
                         <!-- <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span> -->
                     </li>
 
@@ -94,12 +94,12 @@
                         <img [src]="photosProvider" class="foto-profil-provider">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuBar">
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip']">Jual Trip</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/Saldo']">Saldo</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/TransaksiPenjualan']">Transaksi Penjualan</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/DaftarTrip']">Daftar Trip </a></li>
+                        <li><a class="dropdown-list" [routerLink]="['/Provider']">Jual Trip</a></li>
+                        <li><a class="dropdown-list" [routerLink]="['/Provider/Saldo']">Saldo</a></li>
+                        <li><a class="dropdown-list" [routerLink]="['/Provider/TransaksiPenjualan']">Transaksi Penjualan</a></li>
+                        <li><a class="dropdown-list" [routerLink]="['/Provider/DaftarTrip']">Daftar Trip </a></li>
                         <li><a class="dropdown-list">Etalase Travel</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/UbahProfilTravel']">Ubah Profil Travel</a></li>
+                        <li><a class="dropdown-list" [routerLink]="['/Provider/UbahProfilTravel']">Ubah Profil Travel</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a class="delete-trip dropdown-list" (click)=logout()>Logout</a></li>
 

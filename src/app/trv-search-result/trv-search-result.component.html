@@ -227,14 +227,12 @@
                 <div (click)="goToDetail(data._id)">
                     <img src="{{data.photo_trip[0]}}" class="img-promo">
                     <div class="disc">{{data.discount_date[0] === undefined ? '' : '- ' + data.discount_date[0] + '% '}}</div>
-                    <div class="trip" *ngIf="(data.id_type_trip._id == '5a8539010ee623c4311ba67e')">Open</div>
-                    <div class="trip-private" *ngIf="(data.id_type_trip._id == '0')">Private</div>
+                    <div class="trip" *ngIf="(data.id_type_trip.type_trip == 'Open Trip')">Open</div>
+                    <div class="private-trip" *ngIf="(data.id_type_trip.type_trip == 'Private Trip')">Private</div>
                     <div class="body-caption">
                         <div class="row">
                             <div class="col-md-6 colpe-sm-6 ">
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
+                                    <span class="icon-star" *ngFor="let stars of counterStars((data.rate_div!=0)? (data.rate_total/data.rate_div) : 0);let i = index" id="{{i}}"></span>
                             </div>
                             <div class="price pull-right">
                                 <div class="caption-price">Rp {{data.publish_price.toLocaleString('id')}}</div>

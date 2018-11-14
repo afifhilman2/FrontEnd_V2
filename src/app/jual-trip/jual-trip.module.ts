@@ -13,19 +13,15 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { AgmCoreModule } from '@agm/core';
 import { HeaderProviderComponent } from ".././header-provider/header-provider.component";
 import { JualTripRouterModule } from './jual-trip.routing';
+import { JualTripContentComponent } from '../jual-trip-content/jual-trip-content.component';
 
 @NgModule ({
 
     imports:[
-        // JualTripRouting,
         CommonModule,
         JualTripRouterModule,
-        BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
         MyDatePickerModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBClUZWzmnXM-51wYSX22_lI2dBouzEDXM'
@@ -35,7 +31,8 @@ import { JualTripRouterModule } from './jual-trip.routing';
 
     declarations:[
         JualTripComponent,
-        HeaderProviderComponent
+        HeaderProviderComponent,
+        // JualTripContentComponent
         // MiniFooterComponent,
     ]
 

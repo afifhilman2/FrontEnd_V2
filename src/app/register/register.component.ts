@@ -67,14 +67,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     
   }
-  
+  massage: boolean = false;
   onSubmit(){
     if(this.formRegister.valid){
       this.appService.registerUser(this.formRegister.value).subscribe(newUser =>{
           console.log(newUser)
-          if(newUser.status = 200){
+          if(newUser.status == 200){
             sessionStorage.setItem("newUser.stauts", newUser.status)
             this.router.navigate(['/LoginPage']); 
+          } else if(newUser.status == 406){
+            this.massage = !this.massage;
           }
       })
     }else{
@@ -90,6 +92,27 @@ export class RegisterComponent implements OnInit {
 
     signInWithGoogle(): void {
       this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      this.authService.authState.subscribe((user) => {
+        this.userSocial = user;
+      });
+      this.appService.loginGoogle(this.userSocial.authToken).subscribe(userGoogle => {
+        console.log(userGoogle)
+        if(userGoogle.status == 200){
+          this.data.name = userGoogle.name;
+          this.data.photo = userGoogle.photo;
+          this.data.email = userGoogle.email;
+          this.data.telephone = userGoogle.telephone;
+          sessionStorage.setItem("token", userGoogle.token);
+          sessionStorage.setItem("branch_session", JSON.stringify(this.data));
+          if(sessionStorage.getItem('url_login')){
+            this.router.navigate([sessionStorage.getItem('url_login')]);
+            sessionStorage.removeItem('url_login');
+          }
+          else{
+            this.router.navigate(['']);
+          }
+        }
+      })
     }
   
     signInWithFB(): void {

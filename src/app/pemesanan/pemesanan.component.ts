@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import { AppService } from '../app.service';
 import { PagerService } from '../_service/index';
-
+import { ResponseContentType, Http, Response } from '@angular/http';
+import saveAs from 'file-saver';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class PemesananComponent implements OnInit {
   ]
 
 
-  constructor(private routeActive : ActivatedRoute, private appService : AppService, private pagerService: PagerService, private router: Router) { 
+  constructor(private http:Http, private routeActive : ActivatedRoute, private appService : AppService, private pagerService: PagerService, private router: Router) { 
   
   }
 
@@ -104,7 +105,20 @@ export class PemesananComponent implements OnInit {
       
     }else if( idStatus == 3 ){
       this.router.navigate(['/Akun/isiDataPeserta'], {queryParams: {data: JSON.stringify(booking)}});
-    }else if( idStatus == 7){
+    }else if( idStatus == 4){
+      // this.router.navigate(['/Akun/Ulasan'], {queryParams:{data: JSON.stringify(booking._id)}})
+      console.log('download')
+      console.log('Download E-Ticket')
+      var filename = booking.no_booking;
+      this.appService.downloadPDF(booking._id).subscribe(
+        (res) => {
+        saveAs(res, filename+"-eticket.pdf"); 
+        // var fileURL = URL.createObjectURL(res);
+        // window.open(fileURL);
+        }
+      );
+    }
+    else if( idStatus == 7){
       this.router.navigate(['/Akun/Ulasan'], {queryParams:{data: JSON.stringify(booking._id)}})
     }
 

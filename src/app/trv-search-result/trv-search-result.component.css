@@ -90,7 +90,7 @@
 
 .body-caption {
     text-align: left;
-    padding: 10px;
+    padding: 9px;
     background-color: white;
 }
 
@@ -110,7 +110,7 @@
     position: absolute;
     margin: 0 auto;
     background-color: #536dfe;
-    top: 45%;
+    top: 47.5%;
     left: 5%;
     width: 70px;
     text-align: center;
@@ -129,10 +129,16 @@
     border-radius: 25px;
 }
 
+.icon-star{
+    margin-right: -1px;
+    font-size: 11.5px;
+}
+
 
 .caption-price {
     color: #ab47bc;
     font-size: 11px;
+    margin-top: 2px;
 }
 
 .caption-tittle {

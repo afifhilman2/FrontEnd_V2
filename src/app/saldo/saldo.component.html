@@ -5,7 +5,7 @@
 <p class="current-saldo">Saldo Travel Anda saat ini :</p>
 
 <div class="wrap-saldo">
-    <span class="rupiah">Rp </span> <span class="saldo-price">{{balance?.total_balance}}</span>
+    <span class="rupiah">Rp </span> <span class="saldo-price">{{balance?.total_balance.toLocaleString('id')}}</span>
 
     <div class="btn-trv-ajukan" data-toggle="modal" (click)="open()" data-target="#myModal"> Ajukan Pencairan </div>
     <div class="petunjuk-pencarian" data-toggle="modal" data-target="#ModalPencarian"> Lihat Petunjuk Pencairan </div>
@@ -114,7 +114,7 @@
             <tr *ngFor="let arr of balanceFlag">
                 <td>{{arr.created_at | date:"fullDate"}}</td>
                 <td>{{arr.mutation_flag? "+" : "-"}} Rp {{arr.mutation_flag? arr.total_payment : arr.total_withdraw}}</td>
-                <td>Rp {{arr.balance_history}}</td>
+                <td>Rp {{arr.balance_history.toLocaleString('id')}}</td>
                 <td>{{arr.mutation_flag? arr.id_trip.trip_name : "Penarikan"}} {{arr.mutation_flag? '( No. Pemesanan' + ' : '+ arr.id_booking.no_booking +' )' : ''}}</td>
             </tr>
         </tbody>

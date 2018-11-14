@@ -216,6 +216,7 @@ th {
 .kanan {
     margin-bottom: 15px;
     font-weight: bold;
+    margin-left: 5px;
 }
 
 .kanan-deskripsi {
@@ -353,29 +354,36 @@ th {
 }
 
 .map-responsive {
-    width: 432px;
-    height: 226px;
-    overflow: hidden;
-    padding-bottom: 50%;
-    position: relative;
-    height: 0;
+    /* width: 50%; */
     display: inline-block;
 }
 
-.map-responsive iframe {
+.keterangan{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding: 15px 30px;
+}
+
+.text-colapse{
+    text-decoration: none;
+    color: #333
+}
+
+/* .map-responsive iframe {
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
     position: absolute;
-}
+} */
 
-.facility {
+/* .facility {
     display: inline-block;
     vertical-align: top;
     margin-left: 40px;
     margin-top: 50px
-}
+} */
 
 .tempat {
     display: inline-block;

@@ -41,7 +41,7 @@
 
                             <div class="wrap-info-harga">
                                 <div class="tittle-info-harga">Harga per orang :</div>
-                                <div class="info-harga">Rp {{data.publish_price}}</div>
+                                <div class="info-harga">Rp {{data.publish_price.toLocaleString('id')}}</div>
                                 <div class="info-kuota">Kuota : {{data.quota_trip}}</div>
                                 <a class="info-detail-trip" (click)="goDetail($event)" id="{{data._id}}">Lihat Detail Trip</a>
                             </div>
