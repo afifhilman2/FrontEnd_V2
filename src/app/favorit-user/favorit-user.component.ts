@@ -16,12 +16,12 @@ export class FavoritUserComponent implements OnInit {
   ngOnInit() {
     this.appService.getAllFavorites().subscribe(dataFavorit=>{
       this.favorite = dataFavorit.data
-      console.log(this.favorite)
+      // console.log(this.favorite)
     })
   }
 
   deleteFav(id){
-    console.log(id);
+    // console.log(id);
     this.appService.deleteFavoriteTrip(id).subscribe(deleteFav=>{
       if(deleteFav.status == 200){
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
@@ -31,7 +31,7 @@ export class FavoritUserComponent implements OnInit {
   }
 
   openAlert(id):void{
-    console.log(id)
+    // console.log(id)
     this.alert = !this.alert;
   }
   closeAlert():void{

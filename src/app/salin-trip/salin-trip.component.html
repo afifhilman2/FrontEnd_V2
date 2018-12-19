@@ -1,4 +1,25 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmitTrip()">
+    <div class="blur" (click)="close()" [hidden]="bgrError"></div>
+    <div class="wrap-modal-imgError" [hidden]="imgError">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-success">
+                <p class="tittle-imgError">File bukan gambar, harap masukan file gambar</p>
+                <div (click)="close()" class="btn-trv-ok">Ok </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap-modal-imgError" [hidden]="sizeImgError">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-success">
+                <p class="tittle-imgError">Ukuran file terlalu besar, Ukuran file tidak boleh lebih dari 2 MB </p>
+                <div (click)="close()" class="btn-trv-ok">Ok </div>
+            </div>
+        </div>
+    </div>
+
     <div *ngIf='content1'>
         <div class="wrap-tittle">
             <p class="head-content"> Salin Trip </p>
@@ -8,17 +29,20 @@
         <div class="info-trip-term"> Jual Trip Anda lebih cepat dan lebih fleksibel. Salin semua informasi Trip tertentu yang anda jual sebelumnya. Anda juga dapat merubah kolom informasi Trip tertentu.
         </div>
 
-        <div class="info-term" *ngIf='successedTrip'><span class="bold-term">Trip berhasil diperbaharui. </span> Silahkan cek pilihan "Daftar Trip" untuk melihat seluruh trip yang anda jual</div>
+        <div class="info-term" *ngIf='successedTrip'><span class="bold-term">Trip berhasil disalin. </span> Silahkan cek pilihan "Daftar Trip" untuk melihat seluruh trip yang anda jual</div>
 
 
         <div class="wrap-img-trip">
             <label class="label-form" for="namaTrip">Gambar Trip</label>
+            <p class="img-info"><b>Gambar Utama</b> adalah gambar yang ditampilkan pada hasil pencarian paket trip, usahakan memiliki kualitas foto terbaik. </p>
+            <div class="img-info-nd"><span class="text-info-purple">Harap diperhatikan!</span> Masing-masing foto maksimal berukuran 2 MB</div>
+
 
             <div class="img-paket">
                 <div class="img-paket-core">
                     <label>
                                 <div class="img-add">
-                                    <img src="{{trip.photo_trip[0] == undefined ? '../assets/img/add.png' : trip.photo_trip[0] }}" class="add">
+                                    <img src="{{trip.photo_trip[0] == undefined ? 'https://img.travinesia.com/iconweb/icon provider_jual trip_upload logo.png' : trip.photo_trip[0] }}" class="add">
                                     <input type="file" hidden (change)="uploadImage1($event)" >
                                 </div>
                             </label>
@@ -31,7 +55,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="{{trip.photo_trip[1] == undefined ? '../assets/img/add.png' : trip.photo_trip[1] }}" class="add">
+                                            <img src="{{trip.photo_trip[1] == undefined ? 'https://img.travinesia.com/iconweb/icon provider_jual trip_upload logo.png' : trip.photo_trip[1] }}" class="add">
                                             <input type="file" hidden (change)="uploadImage2($event)">
                                         </div>
                                     </label>
@@ -41,7 +65,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src= "{{trip.photo_trip[2] == undefined ? '../assets/img/add.png' : trip.photo_trip[2] }}"  class="add">
+                                            <img src= "{{trip.photo_trip[2] == undefined ? 'https://img.travinesia.com/iconweb/icon provider_jual trip_upload logo.png' : trip.photo_trip[2] }}"  class="add">
                                             <input type="file" hidden (change)="uploadImage3($event)">
                                         </div>
                                     </label>
@@ -51,7 +75,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="{{trip.photo_trip[3] == undefined ? '../assets/img/add.png' : trip.photo_trip[3] }}" class="add">
+                                            <img src="{{trip.photo_trip[3] == undefined ? 'https://img.travinesia.com/iconweb/icon provider_jual trip_upload logo.png' : trip.photo_trip[3] }}" class="add">
                                             <input type="file" hidden (change)="uploadImage4($event)">
                                         </div>
                                     </label>
@@ -61,7 +85,7 @@
                         <div class="col-md-3">
                             <label>
                                         <div class="img-add">
-                                            <img src="{{trip.photo_trip[4] == undefined ? '../assets/img/add.png' : trip.photo_trip[4] }}" class="add">
+                                            <img src="{{trip.photo_trip[4] == undefined ? 'https://img.travinesia.com/iconweb/icon provider_jual trip_upload logo.png' : trip.photo_trip[4] }}" class="add">
                                             <input type="file" hidden (change)="uploadImage5($event)">
                                         </div>
                                     </label>
@@ -72,11 +96,11 @@
             </div>
         </div>
 
-        <div class="wrap-form-trip">
+        <div class="wrap-form-trip" [ngClass]="displayFieldCss('trip_name')">
             <label class="label-form" for="namaTrip">Nama Trip</label>
-
-            <input class="form-control nama-trip" id="namaTrip" formControlName="trip_name" placeholder="Contoh : Pulau Harapan Kepulauan Seribu">
-
+            <p class="img-info">Maksimal nama trip 40 karakter</p>
+            <input class="form-control nama-trip" maxlength="40" id="namaTrip" formControlName="trip_name" placeholder="Contoh : Pulau Harapan Kepulauan Seribu">
+            <div class="alert-error" *ngIf="isFieldValid('trip_name')"> Nama tidak boleh kosong </div>
         </div>
 
         <div class="wrap-option">
@@ -84,14 +108,14 @@
                 <div class="col-md-4">
                     <label class="label-form">Jenis Trip</label>
                     <div class="radio">
-                        <label class="radio"><input type="radio" value="{{idOpenTrip}}" formControlName="id_type_trip"  ><span class="outer"><span class="inner"></span></span>Open</label>
-                        <label class="radio"><input type="radio" value="{{idPrivateTrip}}" formControlName="id_type_trip" ><span class="outer"><span class="inner"></span></span>Private</label>
+                        <label class="radio" (click)=openclick()><input type="radio" value="{{idOpenTrip}}" formControlName="id_type_trip"  ><span class="outer"><span class="inner"></span></span>Open</label>
+                        <label class="radio" (click)=privateclick()><input type="radio" value="{{idPrivateTrip}}" formControlName="id_type_trip" ><span class="outer"><span class="inner"></span></span>Private</label>
                     </div>
                 </div>
 
                 <div class=" col-md-8">
                     <label class="durasi">Durasi Trip </label>
-                    <select class="form-control form-durasi" formControlName="days">
+                    <select class="form-control form-durasi" (change)=selectDays($event) formControlName="days">
                         <option value="" disabled >Pilih Hari</option>
                         <option value="{{i+1}}" *ngFor="let days of counter(10); let i=index">{{i+1}} Hari</option>
                     </select>
@@ -104,27 +128,21 @@
                 <div class="col-md-12">
                     <div class="wrap-label-date">
                         <label class="label-form">Tanggal Berangkat</label>
-                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        <!-- <span class="glyphicon glyphicon-exclamation-sign"></span> -->
                         <span class="label-date">Anda tidak dapat mengubah tanggal</span>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-
-                            <my-date-picker locale='id' (dateChanged)="dateValue($event)" formArrayName="date_trip" [options]="myDatePickerOptions"></my-date-picker>
-
+                            <my-date-picker locale='id' [disabled]="privatetrip || disableDate" (dateChanged)="dateValue0($event)" [options]="myDatePickerOptions"></my-date-picker>
                         </div>
 
                         <div class="col-md-4">
-
-                            <my-date-picker locale='id' (dateChanged)="dateValue($event)" formArrayName="date_trip" [options]="myDatePickerOptions"></my-date-picker>
-
+                            <my-date-picker locale='id' [disabled]="privatetrip || disableDate" (dateChanged)="dateValue1($event)" [options]="myDatePickerOptions"></my-date-picker>
                         </div>
 
                         <div class="col-md-4">
-
-                            <my-date-picker locale='id' formArrayName="date_trip" [options]="myDatePickerOptions"></my-date-picker>
-
+                            <my-date-picker locale='id' [disabled]="privatetrip || disableDate" (dateChanged)="dateValue2($event)" [options]="myDatePickerOptions"></my-date-picker>
                         </div>
                     </div>
 
@@ -132,15 +150,11 @@
 
                     <div class="row">
                         <div class="col-md-4">
-
-                            <my-date-picker locale='id' formArrayName="date_trip" [options]="myDatePickerOptions"></my-date-picker>
-
+                            <my-date-picker locale='id' [disabled]="privatetrip || disableDate" (dateChanged)="dateValue3($event)" [options]="myDatePickerOptions"></my-date-picker>
                         </div>
 
                         <div class="col-md-4">
-
-                            <my-date-picker locale='id' formArrayName="date_trip" [options]="myDatePickerOptions"></my-date-picker>
-
+                            <my-date-picker locale='id' [disabled]="privatetrip || disableDate" (dateChanged)="dateValue4($event)" [options]="myDatePickerOptions"></my-date-picker>
                         </div>
                     </div>
 
@@ -171,7 +185,7 @@
 
         <div class="wrap-label-fasilitas">
             <label class="label-form">Fasilitas Trip </label>
-            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <!-- <span class="glyphicon glyphicon-exclamation-sign"></span> -->
             <span class="tittle-fasilitas">Pilih fasilitas apa saja yang termasuk dalam paket wisata yang akan anda jual. Jika tidak ada pada pilihan, anda dapat menulisakn pada kolom deskripsi di halaman berikutnya.</span>
         </div>
 
@@ -210,52 +224,57 @@
         </div>
 
         <div class="wrap-btn">
-            <button (click)="toggleJual()" class="btn-content"> Selanjutnya</button>
+            <div (click)="toggleJual()" class="btn-content"> Selanjutnya</div>
         </div>
     </div>
 
-
-
     <div *ngIf='content2'>
         <div class="wrap-tittle">
-            <p class="head-content"> Ubah Trip </p>
+            <p class="head-content"> Salin Trip </p>
             <span class="state-all"> Tahap 2 dari 2</span>
-            <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
-            </span>
+            <!-- <span class="state-back"> <a (click)="toggleJual()"> < Kembali ke halaman sebelumnya <span>|</span> </a>
+            </span> -->
         </div>
 
         <div class="info-trip-term"> Jual Trip Travel Anda disini. Masukkan informasi trip selengkap mungkin untuk meningkatkan kepercayaan traveller terhadap paket trip yang ditawarkan. Berikan fasilitas yang terbaik Travel Anda.</div>
 
-        <div class="wrap-deskripsi">
+        <div class="wrap-deskripsi" [ngClass]="displayFieldCss('description')">
             <label class="label-form" for="Deskripsi">Deskripsi</label>
             <textarea class="deskripsi-trip form-control" formControlName="description" placeholder="Tuliskan deskripsi singkat trip (dapat juga berupa keunggulan atau pelayanan travel anda) beserta itinerary. Tuliskan juga fasilitas yang tidak tercantum di kolom sebelumnya"></textarea>
-
+            <div class="alert-error" *ngIf="isFieldValid('description')"> Deskripsi tidak boleh kosong </div>
         </div>
 
         <div class="wrap-mepo">
             <label class="label-form" for="mepo">Meeting Point (MePo)</label>
+
             <div class="input-group">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-mepo dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
 
-                <!-- <input type="text" class="mepo-trip form-control" placeholder="Cari lokasi meeting point" aria-describedby="mepo" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl]="searchControl"> -->
+                <div class="demo">
+                    <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                </div>
             </div>
-            <div class="catatan-mepo"> <span class="note-mepo">Catatan :</span> Masukkan nama tempat atau gedung populer di sekitar meeting point</div>
+            <div class="catatan-mepo"> <span class="note-mepo">Catatan :</span> <input formControlName="notes_meeting_point" class=" form-control notes-mepo" placeholder="Masukkan nama tempat atau gedung populer di sekitar meeting point"> </div>
+
+            <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' width="785" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+    </iframe>
 
         </div>
 
-        <div class="wrap-petunjuk">
+        <div class="wrap-petunjuk" [ngClass]="displayFieldCss('direction')">
             <label class="label-form" for="petunjuk">Petunjuk ke Meeting Point</label>
-            <textarea class="petunjuk-trip form-control" formControlName="notes_meeting_point" id="petunjuk" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
+            <textarea class="petunjuk-trip form-control" formControlName="direction" id="petunjuk" placeholder="Tuliskan petunjuk (jalan yang dilalui dan transportasi yang digunakan) untuk menuju meeting point."></textarea>
+            <div class="alert-error" *ngIf="isFieldValid('direction')"> Petunjuk tidak boleh kosong </div>
         </div>
 
         <div class="wrap-waktu">
             <div class="tittle-waktu">Waktu bertemu:</div>
 
-            <input type="number" value="jam" placeholder="Jam" class="waktu-bertemu-input form-control"> :
+            <input type="text" value="{{time | slice:0:2 }}" (keypress)="timePress($event)" maxlength="2" formControlName="jam" placeholder="Jam" class="waktu-bertemu-input form-control"> :
 
-            <input type="number" value="menit" placeholder="Menit" class="waktu-bertemu-input form-control">
+            <input type="text" value="{{time | slice:3:5 }}" (keypress)="timePress($event)" maxlength="2" formControlName="menit" placeholder="Menit" class="waktu-bertemu-input form-control">
 
             <select class="form-control form-waktu" formControlName="zone_time">
                 <option value="WIB">WIB</option>
@@ -265,101 +284,205 @@
             <div class="note-waktu">Diisi sesuai dengan waktu wilayah di trip berada, sesuai pembagian zona waktu Indonesia</div>
         </div>
 
-        <div class="wrap-catatan">
+        <div class="wrap-catatan" [ngClass]="displayFieldCss('notes_traveler')">
             <label class="label-form" for="catatan">Catatan untuk Traveller</label>
 
             <textarea class="catatan-trip form-control" formControlName="notes_traveler" id="catatan" placeholder="Contoh : Traveller diharapkan membawa obat pribadi, payung jas hujan dan peralatan lainnya yang bersifat pribadi"></textarea>
-
+            <div class="alert-error" *ngIf="isFieldValid('notes_traveler')"> Catatan tidak boleh kosong </div>
         </div>
 
         <div *ngIf='opentrip'>
-            <div class="wrap-harga">
-                <div class="wrap-publish">
-                    <label class="label-form" for="harga">Harga Trip</label>
-                    <div class="publish-trip input-group">
-                        <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                        <input type="number" min="0" formControlName="publish_price" class="form-control publish-price" placeholder="Harga Publish">
-                    </div>
-                    <span class="perorang">/ Orang </span>
+
+            <label class="label-form" for="kuota">Kuota Trip</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="tittle-kuota">Jumlah Maksimal Peserta dalam Satu Kali Trip </p>
                 </div>
 
-                <div class="wrap-kuota">
-                    <label class="label-form" for="harga">Kuota Trip</label>
-                    <div class="publish-trip input-group">
-                        <input type="number" min="1" max="100" formControlName="quota_trip" class="form-control" placeholder="Jumlah">
-                        <span class=" input-group-addon" id="harga"> Peserta </span>
+                <div class="col-md-6">
+                    <div class="publish-trip input-group" [ngClass]="displayFieldCss('quota_trip')">
+                        <input type="text" (keypress)="keyPress($event)" formControlName="quota_trip" min="1" max="100" class="form-control box-kuota-input">
+                        <span class="kuota-trip-perorang">Orang/trip </span>
+                        <div class="alert-error" *ngIf="isFieldValid('quota_trip')"> Kuota tidak boleh kosong </div>
                     </div>
+                </div>
+            </div>
+
+            <label class="label-form" for="harga">Harga Trip</label>
+            <div class="wrap-harga">
+                <div class="wrap-publish" [ngClass]="displayFieldCss('publish_price')">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tittle-publish-price" for="harga">Harga Publish</div>
+                            <div class="info-publish-price">Harga yang akan dilihat oleh Traveller</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="publish-trip input-group">
+                                <span class="input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                                <input type="text" (keypress)="keyPress($event)" (keyup)="priceFee($event)" maxlength="8" formControlName="publish_price" min="0" class="form-control publish-price">
+                                <span class="kuota-perorang">/ Orang </span>
+                            </div>
+                            <div class="alert-error" *ngIf="isFieldValid('publish_price')"> Harga tidak boleh kosong </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tittle-trv-price" for="harga">Biaya Layanan Travinesia</div>
+                            <div class="info-publish-price">Potongan Harga 5% dari Harga Publish</div>
+                            <a class="info-trv-price">Baca Selengkapnya</a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="wrap-trv-price">
+                                <span class="rupiah"> Rp <span class="price-new"> {{fee}} </span> </span>
+                                <span class="perorang">/ Orang </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="list-price">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tittle-publish-price" for="harga">Nominal yang Diterima</div>
+                            <div class="info-publish-price">Harga Publish dikurangi Biaya Layanan Travinesia</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="wrap-trv-price">
+                                <span class="rupiah"> Rp <span class="price-new"> {{priceProvider}} </span> </span>
+                                <span class="perorang">/ Orang </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
         <div *ngIf='privatetrip'>
-            <div class="wrap-range-harga">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="wrap-publish-private">
-                            <label class="label-form" for="harga">Harga Trip</label>
-                            <div class="publish-trip input-group">
-                                <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
-                                <input type="text" (keypress)="keyPress($event)" maxlength="8" formControlName="publish_price" min="0" class="form-control publish-price-private" placeholder="Harga Publish">
-                            </div>
-                            <!-- <span class="perorang">/ Orang </span> -->
-                        </div>
-                    </div>
 
+            <label class="label-form" for="kuota">Kuota Trip</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="tittle-kuota">Jumlah Maksimal Peserta dalam Satu Kali Trip </p>
                 </div>
 
+                <div class="col-md-6">
+                    <div class="publish-trip input-group" [ngClass]="displayFieldCss('quota_trip')">
+                        <input type="text" (keypress)="keyPress($event)" formControlName="quota_trip" min="1" max="100" class="form-control box-kuota-input">
+                        <span class="kuota-trip-perorang">Orang/trip </span>
+                        <div class="alert-error" *ngIf="isFieldValid('quota_trip')"> Kuota tidak boleh kosong </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrap-range-harga">
                 <div class="wrap-publish">
-                    <label class="label-form" for="harga">Harga Rombongan Trip</label>
+                    <label class="label-form-private" for="harga">Harga Borongan </label>
                     <div class="row">
-                        <div class="col-md-5 col-md-offset-1">
-                            <div class="tittle-range-harga"> Peserta </div>
+                        <div class="col-md-2">
+                            <div class="tittle-range-harga"> Jumlah Peserta</div>
+                            <div class="info-title-private"> Range Peserta</div>
                         </div>
 
-                        <div class="col-md-5">
-                            <div class="tittle-range-harga"> Harga </div>
+                        <div class="col-md-4">
+                            <div class="tittle-range-harga"> Harga Publish </div>
+                            <div class="info-title-private"> Harga yang dilihat Traveller</div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="tittle-range-harga"> Biaya Layanan (/orang) </div>
+                            <div class="info-title-private"> 5% dari Harga Publish</div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="tittle-range-harga"> Nominal yang Didapat </div>
+                            <div class="info-title-private"> dari Harga Publish</div>
                         </div>
                     </div>
 
                     <div class="row row-range-harga" *ngFor="let private of counter(5); let i=index">
-                        <div class="col-md-1">
-                            <div class="more-than"> &ge; </div>
-                        </div>
 
-                        <div class="col-md-5">
+                        <div class="col-md-2">
+                            <span class="more-than"> &ge;</span>
                             <div class="range-price-trip">
                                 <div formArrayName="min_qty_group">
-                                    <input type="text" (keypress)="keyPress($event)" [formControlName]="i" class="range-price-trip form-control" placeholder="Jumlah Peserta">
+                                    <input type="text" (keypress)="keyPress($event)" [formControlName]="i" class="range-price-trip form-control">
+                                </div>
+                            </div>
+                            <div class="triangle"></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="wrap-publish-group">
+                                <div formArrayName="publish_price_group">
+                                    <div class="input-group">
+                                        <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                                        <input type="text" (keypress)="keyPress($event)" (keyup)="priceArrFunction($event,i)" maxlength="8" [formControlName]="i" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-5">
-                            <div class="range-price-trip">
-                                <div formArrayName="publish_price_group">
-                                    <input type="text" (keypress)="keyPress($event)" maxlength="8" [formControlName]="i" class="form-control" placeholder="Harga Trip">
-                                </div>
-                            </div>
+                        <div class="col-md-3">
+                            <div class="rupiah-private">Rp {{feeArr[i]}} </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="rupiah-private">Rp {{priceArr[i]}} </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="wrap-range-kuota">
-                    <label class="label-form" for="harga">Kuota Trip</label>
-                    <div class="publish-range-trip">
-                        <input type="text" (keypress)="keyPress($event)" formControlName="quota_trip" min="1" max="100" class="form-control" placeholder="Kuota Maksimal">
+                    <label class="label-price-private" for="harga">Diluar Harga Borongan atau Range Peserta </label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tittle-range-harga"> Harga Publish (/orang)</div>
+                            <div class="info-title-private"> Harga yang dilihat Traveller</div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="tittle-range-harga"> Biaya Layanan (/orang)</div>
+                            <div class="info-title-private"> 5% dari Harga Publish</div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="tittle-range-harga"> Nominal yang Didapat</div>
+                            <div class="info-title-private"> dari Harga Publish</div>
+                        </div>
+                    </div>
+
+                    <div class="row row-harga-publish">
+                        <div class="col-md-6">
+                            <div class="wrap-publish-group">
+                                <div class="input-group">
+                                    <span class=" input-group-addon" id="harga"> <span class="rupiah"> Rp </span> </span>
+                                    <input type="text" (keypress)="keyPress($event)" (keyup)="publsihPrivate($event)" maxlength="8" formControlName="publish_price" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="rupiah-private">Rp {{feePrivate}} </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="rupiah-private">Rp {{priceProviderPrivate}} </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="wrap-checkbox">
+        <!-- <div class="wrap-checkbox">
             <input type="checkbox" class="checkbox">
             <label class="label-checkbox"> Dengan ini saya meneyetujui bahwa paket trip yang saya jual sesuai dengan syarat dan
                     ketentuan pihak Travinesia dan bersedia mengikuti segala kebijakan yang berlaku. <a class="read-more"> Baca Selengkapnya </a> </label>
-        </div>
+        </div> -->
 
         <div class="wrap-btn">
+            <div (click)="toggleJual()" class="tittle-back"> Kembali </div>
             <button type="submit" class="btn-content"> Salin Trip</button>
         </div>
     </div>

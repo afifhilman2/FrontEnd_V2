@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router';
-
+import {HeaderProviderComponent } from '.././header-provider/header-provider.component';
 import { JualTripComponent } from ".././jual-trip/jual-trip.component";
-import { HeaderProviderComponent } from ".././header-provider/header-provider.component";
-import { JualTripContentComponent } from '../jual-trip-content/jual-trip-content.component';
+import { MiniFooterComponent } from '../mini-footer/mini-footer.component';
+
 
 const JualTrip: Routes = [
-    // {
-    //     path: '', 
-    //     component: HeaderProviderComponent,
-    //     children :[
+
             {
                 path:'',
                 component:JualTripComponent,
                 children:[
-                    {
-                        path:'',
-                        redirectTo: 'JualTrip', pathMatch: 'prefix',
-                    },
+                   
                     {   path:'Saldo', 
-                        loadChildren:'../saldo/saldo.module#SaldoModule'
+                        loadChildren:'../saldo/saldo.module#SaldoModule',
                     },
                     {   path:'JualTrip', 
                         loadChildren:'../jual-trip-content/jual-trip-content.module#JualTripContentModule'
@@ -53,12 +47,9 @@ const JualTrip: Routes = [
                     },
                 ]
             },
-            {   path:'EtalaseTravel/:id', 
-                loadChildren:'../etalase-travel/etalase-travel.module#EtalaseTravelModule',
-            }
-
-    //     ]
-    // }
+            // {   path:'EtalaseTravel/:id', 
+            //     loadChildren:'../etalase-travel/etalase-travel.module#EtalaseTravelModule',
+            // },
 ]
 
 

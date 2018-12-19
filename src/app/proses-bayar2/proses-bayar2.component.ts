@@ -63,11 +63,11 @@ export class ProsesBayar2Component implements OnInit {
     this.getBookingId();
 
     this.dataBooking = JSON.parse(sessionStorage.getItem("booking"));
-    console.log(this.dataBooking);
+    // console.log(this.dataBooking);
 
 
     this.lengthPrice = this.dataBooking.coded_amount.toString().length;
-    console.log(this.lengthPrice);
+    // console.log(this.lengthPrice);
   }
 
   createAuthorizationHeader (headers:Headers) {

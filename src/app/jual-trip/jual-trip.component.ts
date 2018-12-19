@@ -18,11 +18,16 @@ export class JualTripComponent implements OnInit {
 
   id;
   profileProvider;
+  domain;
+  success;
 
   constructor(private routeActive : ActivatedRoute, public appService:AppService, private http:Http, private route:Router) { 
     this.appService.getProvider().subscribe(profile => {
 
       this.id = profile.provider._id
+      // console.log(profile);
+      this.success = profile.booking_success
+      this.domain = profile.provider.domain;
 
       if(profile.success == false) {
 

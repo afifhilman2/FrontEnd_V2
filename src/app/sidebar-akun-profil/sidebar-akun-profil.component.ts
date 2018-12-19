@@ -21,10 +21,10 @@ export class SidebarAkunProfilComponent implements OnInit {
 
   ngOnInit() {
     this.routeActive.queryParams.filter(params => params.order).subscribe(params => {
-      console.log(params); // {order: "popular"}
+      // console.log(params); // {order: "popular"}
 
       this.order = params.order;
-      console.log(this.order); // popular
+      // console.log(this.order); // popular
     });
 
     this.getDiskon()
@@ -35,7 +35,7 @@ export class SidebarAkunProfilComponent implements OnInit {
     this.appService.getDiscountTrip().subscribe(diskon =>{
       this.diskon = diskon.data;
       
-      console.log(diskon)
+      // console.log(diskon)
     })
   }
 }

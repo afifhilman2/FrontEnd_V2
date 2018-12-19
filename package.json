@@ -32,8 +32,11 @@
     "core-js": "^2.4.1",
     "file-saver": "^2.0.0-rc.4",
     "mydatepicker": "^2.6.6",
+    "ng2-img-max": "^2.1.1",
+    "ng2-pica": "^1.0.1",
     "ng4-geoautocomplete": "^0.1.0",
     "ngx-pagination": "^3.2.0",
+    "ngx-toastr": "^6.4.1-beta.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

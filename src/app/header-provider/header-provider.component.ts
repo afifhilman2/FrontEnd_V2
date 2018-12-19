@@ -66,7 +66,8 @@ export class HeaderProviderComponent implements OnInit {
 
   querySearch(e) {
     this.query= e.target.value;
-    console.log(this.query);
+    // console.log(this.query);
+
   }
 
   toggleLogin():void {
@@ -147,10 +148,10 @@ export class HeaderProviderComponent implements OnInit {
   
     this.appService.addUser(this.user).subscribe(user => {
       localStorage.setItem("token", user.token);
-      console.log(user);
+      // console.log(user);
       
       // this.login = user.success;
-      console.log(this.login)
+      // console.log(this.login)
       if (user.success== true) {
         this.login = user.token;
         

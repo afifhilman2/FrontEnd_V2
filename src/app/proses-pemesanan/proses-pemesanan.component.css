@@ -221,6 +221,7 @@ textarea{
     margin-left: -10px;
     margin-top: 10px;
     resize: none;
+    font-size: 12.5px;
 }
 
 
@@ -397,3 +398,70 @@ hr{
     background: #fff;
     cursor: pointer;
 }
+
+.code-promo{
+    font-size: 11px;
+    color: #e91e63;
+    margin-bottom: 0;
+    position: relative;
+    left: 187px;
+}
+
+.jenis-trip {
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+    background-color: #536dfe;
+    top: 34.5%;
+    left: 11%;
+    width: 95px;
+    font-size: 16px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.private{
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+    background-color: #ff9800;
+    top: 34.5%;
+    left: 11%;
+    width: 95px;
+    font-size: 16px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+/* footer */
+.footer-black {
+    width: 100%;
+    height: 52px;
+    background-color: #9c27b0;
+    padding: 15px;
+    margin-top: 73px;
+}
+
+.cr-black {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.footer-brand-logo {
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    margin-top: -2px;
+    margin-left: 10px;
+}
+
+/* tutup footer */

@@ -20,17 +20,22 @@ export class ProsesPemesananComponent implements OnInit {
   promo;
 
   nbook: any = {
+    _id: '',
     order_email:'',
     order_telephone:'',
     order_name:'',
     notes:'',
+    code:'',
+    publish_price:'',
+    id_province:'',
+    id_category:'',
     flag_asuransi:false,
     asuransi_price:0,
     id_promo:'',
     flag_promo: false,
     promo_fee:0,
     uniq_code:'',
-    _id: '',
+    
   }
 
 
@@ -54,11 +59,12 @@ export class ProsesPemesananComponent implements OnInit {
 
   ngOnInit() {
 
-    if(sessionStorage.getItem("book_trip") != null){
+    // if(sessionStorage.getItem("book_trip") != null){
       this.dataTrip = JSON.parse(sessionStorage.getItem("book_trip"))
-    console.log(this.dataTrip)
+    // console.log(this.dataTrip)
     this.bayar = this.dataTrip.publish_price * this.dataTrip.quantity;
     // console.log(this.type_trip)
+    this.nbook.publish_price = this.dataTrip.publish_price;
     this.random = Math.floor(Math.random() * 1000);
     this.totalBayar = (this.bayar + this.nbook.asuransi_price) - (this.random + this.nbook.promo_fee);
     this.nbook.asuransi_price = this.nbook.asuransi_price * this.dataTrip.quantity;
@@ -66,25 +72,26 @@ export class ProsesPemesananComponent implements OnInit {
     this.nbook.order_name = this.dataTrip.id_user.name;
     this.nbook.order_email = this.dataTrip.id_user.email;
     this.nbook.order_telephone = this.dataTrip.id_user.telephone;
-    } else {
-      this.router.navigate(['/'])
-    }
-    
-    
-  
+    this.nbook.id_province = this.dataTrip.id_trip.id_province;
+    this.nbook.id_category = this.dataTrip.id_trip.category[0];
+
+    // } else {
+    //   this.router.navigate(['/'])
+    // }
     
   }
 
   goToPembayaran(e){
     this.idBook = e.target.id;
     this.nbook.uniq_code = this.random;
+    // console.log(this.nbook)
     this.appService.nextBooking(this.nbook).subscribe(nbook => {
     
-        console.log(nbook);
+        // console.log(nbook);
         sessionStorage.setItem("booking", JSON.stringify(nbook.data) )
-        if(nbook.status = true){
+        // if(nbook.status = true){
           this.router.navigate(['/ProsesBayar']); 
-        }
+        // }
       }
     )
   }
@@ -103,5 +110,16 @@ export class ProsesPemesananComponent implements OnInit {
       this.nbook.asuransi_price = this.nbook.asuransi_price * this.dataTrip.quantity;
       this.totalBayar = (this.bayar + this.nbook.asuransi_price) - (this.random + this.nbook.promo_fee);
     }
+  }
+
+  massage: boolean = false;
+  tooglePromo(){
+    // console.log(this.nbook.code);
+    this.appService.checkPromo(this.nbook.code).subscribe(promo =>{
+      if(promo.status == 400){
+        this.massage = true;
+      }
+      // console.log(promo)
+    })
   }
 }

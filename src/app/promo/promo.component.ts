@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-promo',
@@ -7,14 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PromoComponent implements OnInit {
 
+  dataPromo;
+  detailPromo
+  promoId;
+
   showChatText:boolean = false;
-  constructor() { }
+  constructor( private appService : AppService) { 
+    this.appService.getAllPromo().subscribe(promo =>{
+      this.dataPromo = promo.data;
+      // this.promoName = this.dataPromo.promo_name;
+      // this.promoDesc = this.dataPromo.description;
+      // this.promoPhoto = this.dataPromo.photo_promo;
+      // console.log(this.dataPromo)
+    })
+
+  }
 
   ngOnInit() {
   }
 
-  showChat(){
-    this.showChatText = !this.showChatText;
+  showChat(id){
+    this.promoId = id;
+    this.appService.getDetailPromo(id).subscribe(detail=>{
+      this.detailPromo = detail.data
+      // console.log(this.detailPromo)
+    })
   }
-
+s
 }

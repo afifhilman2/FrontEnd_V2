@@ -176,3 +176,15 @@
     color: #4a4a4a;
     cursor: pointer;
 }
+
+/* coming soon */
+.coming-soon{
+    color: #4a4a4a;
+    text-align: center;
+    padding: 130px;
+}
+
+.coming-soon p{
+    font-size: 25px;
+    font-weight: bold;
+}

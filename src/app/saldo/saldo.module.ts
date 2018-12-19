@@ -17,7 +17,8 @@ import { SaldoComponent } from './saldo.component';
     FormsModule,
     ReactiveFormsModule,
     SaldoRouterModule,
-    MyDatePickerModule
+    MyDatePickerModule, 
+    
   ],
   declarations: [
     SaldoComponent,

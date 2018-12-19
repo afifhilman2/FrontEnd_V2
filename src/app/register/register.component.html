@@ -1,12 +1,12 @@
-<div class="trv-notice" *ngIf="massage">
+<!-- <div class="trv-notice" *ngIf="massage">
   <span class="txt-notice"> Email Sudah Terdaftar </span>
-</div>
+</div> -->
 <div class="container">
   <div class="trv-tema-atas">
     <h2><strong> Daftar di Travinesia </strong></h2>
     <div class="garis-vertical"></div>
     <div class="trv-punya-akun">
-      <p> Sudah Punya Akun Travinesia? Masuk <a role="button" routerLink="/LoginPage">disini</a></p>
+      <p> Sudah Punya Akun Travinesia? Masuk <a class="disini" routerLink="/LoginPage">disini</a></p>
     </div>
   </div>
   <div class="col-md-6">
@@ -18,7 +18,7 @@
       </div> 
       <div class="form-group" [ngClass]="displayFieldCss('telephone')">
         <label for="telephone"> Nomor Telepon </label>
-        <input type="text" class="form-control" formControlName="telephone">
+        <input type="text" class="form-control" formControlName="telephone" (keypress)="keyPress($event)">
         <small>Harap mengisi nomor telepon yang aktif untuk keamanan transaksi</small>
         <div *ngIf="formRegister.get('telephone').hasError('required') && formRegister.get('telephone').touched" class="alert trv-alert">No Telepon Tidak Boleh Kosong</div> 
       </div>
@@ -26,6 +26,8 @@
         <label for="email"> Email </label>
         <input id="email" type="email" class="form-control" formControlName="email"> 
         <div *ngIf="formRegister.get('email').hasError('required') && formRegister.get('email').touched" class="alert trv-alert">Email Tidak Boleh Kosong</div> 
+        <div *ngIf="formRegister.get('email').hasError('pattern') && formRegister.get('email').touched" class="alert trv-alert">Format Email Salah </div> 
+
       </div>
       <div class="form-group" [ngClass]="displayFieldCss('password')">
         <label for="password"> Password </label>
@@ -33,32 +35,31 @@
         <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
         <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="password()"></span>
         <div *ngIf="formRegister.get('password').hasError('required') && formRegister.get('password').touched" class="alert trv-alert">Password Tidak Boleh Kosong</div> 
-        <div *ngIf="formRegister.get('password').hasError('minlength') && formRegister.get('password').touched" class="alert trv-alert">Minimal 8 Karakter</div> 
+        <div *ngIf="formRegister.get('password').hasError('pattern') || formRegister.get('password').hasError('minlength') && formRegister.get('password').touched" class="alert trv-alert">Minimal 8 Karakter dari Kombinasi Huruf Kapital dan Angka</div>  
       </div>
       <div>
         <input type="checkbox" class="checkbox">
         <label class="label--checkbox">
-          Saya mengkonfirmasi telah menyetujui Syarat dan ketentuan,serta Kebijakan Privasi Travinesia. Baca Selengkapnya
+          Saya mengkonfirmasi telah menyetujui Syarat dan ketentuan,serta Kebijakan Privasi Travinesia. <a class="disini" routerLink="/termCondition">Baca Selengkapnya</a>
         </label>  
       </div>
       <button class="btn btn-daftar pull-right" type="submit" >Daftar</button>
     </form>
   </div>
   <div class="col-md-6">
-    <div class="row">
-      <div class="trv-atau">
-        <p>Atau</p>
-      </div>
-    </div>  
-    <div class="row">
-      <div class="col-md-4">
-        <button class="btn btn-facebook" (click)="signInWithFB()">Daftar Dengan Facebook</button>
+      <div class="button-social">
+          <div class="trv-atau">
+              Atau Daftar Dengan
+          </div> 
+          <button class="btn btn-facebook" (click)="signInWithFB()">Daftar Dengan Facebook</button>
+          <button class="btn btn-google" (click)="signInWithGoogle()">Daftar Dengan Google</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <button class="btn btn-google" (click)="signInWithGoogle()">Daftar Dengan Google</button>
-      </div>
-    </div>
-  </div>
+</div>
+
+<!-- footer -->
+
+<div class="footer-black">
+  <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+  <p class="cr-black pull-right">Copyright &copy; 2017 Travinesia</p>
 </div>

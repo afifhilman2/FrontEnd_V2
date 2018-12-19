@@ -13,8 +13,7 @@
     <p class="head-tittle">Ubah Profil Travel </p>
 </div>
 
-<span class="glyphicon glyphicon-exclamation-sign"></span>
-<p class="info-paket">Logo dan Nama tidak dapat dirubah demi menjaga kredibelitas traveller terhadap Travel Anda. Baca selengkapnya di <a href="" class="highlight"> Syarat dan ketentuan </a> Travinesia</p>
+<p class="info-paket">Logo dan Nama tidak dapat dirubah demi menjaga kredibelitas traveller terhadap Travel Anda. Baca selengkapnya di <a [routerLink]="['/termcondition']" class="highlight"> Syarat dan ketentuan </a> Travinesia</p>
 
 <form [formGroup]="myForm" (ngSubmit)="onEditProfile()">
 
@@ -25,7 +24,7 @@
                 <label>
                     <div class="wrap-img-profil">
                         <img src="{{photoLogo}}" alt="" class="img-profil">
-                        <input type="file" hidden (change)="uploadImage1($event)">
+                        <input type="file" formControlName="logo" hidden (change)="uploadImage1($event)">
                     </div>
                 </label>
             </div>
@@ -33,11 +32,11 @@
 
         <div class="col-md-8">
             <div class="wrap-alamat">
-                <label class="label-form">Foto Profil Travel </label>
+                <label class="label-form">Foto Cover Travel </label>
                 <label>
                     <div class="wrap-cover-profil">
                         <img src="{{photoCover}}" alt="" class="cover-profil">
-                        <input type="file" hidden (change)="uploadImageCover($event)">
+                        <input type="file" hidden formControlName="cover" (change)="uploadImageCover($event)">
                     </div>
                 </label>
             </div>

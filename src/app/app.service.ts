@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, ResponseContentType } from '@angular/http';
+import 'rxjs/Rx';
+
+import { Http, Headers, Response, ResponseContentType, RequestOptions,
+    RequestOptionsArgs,
+    Request,
+    XHRBackend } from '@angular/http';
+
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import 'rxjs/add/operator/toPromise';
-
-import { Product } from './product'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { tokenNotExpired } from 'angular2-jwt';
-import { AuthHttp } from 'angular2-jwt';
-
-declare const FB:any;
-
-import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
 import { EventEmitter } from 'events';
+
+// import { AngularReduxRequestOptions } from './loader/angular-redux-request.options'
+// import { LoaderService } from './loader/loader-service';
+import { Options } from 'selenium-webdriver/ie';
+
+
+
 
 
 
@@ -34,26 +39,15 @@ export class AppService {
     constructor (public http:Http, public http2: HttpClient) {
         this.url  = 'api.datamuse.com/words?ml=';
 
-        // FB.init({
-        //     appId      : 261462964525976,
-        //     status     : false, // the SDK will attempt to get info about the current user immediately after init
-        //     cookie     : false,  // enable cookies to allow the server to access
-        //     // the session
-        //     xfbml      : false,  // With xfbml set to true, the SDK will parse your page's DOM to find and initialize any social plugins that have been added using XFBML
-        //     version    : 'v2.12' // use graph api version 2.5
-        //   });
     }
 
-    //token localstorage
     createAuthorizationHeader (headers:Headers) {
-        // headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
         
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
     }
 
-    //httpClient Headers
-    // requestHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     requestHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
+   
     //user
     getUsers() {
         let headers = new Headers();
@@ -125,7 +119,7 @@ export class AppService {
     }
 
     getEtalseProvider(id) {
-        return this.http.get('https://travinesia.com:1210/get/etalase_provider/'+ id)
+        return this.http.get('https://travinesia.com:1210/get/etalase/provider/'+ id)
         .map(res => res.json());
     }
 
@@ -171,6 +165,16 @@ export class AppService {
     addUser(user) {
         return this.http.post('https://travinesia.com:1210/v1/user/authenticate', user)
         .map(res => res.json());
+    }
+
+    getForgotPassword(token){
+        return this.http.get('https://travinesia.com:1210/v1/user/forgot_password/'+token)
+        .map(res => res.json())
+    }
+  
+    saveNewPassword(user){
+        return this.http.put('https://travinesia.com:1210/v1/user/save_password', user)
+        .map(res => res.json())
     }
 
     loginFacebook(authToken){
@@ -271,6 +275,11 @@ export class AppService {
         .map(res => res.json());
     }
 
+    getTermsConditions(){
+        return this.http.get('https://travinesia.com:1210/get/terms_condition')
+        .map(res => res.json())
+      }
+
     confirmTransaction(confirm) {
         let headers = new Headers();
         this.createAuthorizationHeader (headers);
@@ -279,6 +288,16 @@ export class AppService {
         {headers: headers})
         .map(res => res.json());
     }
+
+    downloadPDFTransaction(id_booking, date_trip): any {
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        
+        return this.http.post('https://travinesia.com:1210/v1/provider/detail_transaction_traveller/'+id_booking +'/'+ date_trip , "" , {headers: headers, responseType: ResponseContentType.Blob}).map(
+        (res) => {
+          return new Blob([res.blob()], { type: 'application/pdf' })
+        })
+      }
 
     //searchResult
     search_word(term){
@@ -309,6 +328,23 @@ export class AppService {
         this.createAuthorizationHeader(headers);
         return this.http.get('https://travinesia.com:1210/v1/user/bookinguser', {headers: headers})
         .map(res => res.json());
+    }
+
+    checkPromo(promo){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('https://travinesia.com:1210/v1/user/booking/check_promo', promo, {headers: headers})
+        .map(res => res.json())
+      }
+      
+    getAllPromo(){
+    return this.http.get('https://travinesia.com:1210/get/promo')
+    .map(res => res.json())
+    }
+
+    getDetailPromo(promo_id){
+    return this.http.get('https://travinesia.com:1210/get/promo/detail/' + promo_id)
+    .map(res => res.json())
     }
 
 
@@ -483,12 +519,19 @@ export class AppService {
         .map(res => res.json())
       }
   
-      addComment(comments){
+      addComment(id, comments){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + comments.id_diskusi, comments, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + id, comments, {headers: headers})
         .map(res => res.json())
       }
+
+      addCommentUser(comments){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + comments, {headers: headers})
+        .map(res => res.json())
+      }      
 
       getAllFavorites(){
         let headers = new Headers();
@@ -510,6 +553,70 @@ export class AppService {
         return this.http.put('https://travinesia.com:1210/v1/user/edit_photo_profile', user, {headers: headers})
         .map(res => res.json())
       }
+
+      getTravel(travel){
+        return this.http.get('https://travinesia.com:1210/get/provider/' + travel)
+        .map(res => res.json())
+      }
+
+      getDetailTrip(id_trip){
+        //   this.showLoader()
+          return this.http.get('https://travinesia.com:1210/get/trip_detail/' + id_trip)
+          .map(res => res.json())
+          
+      }
+
+
+      //loader
+
+    //   private redux(angularReduxOptions?: any){
+    //     if (angularReduxOptions != null) {
+
+    //         for (let option in angularReduxOptions) {
+    //             let optionValue = angularReduxOptions[option];
+    //             this[option] = optionValue;
+    //         }
+    //     }
+    //   }
+
+    //   private requestOptions(options?: RequestOptionsArgs): RequestOptionsArgs {
+
+    //     if (options == null) {
+    //         options = new this.redux();
+    //     }
+
+    //     if (options.headers == null) {
+    //         options.headers = new Headers();
+    //     }
+
+    //     return options;
+    // }
+
+
+
+    // private onCatch(error: any, caught: Observable<any>): Observable<any> {
+    //     return Observable.throw(error);
+    // }
+
+    // private onSuccess(res: Response): void {
+    //     console.log('Request successful');
+    // }
+
+    // private onError(res: Response): void {
+    //     console.log('Error, status code: ' + res.status);
+    // }
+
+    // private onEnd(): void {
+    //     this.hideLoader();
+    // }
+
+    // private showLoader(): void {
+    //     this.loaderService.show();
+    // }
+
+    // private hideLoader(): void {
+    //     this.loaderService.hide();
+    // }
 
       
 }

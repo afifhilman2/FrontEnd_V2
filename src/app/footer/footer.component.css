@@ -6,6 +6,11 @@
     padding-top: 42px;
 }
 
+.imaga-icon{
+    width: 16px;
+    margin-right: 9px;
+}
+
 .footer-brand-logo {
     margin-top: -2px;
 }
@@ -20,6 +25,7 @@
 .cr-tittle {
     font-size: 13px;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .footer-black {

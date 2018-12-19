@@ -26,18 +26,18 @@
                         <div class="dropdown-setting">
                             <span role="button" class="other" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Lainnya </span>
                             <div class="dropdown-menu other-content" aria-labelledby="dropdownMenu1">
-                                    <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ order?.id_trip?.provider?.travel_name }}</span> </p>
-                                    <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ order.coded_amount.toLocaleString('id') }}</span> </p>
-                                    <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{order.quantity}}</span> </p>
-                                    <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
-                                    <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                                <p class="other-name">Agen Travel <span class="semicolon">:</span> <span class="other-value">{{ order?.id_trip?.provider?.travel_name }}</span> </p>
+                                <p class="other-name">Total Biaya <span class="semicolon">:</span> <span class="other-value"> Rp {{ order.coded_amount.toLocaleString('id') }}</span> </p>
+                                <p class="other-name">Kuota dipesan <span class="semicolon">:</span> <span class="other-value"> {{order.quantity}}</span> </p>
+                                <p class="other-name">Metode Pembayaran <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
+                                <p class="other-name">Nama Pemesan <span class="semicolon">:</span> <span class="other-value"> Open Trip (2 Hari 1 Malam) </span> </p>
                             </div>
                         </div>
                     </div>
                     <div class="content-box-right">
                         <p class="status"> Status :</p>
                         <p class="wait-pay"> {{order.id_statusTrip.status_trip}} </p>
-                        <button class="btn-trv-pemesanan" *ngIf="order.id_statusTrip.id_status != 2 || order.id_statusTrip.id_status != 6 " (click)="button(order.id_statusTrip.id_status, order)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
+                        <button class="btn-trv-pemesanan" *ngIf="order.id_statusTrip.id_status !== 2 || order.id_statusTrip.id_status !== 6 " (click)="button(order.id_statusTrip.id_status, order)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
                         <p class="see-status" data-toggle="modal" data-target="#status">Lihat Detail Status</p>
     
                         <!-- modal detail status -->
@@ -51,9 +51,42 @@
                                   <h4 class="modal-title title">Status Pemesanan</h4>
                                 </div>
                                 <div class="modal-body status-body">
-                                    <span class="text-content" *ngFor="let status of statusPemesanan; let i=index" [ngClass]="{'text-content-dissable': i<status[(order.id_statusTrip.id_status-1)]}"><i class="glyphicon glyphicon-ok"></i>{{status}}</span>
+                                    <!-- <span class="text-content" *ngFor="let status of statusPemesanan; let i=index" [ngClass]="{'text-content-dissable': i<status[(order.id_statusTrip.id_status-1)]}"><i class="glyphicon glyphicon-ok"></i>{{status}}</span> -->
+                                    <span class="text-content">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Menunggu Pembayaran
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Sudah dibayar, Menunggu Konfirmasi Agen
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Transaksi Diterima, Silahkan Isi Data Peserta
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Etiket Terbit
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Menunggu Konfirmasi di Meeting Point
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Trip Berlangsung
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5 && order.id_statusTrip.id_status!=6)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5 && order.id_statusTrip.id_status!=6)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Menunggu Review dan Rating
+                                    </span>
+                                    <span [ngClass]="(order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5 && order.id_statusTrip.id_status!=6 && order.id_statusTrip.id_status!=7)? 'text-content' : 'text-content-dissable '">
+                                        <i [ngClass]="['glyphicon', (order.id_statusTrip.id_status!=1 && order.id_statusTrip.id_status!=2 && order.id_statusTrip.id_status!=3 && order.id_statusTrip.id_status!=4 && order.id_statusTrip.id_status!=5 && order.id_statusTrip.id_status!=6 && order.id_statusTrip.id_status!=7)? 'glyphicon-ok' : 'glyphicon-remove']"></i>
+                                        Trip Selesai
+                                    </span>
                                 </div>
-                                <button class="btn-aksiModal">Tombol</button>
+                                <button class="btn-aksiModal" *ngIf="order.id_statusTrip.id_status !== 2 || order.id_statusTrip.id_status !== 6 " (click)="button(order.id_statusTrip.id_status, order)"> {{idPemesanan[(order.id_statusTrip.id_status-1)]}} </button>
+                                <!-- <button class="">Tombol</button> -->
                               </div>
                               
                             </div>
@@ -62,7 +95,8 @@
                     <div class="footer-box"> 
                         <p class="quetion">Ada pertanyaan untuk agen travel ?
                            Cobalah Kirim Pesan</p>
-                        <button class="btn-send-chat" data-toggle="modal" data-target="#pesan">Kirim Pesan</button>
+                           <button class="btn-send-chat" (click)="kirimPesan()">Kirim Pesan</button>
+                        <!-- <button class="btn-send-chat" data-toggle="modal" data-target="#pesan">Kirim Pesan</button> -->
                         <!-- modal kirim pesan -->
                         <div class="modal fade" id="pesan" role="dialog">
                             <div class="modal-dialog">

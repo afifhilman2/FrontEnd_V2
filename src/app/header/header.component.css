@@ -4,27 +4,31 @@
 
 ul.head-category li {
     display: inline;
-    margin-right: 33px;
+    margin-right: 22px;
     position: relative;
     padding-left: 0px;
 }
 
-.line-category {
+.head-category{
+    padding: 0 30px;
+}
+/* .line-category {
     border-bottom: 1px solid #dddddd;
     width: 101.5%;
     position: relative;
     bottom: 18px;
-}
+} */
 
 li.kanan {
     float: right;
-    margin-right: -15px;
     list-style: none;
 }
 
 .navbar-transparent {
     background-color: #f5f5f5;
     border-bottom: 1px solid #dddddd;
+    height: 65px;
+    padding: 6px 9px;
 }
 
 .brand-logo {
@@ -34,7 +38,6 @@ li.kanan {
 
 li>a {
     color: #4c4c4c;
-    font-family: 'Noto Sans';
     font-weight: normal;
     font-style: normal;
 }
@@ -42,6 +45,11 @@ li>a {
 li>a:hover {
     color: #ab47bc;
     text-decoration: none;
+    border-radius: 5px;
+    height: 35px;
+    height: 37px;
+    padding-top: 7px;
+    margin-top: 8px;
 }
 
 li>a:focus {
@@ -68,6 +76,46 @@ ul>li>a:focus .glyphicon-chevron-down {
     z-index: 999;
     box-sizing: border-box;
     border-radius: 0 0 0 10px;
+}
+
+.daftar{
+    font-size: 15px;
+    width: 85px;
+    height: 35px;
+    background-color: #ab47bc;
+    color: white;
+    margin-top: 9px;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 17px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.daftar:hover,
+.daftar:focus{
+    font-size: 15px;
+    width: 85px;
+    height: 35px;
+    background-color: #993fa8;
+    color: white;
+    margin-top: 9px;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 17px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.arrow{
+    margin-left: 10px;
+    margin-right: 10px;
+    border: solid #4a4a4a;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    vertical-align: super;
 }
 
 .trv-form-login {
@@ -98,7 +146,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     background-color: #3a589b;
     margin: 24px 28px 10px 2px;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     color: #ffffff;
 }
 
@@ -110,7 +158,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     border: solid 1px #b7b7b7;
     margin: 0 0 0 2px;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     color: #000000;
 }
 
@@ -141,7 +189,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, .5);
-    z-index: 99;
+    z-index: 999;
     top: 0;
 }
 
@@ -171,7 +219,7 @@ ul>li>a:focus .glyphicon-chevron-down {
 
 #search-box {
     width: 200px;
-    height: 20px;
+    height: 35px;
 }
 
 .item-search:hover {
@@ -180,8 +228,13 @@ ul>li>a:focus .glyphicon-chevron-down {
     cursor: pointer;
 }
 
+.glyphicon-search{
+    color: white;
+}
+
 .btn-search {
     cursor: pointer;
+    font-size: 13px;
 }
 
 .btn-search:hover {
@@ -196,7 +249,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     border: solid 1px #ab47bc;
     background-color: transparent;
     margin-left: 15px;
-    margin-right: 15px;
+    margin-right: 30px;
 }
 
 .notif {
@@ -224,12 +277,16 @@ ul>li>a:focus .glyphicon-chevron-down {
     height: 36px;
     border-radius: 50%;
     position: absolute;
-    top: 7px;
+    top: 13px;
     right: 40px;
+    border: solid 1px #4a4a4a;
+    object-fit: cover;
+    padding: 1px;
 }
 
 .profil {
     margin-right: 20px;
+    margin-left: 20px;
 }
 
 .logout {
@@ -281,10 +338,24 @@ ul>li>a:focus .glyphicon-chevron-down {
 }
 
 .user-drop{
-    top: 165%;
-    left: -245px;
+    top: 50px;
+    left: 76%;
     width: 279px;
-    padding: 5px 30px;
+    padding: 5px;
+}
+
+.user-name{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 34px;
+    display: block;
+}
+
+.agen-drop{
+    top: 50px;
+    right: -24%;
+    width: 279px;
+    padding: 5px;
 }
 
 .navbar-right {
@@ -296,3 +367,65 @@ ul>li>a:focus .glyphicon-chevron-down {
     float: right!important;
     margin-right: 0px;
 }
+
+.travel-saya {
+    font-size: 15px !important;
+    font-weight: bold !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    letter-spacing: normal !important;
+    color: #ab47bc !important;
+    margin-right: -20px;
+}
+
+.list-drop{
+    color: #4c4c4c;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.list-drop>p{
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 0;
+    padding: 10px 15px;
+}
+
+.imaga-icon{
+    margin-right: 15px;
+}
+
+.delete-trip{
+    color: #d50000;
+    cursor: pointer;
+}
+.delete-trip:hover{
+    color: #d50000;
+    cursor: pointer;
+}
+
+.glyphicon-log-out{
+    color: #d50000;
+    margin-right: 15px;
+}
+
+.list-drop>p:hover{
+    color: #ab47bc;;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #e3e3e3;
+    margin-bottom: 0;
+    padding: 10px 15px;
+}
+
+.icon-category {
+    margin-bottom: 5px;
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+}
+

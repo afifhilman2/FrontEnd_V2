@@ -55,6 +55,7 @@
     width: 158px;
     height: 100%;
     float: left;
+    object-fit: contain;
 }
 
 .wrap-info-paket-trip {
@@ -176,6 +177,22 @@
     float: right;
 }
 
+.btn-trv-terima {
+    width: 172px;
+    height: 28px;
+    line-height: 25px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #ab47bc;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
 .tgl-berangkat {
     font-size: 11px;
     font-weight: normal;
@@ -248,19 +265,28 @@ th:nth-child(2) {
 }
 
 tbody {
-    border: 1px solid #dddddd;
-    background-color: #f9f9f9;
+    /* border: 1px solid #dddddd;
+    background-color: #f9f9f9; */
     font-size: 11px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
     color: #4a4a4a;
-    text-align: center;
+    text-align: left;
 }
 
 tbody tr td {
     border: none;
+    padding-left: 0;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.08;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
 }
 
 .accept-table {
@@ -301,12 +327,6 @@ a:hover {
     background-color: #f9f9f9;
     border-bottom: 1px solid #dddddd;
     padding: 10px;
-}
-
-.img-paket-trip {
-    width: 158px;
-    height: 100%;
-    float: left;
 }
 
 .wrap-info-paket-trip {

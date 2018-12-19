@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 import { DetailPaketRouterModule } from './detail-paket-routing.module';
 import { DetailPaketComponent } from './detail-paket.component';
 import { AgmCoreModule } from '@agm/core';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 
@@ -14,7 +15,8 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule,
-    DetailPaketRouterModule
+    DetailPaketRouterModule,
+    MyDatePickerModule,
   ],
   declarations: [
     DetailPaketComponent,

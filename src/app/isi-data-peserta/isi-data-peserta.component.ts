@@ -23,7 +23,7 @@ export class IsiDataPesertaComponent implements OnInit {
 
   ngOnInit() {
     this.dataBooking = JSON.parse(this.active.snapshot.queryParams['data']);
-    console.log(this.dataBooking)
+    // console.log(this.dataBooking)
     this.booking._id = this.dataBooking._id;
     this.booking.traveller_name = this.dataBooking.traveller_name;
     this.booking.traveller_age = this.dataBooking.traveller_age;
@@ -36,7 +36,8 @@ export class IsiDataPesertaComponent implements OnInit {
 
   addTravellerDetail(save_status){
     this.booking.save_status = save_status;
-    console.log(this.booking);
+    // console.log(this.booking);
+
     if(save_status==0){
       this.appService.addTravellerDetail(this.booking).subscribe(booking => {
       
@@ -44,14 +45,14 @@ export class IsiDataPesertaComponent implements OnInit {
     }
     else if(save_status==1 && this.booking.traveller_name.length==this.dataBooking.quantity && this.booking.traveller_age.length==this.dataBooking.quantity && this.booking.traveller_identity.length==this.dataBooking.quantity ){
       this.appService.addTravellerDetail(this.booking).subscribe(booking => {
-        console.log(booking)
+        // console.log(booking)
         if(booking.status == 200){
           this.router.navigate(['/Akun/Pemesanan']);
         }
       })
     }
     else{
-      console.log('Gagal')
+      // console.log('Gagal')
     }
   }
 

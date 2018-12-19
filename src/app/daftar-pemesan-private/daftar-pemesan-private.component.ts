@@ -31,6 +31,9 @@ export class DaftarPemesanPrivateComponent implements OnInit {
   daftar_quota_left:any[];
   quota_left;
   photo;
+  no_hp;
+  msg_travel;
+  id;
 
   // booking
   booking:any[];
@@ -40,7 +43,7 @@ export class DaftarPemesanPrivateComponent implements OnInit {
     let id = this.activeRoute.snapshot.params['id']
      this.appService.getDaftarPemesan(id).subscribe( daftar => {
       
-      console.log(daftar);
+      // console.log(daftar);
       // trip
       this.daftar_quota_left = daftar.trip.quota_left; 
       this.trip_name = daftar.trip.trip_name;
@@ -56,6 +59,9 @@ export class DaftarPemesanPrivateComponent implements OnInit {
 
       // booking
       this.booking = daftar.booking; 
+      this.no_hp = daftar.booking[0].order_telephone;
+      this.msg_travel = daftar.booking[0].notes_for_provider;
+      this.id = daftar.booking[0]._id;
     
     }) 
    
@@ -71,7 +77,7 @@ export class DaftarPemesanPrivateComponent implements OnInit {
   }
 
   toggleBack():void {
-    this.route.navigate(['/JualTrip/TransaksiPenjualan']);
+    this.route.navigate(['/Provider/TransaksiPenjualan']);
   }
 
   dateChange(value,i) {
@@ -84,18 +90,18 @@ export class DaftarPemesanPrivateComponent implements OnInit {
 
   goDetailPesan(){
     let id = this.activeRoute.snapshot.params['id']
-    this.route.navigate(['/traveler/DetailPaket/' + id])
+    this.route.navigate(['/DetailPaket/' + id])
   }
 
   acceptTrip(e){
     this.id_transaction._id = e.target.id;
     // console.log(this.id_transaction._id);
     this.appService.confirmTransaction(this.id_transaction).subscribe(confirm => {
-      console.log(confirm);
+      // console.log(confirm);
       let id = this.activeRoute.snapshot.params['id']
       if(confirm.status == 200) {
         this.route.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.route.navigate(['/JualTrip/DaftarPemesanan/' + id]));
+        this.route.navigate(['/Provider/DaftarPemesananPrivate/' + id]));
       }
     }); 
   }

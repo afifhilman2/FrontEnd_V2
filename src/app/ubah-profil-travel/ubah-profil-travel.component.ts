@@ -3,6 +3,8 @@ import { AppService } from '../app.service';
 import { Http } from '@angular/http';
 import {Router, ActivatedRoute} from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-ubah-profil-travel',
@@ -16,14 +18,7 @@ export class UbahProfilTravelComponent implements OnInit {
   size;
   type;
   imgError:boolean = true;
-
-  myPhoto = {
-    logo:''
-  }
-
-  myCover = {
-    cover:''
-  }
+  id;
 
   myForm = this.fb.group({
     description:'',
@@ -31,18 +26,21 @@ export class UbahProfilTravelComponent implements OnInit {
     province:'',
     office_phone_number:'',
     slogan:'',
+    logo:'',
+    cover:''
   }
 )
 
   provinceTrip:any[];
   
 
-  constructor(public appService:AppService, public fb:FormBuilder, private http:Http, private router:Router) {
+  constructor(public appService:AppService, private toastr: ToastrService, public fb:FormBuilder, private http:Http, private router:Router) {
     this.appService.getProvider().subscribe(profile => {
       // console.log(profile.provider)
 
       this.photoLogo = profile.provider.logo;
       this.photoCover = profile.provider.cover;
+      this.id = profile.provider._id;
 
       this.myForm.patchValue({
         slogan : profile.provider.slogan,
@@ -67,9 +65,11 @@ export class UbahProfilTravelComponent implements OnInit {
      this.appService.editProfileProvider(this.myForm.value).subscribe(provider =>{
       //  console.log(provider);
        if(provider.status == 200) {
+
+        this.toastr.success('Profil Travel Berhasil diubah');
  
          this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-           this.router.navigate(['/JualTrip/JualTrip']));
+           this.router.navigate(['/EtalaseTravel/'+ this.id]));
       }
      })
    }
@@ -115,11 +115,13 @@ export class UbahProfilTravelComponent implements OnInit {
   
   _handleReaderLoaded1(readerEvt) {
      let binaryString = readerEvt.target.result;
-            this.myPhoto.logo= btoa(binaryString); 
-            this.photoLogo="data:image/jpeg;base64,"+ btoa(binaryString);  
+
+      this.myForm.value.logo= btoa(binaryString); 
+      this.photoLogo="data:image/jpeg;base64,"+ btoa(binaryString); 
+      
+      this.appService.editLogoProvider(this.myForm.value).subscribe(logo => {
+      }) 
             
-            this.appService.editLogoProvider(this.myPhoto).subscribe(logo => {
-            })
     }
 
     uploadImageCover(evt) {
@@ -149,18 +151,19 @@ export class UbahProfilTravelComponent implements OnInit {
     }
     
     _handleReaderLoadedCover(readerEvt) {
-       let binaryString = readerEvt.target.result;
-              this.myCover.cover= btoa(binaryString); 
-              this.photoCover="data:image/jpeg;base64,"+ btoa(binaryString);   
+      let binaryString = readerEvt.target.result;
+      this.myForm.value.cover= btoa(binaryString); 
+      this.photoCover="data:image/jpeg;base64,"+ btoa(binaryString);   
+
+      this.appService.editCoverProvider(this.myForm.value).subscribe(cover => {
+    })
             
-              this.appService.editCoverProvider(this.myCover).subscribe(cover => {
-      
-              })
+             
       }
 
 
   ngOnInit() {
-
+    window.scrollTo(0, 0);
   }
 
 }

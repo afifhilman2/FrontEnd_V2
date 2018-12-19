@@ -15,6 +15,10 @@ export class SaldoComponent implements OnInit {
   wrong:boolean = false;
   modalClose:boolean = false;
   confirmSuccess:boolean = true;
+  pageOps:boolean = false;
+  pageData:boolean = true;
+  msg200 = true;
+  msg404 = true;
 
   withdrawForm = this.fb.group({
     password:['', Validators.required],
@@ -66,12 +70,17 @@ export class SaldoComponent implements OnInit {
 
     this.appService.getBalanceProvider().subscribe( balance => {
 
+      if(balance.balance.length == 0) {
+        this.pageOps = !this.pageOps;
+        this.pageData = !this.pageData;
+      }
+
       this.allItems = balance.balance;
-      // console.log(this.allItems)
+      // console.log(balance)
 
       this.balance = balance;
       this.balanceFlag = balance.balance;
-      this.setPage(1);
+      this.setPageSaldo(1);
     })
   }
 
@@ -82,15 +91,30 @@ export class SaldoComponent implements OnInit {
       this.appService.withdrawBalanceProvider(this.withdrawForm.value).subscribe( withdraw => {
         // console.log(withdraw);
 
-        if(withdraw.status == 200) {
+        if(withdraw.status == 200) 
+        
+        {
 
           this.modalClose = !this.modalClose;
+          this.msg200 = false;
+          this.msg404 = true; 
+          this.confirmSuccess = false;
+          this.wrong = false; 
+        } 
+        
+        else if(withdraw.status == 404) 
+        
+        {
+          this.modalClose = !this.modalClose;
+          this.msg200 = true;
+          this.msg404 = false; 
           this.confirmSuccess = false;
           this.wrong = false;
-          
         }
-
-        if(withdraw.status == 400) {
+        
+        else if(withdraw.status == 400) 
+        
+        {
           this.wrong = true;
         }
           
@@ -114,9 +138,9 @@ export class SaldoComponent implements OnInit {
     this.modalClose = false;
   }
 
-  setPage(page: number) {
+  setPageSaldo(page: number) {
     // get pager object from service
-    this.pager = this.pagerService.getPager(this.allItems.length, page);
+    this.pager = this.pagerService.getPagerSaldo(this.allItems.length, page);
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
@@ -132,6 +156,7 @@ export class SaldoComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
   }
 
 }

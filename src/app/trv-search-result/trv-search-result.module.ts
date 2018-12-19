@@ -24,6 +24,7 @@ import { FilterPipe } from './filter.pipe';
     TrvSearchResultComponent,
     FilterPipe
    ],
+
  
 })
 export class TrvSearchResultModule { }

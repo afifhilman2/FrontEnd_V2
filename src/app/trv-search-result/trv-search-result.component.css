@@ -4,8 +4,6 @@
 }
 
 .root-search {
-    margin-top: -23px;
-    margin-left: -45px;
     font-size: 13.4px;
     font-weight: normal;
     font-style: normal;
@@ -13,26 +11,33 @@
     letter-spacing: normal;
     text-align: left;
     color: #4a4a4a;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+
 
 .current-search {
     display: inline-block;
-    font-size: 25.2px;
+    font-size: 25px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.22px;
     letter-spacing: normal;
     text-align: left;
     color: #9c27b0;
-    margin-top: 10px;
-    margin-bottom: 21px;
-    margin-left: -45px;
+    padding: 1px 0 15px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .rslt {
-    left: 336px;
-    top: 128px;
+    left: 347px;
+    top: 155px;
     position: absolute;
     font-size: 13.4px;
     font-weight: normal;
@@ -67,25 +72,37 @@
 }
 
 .thumb-promo {
-    width: 165px;
     border-radius: 10px;
     border: none;
     position: relative;
     display: inline-block;
     overflow: hidden;
     box-sizing: border-box;
-    box-shadow: 0px 0px 1px #dddddd;
+    box-shadow: 0px 0px 1px #4a4a4a;
     margin-top: 8px;
+    width: 158px;
+    height: 244px;
+    cursor: pointer;
 }
 
-.img-thumb img {
-    width: 100%;
+.thumb-promo:hover {
+    border-radius: 10px;
+    border: none;
     position: relative;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 1px #4a4a4a;
+    margin-top: 8px;
+    width: 158px;
+    height: 244px;
+    box-shadow: 0px 1px 5.9px 0.1px rgba(233, 30, 99, 0.6);
 }
 
 .img-promo {
     width: 100%;
-    height: 155px;
+    height: 130px;
+    object-fit: cover;
 }
 
 .body-caption {
@@ -102,7 +119,7 @@
     top: 0;
     left: 0;
     color: white;
-    border-radius: 5px 0 5px 0;
+    border-radius: 10px 0 10px 0;
 }
 
 .trip {
@@ -110,7 +127,7 @@
     position: absolute;
     margin: 0 auto;
     background-color: #536dfe;
-    top: 47.5%;
+    top: 100px;
     left: 5%;
     width: 70px;
     text-align: center;
@@ -122,7 +139,7 @@
     position: absolute;
     margin: 0 auto;
     background-color: #ff9800;
-    top: 47.5%;
+    top: 100px;
     left: 5%;
     width: 70px;
     text-align: center;
@@ -138,66 +155,64 @@
 .caption-price {
     color: #ab47bc;
     font-size: 11px;
-    margin-top: 2px;
 }
 
 .caption-tittle {
     font-size: 13px;
     text-align: left;
-    margin-top: 10px;
-    line-height: 1.15;
+    padding: 7px 0;
     color: #4a4a4a;
+    height: 45px;
 }
 
 .caption-duration {
     font-size: 11px;
     text-align: left;
-    line-height: 1.3;
-    margin-top: 10px;
     color: #9e9e9e;
+    margin-top: 5px;
 }
 
 .travel-name {
     font-size: 11px;
     text-align: left;
     color: #9e9e9e;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .box-wrap-tipe {
     position: relative;
     border-radius: 5px 5px 0 0;
     top: 10px;
-    left: -32px;
     margin-bottom: 3px;
     width: 198px;
-    height: 95px;
+    height: 110px;
     border: solid 0.8px #dddddd;
 }
 
 .box-wrap-lokasi {
     position: relative;
     top: 10px;
-    left: -32px;
     margin-bottom: 3px;
     width: 198px;
-    height: 160px;
+    height: 198px;
     border: solid 0.8px #dddddd;
 }
 
 .box-wrap-kategori {
     position: relative;
     top: 10px;
-    left: -32px;
+     
     margin-bottom: 3px;
     width: 198px;
-    height: 225px;
+    height: 288px;
     border: solid 0.8px #dddddd;
 }
 
 .box-wrap-harga {
     position: relative;
     top: 10px;
-    left: -32px;
     margin-bottom: 3px;
     width: 198px;
     height: 97px;
@@ -207,10 +222,10 @@
 .box-wrap-rating {
     position: relative;
     top: 10px;
-    left: -32px;
+     
     margin-bottom: 3px;
     width: 198px;
-    height: 180px;
+    height: 233px;
     border: solid 0.8px #dddddd;
 }
 
@@ -218,10 +233,10 @@
     position: relative;
     border-radius: 0 0 5px 5px;
     top: 10px;
-    left: -32px;
+     
     margin-bottom: 3px;
     width: 198px;
-    height: 64px;
+    height: 78px;
     border: solid 0.8px #dddddd;
 }
 
@@ -244,7 +259,7 @@
 }
 
 .listbox {
-    padding: 20px 0 0 25px;
+    padding: 25px 0 0 25px;
 }
 
 .label-checkbox-search {
@@ -279,7 +294,7 @@
 .radio {
     display: block;
     line-height: 33px !important;
-    height: 20px;
+    height: 28px;
     margin-top: -8px;
     cursor: pointer;
 }
@@ -390,25 +405,25 @@
 
 /* end range bar */
 
-.fav{
+.fav {
     position: absolute;
-    font-size: 20px;
+    font-size: 16px;
     color: #f5f5f5;
     cursor: pointer;
     top: 6px;
     left: 4px;
 }
 
-.favorit{
+.favorit {
     position: absolute;
     left: 130px;
-    top: 5px;
+    top: 6px;
     font-size: 21px;
     cursor: pointer;
     background-color: rgba(74, 74, 74, 0.4);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 }
 
 .change{
@@ -419,7 +434,95 @@
 }
 
 
-
-.price{
-    margin-right: 15px;
+.search-result{
+    left: 45px;
+    position: relative;
 }
+
+.not-found{
+    position: relative;
+    top: 140px;
+    text-align: center;
+
+}
+.not-found img{
+    width: 150px;
+}
+
+.not-found-text{
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-left: 10px;
+}
+
+/* .price{
+    margin-right: 15px;
+} */
+
+.icon-star{
+    width: 11px;
+    margin-right: 1px;
+    margin-top: -7px;
+}
+
+.cover-star{
+    display: inline;
+}
+
+/* footer */
+
+.imaga-icon{
+    width: 16px;
+    margin-right: 9px;
+}  
+
+.footer {
+    width: 100%;
+    height: 206px;
+    background-color: #9c27b0;
+    margin-top: 61px;
+    padding-top: 42px;
+}
+
+.footer-brand-logo {
+    margin-top: -2px;
+}
+
+.cr-head {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 21px;
+}
+
+.cr-tittle {
+    font-size: 13px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.cr-tittle:hover {
+    font-size: 13px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #ab47bc;
+    border-radius: 5px;
+}
+
+.footer-black {
+    width: 100%;
+    height: 44px;
+    background-color: #1b1b1b;
+    padding: 15px;
+}
+
+.cr-black {
+    font-size: 13px;
+    text-align: left;
+    color: #ffffff;
+    margin-left: 5px;
+}
+
+/* tutup footer */

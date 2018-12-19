@@ -2,7 +2,7 @@
 
 <div class="wrap-paket-trip-daftar">
     <div class="wrap-content-paket-trip">
-        <img class="img-paket-trip" src="../assets/img/trip.jpg">
+        <img class="img-paket-trip" src="{{photo_trip}}">
 
         <div class="wrap-info-paket-trip">
             <p class="tittle-paket-trip">{{trip_name}} </p>
@@ -50,7 +50,7 @@
                 <option>Sabtu, 14 Desember 2018</option>	
               </select>
 
-    <button class="unduh-data-peserta">Unduh Data Peserta </button>
+    <button (click)="download()" class="unduh-data-peserta">Unduh Data Peserta </button>
 </div>
 
 <div class="table-responsive">
@@ -64,7 +64,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let booking of booking">
+            <tr *ngFor="let booking of pagedItems">
                 <td>{{booking.order_name}} </td>
                 <td>{{booking.created_at | date:"fullDate"}}</td>
                 <td>{{booking.quantity}}</td>
@@ -75,4 +75,18 @@
             </tr>
         </tbody>
     </table>
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPageSaldo(pager.currentPage - 1)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPageSaldo(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPageSaldo(pager.currentPage + 1)">&raquo;</a>
+        </li>
+
+    </ul>
 </div>

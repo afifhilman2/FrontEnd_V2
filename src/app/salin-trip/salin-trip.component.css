@@ -47,7 +47,7 @@
     font-stretch: normal;
     text-align: left;
     color: #4a4a4a;
-    margin-bottom: 15px;
+    margin-bottom: 28px;
 }
 
 .info-term {
@@ -89,7 +89,7 @@
     position: relative;
     width: 100%;
     margin-top: 30px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .sort {
@@ -202,15 +202,15 @@
     height: 88px;
     border-radius: 5px;
     background-color: #ffffff;
-    border: dashed 1px #ab47bc;
+    /* border: dashed 1px #ab47bc; */
     text-align: center;
     line-height: 85px;
     cursor: pointer;
 }
 
 .add {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
 }
 
@@ -272,7 +272,7 @@
 
 .wrap-option {
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .wrap-label-date {
@@ -305,7 +305,7 @@
 
 .tittle-fasilitas {
     position: absolute;
-    margin-left: 13px;
+    /* margin-left: 13px; */
     font-size: 13px;
     font-weight: normal;
     font-style: normal;
@@ -320,7 +320,7 @@
     border-radius: 3px;
     background-color: #ffffff;
     border: solid 1px #dddddd;
-    padding: 25px;
+    padding: 28px;
 }
 
 .label-fasilitas {
@@ -462,6 +462,10 @@ textarea {
     text-decoration: none;
 }
 
+.wrap-deskripsi {
+    margin-bottom: 28px;
+}
+
 .deskripsi-trip {
     width: 100%;
     height: 147px;
@@ -469,6 +473,7 @@ textarea {
     background-color: #fdfdfd;
     border: solid 1px #dddddd;
     resize: none;
+    /* margin-bottom: 28px; */
 }
 
 .catatan-trip {
@@ -485,7 +490,7 @@ textarea {
 }
 
 .wrap-mepo {
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .btn-mepo {
@@ -507,11 +512,11 @@ textarea {
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
-    line-height: normal;
+    line-height: 35px;
     letter-spacing: normal;
     float: left;
     margin-left: 13px;
-    margin-right: 20px;
+    margin-right: 8px;
     color: #4a4a4a;
     margin-top: 7px;
 }
@@ -519,9 +524,6 @@ textarea {
 .catatan-mepo {
     width: 100%;
     height: 37px;
-    border-bottom: solid 1px #dddddd;
-    border-left: solid 1px #dddddd;
-    border-right: solid 1px #dddddd;
     font-size: 12.7px;
     font-weight: normal;
     font-style: normal;
@@ -535,7 +537,7 @@ textarea {
 }
 
 .wrap-petunjuk {
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .petunjuk-trip {
@@ -549,7 +551,7 @@ textarea {
 
 .wrap-waktu {
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .tittle-waktu {
@@ -641,18 +643,17 @@ textarea {
 .wrap-harga {
     position: relative;
     width: 100%;
-    height: 127px;
     border-radius: 3px;
     border: solid 1px #ab47bc;
     background-color: #f7f7f7;
     padding: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .perorang {
     position: absolute;
     right: -60px;
-    top: 34px;
+    /* top: 34px; */
     font-size: 15px;
     font-weight: normal;
     font-style: normal;
@@ -664,15 +665,6 @@ textarea {
 .publish-trip {
     width: 225px;
     border-radius: 3px;
-}
-
-.wrap-publish {
-    display: inline-block;
-    position: relative;
-}
-
-.publish-price {
-    width: 335px;
 }
 
 .wrap-kuota {
@@ -741,28 +733,30 @@ textarea {
     border: solid 1px #ab47bc;
     background-color: #f7f7f7;
     padding: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .tittle-range-harga {
-    font-size: 15px;
-    font-weight: normal;
+    font-size: 13px;
+    font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
     color: #4a4a4a;
-    margin-top: 5px;
 }
 
 .row-range-harga {
-    margin-top: 5px;
+    margin-top: 15px;
     margin-bottom: 13px;
+}
+
+.row-harga-publish {
+    margin-top: 15px;
 }
 
 .perorang {
     position: absolute;
     right: -60px;
-    top: 34px;
     font-size: 15px;
     font-weight: normal;
     font-style: normal;
@@ -782,13 +776,16 @@ textarea {
 }
 
 .range-price-trip {
-    width: 100%;
+    width: 80px;
     border-radius: 3px;
+    display: inline-block;
+    margin-left: 2px;
 }
 
 .wrap-publish {
     display: inline-block;
     position: relative;
+    width: 100%;
 }
 
 .wrap-publish-private {
@@ -798,7 +795,7 @@ textarea {
 }
 
 .publish-price {
-    width: 335px;
+    width: 250px;
 }
 
 .publish-price-private {
@@ -815,7 +812,326 @@ textarea {
     float: right;
 }
 
+.wrap-checkbox {
+    position: relative;
+}
+
+.label-checkbox {
+    position: absolute;
+    width: 660px;
+    top: -4px;
+    left: 25px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.wrap-btn {
+    margin: 20px auto;
+    cursor: pointer;
+    float: right;
+}
+
+.btn-content {
+    width: 189px;
+    height: 40px;
+    line-height: 37px;
+    border-radius: 3px;
+    background-color: #ab47bc;
+    border: 1px solid #dddddd;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.read-more {
+    color: #9c27b0;
+    display: inline;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    cursor: pointer;
+}
+
 .more-than {
     padding-top: 7px;
     font-weight: bold;
+    display: inline-block;
+}
+
+.category-error {
+    margin-left: 125px;
+}
+
+.point {
+    width: 100%;
+}
+
+.notes-mepo {
+    width: 709px;
+    display: inline-block;
+    border: 1px solid #dddddd;
+    padding-left: 10px;
+    margin-top: 7px;
+    border-radius: 5px;
+}
+
+.tittle-kuota {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-bottom: 28px;
+}
+
+.box-kuota-input {
+    margin-bottom: 2px;
+}
+
+.kuota-perorang {
+    position: absolute;
+    right: -60px;
+    top: 8px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.kuota-trip-perorang {
+    position: absolute;
+    right: -85px;
+    top: 8px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.tittle-publish-price {
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.tittle-trv-price {
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: 20px;
+}
+
+.info-publish-price {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.info-trv-price {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #9c27b0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.wrap-trv-price {
+    position: relative;
+    width: 295px;
+    margin-top: 20px;
+    padding-left: 14px;
+}
+
+.list-price {
+    width: 100%;
+    border-bottom: 1px solid #9c27b0;
+}
+
+.price-new {
+    padding-left: 15px;
+}
+
+.info-title-private {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    display: block;
+}
+
+.wrap-publish-group {
+    width: 100%;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.rupiah-private {
+    padding-top: 8px;
+}
+
+.label-form-private {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+.label-price-private {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-left: 8px solid #4a4a4a;
+    border-bottom: 4px solid transparent;
+    position: absolute;
+    top: 14px;
+    right: -3px;
+}
+
+.blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: black;
+    opacity: .8;
+}
+
+.wrap-modal-imgError {
+    position: fixed;
+    top: 35%;
+    left: 36%;
+    z-index: 999;
+}
+
+.modal-dialog {
+    background-color: white;
+    width: 420px;
+    padding: 35px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.modal-success {
+    background-color: white;
+}
+
+.tittle-imgError {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.btn-trv-ok {
+    border-radius: 3px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 auto;
+    background-color: #ab47bc;
+    color: white;
+    cursor: pointer;
+}
+
+.img-info {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+}
+
+.img-info-nd {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: -8px;
+    margin-bottom: 18px;
+}
+
+.text-info-purple {
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #e91e63;
+}
+
+
+/* .subtittle-back {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+} */
+
+.tittle-back {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ab47bc;
+    display: inline-block;
+    margin-right: 53px;
+}
+
+.alert-error {
+    font-size: 13px;
+    color: #d24d57;
 }

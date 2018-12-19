@@ -1,0 +1,120 @@
+<div class="container-etalase">
+  <div class="wrapper-content">
+      <div class="wrap-img">
+          <img src="{{travelAgent?.cover}}" class="img-background">
+      </div>
+
+      <div class="wrap-img-logo">
+          <img class="img-logo" src="{{travelAgent?.logo}}">
+      </div>
+
+      <div class="wrap-info">
+          <div class="wrap-tittle">
+              <div class="tittle-head">{{travelAgent?.travel_name}} </div>
+              <div class="slogan-head">{{travelAgent?.slogan}} </div>
+
+              <div class="number-success-trip"> {{success}} </div>
+              <div class="success-trip"> Trip Berhasil </div>
+
+              <button class="chat-travel" (click)="chat()"> Chat Travel </button>
+          </div>
+          <p class="info-travel"> <img src="https://img.travinesia.com/iconweb/icon etalase_alamat kantor.png" class="etalase-kantor"> {{travelAgent?.office_address}} </p>
+          <p class="info-travel"> <img src="https://img.travinesia.com/iconweb/icon etalase_tanggal bergabung.png" class="etalase-kantor"> Bergabung Sejak {{travelAgent?.created_at | date:"fullDate"}} </p>
+
+      </div>
+
+      <div class="wrap-info-penawaran">
+          <div class="paket-penawaran">Paket Trip yang Ditawarkan</div>
+          <!-- <div class="sort"> Urutkan :
+              <select class="form-control form-sort">
+                      <option >Paling Sesuai</option>
+                      <option >Terbaru</option>
+                      <option >Termurah</option>
+                      <option >Termahal</option>
+                      <option >Terlaris</option>
+                   </select>
+          </div> -->
+
+          <!-- <div class="category"> Kategori :
+              <select class="form-control form-sort">
+                      <option >Beach</option>
+                      <option >City Tour</option>
+                      <option >Culture</option>
+                      <option >Fishing</option>
+                      <option >Hiking</option>
+                      <option >Honeymoon</option>
+                      <option >Tracking</option>
+                      <option >Sailing</option>
+                   </select>
+          </div> -->
+      </div>
+
+      <div class="row" *ngIf="pageData">
+          <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let trip of pagedItems">
+              <div class="thumb-promo" (click)="goDetail(trip._id)">
+                  <img src="{{trip.photo_trip[0]}}" class="img-promo">
+                  <!-- <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div> -->
+                  <div [ngClass]="trip.id_type_trip.type_trip == 'Open Trip' ? 'opentrip' : 'private'" class="trip">{{trip.id_type_trip.type_trip== 'Open Trip' ? 'Open' : 'Private'}}</div>
+                  <div class="body-caption">
+                      <div class="row">
+                          <div class="col-md-6 kiri">
+                              <span class="icon-star" *ngFor="let stars of counter((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span>
+                          </div>
+                          <div class="col-md-6 kanan">
+                              <div class="caption-price">Rp {{trip.publish_price}}</div>
+                          </div>
+                      </div>
+                      <div class="caption-tittle">{{trip.trip_name}}</div>
+                      <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
+                      <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{travelAgent?.travel_name}}</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="wrap-oops" *ngIf="pageOps">
+          <div class="wrap-img-oops">
+              <img src="../../assets/img/oops.png" class="img-oops">
+          </div>
+          <div class="tittle-oops"> Oops!</div>
+          <div class="text-oops"> Anda belum memiliki Trip untuk dijual.</div>
+          <div class="wrap-btn-oops">
+              <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
+          </div>
+      </div>
+
+      <!-- pager -->
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+              <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+              <a (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+              <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+          </li>
+
+      </ul>
+
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="chat-travel" role="dialog">
+  <div class="modal-dialog">
+     
+<div class="wrap-modal-content">
+  <p class="chat-text"> Fitur masih dalam pengembangan </p>
+
+  <div class="wrap-btn">
+      <span data-dismiss="modal" class="btn-chat">OK</span>
+  </div>
+</div>
+</div>
+</div> -->
+
+<div class="footer-black">
+  <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+  <p class="cr-black pull-right">Copyright &copy; 2017 Travinesia</p>
+</div>

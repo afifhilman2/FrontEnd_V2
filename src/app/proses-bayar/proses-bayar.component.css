@@ -123,9 +123,9 @@
 }
 
 .batas-waktu p{
-    margin-left: 30px;
     font-family: sans-serif;
     font-size: 15px;
+    text-align: center;
 }
 
 .glyphicon-time{
@@ -231,6 +231,7 @@ hr{
     font-size: 11px;
     color: #9c27b0;
     font-weight: normal;
+    cursor: pointer;
 }
 
 .detail-pesanan{
@@ -423,3 +424,47 @@ li a{
     padding: 0px;
     display: inline-block
 }
+
+/* coming soon */
+.coming-soon{
+    color: #4a4a4a;
+    text-align: center;
+    padding: 81px;
+}
+
+.coming-soon p{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+/* footer */
+.footer-black {
+    width: 100%;
+    height: 52px;
+    background-color: #9c27b0;
+    padding: 15px;
+    margin-top: 73px;
+}
+
+.cr-black {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.footer-brand-logo {
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    margin-top: -2px;
+    margin-left: 10px;
+}
+
+/* tutup footer */

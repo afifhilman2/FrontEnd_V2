@@ -6,10 +6,10 @@
                 <div class="col-md-6">
                     <div class="wrap-form-daftar">
                         <div class="head-daftar">
-                            Daftarkan Travel
+                            Jadi Travel
                         </div>
                         <div class="wrap-form-content">
-                            <label class="label-form" for="namaTravel">Nama Travel</label>
+                            <label class="label-form-nama" for="namaTravel">Nama Travel</label>
                             <div class="form-group" [ngClass]="displayFieldCss('travel_name')">
                                 <input type="text" class="namaTrv form-control" formControlName="travel_name">
                                 <div class="alert-error" *ngIf="isFieldValid('travel_name')"> Form tidak boleh kosong </div>
@@ -57,17 +57,19 @@
                             </div>
 
                             <label class="label-form" for="domainTravel">Domain</label>
-                            <p class="domain-name">travinesia.com/</p>
+                            <div class="domain-info">Domain Travel adalah nama unik untuk membedakan Travel Anda dengan Travel lainnya dan tautan (link) untuk etalase Travel Anda</div>
+
+                            <p class="domain-name margin-checkbox">travinesia.com/</p>
                             <div class="input-group wrap-domain form-group" [ngClass]="displayFieldCss('domain')">
                                 <input type="text" (keypress)="domainPress($event)" class="domainTrv form-control" formControlName="domain">
                                 <div class="alert-error" *ngIf="isFieldValid('domain')"> Form tidak boleh kosong </div>
                             </div>
 
-                            <input type="checkbox" class="checkbox">
+                            <input type="checkbox" (change)="cekTerm($event)" class="checkbox">
                             <label class="label-checkbox"> Dengan ini saya menyetujui bergabung dengan Travinesia sebagai agen
                                 Travel dan bersedia mengikuti segala bentuk kebijakan yang berlaku</label>
 
-                            <div class="btn-daftar-trv" (click)="onNext()"> Lanjutkan </div>
+                            <option class="btn-daftar-trv" (click)="onNext()"> Lanjutkan </option>
                         </div>
                     </div>
                 </div>
@@ -75,10 +77,9 @@
                 <div class="col-md-6">
                     <img src="../assets/img/travinesia-logo.png" class="logo">
                     <p class="tittle-head"> Kemudahan Pengembangan Bisnis Skala Besar untuk Travel Anda. </p>
-                    <p class="title-content"> Kemudahan promosi untuk bisnis travel yang lebih besar. Travinesia membantu anda dalam promosi, ini itu, ini itu dan masih banyak lagi keuntungan menjadi Agen Travel di Travinesia. Promosikan paket wisata anda, ada banyak ategori yang
-                        sisediakan oleh Travinesia. </p>
+                    <p class="title-content"> Kemudahan promosi untuk bisnis travel yang lebih besar. Banyak kategori yang disediakan oleh Travinesia untuk memberikan berbagai kebutuhan liburan untuk wisatawan. Ayo daftar sekarang! </p>
 
-                    <ul class="head-category">
+                    <!-- <ul class="head-category">
                         <li>
                             <a> <span class="icon-island-with-palm-trees"></span></a>
                         </li>
@@ -103,7 +104,7 @@
                         <li>
                             <a><span class="icon-sea-ship-with-containers"></span></a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
@@ -114,7 +115,7 @@
         <div class="modal-dialog">
             <div class="wrap-modal">
                 <a class="exit">
-                    <div data-dismiss="modal" class="close-modal" (click)="toggleLogin()"> X </div>
+                    <img src="../assets/img/error.png" data-dismiss="modal" class="close-modal" (click)="toggleLogin()">
                 </a>
 
                 <label class="wrap-foto-content">
@@ -123,15 +124,15 @@
                 </label>
 
                 <p class="tittle-foto">Tambahkan Foto</p>
-                <p class="detail-tittle"> dapat berupa logo, kantor atau yang berhubungan </p>
+                <p class="detail-tittle"> Dapat berupa logo atau yang berhubungan untuk memperkuat profil anda </p>
 
-                <button type="submit" class="btn-trv-modal"> Kirim </button>
+                <button type="submit" class="btn-trv-modal"> Jadi Travel Sekarang! </button>
             </div>
         </div>
     </div>
 
     <!-- modal respon -->
-    <div *ngIf="responModal">
+    <!-- <div *ngIf="responModal">
         <div class="modal-dialog">
             <div class="wrap-modal-respon">
                 <p *ngIf="text200" class="tittle-respon">Permintaan anda telah dikirim, mohon tunggu untuk konfirmasi admin</p>
@@ -141,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="blur-error" (click)="close()" [hidden]="imgError"></div>
     <div class="wrap-modal-imgError" [hidden]="imgError">
@@ -152,5 +153,10 @@
                 <div (click)="close()" class="btn-trv-ok">Ok </div>
             </div>
         </div>
+    </div>
+
+    <div class="footer-black">
+        <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+        <p class="cr-black pull-right">Copyright &copy; 2017 Travinesia</p>
     </div>
 </form>
