@@ -1,12 +1,14 @@
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
-<div class="container-fluid-page" >
+<div class="container" >
+    <div class="trv-notice" *ngIf="massage">{{massage}}</div>
   <div class="row">
-    <div class="col-md-8 ">
+    <div class="menu-description">
+      <div class="diskon-paket" *ngIf="detailTrip?.flag_discount == 1"> Diskon {{discount_amount === undefined ? '' : discount_amount + '% '}} </div>
+      <div class="favorit"><i class="glyphicon glyphicon-heart fav"></i></div>
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" *ngFor="let poto of detailTrip?.photo_trip; let i=index" class="{{(i==0)? 'active':''}}"></li>
-          <!-- <li *ngFor="let photo of detailTrip?.photo_trip;let i = index" data-target="#myCarousel"  class="{{(i==0)? 'active':''}}"></li> -->
         </ol>
 
         <!-- Wrapper for slides -->
@@ -14,12 +16,6 @@
           <div *ngFor="let photo of detailTrip?.photo_trip; let i=index" class="item {{(i == 0)?'active':''}}">
               <img src="{{photo}}" class="img-slider" alt="pulau">
           </div>
-          <!-- <div class="item">
-              <img src="{{detailTrip?.photo_trip}}" class="img-slider" alt="pulau">
-          </div>
-          <div class="item">
-              <img src="{{detailTrip?.photo_trip}}" class="img-slider" alt="pulau">
-          </div> -->
         </div>
         <!-- Left and right controls -->
         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -32,18 +28,13 @@
         </a>
       </div>
       <div class="jenis-paket">
-        <div class="type-trip">
+        <div [ngClass]="detailTrip?.id_type_trip?.type_trip == 'Open Trip'? 'type-trip' : 'privat'">
             <span class="glyphicon glyphicon-tag"></span>
-            <span class="jenis-trip">{{detailTrip?.id_type_trip?.type_trip}}</span>
+            <span class="jenis-trip" >{{detailTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</span>
         </div>
         <span class="waktu-trip">( {{detailTrip?.days}} Hari {{detailTrip?.night}} Malam) <p class="pembatas">|</p></span>
         <span class="lokasi">Lokasi : <p class="lokasi-detail">{{detailTrip?.id_province.province_name}} </p> <p class="pembatas">|</p></span>
-        <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name + ', '}}</p></span>
-        <div class="share pull-right">
-          <div class="img-share">
-            
-          </div> 
-        </div>
+        <span class="kategori">Kategori : <p class="kategori-detail" *ngFor="let c of kat">{{c.category_name}}</p></span>
       </div>
       <div class="nama-paket" >
         <div class="judul-paket">{{detailTrip?.trip_name}}</div>
@@ -52,70 +43,67 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
+            <!-- <span class="icon-star" *ngFor="let stars of counterStars((detailTrip?.rate_div!=0)? (detailTrip?.rate_total/detailTrip?.rate_div) : 0);let i = index" id="{{i}}"></span> -->
           </div>
         </div>
       </div>
 
       <div class="penjelasan">
         <div class="kanan-deskripsi">
-          <a data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Deskripsi</span>
-          <div id="deskripsi" class="collapse">
-            {{detailTrip?.description}}
-          </div>
+          <a class="text-colapse" data-toggle="collapse" href="#deskripsi" ><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Deskripsi</span></a>
+          <div id="deskripsi" class="collapse" [innerHTML]="detailTrip?.description"></div>
         </div>
         <div class="kanan-fasilitas">
-          <a data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Fasilitas</span>
+          <a class="text-colapse" data-toggle="collapse" href="#fasilitas"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Fasilitas</span></a>
           <div id="fasilitas" class="collapse" fasilitas >
-           <span class="fasilitas" *ngFor="let fasilitas of fasilitas">
-            {{fasilitas?.facility_name}}
-           </span>
+           <div class="loop-fasilitas" *ngFor="let fasilitas of fasilitas">
+             <div class="fasilitas">
+                <img src="{{fasilitas?.facility_photo}}">
+                {{fasilitas?.facility_name}}
+             </div>
+           </div>
           </div>
         </div>
         <div class="kanan-meeting">
-          <a data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Meeting Point</span>
-          
+          <a class="text-colapse" data-toggle="collapse" href="#meetingpoint"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Meeting Point</span></a>
           <div id="meetingpoint" class="collapse">
             <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe  [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' width="380" height="300" frameborder="0" draggable="false" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" style="border:0"></iframe>
             </div>
-            <span class="facility"> Berangkat Pukul: <p>{{detailTrip?.time}} <span>{{detailTrip?.zone_time}}</span></p>
-              <span class="tempat">Tempat :
-                <p>{{detailTrip?.notes_meeting_point}}</p></span>
-            </span>
-            
+            <div class="keterangan">
+                <span class="facility"> <b>Berangkat Pukul :</b> <p>{{detailTrip?.time}} <span>{{detailTrip?.zone_time}}</span></p>
+                  <span class="tempat"> <b>Tempat Meeting Point :</b>
+                    <p>{{detailTrip?.notes_meeting_point}}</p></span>
+                </span>
+                <div class="facility"> <b>Keterangan :</b>
+                    <p>{{detailTrip?.direction}}</p></div>
+            </div>            
           </div>
         </div>
         <div class="kanan-catatan">
-          <a data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-          <span class="kanan">Catatan untuk Travel</span>
-          <div id="catatan" class="collapse"  >
-            fasilitas yang disediakan.......
+          <a class="text-colapse" data-toggle="collapse" href="#catatan"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Catatan untuk Traveler</span></a>
+          
+          <div id="catatan" class="collapse"  [innerHTML]="detailTrip?.notes_traveler">
+          
           </div>
         </div>
       </div>
       <div class="kanan-catatan">
-        <a data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-right panah"></span></a>
-        <span class="kanan">Informasi Travel Agen</span>
+        <a class="text-colapse" data-toggle="collapse" href="#infoAgen"><span class="glyphicon glyphicon-menu-right panah"></span><span class="kanan">Informasi Travel Agen</span></a>
+        
         <div id="infoAgen" class="collapse">
           <div class="body-info">
             <img class="img-agen" src="{{detailTrip?.provider?.logo}}">
               <div class="nama">
-                <span class="nama-agen">{{detailTrip?.provider?.travel_name}}</span>
-                <p class="alamat-agen">Bogor, Jawa Barat </p>
-                <p class="kelas-agen"> Travel Kelas Satu</p>
+                <span class="nama-agen" (click)="toggle_travel(detailTrip?.provider.domain)" role="button">{{detailTrip?.provider?.travel_name}}</span>
+                <p class="alamat-agen">{{detailTrip?.provider.office_address}} </p>
+                <!-- <p class="kelas-agen"> Travel Kelas Satu</p> -->
               </div>
           </div>
           <div class="button-body">
-            <button class="btn btn-lihatProfil" (click)="goToAgen()">Lihat Profil Travel</button>
-            <button class="btn btn-kirimPesan" data-toggle="modal" data-target="#pesan">Kirim Pesan</button>
+            <button class="btn btn-lihatProfil" (click)="toggle_travel(detailTrip?.provider.domain)">Lihat Profil Travel</button>
+            <button class="btn btn-kirimPesan" (click)="kerimPesan()">Kirim Pesan</button>
+            <!-- <button class="btn btn-kirimPesan" data-toggle="modal" data-target="#pesan">Kirim Pesan</button> -->
             <div class="modal fade" id="pesan" role="dialog">
               <div class="modal-dialog">
                 <!-- Modal content-->
@@ -145,8 +133,8 @@
       </div> 
       <div class="card">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#status-pembayaran" aria-controls="home" role="tab" data-toggle="tab">Ulasan</a></li>
-            <li role="presentation"><a href="#daftar-transaksi" aria-controls="settings" role="tab" data-toggle="tab">Diskusi</a></li>
+          <li role="presentation" class="active"><a href="#status-pembayaran" aria-controls="home" role="tab" data-toggle="tab">Ulasan</a></li>
+          <li role="presentation"><a href="#daftar-transaksi" aria-controls="settings" role="tab" data-toggle="tab">Diskusi</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -155,7 +143,7 @@
                 <img src="{{r.id_user.photo}}" class="komen-image">
                 <div class="komen-user">
                   <p class="komen-user-name">{{r.id_user.name}}</p>
-                  <p class="komen-tanggal">{{r.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p>
+                  <p class="komen-user-tanggal">{{r.created_at | date:'dd MMMM yyyy, hh:mm Z'}}</p>
                   <div class="komen-star">
                     <span class="icon-star"></span>
                     <span class="icon-star"></span>
@@ -163,9 +151,24 @@
                     <span class="icon-star"></span>
                     <span class="icon-star"></span>
                   </div> 
-                  <p class="komen-tanggapan" [innerHTML]="r.content"></p>
+                  <p class="komen-user-tanggapan" [innerHTML]="r.content"></p>
                 </div>
               </div>
+              <!-- <div class="komen">
+                <img src="{{r.id_user.photo}}" class="komen-image">
+                <div class="komen-user">
+                  <p class="komen-user-name">tempe</p>
+                  <p class="komen-user-tanggal">tempe</p>
+                  <div class="komen-star">
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                    <span class="icon-star"></span>
+                  </div> 
+                  <p class="komen-user-tanggapan" [innerHTML]="tempe">tempe</p>
+                </div>
+              </div> -->
             </div>
             <div role="tabpanel" class="tab-pane" id="daftar-transaksi">
               <div class="komen" *ngFor="let d of diskus">
@@ -183,7 +186,6 @@
                       </div>
                     </div>
                     <div *ngIf="isLogin">
-                      
                       <form (submit)="addComent()" [formGroup]="coment" >
                           <img src="{{d?.id_user?.photo}}" class="komen-image">
                         <textarea class="content-agent" formControlName="comment"></textarea>
@@ -203,41 +205,38 @@
       </div>
     </div>
     
-    <form (submit)="goToProsespemesanan()" [formGroup]="formBooking">
-      <div class="col-md-4" >
+    
+      <div class="price-description" >
+          <form (submit)="goToProsespemesanan()" [formGroup]="formBooking">
         <div class="kolom-kanan">
-          <div class="harga-tanggal">
+          <div class="Open" *ngIf="detailTrip?.id_type_trip?.id_type_trip == 1">
             <div class="harga">
               <span class="harga-diskon"> Rp {{(detailTrip?.publish_price)?.toLocaleString('id')}} </span> 
               <span class="orang"> / Orang </span>
-              <!-- <p class="harga-normal"> Rp 300.000/orang <span class="diskon"> Diskon 10%</span> </p> -->
             </div>
-          </div>
-          <div class="table">
-            <table>
-              <tr>
-                <td>Dilihat : <span class="nominal-table">20</span></td>
-                <td>Terjual : <span class="nominal-table">20</span></td>
-                <td>Difavoritkan : <span class="nominal-table">20</span></td>
-              </tr>
-            </table>
-          </div>
-          <div class="pilih-tanggal">
-            <p>Silahkan Pilih Tanggal Trip</p>
-          </div>
-          <div class="calendar">
-            <!-- <app-calendar></app-calendar> -->
-
-            
-            <select class="form-control tanggal-tersedia" formControlName="startDate_trip" (change)="onChange($event.target.selectedIndex)">
-                <option value="" disabled selected>Pilih Tanggal</option>
-                <option *ngFor="let date_trip of detailTrip?.date_trip; let i = index" value="{{date_trip}}" id="{{i}}">{{ date_trip | date:'fullDate'}} </option>  
-            </select>
-            <div *ngIf="formBooking.get('startDate_trip').hasError('required') && formBooking.get('startDate_trip').touched" class="alert trv-alert">Tanggal Tidak Boleh Kosong</div> 
-          </div>
+            <!-- <div class="table">
+              <table>
+                <tr>
+                  <td>Dilihat : <span class="nominal-table">20</span></td>
+                  <td>Terjual : <span class="nominal-table">20</span></td>
+                  <td>Difavoritkan : <span class="nominal-table">20</span></td>
+                </tr>
+              </table>
+            </div> -->
+            <div class="pilih-tanggal">
+              <p>Silahkan Pilih Tanggal Trip</p>
+            </div>
+            <div class="calendar">
+              <select class="form-control tanggal-tersedia" formControlName="startDate_trip" (change)="onChange($event.target.selectedIndex, detailTrip?.publish_price)">
+                  <option value="" disabled selected>Pilih Tanggal</option>
+                  <option *ngFor="let date_trip of detailTrip?.date_trip; let i = index" value="{{date_trip}}" id="{{i}}">{{ date_trip | date:'fullDate'}} </option>  
+              </select>
+              <div *ngIf="formBooking.get('startDate_trip').hasError('required') && formBooking.get('startDate_trip').touched" class="alert trv-alert">Tanggal Tidak Boleh Kosong</div> 
+            </div>
             <div class="kuota-jumlah" [hidden]="quota_dateTrip==null">
                 <p class="kuota" >Tersisa <b>{{(quota_dateTrip==null)? ' ':(quota_dateTrip)+' orang'}}</b> untuk</p>
                 <p class="berangkat">Tanggal berangkat {{dateTrip | date:'d MMMM yyyy'}} </p> 
+                <p class="diskon" *ngIf="discount != 0 && discount !=undefined">Diskon {{'-' + discount + '%'}}</p>
             </div>
             <div class="jumlah">
               <div class="jumlah-orang">Banyak Peserta</div>
@@ -257,18 +256,129 @@
                 </div> 
                 <div class="harga-perorang">
                   <p class="text-harga">Harga per orang</p>
-                  <p class="harga-satuorang"> Rp {{(detailTrip?.publish_price)?.toLocaleString('id')}} </p>
+                  <p class="harga-satuorang"> Rp {{hargaProduct.toLocaleString('id')}} </p>
                   <p class="text-harga">Total Harga</p>
                   <p class="harga-satuorang"> Rp {{(totalHarga)?.toLocaleString('id')}}</p> 
                 </div>   
               </div>
             </div>
-          <button type="submit" class="btn btn-pesan"> Pesan Sekarang </button>
+            <button type="submit" class="btn btn-pesan"> Pesan Sekarang </button>
+          </div> 
+          <!-- tutup Open -->
+
+          
+          <div class="private" *ngIf="detailTrip?.id_type_trip?.id_type_trip == 2">
+            <div class="harga-private">
+              <div class="header">Range Harga Private Trip</div>
+              <div class="private-nominal" *ngFor="let jumlah of detailTrip.min_qty_group; let i = index" > 
+                <div class="jumlah-private" *ngIf="detailTrip.min_qty_group[i+1]"> {{detailTrip.min_qty_group[i]}} - {{detailTrip.min_qty_group[i+1]-1}}</div> 
+                <span class="{{(jumlah)? 'jumlah-private':''}}" *ngIf="detailTrip?.publish_price_group[i+1]==null">{{(detailTrip?.min_qty_group[i]!="")? ('≥ '+detailTrip?.min_qty_group[i]):''}}</span>
+                <i class="arrow" *ngIf="detailTrip.publish_price_group[i] !=null"></i> 
+                <p class="harga-nominal" *ngIf="detailTrip.publish_price_group[i]!=null">Rp {{(detailTrip.publish_price_group[i]).toLocaleString('id')}}/ &nbsp;<span class="private-orang">Orang</span></p>
+              </div>
+            </div>
+            <!-- <div class="table">
+              <table>
+                <tr>
+                  <td>Dilihat : <span class="nominal-table">20</span></td>
+                  <td>Terjual : <span class="nominal-table">20</span></td>
+                  <td>Difavoritkan : <span class="nominal-table">20</span></td>
+                </tr>
+              </table> 
+            </div> -->
+            <div class="tanggal-private">
+              <div class="header-tanggal-private">
+                Ajukan Tanggal Berangkat
+              </div>
+              <div class="content-tanggal-private">
+                  <div class="input-group">
+                      <div class="input-group-btn">
+                        <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions" required></my-date-picker>
+                      </div>
+                  </div>
+                <div class="content-comment"> Anda bebas menentukan tanggal berangkat
+                  (yang telah disetujui Agen Travel Setelahnya)
+                </div>
+              </div>
+            </div>
+            <div class="jumlah">
+              <div class="jumlah-orang">Banyak Peserta</div>
+              <div class="add-orang">
+                <div class="minus">
+                    <a (click)="decrement()" role="button">
+                        <i class="glyphicon glyphicon-minus addMinus"></i>
+                    </a>
+                </div>
+                <div class="jumlah-input">
+                  <input class="form-control nominal" readonly value="{{ quantity }}" formControlName="quantity">
+                </div>
+                <div class="plus">
+                  <a (click)="increment()" role="button">
+                      <i class="glyphicon glyphicon-plus addMinus"></i>
+                  </a>
+                </div> 
+                <div class="harga-perorang">
+                  <p class="text-harga">Harga per orang</p>
+                  <p class="harga-satuorang"> Rp {{(hargaProduct)?.toLocaleString('id')}} </p>
+                  <p class="text-harga">Total Harga</p>
+                  <p class="harga-satuorang"> Rp {{(totalHarga)?.toLocaleString('id')}}</p> 
+                </div>   
+              </div>
+            </div>
+            <button class="btn btn-pesan" type="submit">Ajukan Tanggal</button>
+          </div>
+          <!-- tutup private -->
         </div>
+      </form>
       </div>
-    </form>
+    
   </div>
-  
 </div>
+
 <!-- <app-footer></app-footer> -->
+<!-- <app-footer></app-footer> -->
+<div class="footer">
+    <div class="col-md-2">
+        <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Travinesia</p>
+        <p class="cr-tittle" >Tentang Travinesia</p>
+        <p class="cr-tittle" (click)="gototerm()">Hubungi Kami</p>
+        <p class="cr-tittle" routerLink="/termCondition">Syarat dan Ketentuan</p>
+        <p class="cr-tittle" (click)="gototerm()">Karir</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Informasi</p>
+        <p class="cr-tittle" [routerLink]="['/JadiTravel']">Jadi Travel di Travinesia</p>
+        <p class="cr-tittle" (click)="gototerm()">Pesan Paket Wisata</p>
+        <p class="cr-tittle" (click)="gototerm()">Promo</p>
+        <p class="cr-tittle" (click)="goDiskon()">Diskon</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Kontak</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-earphone"></span> (+62) 897 1234 4321</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-envelope"></span> ask@travinesia.com</p>
+        <p class="cr-tittle">Dramaga Cantik Residence Blok K51 Bogor, Jawa Barat Indonesia </p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Ikuti Kami</p>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-facebook.png" class="imaga-icon"></span>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-instagram.png" class="imaga-icon"></span>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-twitter.png" class="imaga-icon"></span>
+    </div>
+
+    <!-- <div class="col-md-2">
+        <p class="cr-head">Download App</p>
+        <p class="cr-tittle">Logo</p>
+    </div> -->
+</div>
+
+<div class="footer-black">
+    <p class="cr-black">Copyright &copy; 2017 Travinesia</p>
+</div>
 

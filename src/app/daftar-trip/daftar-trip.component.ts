@@ -3,7 +3,9 @@ import { AppService } from '../app.service';
 import { Http, Headers, Response } from '@angular/http';
 import { FormBuilder, FormControl, FormArray, Validator, Validators, FormGroup } from '@angular/forms';
 import { Router, CanActivate } from '@angular/router';
+import { PagerService } from '../_service/index';
 import 'rxjs/add/operator/map';
+import { ToastrService } from 'ngx-toastr';
 
 Injectable()
 
@@ -23,6 +25,8 @@ export class DaftarTripComponent implements OnInit {
   hapus:any;
   night:any;
   discount_price:any;
+  pageOps:boolean = false;
+  pageData:boolean = true;
 
   quota = {
     quota_trip:[] =[]
@@ -35,19 +39,36 @@ export class DaftarTripComponent implements OnInit {
   diskonForm = this.fb.group({
     value:['', Validators.required]
   })
+
+  
+  // array of all items to be paged
+  private allItems: any[];
+
+  // pager object
+  pager: any = {};
+
+    // paged items
+  pagedItems: any[];
   
 
-  constructor( public appService:AppService, private http:Http, public router:Router, private fb:FormBuilder) { 
+  constructor( public appService:AppService, private http:Http, private toastr: ToastrService, public router:Router, private fb:FormBuilder, private pagerService: PagerService) { 
     this.appService.getTripProvider().subscribe (Trip =>{
-
-      this.tripProvider = Trip.trip;
-      this.date = Trip.trip[this.data].date_trip
       
-      // console.log(this.tripProvider)
+      this.allItems = Trip.trip;
+      this.tripProvider = Trip.trip;
+      // this.date = Trip.trip[this.data].date_trip
+      
+      if(this.allItems.length == 0) {
+        this.pageOps = !this.pageOps;
+        this.pageData = !this.pageData;
+      }
+      // console.log(Trip)
 
       if (Trip.success == false) {
         alert('Belum ada trip');
         }
+        
+    this.setPage(1);
     })
   }
 
@@ -116,27 +137,33 @@ checkedDiscount(e,d,y) {
 
     this.appService.kosongkanKuotaProvider(this.idTrip, this.quota).subscribe(kosong => {
       
-      // console.log(kosong);
+      if(kosong.status == 200) {
+        
+        this.toastr.success('Kuota Berhasil dikosongkan');
+      }
     })
   }
 
   onSubmitDiskon() {
 
     // console.log(this.diskon);
-    // this.appService.beriDiskonProvider(this.idTrip, this.diskon).subscribe(diskon => {
-      
-      
-    // })
+    this.appService.beriDiskonProvider(this.idTrip, this.diskon).subscribe(diskon => {
+      if(diskon.status == 200) {
+        
+        this.toastr.success('Diskon Berhasil ditambahkan');
+      }
+            
+    })
   }
 
   ubahTrip(e){
     this.idTrip = e.target.id;
-    this.router.navigate(['/JualTrip/UbahTrip', this.idTrip]);
+    this.router.navigate(['/Provider/UbahTrip', this.idTrip]);
   }
 
   salinTrip(e){
     this.idTrip = e.target.id;
-    this.router.navigate(['/JualTrip/SalinTrip', this.idTrip]);
+    this.router.navigate(['/Provider/SalinTrip', this.idTrip]);
     // console.log(this.idTrip);
   }
 
@@ -152,9 +179,11 @@ checkedDiscount(e,d,y) {
             let delTrip = res.json();
             // console.log(delTrip);
             if(delTrip.status == 200) {
+              
+                this.toastr.success('Trip Berhasil di Hapus');
         
                 this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-                  this.router.navigate(['/JualTrip/DaftarTrip']));
+                  this.router.navigate(['/Provider/DaftarTrip']));
              }
           }
         )
@@ -166,10 +195,22 @@ checkedDiscount(e,d,y) {
 
   goDetail(e){
     let id = e.target.id
-    this.router.navigate(['/traveler/DetailPaket/' + id])
+    this.router.navigate(['/DetailPaket/' + id])
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
+  }
+
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.allItems.length, page);
+  
+
+
+    // get current page of items
+    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    
   }
 
 }

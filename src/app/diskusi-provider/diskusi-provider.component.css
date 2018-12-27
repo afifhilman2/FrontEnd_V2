@@ -183,6 +183,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #ab47bc;
+    cursor: pointer;
 }
 
 .akun-comment {
@@ -339,4 +340,32 @@
     color: #ab47bc;
     text-decoration: none;
     cursor: pointer;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #4a4a4a;
+    border-radius: 50%;
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: #ab47bc;
+    border-color: #ab47bc;
 }

@@ -1,0 +1,12 @@
+<div class="body-home">
+    <div *ngFor="let term of termsAndConditions; let i = index" class="col-terms">
+        <div *ngIf="term?.title" class="col-title">
+            {{term.title}}
+        </div>
+        <div class="col-content">
+            <div *ngFor="let sub of term?.content" class="col-sub" [innerHTML]="sub">
+
+            </div>
+        </div>
+    </div>
+</div>

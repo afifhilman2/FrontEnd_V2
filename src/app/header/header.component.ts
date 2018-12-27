@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { AppService } from '../app.service';
 import { TokenParams } from '../token/token-params.component';
-import { AuthService } from '../token/auth.service';
+// import { AuthService } from '../token/auth.service';
 import { Router, CanActivate } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { TrvSearchResultComponent } from '../trv-search-result/trv-search-result.component';
@@ -13,6 +13,10 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import { Subject }           from 'rxjs/Subject';
 import { Product } from '../product';
 
+import { AuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -28,9 +32,15 @@ export class HeaderComponent implements OnInit {
   userTravel = true;
   providerTravel = true;
   
+  data = {
+    name:'',
+    telephone:'',
+    email:'',
+    photo:''
+  }
 
-  
   tripData;
+
   user = {
     email:'',
     password:''
@@ -59,20 +69,18 @@ export class HeaderComponent implements OnInit {
 
 
   filterTrip;
-  // heroes: Observable<Product[]>;
-  // private searchTerms = new Subject<{}>();
-  
 
   showDropDown: boolean = false;
 
-  stateForm: FormGroup;
+  // stateForm: FormGroup;
 
   heroes: Observable<Product[]>;
   private searchTerms = new Subject<string>();
   name;
   loginUser: boolean = false;
 
-  
+  private userSocial: SocialUser;
+  private loggedIn: boolean;
 
   profile:any =[];
   provider:any=[];
@@ -83,6 +91,9 @@ export class HeaderComponent implements OnInit {
   dataUser;
   photos :"../assets/img/user.png";
   photosProvider :"../assets/img/user.png";
+
+  userBio;
+  travelBio;
 
   querySearch(e) {
     this.query= e.target.value;
@@ -105,35 +116,33 @@ export class HeaderComponent implements OnInit {
   pwd() {
     this.show = !this.show;
   }
-
-  
-  // private results: Observable<SearchItem[]>;
-  private searchField: FormControl;
   
   results: Object;
   searchTerm$ = new Subject<string>();
+  id;
 
-  constructor( public data:DataService, private http:Http, private fb: FormBuilder, public appService: AppService, private authService:AuthService, private router:Router, myElement: ElementRef) {
+  constructor(private toastr: ToastrService, public dataSevie:DataService, private http:Http, private fb: FormBuilder, public appService: AppService, private authService:AuthService, private router:Router, myElement: ElementRef) {
 
-    // get all category trip
     this.appService.getCategoryTrip().subscribe (categoryAllTrip =>  {
       this.categoryAllTrip = categoryAllTrip.data; 
     });
     
     this.appService.getUsers().subscribe(profile => {
-      this.photos = profile.data.photo;
-      // console.log(profile);
+      if(profile.status == 200){
+        this.photos = profile.data.photo;
+        this.userBio = profile.data.name;
+      }
     });
 
     this.appService.getProvider().subscribe(profile => {
-      // console.log(profile);
-      
-      this.photosProvider = profile.provider.logo;
+      if(profile.status == 200){
+        this.travelBio = profile.provider.travel_name;
+        this.id = profile.provider._id
+      }
     })
 
     this.appService.search(this.searchTerm$).subscribe(results => {
         this.results = results.data;
-        // console.log(this.results);
     });
 
     //validation
@@ -142,11 +151,7 @@ export class HeaderComponent implements OnInit {
       'password':[null, Validators.required],
       'email':['', Validators.required],
     });
-
-    this.initForm();
-
   }
-
 
   logout(): void{
     sessionStorage.removeItem('token');
@@ -156,61 +161,57 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']))
   }
 
-  
+  //search
   goToSearch(trip_name){
-    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    this.router.navigateByUrl('/search', {skipLocationChange: true}).then(()=>
     this.router.navigate(['/search'], {queryParams:{keyword: trip_name, flag_search: 1}}));
    }
    
   searchTrip(_id) {
     this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-    this.router.navigate(['/search'], {queryParams :{keyword : _id, flag_search: 2}}))  
+    this.router.navigate(['/search'], {queryParams :{keyword : _id, flag_search: 2}}))
   }
+
+
+  goSearch(trip_name){
+   this.goToSearch(trip_name) 
+  }
+
+  //tutup search
 
   initializeErrorMessage() {
     this.emailAlertMessage = "Email harus diisi";
     this.passwordAlertMessage = "Password harus diisi";
     this.emailAtAlertMessage = "Alamat email salah"
   }
-
-  goSearch(trip_name){
-   this.goToSearch(trip_name) 
-  }
-
     //login
    onSubmit() {
   
     this.appService.addUser(this.user).subscribe(user => {
-      // console.log(user);
+      // console.log(user)
+      if(user.status == 200){
 
-      sessionStorage.setItem("token", user.token);
-      sessionStorage.setItem("role", user.role);
-
-      if (sessionStorage.role == 1 ) {
+        this.toastr.success('Login Berhasil')
+        sessionStorage.setItem("token", user.token);
+        sessionStorage.setItem("role", user.role);
         
-        this.userTravel = false;
-        this.noUser = true;
-        this.providerTravel = true;
-
-        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate([''])
-      )
+        if (sessionStorage.role == 1 ) {
+          this.userTravel = false;
+          this.noUser = true;
+          this.providerTravel = true;
+          this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+          this.router.navigate(['']));
+        }
+        else if (sessionStorage.role == 2) {
+          this.providerTravel = false;
+          this.noUser = true;
+          this.userTravel = true;
+          this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+          this.router.navigate(['']))
+        }
       }
-
-      else if (sessionStorage.role == 2) {
-
-        this.providerTravel = false;
-        this.noUser = true;
-        this.userTravel = true;
-
-        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate([''])
-      )
-      }
-
-      else {
-        alert("Login Gagal");
-        this.router.navigate(['']);
+      else if(user.status == 400) {
+        this.toastr.error('Email atau Password salah')
       }
     })
    }
@@ -225,67 +226,92 @@ export class HeaderComponent implements OnInit {
    myToken:string;
 
   ngOnInit() {
-
-
     if (sessionStorage.role == 1 ) {
-        
       this.noUser = true;
       this.userTravel = false;
       this.providerTravel = true;
-
     }
-
     else if (sessionStorage.role == 2) {
-
       this.noUser = true;
       this.userTravel = true;
       this.providerTravel = false;
     
     }
-
-
-    this.myToken = this.authService.AccessToken;
-
-    this.data.currentMessage.subscribe(trip => this.trip = trip);
-  }
-
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-
-  // logout() {
-  //   localStorage.removeItem('token');
-  //   this.router.navigate(['/']); 
-  // }
- 
-   initForm(): FormGroup {
-    return this.stateForm = this.fb.group({
-      search: [null]
-    })
-  }
-
-  selectValue(value) {
-    this.stateForm.patchValue({"search": value});
-    this.showDropDown = false;
-  }
-
-  closeDropDown() {
-    this.showDropDown = !this.showDropDown;
-  }
-
-  openDropDown() {
-    this.showDropDown = !this.showDropDown;
-  }
-
-  getSearchValue() {
-    return this.stateForm.value.search.debounceTime(300).distinctUntilChanged();
+    this.dataSevie.currentMessage.subscribe(trip => this.trip = trip);
   }
 
   get isLogin(){
     if(this.appService.loggedIn()){
-      // this.loginUser = !this.loginUser;
       return this.loginUser = true;
     }
-     
-   }
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.userSocial = user;
+      // console.log(this.userSocial)
+    });
+    this.appService.loginGoogle(this.userSocial.authToken).subscribe(userGoogle => {
+      // console.log(userGoogle)
+      if(userGoogle.status == 200){
+        this.data.name = userGoogle.name;
+        this.data.photo = userGoogle.photo;
+        this.data.email = userGoogle.email;
+        this.data.telephone = userGoogle.telephone;
+        sessionStorage.setItem("token", userGoogle.token);
+        sessionStorage.setItem("branch_session", JSON.stringify(this.data));
+        sessionStorage.setItem("role", userGoogle.role);
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['']))
+        if(sessionStorage.getItem('url_login')){
+          this.router.navigate([sessionStorage.getItem('url_login')]);
+          sessionStorage.removeItem('url_login');
+        }
+        else{
+          this.router.navigate(['']);
+        }
+      }
+    })
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.userSocial = user;
+    });
+    this.appService.loginFacebook(this.userSocial.authToken).subscribe(user => {
+      // console.log(user)
+      if(user.status==200){
+        this.data.name = user.name;
+        this.data.photo = user.photo;
+        this.data.email = user.email;
+        this.data.telephone = user.telephone;
+        sessionStorage.setItem("token", user.token);
+        sessionStorage.setItem("branch_session", JSON.stringify(this.data));
+        sessionStorage.setItem("role", user.role);
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['']))
+        if(sessionStorage.getItem('url_login')){
+          this.router.navigate([sessionStorage.getItem('url_login')]);
+          sessionStorage.removeItem('url_login');
+        }
+        else{
+          this.router.navigate(['']);
+        }
+      }
+    })
+  } 
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+
+  pengembangan(){
+    this.toastr.warning('Fitur Dalam Tahap Pengembangan');
+  }
+
+  goEtalase() {
+    this.router.navigate(['/EtalaseTravel/'+ this.id]);
+  }
 }

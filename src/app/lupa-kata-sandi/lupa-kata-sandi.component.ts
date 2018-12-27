@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Http, Response } from '@angular/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lupa-kata-sandi',
@@ -17,7 +18,7 @@ export class LupaKataSandiComponent implements OnInit {
   succes : boolean = false;
   isEdit:boolean = false;
 
-  constructor(public appService: AppService, private http:Http) { 
+  constructor(public appService: AppService, private http:Http, private toastr: ToastrService) { 
     
   }
 
@@ -26,9 +27,9 @@ export class LupaKataSandiComponent implements OnInit {
     .subscribe(
       (res: Response) =>{
         let users = res.json();
-        console.log(users);
+        // console.log(users);
         if(users.status == 200){
-          this.succes = !this.succes;
+          this.toastr.success('berisi tautan untuk tahap berikutnya','Silahkan cek Email Anda')
         }
       }
     )

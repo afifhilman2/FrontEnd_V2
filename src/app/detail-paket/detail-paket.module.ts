@@ -2,14 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 
-
-
-// import { RegisterComponent } from './register.component';
-// import { RegisterRouterModule } from './register-routing.modules';
-
-// import { HeaderNologinComponent } from '../header-nologin/header-nologin.component';
 import { DetailPaketRouterModule } from './detail-paket-routing.module';
 import { DetailPaketComponent } from './detail-paket.component';
+import { AgmCoreModule } from '@agm/core';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 
@@ -18,12 +14,12 @@ import { DetailPaketComponent } from './detail-paket.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    DetailPaketRouterModule
+    AgmCoreModule,
+    DetailPaketRouterModule,
+    MyDatePickerModule,
   ],
-  declarations: [ 
-    // RegisterComponent,
+  declarations: [
     DetailPaketComponent,
-    // HeaderNologinComponent,
    ],
  
 })

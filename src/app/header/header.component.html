@@ -20,7 +20,7 @@
             <form class="navbar-form navbar-left" (submit)="goSearch(trip_name)">
                 <div class="input-group stylish-input-group">
 
-                    <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control" placeholder="Cari Wisata">
+                    <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control " placeholder="Cari Wisata">
                     <ul *ngIf="results" class="search-dropdown">
                         <li *ngFor="let result of results | slice:0:9" class="item-search">
                             <a (click)="goToSearch(result.trip_name)">
@@ -38,12 +38,12 @@
 
             <div [hidden]="noUser">
                 <ul class="nav navbar-nav navbar-right-nouser">
-                    <li>
-                        <a [routerLink]="['/Daftar']">Daftar</a>
+                    <li class="daftar">
+                        <span [routerLink]="['/Daftar']" >Daftar</span>
                     </li>
 
                     <li>
-                        <a role="button" (click)="toggleLogin()">Masuk <span class="glyphicon glyphicon-chevron-down"></span></a>
+                        <a role="button" (click)="toggleLogin()">Masuk <span class="arrow"></span></a>
                     </li>
                 </ul>
             </div>
@@ -54,55 +54,75 @@
                         <a [routerLink]="['/Akun/Pemesanan']" role="button">Pemesanan</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/Notifikasi']" role="button">Notifikasi</a>
+                        <a (click)="pengembangan()" role="button">Notifikasi</a>
                     </li>
                     <li>
-                        <button [routerLink]="['/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span>
+                        <button [routerLink]="['/JadiTravel']" class="btn btn-trv">Jadi Travel</button> 
+                        <!-- <span class="notif"></span> -->
                     </li>
-                    <li>
-                        <a role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
-                            <img [src]="photos" class="foto-profil">
-                        </a>
-                        <ul class="dropdown-menu user-drop" aria-labelledby="dropdownMenu">
-                            <li><a class="dropdown-list" routerLink="/Akun/Profile">Profil</a></li>
-                            <li><a class="dropdown-list" routerLink="/Akun/Pemesanan">Pemesanan</a></li>
-                            <li><a class="dropdown-list" routerLink="/Akun/Favorit">Favorit</a></li>
-                            <li><a class="dropdown-list" routerLink="/Akun/PesanMasuk">Pesan Masuk</a></li>
-                            <li><a class="dropdown-list" routerLink="/Akun/DiskusiTrip">Diskusi Trip</a></li>
-                            <li><a class="dropdown-list" routerLink="/Akun/Promo">Promo</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a class="delete-trip dropdown-list" (click)=logout()>Logout</a></li>
-                        </ul>
-                    </li>
+                    <a role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
+                        <img [src]="photos" class="foto-profil-provider">
+                    </a>
+                    <ul class="dropdown-menu user-drop" aria-labelledby="dropdownMenu">
+
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/Profile']"><img src="https://img.travinesia.com/icon/ikon_traveler_profil_16x16.png" class="imaga-icon">Profil</p></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/Pemesanan']"><img src="https://img.travinesia.com/icon/ikon traveler_pemesanan_16x16.png" class="imaga-icon">Pemesanan</p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/Favorit']"><img src="https://img.travinesia.com/icon/ikon traveler_favorit_16x16.png" class="imaga-icon">Favorit</p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/PesanMasuk']"><img src="https://img.travinesia.com/icon/ikon traveler_pesan masuk_16x16.png" class="imaga-icon">Pesan Masuk </p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/DiskusiTrip']"><img src="https://img.travinesia.com/icon/ikon traveler_diskusi trip_16x16.png" class="imaga-icon">Diskusi Trip</p></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="list-drop"><p class="delete-trip " (click)=logout()><i class="glyphicon glyphicon-log-out"></i>Logout</p></li>
+
+                    </ul>
                 </ul>
             </div>
 
             <div [hidden]="providerTravel">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a [routerLink]="['Akun/Pemesanan']" role="button">Pemesanan</a>
+                        <a role="button" (click)="pengembangan()">Notifikasi</a>
                     </li>
-                    <li>
-                        <a role="button">Notifikasi</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/JualTrip']" role="button">Travel Saya</a>
+                    <li class="travel-saya">
+                        <a role="button" id="dropdownMenuAgen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="travel-saya">Travel Saya</a>
                         <!-- <button [routerLink]="['/traveler/JadiTravel']" class="btn btn-trv">Jadi Agen</button> <span class="notif"></span> -->
+                        <ul class="dropdown-menu agen-drop" aria-labelledby="dropdownMenuAgen">
+                            <li class="list-drop">
+                                <p class="dropdown-list" [routerLink]="['/Provider/JualTrip']"><img src="https://img.travinesia.com/icon/ikon_traveler_profil_16x16.png" class="imaga-icon">
+                                    Travel Saya
+                                    <span class="user-name">{{travelBio}}</span>
+                                </p>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/JualTrip']"><img src="https://img.travinesia.com/icon/ikon provider_jual trip_16x16.png" class="imaga-icon">Jual Trip</p></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/Saldo']"><img src="https://img.travinesia.com/icon/ikon provider_saldo_16x16.png" class="imaga-icon">Saldo</p></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/TransaksiPenjualan']"><img src="https://img.travinesia.com/icon/ikon provider_transaksi penjualan_16x16.png" class="imaga-icon">Transaksi Penjualan</p></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/DaftarTrip']"><img src="https://img.travinesia.com/icon/ikon provider_daftar trip_16x16.png" class="imaga-icon">Daftar Trip </p></li>
+                            <li class="list-drop"><p class="dropdown-list" (click)="goEtalase()"><img src="https://img.travinesia.com/icon/ikon provider_etalase_16x16.png" class="imaga-icon">Etalase Travel</p></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/UbahProfilTravel']"><img src="https://img.travinesia.com/icon/ikon provider_edit profil travel_16x16.png" class="imaga-icon">Ubah Provil Travel</p></li>
+                            <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Provider/DiskusiProvider']"><img src="https://img.travinesia.com/icon/ikon traveler_diskusi trip_16x16.png" class="imaga-icon">Diskusi Trip</p></li>
+                            <!-- <li role="separator" class="divider"></li>
+                            <li class="list-drop"><p class="delete-trip " (click)=logout()><i class="glyphicon glyphicon-log-out"></i>Logout</p></li> -->
+                        </ul>
                     </li>
 
-                    <a role="button" id="dropdownMenuBar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
-                        <img [src]="photosProvider" class="foto-profil-provider">
+                    <a role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
+                        <img [src]="photos" class="foto-profil-provider">
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuBar">
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip']">Jual Trip</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/Saldo']">Saldo</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/TransaksiPenjualan']">Transaksi Penjualan</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/DaftarTrip']">Daftar Trip </a></li>
-                        <li><a class="dropdown-list">Etalase Travel</a></li>
-                        <li><a class="dropdown-list" [routerLink]="['/JualTrip/UbahProfilTravel']">Ubah Profil Travel</a></li>
+                    <ul class="dropdown-menu user-drop" aria-labelledby="dropdownMenu">
+                        <li class="list-drop">
+                            <p class="dropdown-list" [routerLink]="['/Akun/Profile']"><img src="https://img.travinesia.com/icon/ikon_traveler_profil_16x16.png" class="imaga-icon">
+                                Akun Saya
+                                <span class="user-name">{{userBio}}</span>
+                            </p>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a class="delete-trip dropdown-list" (click)=logout()>Logout</a></li>
-
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/Pemesanan']"><img src="https://img.travinesia.com/icon/ikon traveler_pemesanan_16x16.png" class="imaga-icon">Pemesanan</p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/Favorit']"><img src="https://img.travinesia.com/icon/ikon traveler_favorit_16x16.png" class="imaga-icon">Favorit</p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/PesanMasuk']"><img src="https://img.travinesia.com/icon/ikon traveler_pesan masuk_16x16.png" class="imaga-icon">Pesan Masuk </p></li>
+                        <li class="list-drop"><p class="dropdown-list" [routerLink]="['/Akun/DiskusiTrip']"><img src="https://img.travinesia.com/icon/ikon traveler_diskusi trip_16x16.png" class="imaga-icon">Diskusi Trip</p></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="list-drop"><p class="delete-trip " (click)=logout()><i class="glyphicon glyphicon-log-out"></i>Logout</p></li>
                     </ul>
                 </ul>
             </div>
@@ -116,7 +136,7 @@
 <div class="container-fluid-bar-fixed">
     <ul class="head-category">
         <li *ngFor="let category of categoryAllTrip">
-            <a (click)="searchTrip(category._id)" name="{{category.category_name}}" class="btn-search"> <span class="{{category.icon}}"></span> {{category.category_name}} </a>
+            <a (click)="searchTrip(category._id)" class="btn-search"><img src="{{category.category_photo}}" class="icon-category"> {{category.category_name}} </a>
         </li>
 
         <li class="kanan">
@@ -127,7 +147,6 @@
             </a>
         </li>
     </ul>
-    <hr class="line-category">
 </div>
 <!-- <div *ngFor="let trip of getTripSearch"
 []></div> -->
@@ -172,8 +191,8 @@
 
         <div class="trv-line-login"></div>
 
-        <button class="btn btn-facebook" type="submit"> <span class="icon-facebook"></span> Masuk Dengan Facebook</button>
-        <button class="btn btn-gmail" type="submit">Masuk Dengan Gmail</button>
+        <button class="btn btn-facebook" type="button" (click)="signInWithFB()">Masuk Dengan Facebook</button>
+        <button class="btn btn-gmail" type="button" (click)="signInWithGoogle()">Masuk Dengan Gmail</button>
     </form>
 </div>
 

@@ -20,7 +20,7 @@ export class DiskusiTripComponent implements OnInit {
   ngOnInit() {
     this.appService.getDiscussionUser().subscribe(diskusi=>{
       this.diskusi = diskusi.data;
-      console.log(this.diskusi)
+      // console.log(this.diskusi)
     })
   }
 
@@ -31,8 +31,8 @@ export class DiskusiTripComponent implements OnInit {
     this.myForm.patchValue({
       id_diskusi: id,
     })
-    console.log(this.myForm.value)
-    this.appService.addComment(this.myForm.value).subscribe(dataComment=>{
+    // console.log(this.myForm.value)
+    this.appService.addCommentUser(this.myForm.value).subscribe(dataComment=>{
       if(dataComment.status == 200){
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/Akun/DiskusiTrip']));

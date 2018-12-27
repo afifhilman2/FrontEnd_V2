@@ -3,3 +3,70 @@
     font-size: 32px;
     font-weight: bold;
 }
+
+
+/* oops */
+
+.wrap-oops {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #dddddd;
+    position: fixed;
+}
+
+.wrap-img-oops {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: -12px;
+}
+
+.img-oops {
+    width: 141px;
+    height: 106px;
+    margin-top: 15%;
+}
+
+.tittle-oops {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #454545;
+    margin-bottom: 5px;
+}
+
+.text-oops {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #454545;
+}
+
+.wrap-btn-oops {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-oops {
+    width: 171px;
+    height: 36px;
+    border-radius: 5px;
+    background-color: #9c27b0;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 34px;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}

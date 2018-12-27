@@ -16,7 +16,7 @@
 
         <!-- Modal content-->
         <div class="wrap-modal-pencarian">
-            <img src="../assets/img/Award.png" class="img-modal-pencarian">
+            <img src="https://img.travinesia.com/icon/ikon provider_saldo_menunggu travinesia menghubungi_64x64.png" class="img-modal-pencarian">
             <p class="tittle-modal-pencarian"> <span class="bold"> Travinesia, </span> beberapa saat lagi akan menghubungi nomor yang tertera pada profil agen travel Anda. Silahkan pergi ke tab pilihan <span class="bold">“pencairan” </span> untuk memantau status proses penarikan.</p>
             <button data-dismiss="modal" class="btn-trv-ok">Ok</button>
         </div>
@@ -89,7 +89,8 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-success">
-                <p class="tittle-modal-pencarian">Tunggu Konfirmasi Admin</p>
+                <p [hidden]="msg200" class="tittle-modal-pencarian">Tunggu Konfirmasi Admin</p>
+                <p [hidden]="msg404" class="tittle-modal-pencarian">Penarikan melebihi total saldo yang ada</p>
                 <button data-dismiss="modal" (click)="close()" class="btn-trv-ok">Ok</button>
             </div>
         </div>
@@ -106,12 +107,12 @@
     <table class="table table-hover">
         <thead>
             <th>Waktu</th>
-            <th>Mutasi <span class="glyphicon glyphicon-info-sign "></span></th>
+            <th>Mutasi </th>
             <th>Saldo</th>
             <th>Keterangan</th>
         </thead>
-        <tbody>
-            <tr *ngFor="let arr of balanceFlag">
+        <tbody *ngIf="pageData">
+            <tr *ngFor="let arr of pagedItems">
                 <td>{{arr.created_at | date:"fullDate"}}</td>
                 <td>{{arr.mutation_flag? "+" : "-"}} Rp {{arr.mutation_flag? arr.total_payment : arr.total_withdraw}}</td>
                 <td>Rp {{arr.balance_history}}</td>
@@ -119,22 +120,27 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="wrap-oops" *ngIf="pageOps">
+        <div class="wrap-img-oops">
+            <img src="../../assets/img/oops.png" class="img-oops">
+        </div>
+        <div class="tittle-oops"> Oops!</div>
+        <div class="text-oops"> Anda belum memiliki riwayat transaksi.</div>
+    </div>
+
     <!-- pager -->
     <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
-        <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
-    <a (click)="setPage(1)">First</a>
-</li> -->
+
         <li [ngClass]="{disabled:pager.currentPage === 1}">
-            <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+            <a (click)="setPageSaldo(pager.currentPage - 1)">&laquo;</a>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-            <a (click)="setPage(page)">{{page}}</a>
+            <a (click)="setPageSaldo(page)">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-            <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+            <a (click)="setPageSaldo(pager.currentPage + 1)">&raquo;</a>
         </li>
-        <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-    <a (click)="setPage(pager.totalPages)">Last</a>
-</li> -->
+
     </ul>
 </div>

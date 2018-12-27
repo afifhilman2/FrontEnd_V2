@@ -1,7 +1,9 @@
-<div class="container-side">
-    <div class="root-search"> Home > {{order}} </div>
-    <div class="current-search"> {{order}} </div>
-    <span class="rslt"> Hasil Pencarian Paket Wisata </span>
+<div class="container">
+
+    <!-- <pre>Selected items: <span *ngFor="let filterItem of checked()" style="padding-right:10px;">{{ filterItem.trip_name }}</span></pre> -->
+    <div class="root-search"> Home > {{titleSearch }}</div>
+    <div class="current-search"> {{titleSearch}} </div>
+    <span class="rslt"> Hasil Pencarian Paket Wisata {{titleSearch}}</span>
     <span class="sort"> Urutkan :  
             <select class="form-control form-sort">
                     <option >Paling Sesuai</option>
@@ -13,359 +15,276 @@
     </span>
 </div>
 
-<div class="container-side">
+<div class="container">
     <div class="row">
         <div class="col-md-2">
-            <div class="row">
-                <div class="box-wrap-tipe">
-                    <div class="head-box">
-                        <div class="tittle-box">Tipe</div>
-                        <div class="listbox">
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                        Open Trip
-                                </label>
-                            </div> 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Private Trip
-                                </label>
-                            </div>
+            <div class="box-wrap-tipe">
+                <div class="head-box">
+                    <div class="tittle-box">Tipe</div>
+                    <div class="listbox">
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios">
+                                <span class="outer">
+                                    <span class="inner"></span>
+                                </span>
+                                    Open Trip
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios" (change)="checked($event)" value="Private"><span class="outer"><span class="inner"></span></span>
+                                Private Trip
+                            </label>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="box-wrap-lokasi">
-                    <div class="head-box">
-                        <div class="tittle-box">Lokasi</div>
-                        <div class="listbox">
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Jawa
-                                </label>
-                            </div>
+            <div class="box-wrap-lokasi">
+                <div class="head-box">
+                    <div class="tittle-box">Lokasi</div>
+                    <div class="listbox">
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Jawa
+                            </label>
+                        </div>
 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Sumatera
-                                </label>
-                            </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Sumatera
+                            </label>
+                        </div>
 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Kalimantan
-                                </label>
-                            </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Kalimantan
+                            </label>
+                        </div>
 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Sulawesi
-                                </label>
-                            </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Sulawesi
+                            </label>
+                        </div>
 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Maluku
-                                </label>
-                            </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Maluku
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-wrap-kategori">
+                <div class="head-box">
+                    <div class="tittle-box">Kategori</div>
+                    <div class="listbox">
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Beach
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                City Tour
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Culture
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Fishing
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Hiking
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Honeymoon
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Sailing
+                            </label>
+                        </div>
+
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Tracking
+                            </label>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="box-wrap-kategori">
-                    <div class="head-box">
-                        <div class="tittle-box">Kategori</div>
-                        <div class="listbox">
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Beach
-                                </label>
-                            </div>
+            <div class="box-wrap-harga">
+                <div class="head-box">
+                    <div class="tittle-box">Harga</div>
+                    <div class="listbox">
 
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    City Tour
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Culture
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Fishing
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Hiking
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Honeymoon
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                   Sailing
-                                </label>
-                            </div>
-
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Tracking
-                                </label>
-                            </div>
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            <span class="range-min">0</span> <span class="range-max">10.000.000</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="box-wrap-harga">
-                    <div class="head-box">
-                        <div class="tittle-box">Harga</div>
-                        <div class="listbox">
+            <div class="box-wrap-rating">
+                <div class="head-box">
+                    <div class="tittle-box">Rating</div>
+                    <div class="listbox">
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="icon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>    
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>    
+                            </label>
+                        </div>
 
-                            <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                                <span class="range-min">0</span> <span class="range-max">10.000.000</span>
-                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-wrap-lainnya">
+                <div class="head-box">
+                    <div class="tittle-box">Lainnya</div>
+                    <div class="listbox">
+                        <div class="radio">
+                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                    Diskon
+                                </label>
                         </div>
                     </div>
                 </div>
-
-                <div class="box-wrap-rating">
-                    <div class="head-box">
-                        <div class="tittle-box">Rating</div>
-                        <div class="listbox">
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="icon-star"></span>
-                                    <span class="icon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="icon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>    
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>    
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box-wrap-lainnya">
-                    <div class="head-box">
-                        <div class="tittle-box">Lainnya</div>
-                        <div class="listbox">
-                            <div class="radio">
-                                <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                        Diskon
-                                    </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
-        <div *ngFor="let data of dataSearchCategory" class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo" >
-                <div class="favorit">
-                    <span class="glyphicon glyphicon-heart fav" (click)="favorit(data._id)" [ngClass]="{'change' : change}"></span>
+
+        <div class="search-result">
+            <div *ngIf="notFound" class="not-found">
+                <img src="/assets/img/oops.png">
+                <div class="not-found-text">
+                    Trip Tidak Ditemukan
                 </div>
-                <div (click)="goToDetail(data._id)">
-                    <img src="{{data.photo_trip[0]}}" class="img-promo">
-                    <div class="disc">{{data.discount_date[0] === undefined ? '' : '- ' + data.discount_date[0] + '% '}}</div>
-                    <div class="trip" *ngIf="(data.id_type_trip._id == '5a8539010ee623c4311ba67e')">Open</div>
-                    <div class="trip-private" *ngIf="(data.id_type_trip._id == '0')">Private</div>
+            </div>
+            <div *ngFor="let data of dataSearchCategory; let i = index">
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="thumb-promo">
+                        <div class="favorit">
+                            <span class="glyphicon glyphicon-heart fav" (click)="favorit(data._id)" [ngClass]="{'change' : change}"></span>
+                        </div>
+                        <div (click)="goToDetail(data._id)">
+                            <img src="{{data.photo_trip[0]}}" class="img-promo">
+                            <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div>
+                            <div class="trip" *ngIf="(data.id_type_trip.type_trip == 'Open Trip')">Open</div>
+                            <div class="private-trip" *ngIf="(data.id_type_trip.type_trip == 'Private Trip')">Private</div>
+                            <div class="body-caption">
+                                <div class="row">
+                                    <div class="col-md-6 colpe-sm-6 ">
+                                        <span class="icon-star" *ngFor="let stars of counterStars((data.rate_div!=0)? (data.rate_total/data.rate_div) : 0);let i = index" id="{{i}}"></span>
+                                    </div>
+                                    <div class="price pull-right">
+                                        <div class="caption-price">Rp {{data.publish_price.toLocaleString('id')}}</div>
+                                    </div>
+                                </div>
+                                <div class="caption-tittle">{{data.trip_name}}</div>
+                                <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{data.days}}H{{data.night}}M</div>
+                                <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{data.provider.travel_name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-2 col-sm-4 col-xs-6">
+                <div class="thumb-promo">
+                    <img src="../assets/img/1.jpg" class="img-promo">
+                    <div class="disc">-10%</div>
+                    <div class="trip">Open</div>
                     <div class="body-caption">
                         <div class="row">
-                            <div class="col-md-6 colpe-sm-6 ">
+                            <div class="col-md-6 col-sm-6 ">
                                 <span class="icon-star"></span>
                                 <span class="icon-star"></span>
                                 <span class="icon-star"></span>
                             </div>
-                            <div class="price pull-right">
-                                <div class="caption-price">Rp {{data.publish_price.toLocaleString('id')}}</div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="caption-price">Rp 300.000</div>
                             </div>
                         </div>
-                        <div class="caption-tittle">{{data.trip_name}}</div>
-                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{data.days}}H{{data.night}}M</div>
-                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{data.provider.travel_name}}</div>
+                        <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
+                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
+                        <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
                     </div>
                 </div>
-                
-            </div>
-        </div>
-
-        <!-- <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
-                    </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
-                    </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
-                    </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
-                    </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </div>
-            </div>
+            </div> -->
         </div>
 
 
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="thumb-promo">
-                <img src="../assets/img/1.jpg" class="img-promo">
-                <div class="disc">-10%</div>
-                <div class="trip">Open</div>
-                <div class="body-caption">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 ">
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                            <span class="icon-star"></span>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="caption-price">Rp 300.000</div>
-                        </div>
-                    </div>
-                    <div class="caption-tittle">Pantai Sangat Indah sekali sekali kesini lah</div>
-                    <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> 2H1M</div>
-                    <div class="travel-name"><span class="glyphicon glyphicon-user"></span> Harapan Indah Tour</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
+        <!--<div class="col-md-2 col-sm-4 col-xs-6">
             <div class="thumb-promo">
                 <img src="../assets/img/1.jpg" class="img-promo">
                 <div class="disc">-10%</div>
@@ -458,3 +377,51 @@
         </div>
     </div> -->
     </div>
+</div>
+
+
+<!-- <app-footer></app-footer> -->
+<div class="footer">
+    <div class="col-md-2">
+        <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Travinesia</p>
+        <p class="cr-tittle">Tentang Travinesia</p>
+        <p class="cr-tittle">Hubungi Kami</p>
+        <p class="cr-tittle">Syarat dan Ketentuan</p>
+        <p class="cr-tittle">Karir</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Informasi</p>
+        <p class="cr-tittle">Jadi Travel di Travinesia</p>
+        <p class="cr-tittle">Pesan Paket Wisata</p>
+        <p class="cr-tittle">Promo</p>
+        <p class="cr-tittle">Dikon</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Kontak</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-earphone"></span> (+62) 897 1234 4321</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-envelope"></span> ask@travinesia.com</p>
+        <p class="cr-tittle">Dramaga Cantik Residence Blok K51 Bogor, Jawa Barat Indonesia </p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Ikuti Kami</p>
+        <p class="cr-tittle">Logo</p>
+        <p class="cr-tittle">Logo</p>
+        <p class="cr-tittle">Logo</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Download App</p>
+        <p class="cr-tittle">Logo</p>
+    </div>
+</div>
+
+<div class="footer-black">
+    <p class="cr-black">Copyright &copy; 2017 Travinesia</p>
+</div>

@@ -22,7 +22,7 @@ const routes: Routes = [
         path:'', component:TrvSidebarComponent,
         children:
         [
-            { path:'', redirectTo: 'Profile', pathMatch: 'prefix'},
+            // { path:'', redirectTo: 'Profile', pathMatch: 'prefix'},
             { path:'Profile', loadChildren:'../ubah-profil/ubah-profil.module#UbahProfilModule'},
             { path:'Pemesanan', loadChildren:'../pemesanan/pemesanan.module#PemesananModule'},
             { path:'Favorit', loadChildren:'../favorit-user/favorit-user.module#FavoritUserModule'},

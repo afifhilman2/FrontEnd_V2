@@ -27,7 +27,7 @@ export class HeaderUserComponent implements OnInit {
   
   querySearch(e) {
     this.query= e.target.value;
-    console.log(this.query);
+    // console.log(this.query);
   }
   
 
@@ -38,7 +38,7 @@ export class HeaderUserComponent implements OnInit {
     this.appService.getUsers().subscribe(profile => {
       this.dataUser = profile.data;
       this.photos = profile.data.photo;
-      console.log(profile);
+      // console.log(profile);
     });
 
     // this.appService.getProvider().subscribe(provider => {

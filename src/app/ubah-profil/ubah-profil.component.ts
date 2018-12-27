@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -45,7 +46,7 @@ export class UbahProfilComponent implements OnInit {
   date;
   daraUser;
 
-  constructor( private appServis: AppService, private datePipe: DatePipe, private router: Router) { 
+  constructor(private toastr:ToastrService, private appServis: AppService, private datePipe: DatePipe, private router: Router) { 
     this.appServis.getUsers().subscribe(edit=>{
       this.edit.name = edit.data.name;
       this.edit.email = edit.data.email;
@@ -63,7 +64,7 @@ export class UbahProfilComponent implements OnInit {
       this.edit.photo = edit.data.photo;
       this.edit.gender = edit.data.gender;
 
-      console.log(this.daraUser);
+      // console.log(this.daraUser);
     });
   }
 
@@ -97,7 +98,7 @@ export class UbahProfilComponent implements OnInit {
 
   onRadioType(t){
     this.edit.gender = t.target.value;
-    console.log(this.edit.gender);
+    // console.log(this.edit.gender);
   }
 
   onSelectDate(t){
@@ -120,6 +121,7 @@ export class UbahProfilComponent implements OnInit {
       
     this.appServis.editUser(this.edit).subscribe(edit => {
       if(edit.status == 200){
+        this.toastr.success('Profil Berhasil Disimpan')
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
         this.router.navigate(['/Akun/Profile']));
       }
@@ -152,7 +154,12 @@ export class UbahProfilComponent implements OnInit {
     let binaryString = readerEvt.target.result;
     this.edit.photo = btoa(binaryString);
     this.appServis.editProfilePictureUser(this.edit).subscribe(user => {
-      console.log(user)
+      // console.log(user)
+      if(user.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/Akun/Profile']));
+        this.toastr.success('Foto Berhasil Diubah')
+      }
     })
     this.edit.photo = "data:image/jpeg;base64,"+ btoa(binaryString);
     
@@ -166,10 +173,15 @@ export class UbahProfilComponent implements OnInit {
       // this.pwd.password;
       // this.pwd.repeatPassword;
       this.appServis.changePwd(this.pwd).subscribe(pwd => {
-        console.log(pwd);
+        // console.log(pwd);
+        if(pwd.status == 200){
+          this.toastr.success('Password Berhasil Diubah')
+        }
+        
       })
     }else{
-      console.log("Password Baru harus sama dengan Ulangi Password Baru dan atau Password lama tidak boleh sama dengan password baru")
+      this.toastr.error('Ulangi password tidak sama denga Pasword Baru', 'Password Lama Tidak Boleh sama dengan Password Baru')
+      // console.log("Password Baru harus sama dengan Ulangi Password Baru dan atau Password lama tidak boleh sama dengan password baru")
     }
     // this.appServis.changePassword(this.pwd).subscribe(pwd =>{
     //   console.log(pwd)

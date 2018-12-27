@@ -1,4 +1,4 @@
-<app-loader *ngIf="loaded"></app-loader>
+<!-- <app-loader *ngIf="loaded"></app-loader> -->
 <div *ngIf="dataTrip" class="container">
   <div class="tahapan-proses">
     <div class="tahapan-proses1">
@@ -25,6 +25,8 @@
         <div class="gambar">
           <img src="{{dataTrip.id_trip.photo_trip['0']}}">
         </div>
+        <div [ngClass]="dataTrip.id_type_trip.type_trip == 'Open Trip'? 'jenis-trip': 'private'" >{{dataTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</div>
+      
         <div class="detail-pesanan">
           <div class="isi-pesanan-star">
             <span class="icon-star"></span>
@@ -52,11 +54,11 @@
           <div class="panel-body">
             <div class="detail-pelaksanaan">
               <span>Pelaksanaan :</span>
-              <p>{{dataTrip.startDate_trip | date: "d MMMM"}} - {{dataTrip.endDate_trip | date: "d MMMM"}}</p>
+              <p>{{dataTrip?.startDate_trip | date: "d MMMM"}} - {{dataTrip?.endDate_trip | date: "d MMMM"}}</p>
             </div>
             <div class="detail-jumlah">
               <span>Jumlah Peserta (yang anda pesan) :</span>
-              <p>{{dataTrip.quantity}}</p>
+              <p>{{dataTrip?.quantity}}</p>
             </div>
             <div class="detail-keterangan">
               <p>Data peserta dilengkapi setelah melakukan pembayaran</p>
@@ -105,7 +107,7 @@
           <div class="panel-body">
             <div class="form-data-pemesan">
               <div class="form-group">
-                <textarea class="form-control" [(ngModel)]="nbook.notes" name="catatan_provider"> </textarea>
+                <textarea class="form-control" [(ngModel)]="nbook.notes" name="catatan_provider" placeholder="Masukkan keterangan riwayat Penyakit Kronis(Jika dibutuhkan), Alergi terhadap makanan tertentu, Phobia, dan Informasi lainnya yang membutuhkan penanganan khusus"> </textarea>
               </div>
             </div>
           </div>
@@ -136,8 +138,9 @@
              <div class="form-kode-promo">
               <div class="form-group">
                 <label>Punya Kode Promo?</label>
-                <input type="text" class="form-control">
-                <button class="btn btn-kode" type="submit">Gunakan Kode</button>
+                <input type="text" class="form-control" [(ngModel)]="nbook.code" name="code">
+                <button class="btn btn-kode" type="button" (click)="tooglePromo()">Gunakan Kode</button>
+                <p class="code-promo" *ngIf="massage">Kode Promo Tidak Berlaku</p>
               </div>
             </div>
           </div>
@@ -151,7 +154,7 @@
           <div class="panel-body">
             <div class="detail">
               <div class="harga">
-                <span>Harga Paket</span><span class="jumlah">x {{dataTrip.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(bayar).toLocaleString('id')}}</span>
+                <span>Harga Paket</span><span class="jumlah">x {{dataTrip?.quantity}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(bayar).toLocaleString('id')}}</span>
               </div>
               <div class="diskon">
                 <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right"> Rp {{nbook.promo_fee}}</span>
@@ -165,7 +168,7 @@
             </div>
             <hr>
             <div class="total">
-              <p class="total-bayar" >Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.publish_price">Rp {{(totalBayar).toLocaleString('id')}}</span></p>
+              <p class="total-bayar" >Total Harga<span class="titik-dua">:</span><span class="nominal pull-right" >Rp {{(totalBayar).toLocaleString('id')}}</span></p>
             </div>
           </div>
         </div>
@@ -175,4 +178,8 @@
     </form>
   </div>
 </div>
-<app-mini-footer></app-mini-footer>
+<!-- <app-mini-footer></app-mini-footer> -->
+<div class="footer-black">
+  <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+  <p class="cr-black pull-right">Copyright &copy; 2017 Travinesia</p>
+</div>

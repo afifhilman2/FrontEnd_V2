@@ -4,147 +4,182 @@
 
 <p class="info-paket">Berikut adalah daftar trip yang Anda jual. Anda dapat mengubah informasi paket trip Anda. Beri Diskon, Ubah Trip, Salin Trip, Kosongkan Kuota atau Hapus Trip dapat Anda Lakukan disini.</p>
 
-<div class="wrap-paket-trip" *ngFor="let trip of tripProvider; let i = index">
-    <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
+<div *ngIf="pageData">
+    <div class="wrap-paket-trip" *ngFor="let trip of pagedItems; let i = index">
+        <img class="img-paket-trip" src="{{trip.photo_trip['0']}}">
 
-    <div class="wrap-content-paket-trip">
+        <div class="wrap-content-paket-trip">
 
-        <div class="wrap-info-paket-trip">
-            <p class="tittle-paket-trip">{{trip.trip_name}} </p>
+            <div class="wrap-info-paket-trip">
+                <div [ngClass]="trip.id_type_trip.type_trip == 'Open Trip' ? 'opentrip' : 'private'">{{trip.id_type_trip.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</div>
+                <p class="tittle-paket-trip">{{trip.trip_name}} </p>
 
-            <div class="tittle-info">Durasi
-                <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.days===null || trip.days===undefined ? '' : trip.days +' Hari'}} {{trip.night===null || trip.night===-1 || trip.night === 0 ? '' : trip.night +' Malam'}}</div>
-            </div>
+                <div class="tittle-info">Durasi
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{trip.days===null || trip.days===undefined ? '' : trip.days +' Hari'}} {{trip.night===null || trip.night===-1 || trip.night === 0 ? '' : trip.night +' Malam'}}</div>
+                </div>
 
-            <div class="tittle-info">Kategori
-                <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.category[0].category_name}}</div>
-            </div>
+                <div class="tittle-info">Kategori
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{trip.category[0].category_name}}</div>
+                </div>
 
-            <div class="tittle-info">Jenis Trip
+                <!-- <div class="tittle-info">Jenis Trip
                 <span class="colon-info">:</span>
                 <div class="tittle-info-value">{{trip.id_type_trip.type_trip == null? "" : trip.id_type_trip.type_trip}}</div>
-            </div>
+            </div> -->
 
-            <div class="tittle-info">Harga (Publish)
-                <span class="colon-info">:</span>
-                <div class="tittle-info-value">Rp {{trip.publish_price}}</div>
-            </div>
+                <div class="tittle-info">Harga (Publish)
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">Rp {{trip.publish_price}}</div>
+                </div>
 
-            <div class="tittle-info">Kuota
-                <span class="colon-info">:</span>
-                <div class="tittle-info-value">{{trip.quota_trip}}</div>
-            </div>
-        </div>
-
-
-        <div class="wrap-info-harga">
-            <div class="dropdown-setting">
-                <span class="glyphicon glyphicon-cog info-setting" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a class="dropdown-list" (click)="beriDiskon(i, $event)" id="{{trip._id}}" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
-                    <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
-                    <li><a class="dropdown-list" (click)="salinTrip($event)" id="{{trip._id}}">Salin Trip</a></li>
-                    <li><a class="dropdown-list" (click)="kosong(i, $event)" data-toggle="modal" data-target="#kosongkankuotaModal" id="{{trip._id}}">Kosongkan Kuota</a></li>
-                    <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal" (click)="idHapus($event)" id="{{trip._id}}">Hapus Trip</a></li>
-                </ul>
-            </div>
-
-            <!-- modal hapus -->
-            <div class="modal fade" id="hapusModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="wrap-modal-content">
-                        <div class="wrap-modal-header">
-                            Hapus Trip
-                        </div>
-                        <div class="wrap-modal-body">
-
-                            <p class="confirm-delete"> Apakah Anda yakin akan menghapus Trip ini?
-                            </p>
-                            <div class="wrap-btn-hapus">
-                                <span data-dismiss="modal" class="batal">Batal</span>
-                                <button class="btn-trv-hapus" data-dismiss="modal" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="tittle-info">Kuota
+                    <span class="colon-info">:</span>
+                    <div class="tittle-info-value">{{trip.quota_trip}}</div>
                 </div>
             </div>
 
-            <!-- modal kosongkan kuota -->
-            <div class="modal fade" id="kosongkankuotaModal" role="dialog">
-                <form (submit)="onSubmitKosong()">
+
+            <div class="wrap-info-harga">
+                <div class="dropdown-setting">
+                    <button class="setting-trip" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-cog info-setting" ></span> Ubah Trip
+                </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li *ngIf="trip.id_type_trip.type_trip == 'Open Trip'"><a class="dropdown-list" (click)="beriDiskon(i, $event)" id="{{trip._id}}" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
+                        <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
+                        <li><a class="dropdown-list" (click)="salinTrip($event)" id="{{trip._id}}">Salin Trip</a></li>
+                        <li *ngIf="trip.id_type_trip.type_trip == 'Open Trip'"><a class="dropdown-list" (click)="kosong(i, $event)" data-toggle="modal" data-target="#kosongkankuotaModal" id="{{trip._id}}">Kosongkan Kuota</a></li>
+                        <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal" (click)="idHapus($event)" id="{{trip._id}}">Hapus Trip</a></li>
+                    </ul>
+                </div>
+
+                <!-- modal hapus -->
+                <div class="modal fade" id="hapusModal" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="wrap-modal-content">
                             <div class="wrap-modal-header">
-                                Kosongkan Kuota
+                                Hapus Trip
                             </div>
                             <div class="wrap-modal-body">
 
-                                <div class="confirm-delete"> Kosongkan Kuota untuk mengubah kondisi sisa kuota Trip Anda menjadi 0 atau menghabiskan sisa kuota.</div>
-                                <a class="purpletext">Pelajari lebih lanjut</a>
-
-                                <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
-
-                                <div class="col-md-12" *ngFor="let date of tripProvider[data].date_trip; let y= index">
-                                    <input type="checkbox" class="checkbox" value="0" (click)="checked($event,y, $event.target.value)">
-                                    <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
-                                </div>
-
-                                <div class="wrap-btn">
+                                <p class="confirm-delete"> Apakah Anda yakin akan menghapus Trip ini?
+                                </p>
+                                <div class="wrap-btn-hapus">
                                     <span data-dismiss="modal" class="batal">Batal</span>
-                                    <button class="btn-trv-hapus" data-dismiss="modal" (click)="onSubmitKosong()" type="submit" id="{{trip._id}}">Kosongkan</button>
+                                    <button class="btn-trv-hapus" data-dismiss="modal" (click)="hapusTrip($event)" id="{{trip._id}}">Hapus</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <!-- modal Beri Diskon -->
-            <div class="modal fade" id="beridiskonModal" role="dialog">
-                <form #f="ngForm" [formGroup]="diskonForm" (ngSubmit)="onSubmitDiskon()">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="wrap-modal-content-diskon">
-                            <div class="wrap-modal-header">
-                                Beri Diskon
-                            </div>
-                            <div class="wrap-modal-body">
+                <!-- modal kosongkan kuota -->
+                <div class="modal fade" id="kosongkankuotaModal" role="dialog">
+                    <form (submit)="onSubmitKosong()">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="wrap-modal-content">
+                                <div class="wrap-modal-header">
+                                    Kosongkan Kuota
+                                </div>
+                                <div class="wrap-modal-body">
 
-                                <div class="confirm-delete"> Beri Diskon untuk meningkatkan penjualan Trip Anda. Atur dan pertimbangkan fasilitas yang ditawarkan di menu Ubah Trip.</div>
-                                <div class="pinktext">Besarnya diskon berlaku untuk semua tanggal trip yang dipilih.</div>
-
-                                <div class="wrap-content-body">
+                                    <div class="confirm-delete"> Kosongkan Kuota untuk mengubah kondisi sisa kuota Trip Anda menjadi 0 atau menghabiskan sisa kuota.</div>
+                                    <a class="purpletext">Pelajari lebih lanjut</a>
 
                                     <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
 
-                                    <div class="text-diskon">Besarnya Diskon :</div>
-                                    <input (keypress)="keyPress($event)" formControlName="value" class="form-control input-diskon" (keyup)="discPrice($event)" type="text" autofocus> <span class="percent-diskon"> % </span>
-                                    <div class="price-diskon">Rp. {{tripProvider[data].publish_price}} </div>
+                                    <div class="col-md-12" *ngFor="let date of tripProvider[data].date_trip; let y= index">
+                                        <input type="checkbox" class="checkbox" value="0" (click)="checked($event,y, $event.target.value)">
+                                        <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
+                                    </div>
 
-                                </div>
-                                <div class="col-md-9" *ngFor="let date of tripProvider[data].date_trip; let y = index">
-                                    <input [disabled]="!f.valid" type="checkbox" value="{{discount_price}}" (click)="checkedDiscount($event, $event.target.value, y)" class="checkbox">
-                                    <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
-                                </div>
-
-                                <div class="wrap-btn">
-                                    <span data-dismiss="modal" class="batal">Batal</span>
-                                    <button class="btn-trv-hapus" type="submit" (click)="onSubmitDiskon()" data-dismiss="modal">Simpan</button>
+                                    <div class="wrap-btn">
+                                        <span data-dismiss="modal" class="batal">Batal</span>
+                                        <button class="btn-trv-hapus" data-dismiss="modal" (click)="onSubmitKosong()" type="submit" id="{{trip._id}}">Kosongkan</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
+                <!-- modal Beri Diskon -->
+                <div class="modal fade" id="beridiskonModal" role="dialog">
+                    <form #f="ngForm" [formGroup]="diskonForm" (ngSubmit)="onSubmitDiskon()">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="wrap-modal-content-diskon">
+                                <div class="wrap-modal-header">
+                                    Beri Diskon
+                                </div>
+                                <div class="wrap-modal-body">
+
+                                    <div class="confirm-delete"> Beri Diskon untuk meningkatkan penjualan Trip Anda. Atur dan pertimbangkan fasilitas yang ditawarkan di menu Ubah Trip.</div>
+                                    <div class="pinktext">Besarnya diskon berlaku untuk semua tanggal trip yang dipilih.</div>
+
+                                    <div class="wrap-content-body">
+
+                                        <p class="confirm-delete"> Pilih Tanggal Keberangkatan : </p>
+
+                                        <div class="text-diskon">Besarnya Diskon :</div>
+                                        <input (keypress)="keyPress($event)" formControlName="value" class="form-control input-diskon" (keyup)="discPrice($event)" type="text" autofocus> <span class="percent-diskon"> % </span>
+                                        <div class="price-diskon">Rp. {{tripProvider[data].publish_price}} </div>
+
+                                    </div>
+                                    <div class="col-md-9" *ngFor="let date of tripProvider[data].date_trip; let y = index">
+                                        <input [disabled]="!f.valid" type="checkbox" value="{{discount_price}}" (click)="checkedDiscount($event, $event.target.value, y)" class="checkbox">
+                                        <label class="label-checkbox-search"> {{date | date:"fullDate"}} </label>
+                                    </div>
+
+                                    <div class="wrap-btn">
+                                        <span data-dismiss="modal" class="batal">Batal</span>
+                                        <button class="btn-trv-hapus" type="submit" (click)="onSubmitDiskon()" data-dismiss="modal">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+                <a class="info-detail-trip" (click)="goDetail($event)" id="{{trip._id}}">Lihat Detail Trip</a>
             </div>
-
-
-
-            <a class="info-detail-trip" (click)="goDetail($event)" id="{{trip._id}}">Lihat Detail Trip</a>
         </div>
+    </div>
+
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+        <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
+<a (click)="setPage(1)">First</a>
+</li> -->
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+        </li>
+        <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+<a (click)="setPage(pager.totalPages)">Last</a>
+</li> -->
+    </ul>
+</div>
+
+<div class="wrap-oops" *ngIf="pageOps">
+    <div class="wrap-img-oops">
+        <img src="../../assets/img/oops.png" class="img-oops">
+    </div>
+    <div class="tittle-oops"> Oops!</div>
+    <div class="text-oops"> Anda belum memiliki Trip yang dijual.</div>
+    <div class="wrap-btn-oops">
+        <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
     </div>
 </div>

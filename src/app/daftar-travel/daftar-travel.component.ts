@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Http } from '@angular/http';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validator, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-daftar-travel',
@@ -15,10 +17,11 @@ export class DaftarTravelComponent implements OnInit {
   activeModal:boolean= false;
   blurModal:boolean= false;
   responModal:boolean = false;
-  photo:any = '../assets/img/user.png';
+  photo:any = '../assets/img/provider_jual trip_upload logo edit.png';
   size;
   type;
   imgError:boolean = true;
+  cek = false;
 
   toggleLogin():void {
     this.activeModal = false;
@@ -116,7 +119,7 @@ displayFieldCss(field: string) {
   }
 
 
-  constructor( public appService:AppService, private fb:FormBuilder, private http:Http ) {
+  constructor( public router :Router, public appService:AppService, private fb:FormBuilder, private toastr: ToastrService, private http:Http ) {
     this.appService.getProvinceTrip().subscribe(province => {
       this.province = province.data;   
     });
@@ -126,8 +129,14 @@ displayFieldCss(field: string) {
     if (this.myForm.controls.travel_name.valid && this.myForm.controls.slogan.valid && this.myForm.controls.description.valid && this.myForm.controls.office_address.valid && this.myForm.controls.province.valid && this.myForm.controls.office_phone_number.valid && this.myForm.controls.domain.valid && this.myForm.controls.medsoc_account.valid ) 
     
     {
-      this.activeModal = true;
-      this.blurModal = true;
+      if (this.cek == false) {
+
+        this.toastr.error('Harap isi bagian persetujuan');
+      } 
+      else {
+        this.activeModal = true;
+        this.blurModal = true;
+      }
         
     } else {
       this.validate1('travel_name');
@@ -138,31 +147,38 @@ displayFieldCss(field: string) {
       this.validate1('office_phone_number');
       this.validate1('domain');
       this.validate1('medsoc_account');
-    }      
+    }       
    }
 
    onSubmitTravel() {
     
     this.appService.postBeTravel(this.myForm.value).subscribe(travel => {
-      console.log(travel);
+      // console.log(travel);
 
       if(travel.status == 200) {
 
-        this.activeModal = false;
-        this.blurModal = true;
-        this.responModal = true;
-        this.text200 = true;
-        this.text400 = false;
+        // this.activeModal = false;
+        // this.blurModal = true;
+        // this.responModal = true;
+        // this.text200 = true;
+        // this.text400 = false;
+
+        this.toastr.success('Permintaan anda telah dikirim, mohon tunggu untuk konfirmasi admin');
+
+        this.router.navigate(['/'])
         
                 
 
       } else if (travel.status == 400) {
         
-        this.activeModal = false;
-        this.blurModal = true;
-        this.responModal = true; 
-        this.text400 = true;
-        this.text200 = false;
+        // this.activeModal = false;
+        // this.blurModal = true;
+        // this.responModal = true; 
+        // this.text400 = true;
+        // this.text200 = false;
+
+        this.toastr.error('Anda telah melakukan registrasi sebelumnya');
+        // this.router.navigate(['/'])
         
       }
 
@@ -220,6 +236,14 @@ displayFieldCss(field: string) {
 
     close() {
       this.imgError = true;
+    }
+
+    cekTerm(e){
+      if(e.target.checked) {
+        this.cek=true;
+      } else {
+        this.cek= false;
+      }
     }
 
   ngOnInit() {

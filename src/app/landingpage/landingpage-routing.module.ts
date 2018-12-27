@@ -6,10 +6,12 @@ import { LandingpageComponent } from './landingpage.component';
 
 
 const routes: Routes = [
+
   {
-    
-    path:'', component:LandingpageComponent 
-     
+    path:'', component:HeaderComponent,
+    children:[
+      {path:'', component:LandingpageComponent}
+    ]  
   }
 ];
 

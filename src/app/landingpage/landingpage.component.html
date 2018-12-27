@@ -1,31 +1,21 @@
 <!-- <app-loader *ngIf="showSpinner"></app-loader> -->
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
-<div class="container-fluid-page">
+<div class="container">
     
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="../assets/img/edit2.jpg" class="img-slider" alt="pulau">
+                    <li data-target="#myCarousel" *ngFor="let poto of dataPromo; let i=index" class="{{(i==0)? 'active':''}}"></li>
+                  </ol>
+          
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    <div *ngFor="let photo of dataPromo; let i=index" class="item {{(i == 0)?'active':''}}">
+                        <img src="{{photo.photo_promo}}" class="img-slider" alt="pulau">
                     </div>
-
-                    <div class="item">
-                        <img src="../assets/img/edit2.jpg" class="img-slider" alt="pulau">
-                    </div>
-
-                    <div class="item">
-                        <img src="../assets/img/edit2.jpg" class="img-slider" alt="pulau">
-                    </div>
-                </div>
+                  </div>
 
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -48,10 +38,10 @@
                             <div class="form-group">
                                 <label for="lokasi">Lokasi : </label>
                                 <select class="form-control" (change)="getprovinsi($event)">
-                                            <option value="" disabled selected>Pilih Lokasi</option>
-									 		<option *ngFor="let p of profinsi" [value]="p._id">{{ p.province_name }}</option>
-									 		
-									 	</select>
+                                    <option value="" disabled selected>Pilih Lokasi</option>
+                                    <option *ngFor="let p of profinsi" [value]="p._id">{{ p.province_name }}</option>
+                                    
+                                </select>
                             </div>
                         </div>
 
@@ -72,7 +62,7 @@
                                 <label for="tanggal">Tanggal Berangkat :</label>
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                            <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions" required></my-date-picker>
+                                            <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions"></my-date-picker>
                                         <!-- <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
                                     </div>
                                 </div>
@@ -95,7 +85,7 @@
                             <div class="form-group">
                                 <label for="optradio">Jenis Trip : </label>
                                 <div class="radio" (change)="getType($event)">
-                                    <label class="radio" *ngFor="let name of type_trip"><input type="radio" name="radios" value="{{name._id}}"><span class="outer"><span class="inner"></span></span>{{name.type_trip}}</label>
+                                    <label class="radio" *ngFor="let name of type_trip"><input type="radio" name="radios" value="{{name._id}}"><span class="outer"><span class="inner"></span></span>{{name.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</label>
                                     <!-- <label class="radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>Private</label> -->
                                 </div>
                             </div>
@@ -133,34 +123,39 @@
                 <div *ngFor="let trip of diskon; let i=index" >
                     <div *ngIf="i<6" >
                         <div class="col-md-2 col-sm-4 col-xs-6">
-                            <a >
-                                <div class="thumb-promo">
-                                    <div class="favorit">
-                                        <span class="glyphicon glyphicon-heart fav" (click)="favorit(trip._id)" [ngClass]="{'change' : change}"></span>
-                                    </div>
-                                    <div (click)="goToDetail(trip._id)">
-                                        <img src="{{trip.photo_trip['0']}}" class="img-promo">
-                                        <div class="disc">{{trip.discount_date[0] === undefined ? '' : '- ' + trip.discount_date[0] + '% '}}</div>
-                                        <div class="trip">Open</div>
-                                        <!-- <div class="private-trip">Private</div> -->
-                                        <div class="body-caption" id="{{trip._id}}">
-                                            <div class="row">
-                                                <div class="col-md-6 col-sm-6 ">
-                                                    <span class="icon-star" *ngFor="let stars of counterStars((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span>
-                                                </div>
-                                                <div class="price pull-right">
-                                                    <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
-                                                </div>
+                            <div class="thumb-promo">
+                                <div class="favorit">
+                                    <span class="glyphicon glyphicon-heart fav" (click)="favorit(trip._id)" [ngClass]="{'change' : change}"></span>
+                                </div>
+                                <div (click)="goToDetail(trip._id)" class="go-detail">
+                                    <img src="{{trip.photo_trip['0']}}" class="img-promo">
+                                    <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div>
+                                    <div class="trip">Open</div>
+                                    <div class="body-caption">
+                                        <div class="cover-star">
+                                            <div style="display:inline;">
+                                                    <img *ngFor="let star of trip_star; let i = index" src="{{(star)? star : starEmpty}}" class="icon-star">
+                                                    <!-- <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
+                                                    <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
+                                                    <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
+                                                    <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star"> -->
+                                                <!-- <img src="https://img.travinesia.com/icon/ikon card trip_bintang_16x16.png" class="imaga-icon" *ngFor="let stars of counterStars((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"> -->
+                                                <!-- <span class="icon-star" *ngFor="let stars of counterStars((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span> -->
                                             </div>
-                                            <div class="caption-tittle"> {{ trip.trip_name }} </div>
-                                            <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
-                                            <a [routerLink]="['/EtalaseTravel']">
-                                                <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{trip.provider.travel_name}}</div>
-                                            </a>
+                                            <div class="price pull-right">
+                                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
+                                            </div>
                                         </div>
+                                        <div class="caption-tittle">
+                                            {{ trip.trip_name }} 
+                                        </div>
+                                        <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
+                                        <a [routerLink]="['/EtalaseTravel']">
+                                            <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{trip.provider.travel_name}}</div>
+                                        </a>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -170,3 +165,47 @@
 </div>
 
 <!-- <app-footer></app-footer> -->
+<div class="footer">
+    <div class="col-md-2">
+        <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Travinesia</p>
+        <p class="cr-tittle" >Tentang Travinesia</p>
+        <p class="cr-tittle" (click)="gototerm()">Hubungi Kami</p>
+        <p class="cr-tittle" routerLink="/termCondition">Syarat dan Ketentuan</p>
+        <p class="cr-tittle" (click)="gototerm()">Karir</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Informasi</p>
+        <p class="cr-tittle" [routerLink]="['/JadiTravel']">Jadi Travel di Travinesia</p>
+        <p class="cr-tittle" (click)="gototerm()">Pesan Paket Wisata</p>
+        <p class="cr-tittle" (click)="gototerm()">Promo</p>
+        <p class="cr-tittle" (click)="goDiskon()">Diskon</p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Kontak</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-earphone"></span> (+62) 897 1234 4321</p>
+        <p class="cr-tittle"><span class="glyphicon glyphicon-envelope"></span> ask@travinesia.com</p>
+        <p class="cr-tittle">Dramaga Cantik Residence Blok K51 Bogor, Jawa Barat Indonesia </p>
+    </div>
+
+    <div class="col-md-2">
+        <p class="cr-head">Ikuti Kami</p>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-facebook.png" class="imaga-icon"></span>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-instagram.png" class="imaga-icon"></span>
+        <span class="cr-tittle"><img src="https://img.travinesia.com/iconweb/logo-twitter.png" class="imaga-icon"></span>
+    </div>
+
+    <!-- <div class="col-md-2">
+        <p class="cr-head">Download App</p>
+        <p class="cr-tittle">Logo</p>
+    </div> -->
+</div>
+
+<div class="footer-black">
+    <p class="cr-black">Copyright &copy; 2017 Travinesia</p>
+</div>

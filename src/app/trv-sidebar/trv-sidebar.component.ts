@@ -24,7 +24,7 @@ export class TrvSidebarComponent implements OnInit {
     this.appService.getUsers().subscribe(user =>{
       this.dataUser = user.data;
       this.photo = user.data.photo;
-      console.log(this.dataUser);
+      // console.log(this.dataUser);
     })
    }
 

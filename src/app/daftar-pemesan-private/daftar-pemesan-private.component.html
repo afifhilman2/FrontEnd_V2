@@ -31,43 +31,65 @@
 
     </div>
 
-    <div class="wrap-btn-trv">
+    <!-- <div class="wrap-btn-trv">
         <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="daftarChange($event.target.value)" class="form-control form-tgl">
                     <option *ngFor="let date of date_trip; let x = index" value="{{x}}" > {{date | date:"fullDate"}}</option>
                   </select>
-        <span class="sisa-kuota">Maksimal Kuota : <span class="highlight-kuota"> </span> {{quota_left}}</span>
-    </div>
+        <span class="sisa-kuota">Maksimal Kuota : <span class="highlight-kuota"> </span> </span>
+    </div> -->
 </div>
 
-<div class="wrap-private-box">
+<div *ngIf="pageData">
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <th>Pemesan</th>
-                <th>Waktu Pemesanan</th>
-                <th>Dipesan</th>
-                <th>Status</th>
-            </thead>
+    <div class="wrap-private-box">
 
-            <tbody>
-                <tr *ngFor="let booking of booking">
-                    <td>{{booking.order_name}}</td>
-                    <td>{{booking.created_at | date:"fullDate"}}</td>
-                    <td>{{booking.quantity}}</td>
-                    <td>{{booking.id_statusTrip.status_trip}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <th>Pemesan</th>
+                    <th>Waktu Pemesanan</th>
+                    <th>Dipesan</th>
+                    <th>Status</th>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let booking of booking">
+                        <td>{{booking.order_name}} {{booking.no_booking}}</td>
+                        <td>{{booking.created_at | date:"fullDate"}}</td>
+                        <td>{{booking.quantity}}</td>
+                        <td>{{booking.id_statusTrip.status_trip}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="msg-agen">Pesan untuk Agen Travel (Anda) : </p>
+        <div class="box-msg-agen"> {{msg_travel}} </div>
+
+        <p class="info-msg-agen">Jangan terlambat, diskusikan lebih lanjut di Whatsapp, Ayo berikan pelayanan terbaik ! </p>
+        <p class="no-hp">No. HP Pemesan : </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box-number-phone">
+                    {{no_hp}}
+                </div>
+            </div>
+            <div class="col-md-offset-9">
+                <button (click)="acceptTrip($event)" id="{{id}}" class="btn-trv-terima">Terima</button>
+            </div>
+        </div>
     </div>
 
-    <p class="msg-agen">Pesan untuk Agen Travel (Anda) : </p>
-    <div class="box-msg-agen"> </div>
+</div>
 
-    <p class="info-msg-agen">Jangan terlambat, diskusikan lebih lanjut di Whatsapp, Ayo berikan pelayanan terbaik ! </p>
-    <p class="no-hp">No. HP Pemesan : </p>
-
-    <div class="box-number-phone">
-        085678254252
+<div class="wrap-oops" *ngIf="pageOps">
+    <div class="wrap-img-oops">
+        <img src="../../assets/img/oops.png" class="img-oops">
     </div>
+    <div class="tittle-oops"> Oops!</div>
+    <div class="text-oops"> Anda belum memiliki daftar pemesanan trip.</div>
+    <!-- <div class="wrap-btn-oops">
+            <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
+        </div> -->
 </div>

@@ -2,7 +2,7 @@
 
 <div class="wrap-paket-trip-daftar">
     <div class="wrap-content-paket-trip">
-        <img class="img-paket-trip" src="../assets/img/trip.jpg">
+        <img class="img-paket-trip" src="{{photo_trip}}">
 
         <div class="wrap-info-paket-trip">
             <p class="tittle-paket-trip">{{trip_name}} </p>
@@ -41,38 +41,67 @@
 </div>
 
 <div class="wrap-sort-pesan">
-    <span class="sort-by">Urutkan Berdasarkan : </span>
-    <select class="form-control form-sort">
+    <span class="sort-by"> 
+        <!-- Urutkan Berdasarkan :  -->
+    </span>
+    <!-- <select class="form-control form-sort">
                 <option>Pesanan Baru (Waktu Diterima)</option>
                 <option>Sabtu, 14 Desember 2018</option>
                 <option>Sabtu, 14 Desember 2018</option>
                 <option>Sabtu, 14 Desember 2018</option>
                 <option>Sabtu, 14 Desember 2018</option>	
-              </select>
+              </select> -->
 
-    <button class="unduh-data-peserta">Unduh Data Peserta </button>
+    <button (click)="download()" class="unduh-data-peserta">Unduh Data Peserta </button>
 </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <th>Pemesan</th>
-            <th>Waktu Pemesanan</th>
-            <th>Kuota Dipesan</th>
-            <th>Status</th>
-            <th>Konfirmasi Travel</th>
-        </thead>
+<div *ngIf="pageData">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Pemesan</th>
+                <th>Waktu Pemesanan</th>
+                <th>Kuota Dipesan</th>
+                <th>Status</th>
+                <th>Konfirmasi Travel</th>
+            </thead>
 
-        <tbody>
-            <tr *ngFor="let booking of booking">
-                <td>{{booking.order_name}} </td>
-                <td>{{booking.created_at | date:"fullDate"}}</td>
-                <td>{{booking.quantity}}</td>
-                <td>{{booking.id_statusTrip.status_trip}}</td>
-                <td (click)="acceptTrip($event)">
-                    <div id="{{booking._id}}" class="accept-table">{{booking.id_statusTrip.id_status == "2"? "Terima" : ''}}</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            <tbody>
+                <tr *ngFor="let booking of pagedItems">
+                    <td>{{booking.order_name}} </td>
+                    <td>{{booking.created_at | date:"fullDate"}}</td>
+                    <td>{{booking.quantity}}</td>
+                    <td>{{booking.id_statusTrip.status_trip}}</td>
+                    <td (click)="acceptTrip($event)">
+                        <div id="{{booking._id}}" class="accept-table">{{booking.id_statusTrip.id_status == "2"? "Terima" : ''}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPageSaldo(pager.currentPage - 1)">&laquo;</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPageSaldo(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPageSaldo(pager.currentPage + 1)">&raquo;</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="wrap-oops" *ngIf="pageOps">
+    <div class="wrap-img-oops">
+        <img src="../../assets/img/oops.png" class="img-oops">
+    </div>
+    <div class="tittle-oops"> Oops!</div>
+    <div class="text-oops"> Anda belum memiliki daftar pemesanan trip.</div>
+    <!-- <div class="wrap-btn-oops">
+        <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
+    </div> -->
 </div>

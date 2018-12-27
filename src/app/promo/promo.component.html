@@ -1,51 +1,42 @@
-<main id="page-content-wrapper" role="main">
+<div class="coming-soon">
+  <p>Fitur ini Dalam Pengembangan,</p>
+  <span>Silahhkan Hubungi Nomor</span>
+</div>
+<!-- <main id="page-content-wrapper" role="main">
   <p class="profil">Promo</p>
   <p class="masukan-profil">Tanyakan semua hal terkait Trip kepada Agen Travel di Pesan Masuk. Ciptakan komuniasi dan Trip yang menyenangkan
     dimulai dari Pesan Masuk.</p>
 
   <div class="history-chat">
-    <a class="link" (click)="showChat()">
-    <div class="chat">
+    <a class="link" >
+    <div class="chat" *ngFor="let promo of dataPromo" (click)="showChat(promo._id)">
         <div class="keterangan">
-          <span>Kuylah Travel Indonesia</span><span class="time">Baru</span>
-          <p class="text-chat">masih ada gan silahkan book lagi</p>
+          <span>{{promo.promo_name}}</span><span class="time">Baru</span>
+          <p class="text-chat">{{promo.description}}</p>
         </div>
     </div>
     </a>
-    <div class="chat">
-      <div class="keterangan">
-        <span>Kuylah Travel Indonesia</span><span class="time">Baru</span>
-        <p class="text-chat">masih ada gan silahkan book lagi</p>
-      </div>
-    </div>
   </div>
 
 
-  <div *ngIf='showChatText' class="content-chat">
+  <div [hidden]="promoId==null" class="content-chat">
     <div class="header-chat">
-      <img src="assets/img/1.jpg" class="akun-image">
+      <img src="{{detailPromo?.photo_promo}}" class="akun-image">
     </div>
     <div class="percakapan">
-      <p>Promo Idul Fitri dari Travinesia</p>
-      <span>Simply dummy text of the printing and typesetting industry. Lorem Ipsum
-        has been the industry's standard dummy text ever since the 1500s, when
-        an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap
-        into electronic typesetting, remaining essentially unchanged. It was
-        popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing
-        software like Aldus PageMaker including versions of Lorem Ipsum</span>
+      <p>{{detailPromo?.promo_name}}</p>
+      <div class="description">{{detailPromo?.description}}</div>
     </div>
     <div class="send-chat">
         <div class="send">
           <p class="period"><i class="glyphicon glyphicon-time glp"></i>
-          <span class="title">Periode Promo <span class="titik-dua">:</span> <span class="content">10 Juli - 10 Agustus</span></span></p>
+          <span class="title">Periode Promo <span class="titik-dua">:</span> <span class="content">{{detailPromo?.created_at | date:' dd MMM yyyy'}} - {{detailPromo?.expiration_date | date:'dd MMM yyyy'}}</span></span></p>
 
           <p class="code"><i class="glyphicon glyphicon-dashboard glp"></i>
-          <span class="title">Kode Promo <span class="titik-dua">:</span> <span class="content">TRAVILEBARAN!</span></span></p>
+          <span class="title">Kode Promo <span class="titik-dua">:</span> <span class="content">{{detailPromo?.promo_code}}</span></span></p>
         </div>
     </div>
   </div>
 </main>
 
-
+ -->

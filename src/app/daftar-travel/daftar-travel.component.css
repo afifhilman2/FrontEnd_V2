@@ -95,6 +95,18 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #4a4a4a;
+    margin-top: 23px;
+}
+
+.label-form-nama {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    margin-top: -11px;
 }
 
 .namaTrv {
@@ -128,7 +140,7 @@
 }
 
 .alamatTrv {
-    width: 213px;
+    width: 203px;
     height: 125px;
     border-radius: 3px;
     background-color: #ffffff;
@@ -164,6 +176,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #4a4a4a;
+    padding-left: 8px;
 }
 
 .nomorTrv {
@@ -183,7 +196,18 @@
     letter-spacing: normal;
     color: #9c27b0;
     margin-top: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+}
+
+.domain-info {
+    font-size: 11px;
+    color: #4a4a4a;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    margin-bottom: 18px;
+    text-align: justify;
 }
 
 .domainTrv {
@@ -221,6 +245,7 @@
     line-height: 1.55;
     letter-spacing: normal;
     color: #4a4a4a;
+    margin-left: 7px;
 }
 
 .btn-daftar-trv {
@@ -238,6 +263,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .logo {
@@ -290,10 +316,11 @@ li>a:hover {
     left: 40%;
     z-index: 9999;
     width: 342px;
-    height: 450px;
-    border-radius: 3px;
+    /* height: 450px; */
+    border-radius: 10px;
     background-color: #ffffff;
     padding: 11px;
+    box-shadow: 0px 0px 6px 1px #4a4a4a;
 }
 
 .wrap-modal-respon {
@@ -318,7 +345,7 @@ li>a:hover {
     width: 31px;
     height: 31px;
     line-height: 31px;
-    border-radius: 3px;
+    border-radius: 50%;
     background-color: #d24d57;
     cursor: pointer;
 }
@@ -328,7 +355,7 @@ li>a:hover {
 }
 
 .wrap-foto-content {
-    margin: 38px 58px;
+    margin: 18px 58px;
     width: 204px;
     height: 204px;
 }
@@ -343,6 +370,8 @@ li>a:hover {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
+    /* border: 2px solid #9e9e9e; */
 }
 
 .tittle-foto {
@@ -429,4 +458,39 @@ li>a:hover {
     position: absolute;
     top: 60px;
     right: 25px;
+}
+
+.margin-checkbox {
+    margin-bottom: 40px;
+}
+
+
+/* mini footer */
+
+.footer-black {
+    width: 100%;
+    height: 52px;
+    background-color: #9c27b0;
+    padding: 15px;
+    margin-top: 73px;
+}
+
+.cr-black {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.footer-brand-logo {
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    margin-top: -2px;
+    margin-left: 10px;
 }

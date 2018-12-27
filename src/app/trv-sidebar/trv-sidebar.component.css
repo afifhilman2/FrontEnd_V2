@@ -26,7 +26,7 @@
     border: solid 1px #ab47bc;
     padding: 1px;
     display: inline-block;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .akun-name {

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 import { LandingPageRouterModule } from './landingpage-routing.module';
 import { LandingpageComponent } from './landingpage.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { HeaderComponent } from '../header/header.component';
 
 
 
@@ -19,6 +20,7 @@ import { MyDatePickerModule } from 'mydatepicker';
   ],
   declarations: [
     LandingpageComponent,
+    HeaderComponent
    ],
  
 })

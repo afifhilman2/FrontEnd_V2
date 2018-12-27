@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../app.service';
 import { DatePipe } from '@angular/common';
 import { Http, Response, Headers } from '@angular/http'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-proses-bayar',
@@ -38,7 +39,7 @@ export class ProsesBayarComponent implements OnInit {
 
   // loaded: boolean = true;
 
-  constructor(private active: ActivatedRoute,private http:Http, private router: Router, private appService: AppService, private datePipe: DatePipe) {
+  constructor(private toastr: ToastrService ,private active: ActivatedRoute,private http:Http, private router: Router, private appService: AppService, private datePipe: DatePipe) {
     // let id = this.active.snapshot.params['id']
     // this.idBooking = id;
     // this.appService.getUsers().subscribe(getUser =>{
@@ -65,18 +66,11 @@ export class ProsesBayarComponent implements OnInit {
     
   }
 
-  choosePayment(id_payment, id_type_payment){
-    
-    this.boking.id_paymentMethod = id_payment;
-    this.boking.id_typePayment = id_type_payment;
-    
-  }
 
    getBookingId(): void{
     this.appService.paymentBooking().subscribe( bookPayment => {
       this.payment = bookPayment.data;
-      console.log(this.payment);
-      
+      // console.log(this.payment);
       // console.log(this.bca);
     })
   }
@@ -86,7 +80,7 @@ export class ProsesBayarComponent implements OnInit {
   sendValueBank(id_payment, id_type_payment, id_payment_method){
     
     this.dataBank = id_payment_method;
-    console.log(this.dataBank);
+    // console.log(this.dataBank);
     if(this.dataBank == 3){
       this.boking.id_paymentMethod = id_payment;
       this.boking.id_typePayment = id_type_payment;
@@ -96,6 +90,8 @@ export class ProsesBayarComponent implements OnInit {
       this.boking.id_typePayment = id_type_payment;
       this.boking.admin_fee = 7500;
     }else{
+      this.boking.id_paymentMethod = id_payment;
+      this.boking.id_typePayment = id_type_payment;
       this.boking.admin_fee = 0;
     }
     // this.totalBayar = this.bayar + this.uniq + this.price;
@@ -106,10 +102,12 @@ export class ProsesBayarComponent implements OnInit {
     
     // console.log(this.boking)
     this.appService.addPayment(this.boking).subscribe(boking=>{
-      console.log(boking)
+      // console.log(boking)
       sessionStorage.setItem("booking", JSON.stringify(boking.data))
       if(boking.status == 200){
         this.router.navigate(['/ProsesBayar2'])
+      } else if(boking.status == 400){
+        this.toastr.error('Belum Memilih Metode Pembayaran')
       }
       
     })
@@ -118,6 +116,20 @@ export class ProsesBayarComponent implements OnInit {
 
   ceck(bank){
     return bank;
+  }
+
+  copyMessage(val: string){
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
   }
 
 }

@@ -2,10 +2,10 @@
     <p class="profil">Diskusi Trip</p>
     <p class="masukan-profil">Tanyakan semua pertanyaan yang bersifat umum dan terbuka kepada Agen Travel. Travinesia menyediakan Diskusi Trip untuk kamu yang juga ingin mendapatkan atau memberikan tanggapan sebuah Trip.</p>
     <!-- <div class="diskusi"> -->
-    <div class="content-diskusi" *ngFor="let discussion of discussion">
+    <div class="content-diskusi" *ngFor="let discussion of pagedItems">
         <div class="isi-tahapan-pesanan">
             <div class="gambar">
-                <img src="{{discussion.id_trip.photo_trip}}" align="center">
+                <img [src]="discussion.id_trip.photo_trip[0]">
             </div>
             <div class="detail-pesanan">
                 <div class="isi-pesanan-star">
@@ -32,7 +32,7 @@
         <div class="diskusi-pesan">
             <div class="akun">
                 <div class="akun-image">
-                    <img src="assets/img/foto.png">
+                    <img [src]="discussion.id_user.photo">
                 </div>
                 <div class="akun-text">
                     <span class="akun-name">{{discussion.id_user.name}} <span class="date-time pull-right">{{discussion.created_at | date:'dd MMMM yyyy, hh:mm z'}}</span></span>
@@ -46,14 +46,26 @@
 
             </div>
             <div class="wrap-content-comment">
-                <span class="comment-more">Lihat Komentar Sebelumnya </span>
+                <span class="comment-more" (click)="comment()" *ngIf="discussionComment">Lihat {{discussion.comments.length}} Komentar Sebelumnya </span>
 
-                <div *ngFor="let count of discussion.comments" class="content-comment">
-                    <img src="assets/img/user.png" alt="" class="img-comment">
-                    <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm z' }}</span>
-                    <span class="akun-comment">{{count.name_comment}}</span>
-                    <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
-                    <span class="comment-msg"> {{count.comment}} </span>
+                <!-- <div *ngIf="discussionComment">
+                        <div *ngFor="let count of discussion.comments" class="content-comment">
+                                <img [src]="count.photo_comment" alt="" class="img-comment">
+                                <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm z' }}</span>
+                                <span class="akun-comment">{{count.name_comment}}</span>
+                                <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
+                                <span class="comment-msg"> {{count.comment}} </span>
+                            </div>
+                </div> -->
+
+                <div *ngIf="allComments">
+                    <div *ngFor="let count of discussion.comments" class="content-comment">
+                        <img [src]="count.photo_comment" alt="" class="img-comment">
+                        <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm z' }}</span>
+                        <span class="akun-comment">{{count.name_comment}}</span>
+                        <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
+                        <span class="comment-msg"> {{count.comment}} </span>
+                    </div>
                 </div>
             </div>
 
@@ -66,5 +78,20 @@
         </div>
 
     </div>
+
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
+
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+        </li>
+
+    </ul>
     <!-- </div> -->
 </main>

@@ -37,3 +37,18 @@
     </div>
   </div>
   
+  <div *ngIf="flag_type_trip==2" class="tripDesc">
+    <div data-toggle="collapse" data-target="#harga_rombongan">
+      <span class="mainTitle">Harga Rombongan</span>
+      <i class="material-icons pull-right">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="harga_rombongan" class="collapse" style="margin-top: 5px;">
+      <div *ngFor="let qty of detailTrip?.publish_price_group;let i = index">
+        <span class="quantity-group" *ngIf="detailTrip?.publish_price_group[i+1]!=null">{{detailTrip?.min_qty_group[i]}} - {{(detailTrip?.min_qty_group[i+1]-1)+' orang'}}</span>
+        <span class="{{(qty)? 'quantity-group':''}}" *ngIf="detailTrip?.publish_price_group[i+1]==null">{{(detailTrip?.min_qty_group[i]!="")? ('≥ '+detailTrip?.min_qty_group[i]+' orang'):''}}</span>
+        <span *ngIf="qty">{{(qty)? ('Rp. '+detailTrip?.publish_price_group[i].toLocaleString('id')):''}}</span>
+      </div>
+    </div>
+  </div>

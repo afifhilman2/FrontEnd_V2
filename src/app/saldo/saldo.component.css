@@ -309,8 +309,8 @@ td {
 }
 
 .img-modal-pencarian {
-    width: 84px;
-    height: 84px;
+    width: 64px;
+    height: 64px;
 }
 
 .tittle-modal-pencarian {
@@ -328,4 +328,78 @@ td {
 .alert-error {
     color: red;
     font-size: 12px;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #4a4a4a;
+    border-radius: 50%;
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: #ab47bc;
+    border-color: #ab47bc;
+}
+
+
+/* oops */
+
+.wrap-oops {
+    width: 100%;
+    height: 328px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: -10px;
+    border: 1px solid #dddddd;
+}
+
+.wrap-img-oops {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: -12px;
+}
+
+.img-oops {
+    width: 141px;
+    height: 106px;
+    margin-top: 70px;
+}
+
+.tittle-oops {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #454545;
+    margin-bottom: 5px;
+}
+
+.text-oops {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #454545;
 }

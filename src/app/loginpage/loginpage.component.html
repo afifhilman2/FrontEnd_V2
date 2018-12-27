@@ -1,65 +1,61 @@
-<div class="trv-notice" *ngIf="massage">
-  <span class="txt-notice"> Silahkan Cek Email Anda</span>
-</div>
+
 <div class="container">
-    <div class="trv-notice" *ngIf="notifEmail">
-        <span class="txt-notice"> <b>Travinesia</b> akan selalu memberitahukan status terbaru pemesanan melaui email Anda </span>
+  <div class="trv-tema-atas">
+    <h2 class="header"><strong> Masuk di Travinesia </strong></h2>
+    <div class="garis-vertical"></div>
+    <div class="trv-punya-akun">
+      <p> Belum Punya Akun Travinesia? Daftar <a class="disini" [routerLink]="['/Daftar']">disini</a></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email"> Email </label>
+          <input id="email" type="email" class="form-control" formControlName="email"> 
+          <div class="alert trv-alert" *ngIf="formLogin.get('email').hasError('required') && formLogin.get('email').touched"> Email Tidak Boleh Kosong </div>
+        </div>
+        <div class="form-group">
+          <label for="password"> Password </label>
+          <input id="password" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"> 
+          <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
+          <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="password()"></span>
+          <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('required') && formLogin.get('password').touched"> Password Tidak Boleh Kosong </div>
+          <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('minlength') && formLogin.get('password').touched"> Minimal 8 Karakter </div> 
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-6">
+            <input type="checkbox" class="checkbox">
+            <label class="label--checkbox">
+              Ingat saya
+            </label>
+          </div>
+          <div class="col-md-6 col-xs-6">
+            <div class="lupa" [routerLink]="['/LupaPassword']">
+              Lupa Password?
+            </div>
+          </div> 
+        </div>
+        <div class="masuk-btn">
+            <button class="btn btn-daftar" type="submit">Masuk</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="button-social">
+          <div class="trv-atau">
+              Atau Masuk Dengan
+          </div> 
+          <button class="btn btn-facebook" (click)="signInWithFB()">Masuk Dengan Facebook</button>
+          <button class="btn btn-google" (click)="signInWithGoogle()">Masuk Dengan Google</button>
       </div>
-        <div class="trv-tema-atas">
-          <h2><strong> Masuk di Travinesia </strong></h2>
-          <div class="garis-vertical"></div>
-          <div class="trv-punya-akun">
-            <p> Belum Punya Akun Travinesia? Daftar <a role="button" [routerLink]="['/Daftar']">disini</a></p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <label for="email"> Email </label>
-              <input id="email" type="email" class="form-control" formControlName="email"> 
-              <div class="alert trv-alert" *ngIf="formLogin.get('email').hasError('required') && formLogin.get('email').touched"> Email Tidak Boleh Kosong </div>
-              
-      
-            </div>
-            <div class="form-group">
-              <label for="password"> Password </label>
-              <input id="password" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"> 
-              <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
-              <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="password()"></span>
-              <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('required') && formLogin.get('password').touched"> Password Tidak Boleh Kosong </div>
-              <div class="alert trv-alert" *ngIf="formLogin.get('password').hasError('minlength') && formLogin.get('password').touched"> Minimal 8 Karakter </div> 
-            </div>
-            <div>
-              <div class="col-md-6">
-                <input type="checkbox" class="checkbox">
-                <label class="label--checkbox">
-                  Ingat saya
-                </label>
-              </div>
-              <div class="col-md-6">
-                <a role="button" [routerLink]="['/LupaPassword']">
-                  <p class="lupa">Lupa Password?</p>
-                </a>
-              </div> 
-            </div>
-            <button class="btn btn-daftar pull-right" type="submit">Masuk</button>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="trv-atau">
-              <p>Atau</p>
-            </div>
-          </div>  
-          <div class="row">
-            <div class="col-md-4">
-              <button class="btn btn-facebook">Daftar Dengan Facebook</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <button class="btn btn-google">Daftar Dengan Google</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+
+<div class="footer-black">
+  <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
+  <p class="cr-black pull-right">Copyright &copy; 2017 Travinesia</p>
+</div>

@@ -14,56 +14,68 @@
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="open-trip">
-            <div *ngFor="let data of transaction; let i = index">
-                <div *ngIf="data.id_type_trip.type_trip == 'Open Trip'">
-                    <div class="wrap-paket-trip">
-                        <div class="wrap-content-paket-trip">
-                            <img class="img-paket-trip" src="{{data.photo_trip[0]}}">
+            <div *ngIf="pageDataOpen">
+                <div *ngFor="let data of pagedItems; let i = index">
+                    <div>
+                        <div class="wrap-paket-trip">
+                            <div class="wrap-content-paket-trip">
+                                <img class="img-paket-trip" src="{{data.photo_trip[0]}}">
 
-                            <div class="wrap-info-paket-trip">
-                                <p class="tittle-paket-trip">{{data.trip_name}} </p>
+                                <div class="wrap-info-paket-trip">
+                                    <p class="tittle-paket-trip">{{data.trip_name}} </p>
 
-                                <div class="tittle-info">Durasi
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.days}} Hari {{data.night === 0 ? '' : data.night + ' Malam' }}</div>
+                                    <div class="tittle-info">Durasi
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.days}} Hari {{data.night === 0 ? '' : data.night + ' Malam' }}</div>
+                                    </div>
+
+                                    <div class="tittle-info">Kategori
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.category[0].category_name}}</div>
+                                    </div>
+
+                                    <div class="tittle-info">Jenis Trip
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.id_type_trip.type_trip}}</div>
+                                    </div>
                                 </div>
 
-                                <div class="tittle-info">Kategori
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.category[0].category_name}}</div>
+                                <div class="wrap-info-harga">
+                                    <div class="tittle-info-harga">Harga per orang :</div>
+                                    <div class="info-harga">Rp {{data.publish_price}}</div>
+                                    <div class="info-kuota">Kuota : {{data.quota_trip}}</div>
+                                    <a class="info-detail-trip" (click)="goDetail($event)" id="{{data._id}}">Lihat Detail Trip</a>
                                 </div>
 
-                                <div class="tittle-info">Jenis Trip
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.id_type_trip.type_trip}}</div>
-                                </div>
                             </div>
 
-                            <div class="wrap-info-harga">
-                                <div class="tittle-info-harga">Harga per orang :</div>
-                                <div class="info-harga">Rp {{data.publish_price}}</div>
-                                <div class="info-kuota">Kuota : {{data.quota_trip}}</div>
-                                <a class="info-detail-trip" (click)="goDetail($event)" id="{{data._id}}">Lihat Detail Trip</a>
+                            <div class="wrap-btn-trv">
+                                <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="dateChange($event.target.value,i)" class="form-control form-tgl">
+                                                                    <option *ngFor="let date of data.date_trip; let j = index" value="{{j}}">{{date | date:"fullDate"}}</option>
+                                                                    </select>
+                                <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> {{quantity[i]}}</span> </span>
+                                <button class="btn-trv-daftar" (click)="togglePesan($event)" id="{{data._id}}">Lihat Daftar Pemesan </button>
                             </div>
-
-                        </div>
-
-                        <div class="wrap-btn-trv">
-                            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="dateChange($event.target.value,i)" class="form-control form-tgl">
-                                                        <option *ngFor="let date of data.date_trip; let j = index" value="{{j}}">{{date | date:"fullDate"}}</option>
-                                                        </select>
-                            <span class="sisa-kuota">Sisa Kuota : <span class="highlight-kuota"> {{quantity[i]}}</span> </span>
-                            <button class="btn-trv-daftar" (click)="togglePesan($event)" id="{{data._id}}">Lihat Daftar Pemesan </button>
                         </div>
                     </div>
                 </div>
             </div>
 
+
+            <div class="wrap-oops" *ngIf="pageOpsOpen">
+                <div class="wrap-img-oops">
+                    <img src="../../assets/img/oops.png" class="img-oops">
+                </div>
+                <div class="tittle-oops"> Oops!</div>
+                <div class="text-oops"> Anda belum memiliki pesanan trip.</div>
+                <div class="wrap-btn-oops">
+                    <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
+                </div>
+            </div>
+
             <!-- pager -->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
-                <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
-                <a (click)="setPage(1)">First</a>
-            </li> -->
+            <ul *ngIf="pagerPrivate.pages && pagerPrivate.pages.length" class="pagination pull-right">
+
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
                     <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
                 </li>
@@ -73,78 +85,89 @@
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
                     <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
                 </li>
-                <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                <a (click)="setPage(pager.totalPages)">Last</a>
-            </li> -->
+
             </ul>
 
         </div>
 
         <div role="tabpanel" class="tab-pane" id="private-trip">
 
-            <div *ngFor="let data of transaction; let i = index">
-                <div *ngIf="data.id_type_trip.type_trip == 'Private Trip'">
-                    <div class="wrap-paket-trip">
-                        <div class="wrap-content-paket-trip">
-                            <img class="img-paket-trip" src="{{data.photo_trip[0]}}">
+            <div *ngIf="pageDataPrivate">
+                <div *ngFor="let data of pagedItemsPrivate; let x = index">
+                    <div>
+                        <div class="wrap-paket-trip">
+                            <div class="wrap-content-paket-trip">
+                                <img class="img-paket-trip" src="{{data.photo_trip[0]}}">
 
-                            <div class="wrap-info-paket-trip">
-                                <p class="tittle-paket-trip">{{data.trip_name}} </p>
+                                <div class="wrap-info-paket-trip">
+                                    <p class="tittle-paket-trip">{{data.trip_name}} </p>
 
-                                <div class="tittle-info">Durasi
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.days}} Hari {{data.night === 0 ? '' : data.night + ' Malam' }}</div>
+                                    <div class="tittle-info">Durasi
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.days}} Hari {{data.night === 0 ? '' : data.night + ' Malam' }}</div>
+                                    </div>
+
+                                    <div class="tittle-info">Kategori
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.category[0].category_name}}</div>
+                                    </div>
+
+                                    <div class="tittle-info">Jenis Trip
+                                        <span class="colon-info">:</span>
+                                        <div class="tittle-info-value">{{data.id_type_trip.type_trip}}</div>
+                                    </div>
                                 </div>
 
-                                <div class="tittle-info">Kategori
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.category[0].category_name}}</div>
+                                <div class="wrap-info-harga">
+                                    <div class="tittle-info-harga-private">Harga per orang :</div>
+                                    <div class="info-harga-private">Rp {{data.publish_price}}</div>
+                                    <a class="info-detail-trip" (click)="goDetail($event)" id="{{data._id}}">Lihat Detail Trip</a>
                                 </div>
 
-                                <div class="tittle-info">Jenis Trip
-                                    <span class="colon-info">:</span>
-                                    <div class="tittle-info-value">{{data.id_type_trip.type_trip}}</div>
-                                </div>
                             </div>
 
-                            <div class="wrap-info-harga">
-                                <div class="tittle-info-harga-private">Harga per orang :</div>
-                                <div class="info-harga-private">Rp {{data.publish_price}}</div>
-                                <a class="info-detail-trip" (click)="goDetail($event)" id="{{data._id}}">Lihat Detail Trip</a>
+                            <div class="wrap-btn-trv">
+                                <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="dateChange($event.target.value,x)" class="form-control form-tgl">
+                                                                            <option *ngFor="let date of data.date_trip; let j = index" value="{{j}}">{{date | date:"fullDate"}}</option>
+                                                                            </select>
+                                <span class="sisa-kuota">Maksimal Kuota : <span class="highlight-kuota"> {{quantity[i]}}</span> </span>
+                                <button class="btn-trv-daftar" (click)="togglePesanPrivate($event)" id="{{data._id}}">Lihat Pemesan </button>
                             </div>
 
                         </div>
-
-                        <div class="wrap-btn-trv">
-                            <span class="tgl-berangkat">Tanggal Berangkat : </span> <select (change)="dateChange($event.target.value,i)" class="form-control form-tgl">
-                                                                <option *ngFor="let date of data.date_trip; let j = index" value="{{j}}">{{date | date:"fullDate"}}</option>
-                                                                </select>
-                            <span class="sisa-kuota">Maksimal Kuota : <span class="highlight-kuota"> {{quantity[i]}}</span> </span>
-                            <button class="btn-trv-daftar" (click)="togglePesanPrivate($event)" id="{{data._id}}">Lihat Pemesan </button>
-                        </div>
-
                     </div>
+                </div>
+            </div>
+
+            <div class="wrap-oops" *ngIf="pageOpsPrivate">
+                <div class="wrap-img-oops">
+                    <img src="../../assets/img/oops.png" class="img-oops">
+                </div>
+                <div class="tittle-oops"> Oops!</div>
+                <div class="text-oops"> Anda belum memiliki pesanan trip.</div>
+                <div class="wrap-btn-oops">
+                    <button class="btn-oops" [routerLink]="['/Provider/JualTrip']"> Mulai Jual Trip</button>
                 </div>
             </div>
 
 
             <!-- pager -->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pull-right">
-                <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
-                        <a (click)="setPage(1)">First</a>
-                    </li> -->
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                    <a (click)="setPage(pager.currentPage - 1)">&laquo;</a>
+            <ul *ngIf="pagerPrivate.pages && pagerPrivate.pages.length" class="pagination pull-right">
+                <!-- <li [ngClass]="{disabled:pagerPrivate.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+        </li> -->
+                <li [ngClass]="{disabled:pagerPrivate.currentPage === 1}">
+                    <a (click)="setPage(pagerPrivate.currentPage - 1)">&laquo;</a>
                 </li>
-                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <li *ngFor="let page of pagerPrivate.pages" [ngClass]="{active:pagerPrivate.currentPage === page}">
                     <a (click)="setPage(page)">{{page}}</a>
                 </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.currentPage + 1)">&raquo;</a>
+                <li [ngClass]="{disabled:pagerPrivate.currentPage === pagerPrivate.totalPages}">
+                    <a (click)="setPage(pagerPrivate.currentPage + 1)">&raquo;</a>
                 </li>
                 <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                        <a (click)="setPage(pager.totalPages)">Last</a>
-                    </li> -->
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li> -->
             </ul>
 
         </div>
