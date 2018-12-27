@@ -22,10 +22,10 @@
 
                     <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control " placeholder="Cari Wisata">
                     <ul *ngIf="results" class="search-dropdown">
-                        <li *ngFor="let result of results | slice:0:9" class="item-search">
-                            <a (click)="goToSearch(result.trip_name)">
+                        <li *ngFor="let result of results | slice:0:9" class="item-search" (click)="goToSearch(result.trip_name)">
+                            <a >
                                 {{ result.trip_name }}
-                                </a>
+                            </a>
                         </li>
                     </ul>
                     <span class="input-group-addon">

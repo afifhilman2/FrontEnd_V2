@@ -1,21 +1,21 @@
 <!-- <app-loader *ngIf="showSpinner"></app-loader> -->
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
 <div class="container">
-    
+
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" *ngFor="let poto of dataPromo; let i=index" class="{{(i==0)? 'active':''}}"></li>
-                  </ol>
-          
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
                     <div *ngFor="let photo of dataPromo; let i=index" class="item {{(i == 0)?'active':''}}">
                         <img src="{{photo.photo_promo}}" class="img-slider" alt="pulau">
                     </div>
-                  </div>
+                </div>
 
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -62,7 +62,7 @@
                                 <label for="tanggal">Tanggal Berangkat :</label>
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                            <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions"></my-date-picker>
+                                        <my-date-picker class="dropdown-toggle" name="mydate" (dateChanged)="dateValue($event)" [options]="myDatePickerOptions"></my-date-picker>
                                         <!-- <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
                                     </div>
                                 </div>
@@ -120,8 +120,8 @@
             <a class="diskon-category lihat-diskon" (click)="goDiskon()">Lihat Semua <span class="glyphicon glyphicon-chevron-right"> </span></a>
 
             <div class="row">
-                <div *ngFor="let trip of diskon; let i=index" >
-                    <div *ngIf="i<6" >
+                <div *ngFor="let trip of diskon; let i=index">
+                    <div *ngIf="i<6">
                         <div class="col-md-2 col-sm-4 col-xs-6">
                             <div class="thumb-promo">
                                 <div class="favorit">
@@ -134,8 +134,8 @@
                                     <div class="body-caption">
                                         <div class="cover-star">
                                             <div style="display:inline;">
-                                                    <img *ngFor="let star of trip_star; let i = index" src="{{(star)? star : starEmpty}}" class="icon-star">
-                                                    <!-- <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
+                                                <img *ngFor="let star of trip_star; let i = index" src="{{(star)? star : starEmpty}}" class="icon-star">
+                                                <!-- <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
                                                     <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
                                                     <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star">
                                                     <img src="https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png" class="icon-star"> -->
@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                         <div class="caption-tittle">
-                                            {{ trip.trip_name }} 
+                                            {{ trip.trip_name }}
                                         </div>
                                         <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
                                         <a [routerLink]="['/EtalaseTravel']">
@@ -172,7 +172,7 @@
 
     <div class="col-md-2">
         <p class="cr-head">Travinesia</p>
-        <p class="cr-tittle" >Tentang Travinesia</p>
+        <p class="cr-tittle">Tentang Travinesia</p>
         <p class="cr-tittle" (click)="gototerm()">Hubungi Kami</p>
         <p class="cr-tittle" routerLink="/termCondition">Syarat dan Ketentuan</p>
         <p class="cr-tittle" (click)="gototerm()">Karir</p>
@@ -190,7 +190,7 @@
         <p class="cr-head">Kontak</p>
         <p class="cr-tittle"><span class="glyphicon glyphicon-earphone"></span> (+62) 897 1234 4321</p>
         <p class="cr-tittle"><span class="glyphicon glyphicon-envelope"></span> ask@travinesia.com</p>
-        <p class="cr-tittle">Dramaga Cantik Residence Blok K51 Bogor, Jawa Barat Indonesia </p>
+        <p class="cr-tittle">Pakuan Regency Cluster Subanglarang B8 22 Bogor, Jawa Barat Indonesia </p>
     </div>
 
     <div class="col-md-2">

@@ -254,9 +254,12 @@ label {
     text-align: left;
     padding: 7px 0;
     color: #4a4a4a;
+<<<<<<< HEAD
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+=======
+>>>>>>> f179e542353a249645b5151e842122063b58f92f
     height: 45px;
 }
 
@@ -264,6 +267,7 @@ label {
     font-size: 11px;
     text-align: left;
     color: #9e9e9e;
+    margin-top: 5px;
 }
 
 .travel-name {

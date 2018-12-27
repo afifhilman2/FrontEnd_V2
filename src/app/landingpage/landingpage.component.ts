@@ -45,13 +45,11 @@ export class LandingpageComponent implements OnInit {
   // {date : {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+2} }
   constructor(private router: Router, private appService: AppService, private toastr: ToastrService) { 
     // this.loaded = true;
-    this.appService.getDataTrip().subscribe (dataTrip => {
-      this.dataTrip = dataTrip.data;
-      this.photo = dataTrip.data.photo_trip
-      this.loaded = false;
-    });
-
-
+    // this.appService.getDataTrip().subscribe (dataTrip => {
+    //   this.dataTrip = dataTrip.data;
+    //   this.photo = dataTrip.data.photo_trip
+    //   this.loaded = false;
+    // });
     this.appService.getProvinceTrip().subscribe (province => {
       this.profinsi = province.data;
     });

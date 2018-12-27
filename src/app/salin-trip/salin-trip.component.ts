@@ -245,7 +245,6 @@ selectDays(e) {
 
 onSubmitTrip() {
 
-  console.log(this.myForm.value);
   if(this.myForm.controls.notes_meeting_point.valid && this.myForm.controls.notes_traveler.valid && this.myForm.controls.direction.valid && this.myForm.controls.publish_price.valid ) {
 
       this.myForm.value.latitude =this.lat;

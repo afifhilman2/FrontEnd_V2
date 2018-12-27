@@ -48,15 +48,6 @@
             <div class="wrap-content-comment">
                 <span class="comment-more" (click)="comment()" *ngIf="discussionComment">Lihat {{discussion.comments.length}} Komentar Sebelumnya </span>
 
-                <!-- <div *ngIf="discussionComment">
-                        <div *ngFor="let count of discussion.comments" class="content-comment">
-                                <img [src]="count.photo_comment" alt="" class="img-comment">
-                                <span class="date-time pull-right">{{count.created_at | date:'dd MMMM yyyy, hh:mm z' }}</span>
-                                <span class="akun-comment">{{count.name_comment}}</span>
-                                <div class="type-comment">{{count.flag_comment == 1? 'Traveller' : 'Travel Agent'}}</div>
-                                <span class="comment-msg"> {{count.comment}} </span>
-                            </div>
-                </div> -->
 
                 <div *ngIf="allComments">
                     <div *ngFor="let count of discussion.comments" class="content-comment">

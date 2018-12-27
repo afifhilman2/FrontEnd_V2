@@ -102,6 +102,10 @@ export class DetailPaketComponent implements OnInit {
     return Array(Math.round(i)).fill(4);
   }
 
+  starEmpty= "https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png"
+  star = "https://img.travinesia.com/icon/ikon card trip_bintang_16x16.png"
+  trip_star: boolean[] = [false,false,false,false,false];
+  rating
   idAgen;
   getTrip(): void{
     // this.book._id = this.dataTrip;
@@ -137,6 +141,14 @@ export class DetailPaketComponent implements OnInit {
                     // console.log(this.discount_amount)
                   }
                 }
+              }
+            }
+
+
+            if(trip.data.rate_div!=0){
+              this.rating = Math.floor(trip.data.rate_total/trip.data.rate_div);
+              for(var i = 0; i < this.rating; i++){
+                this.trip_star[i] = !this.trip_star[i];
               }
             }
 
@@ -279,6 +291,8 @@ export class DetailPaketComponent implements OnInit {
   dateTrip: string ;
   discount;
   harga;
+
+  
   // showLeft : boolean = false;
   onChange(event, price){
     this.quota_dateTrip = this.quota_left[event-1];

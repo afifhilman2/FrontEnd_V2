@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { Router, CanActivate,ActivatedRoute } from '@angular/router';
 import { DataService} from '../data.service';
 import 'rxjs/add/operator/filter';
+import { ToastrService } from 'ngx-toastr';
 // import { FilterPipe } from './filter.pipe'
 
 @Component({
@@ -25,7 +26,7 @@ export class TrvSearchResultComponent implements OnInit {
 
 
   notFound: boolean = false;
-  constructor ( private routeActive :ActivatedRoute, private appService:AppService, public http:Http, private router: Router) { 
+  constructor (private toastr:ToastrService, private routeActive :ActivatedRoute, private appService:AppService, public http:Http, private router: Router) { 
 
 
   //  this.categoryId = id;
@@ -36,6 +37,11 @@ export class TrvSearchResultComponent implements OnInit {
   dataSearchName;
   titleSearch;
   discount_trip: number[] = [];
+  rating;
+  trip_star: boolean[] = [false,false,false,false,false];
+  starEmpty= "https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png"
+  star = "https://img.travinesia.com/icon/ikon card trip_bintang_16x16.png"
+
   ngOnInit() {
       
     let flag_search = this.routeActive.snapshot.queryParams['flag_search'];
@@ -61,6 +67,14 @@ export class TrvSearchResultComponent implements OnInit {
               }
             }
           }
+
+          if(results_trip.data.rate_div!=0){
+            this.rating = Math.floor(results_trip.data.rate_total/results_trip.data.rate_div);
+            for(var i = 0; i < this.rating; i++){
+              this.trip_star[i] = !this.trip_star[i];
+            }
+          }
+
         } else if(results_trip == 404){
           this.notFound = true;
         }
@@ -89,6 +103,14 @@ export class TrvSearchResultComponent implements OnInit {
               }
             }
           }
+
+          if(results_trip.data.rate_div!=0){
+            this.rating = Math.floor(results_trip.data.rate_total/results_trip.data.rate_div);
+            for(var i = 0; i < this.rating; i++){
+              this.trip_star[i] = !this.trip_star[i];
+            }
+          }
+
         }else if(results_trip.status == 404){
           this.notFound = true;
         }
@@ -113,6 +135,13 @@ export class TrvSearchResultComponent implements OnInit {
               }
             }
           }
+
+          if(results_trip.data.rate_div!=0){
+            this.rating = Math.floor(results_trip.data.rate_total/results_trip.data.rate_div);
+            for(var i = 0; i < this.rating; i++){
+              this.trip_star[i] = !this.trip_star[i];
+            }
+          }
         }else if(results_trip.status == 404){
           this.notFound = true;
         }
@@ -134,6 +163,14 @@ export class TrvSearchResultComponent implements OnInit {
               }
             }
           }
+
+          if(results_trip.data.rate_div!=0){
+            this.rating = Math.floor(results_trip.data.rate_total/results_trip.data.rate_div);
+            for(var i = 0; i < this.rating; i++){
+              this.trip_star[i] = !this.trip_star[i];
+            }
+          }
+
         }else if(results_trip.status == 404){
           this.notFound = true;
         }
@@ -171,5 +208,10 @@ export class TrvSearchResultComponent implements OnInit {
     })
 
     // console.log(this.filter)
+  }
+
+  
+  gototerm(){
+    this.toastr.warning('Masih Dalam Pengembangan')
   }
 }
