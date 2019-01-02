@@ -19,6 +19,8 @@ export class DaftarPemesanComponent implements OnInit {
   idParams:any;
   transaction:any[];
   quantity:number[] = [];
+  pageOps:boolean = false;
+  pageData:boolean = true;
   
   id_transaction = {
     _id:''
@@ -76,6 +78,11 @@ export class DaftarPemesanComponent implements OnInit {
       // booking
       this.booking = daftar.booking; 
       this.allItems = daftar.booking;
+
+      if(this.allItems.length == 0) {
+        this.pageOps = !this.pageOps;
+        this.pageData = !this.pageData;
+      }
 
       
       this.setPageSaldo(1);

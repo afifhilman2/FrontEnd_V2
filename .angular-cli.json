@@ -8,7 +8,8 @@
         "outDir": "dist",
         "assets": [
             "assets",
-            "favicon.ico"
+            "favicon.ico",
+            ".htaccess"
         ],
         "index": "index.html",
         "main": "main.ts",
@@ -18,9 +19,9 @@
         "testTsconfig": "tsconfig.spec.json",
         "prefix": "app",
         "styles": [
-            "../node_modules/bootstrap/dist/css/bootstrap.min.css", 
-            "styles.css",
-            "../node_modules/ngx-toastr/toastr.css"
+            "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "../node_modules/ngx-toastr/toastr.css",
+            "styles.css"
         ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js",

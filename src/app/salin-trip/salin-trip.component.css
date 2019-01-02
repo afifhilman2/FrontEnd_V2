@@ -391,6 +391,7 @@
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+    display: inline-block;
 }
 
 .wrap-category-item .col-md-6 {

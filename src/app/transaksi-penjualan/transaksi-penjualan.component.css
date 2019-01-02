@@ -174,12 +174,6 @@
     text-decoration: none;
 }
 
-.wrap-btn-trv {
-    padding-left: 12px;
-    margin-top: 7px;
-    margin-right: 25px;
-}
-
 .btn-trv-daftar {
     width: 172px;
     height: 28px;
@@ -414,7 +408,7 @@ a:hover {
 .wrap-btn-trv {
     padding-left: 12px;
     margin-top: 7px;
-    margin-right: 25px;
+    margin-right: 85px;
 }
 
 .tgl-berangkat {

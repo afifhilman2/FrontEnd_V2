@@ -14,6 +14,8 @@ export class DaftarPemesanPrivateComponent implements OnInit {
   idParams:any;
   transaction:any[];
   quantity:number[] = [];
+  pageOps:boolean = false;
+  pageData:boolean = true;
   
   id_transaction = {
     _id:''
@@ -43,6 +45,10 @@ export class DaftarPemesanPrivateComponent implements OnInit {
     let id = this.activeRoute.snapshot.params['id']
      this.appService.getDaftarPemesan(id).subscribe( daftar => {
       
+      if(daftar.booking.length == 0) {
+        this.pageOps = !this.pageOps;
+        this.pageData = !this.pageData;
+      }
       // console.log(daftar);
       // trip
       this.daftar_quota_left = daftar.trip.quota_left; 
@@ -62,6 +68,8 @@ export class DaftarPemesanPrivateComponent implements OnInit {
       this.no_hp = daftar.booking[0].order_telephone;
       this.msg_travel = daftar.booking[0].notes_for_provider;
       this.id = daftar.booking[0]._id;
+
+      
     
     }) 
    

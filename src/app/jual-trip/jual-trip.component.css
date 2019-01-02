@@ -44,7 +44,7 @@ hr {
 .img-info {
     width: 59px;
     height: 59px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .info-tittle {

@@ -34,7 +34,7 @@ export class DiskusiProviderComponent implements OnInit {
     this.appService.getDiscussionProvider().subscribe( discussion => {
 
       this.discussion = discussion.data;
-      
+      // console.log(this.discussion)
       this.allItems =  discussion.data;
 
       this.setPage(1);
@@ -64,6 +64,7 @@ export class DiskusiProviderComponent implements OnInit {
 
    onSubmitComment(){
    
+    this.myForm.value.comment = this.myForm.value.comment.replace(/\n/g, "<br>");
     // console.log(this.myForm.value)
     this.appService.addComment(this.id, this.myForm.value).subscribe(dataComment=>{
       if(dataComment.status == 200){

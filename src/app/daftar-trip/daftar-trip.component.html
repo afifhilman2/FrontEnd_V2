@@ -51,7 +51,7 @@
                         <li *ngIf="trip.id_type_trip.type_trip == 'Open Trip'"><a class="dropdown-list" (click)="beriDiskon(i, $event)" id="{{trip._id}}" data-toggle="modal" data-target="#beridiskonModal">Beri Diskon</a></li>
                         <li><a class="dropdown-list" (click)="ubahTrip($event)" id="{{trip._id}}">Ubah Trip</a></li>
                         <li><a class="dropdown-list" (click)="salinTrip($event)" id="{{trip._id}}">Salin Trip</a></li>
-                        <li><a class="dropdown-list" (click)="kosong(i, $event)" data-toggle="modal" data-target="#kosongkankuotaModal" id="{{trip._id}}">Kosongkan Kuota</a></li>
+                        <li *ngIf="trip.id_type_trip.type_trip == 'Open Trip'"><a class="dropdown-list" (click)="kosong(i, $event)" data-toggle="modal" data-target="#kosongkankuotaModal" id="{{trip._id}}">Kosongkan Kuota</a></li>
                         <li><a class="delete-trip dropdown-list" data-toggle="modal" data-target="#hapusModal" (click)="idHapus($event)" id="{{trip._id}}">Hapus Trip</a></li>
                     </ul>
                 </div>

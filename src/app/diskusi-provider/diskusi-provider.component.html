@@ -5,7 +5,7 @@
     <div class="content-diskusi" *ngFor="let discussion of pagedItems">
         <div class="isi-tahapan-pesanan">
             <div class="gambar">
-                <img [src]="discussion.id_trip.photo_trip" align="center">
+                <img [src]="discussion.id_trip.photo_trip[0]">
             </div>
             <div class="detail-pesanan">
                 <div class="isi-pesanan-star">
@@ -47,6 +47,7 @@
             </div>
             <div class="wrap-content-comment">
                 <span class="comment-more" (click)="comment()" *ngIf="discussionComment">Lihat {{discussion.comments.length}} Komentar Sebelumnya </span>
+
 
                 <div *ngIf="allComments">
                     <div *ngFor="let count of discussion.comments" class="content-comment">

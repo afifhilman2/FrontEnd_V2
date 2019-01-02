@@ -43,7 +43,8 @@ export class JualTripContentComponent implements OnInit {
   provinceTrip:any[];
   typeTrip:any[];
   facilityTrip:any[];
-  dateTemp:any[] = [];
+  date_temp:any[] = ['','','','',''];
+  flag_date:boolean[] = [true, true, true, true, true];
   idTypeOpen:any;
   idTypePrivate:any;
   daysLength;
@@ -208,9 +209,9 @@ displayFieldCss(field: string) {
     toggleJual():void {
       
       
-      for(let p=0; p<this.myForm.value.date_trip.length; p++) {
-        this.myForm.value.date_trip[p] = this.dateTemp[p];
-      }
+      // for(let p=0; p<this.myForm.value.date_trip.length; p++) {
+      //   this.myForm.value.date_trip[p] = this.date_temp[p];
+      // }
       // console.log(this.myForm.value);
      
       if (this.myForm.controls.trip_name.valid && this.myForm.controls.id_type_trip.valid && this.myForm.controls.days.valid && this.myForm.controls.id_province_trip.valid && this.myForm.controls.id_category.valid ) {
@@ -361,13 +362,11 @@ displayFieldCss(field: string) {
         this.bgrError = false;
       }
 
-      // console.log('ukuran masuk')
     }
 
     else {
       this.sizeImgError = false;
       this.bgrError = false;
-      // console.log('ukuran ga masuk')
     }
     
   }
@@ -593,108 +592,147 @@ displayFieldCss(field: string) {
 
       }
 
-      dateValue0(event: IMyDateModel) {
-        
-        this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
-        // this.myForm.value.date_trip[0] = event.jsdate;
-        this.dateTemp[0] = event.jsdate;
-        this.myForm.value.d_date[0] = event.date;
-
-        // console.log(this.myForm.value);
-
-        if(event.date.day == 0) {
-          // console.log(event.date.day);
-          this.myForm.value.date_trip[0]='';
+      onDateChanged(event:IMyDateModel, index) {
+        let daysLength = event.date.day + (parseInt(this.myForm.value.days) - 1);
+        this.myForm.value.d_date[index] = event.date;
+    
+        if(event.date.day == 0 && index == 0) {
+          this.myForm.value.date_trip[index]='';
+          for(var i = index+1; i < this.date_temp.length; i++){
+            this.date_temp[i] = null;
+            this.flag_date[i-1] = true;
+            this.myForm.value.date_trip[index] = '';
+          }
           this.myDatePickerOptions = {
+            dateFormat: 'dd mmm yyyy',
             disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()-1}
-            };
-          } else {
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
           };
         }
+        else if(event.date.day == 0 && (index == 1 || index == 2 || index == 3 || index == 4)) {
+          this.myForm.value.date_trip[index]='';
+          for(var i = index+1; i < this.date_temp.length; i++){
+            this.date_temp[i] = null;
+            this.flag_date[i-1] = true;
+            this.myForm.value.date_trip[index] = '';
+          }
+          this.myDatePickerOptions = {
+            dateFormat: 'dd mmm yyyy',
+            disableUntil: {year: this.myForm.value.d_date[index-1].year, month: this.myForm.value.d_date[index-1].month, day:this.myForm.value.d_date[index-1].day + daysLength}
+          };
+        }
+        else {
+          this.flag_date[index] = false;
+          this.myForm.value.date_trip[index] = event.date.year + "-" + event.date.month + "-" + event.date.day;
+          this.myDatePickerOptions = {
+            dateFormat: 'dd mmm yyyy',
+            disableUntil: {year: this.myForm.value.d_date[index].year, month: this.myForm.value.d_date[index].month, day: daysLength}
+          };
+        }
+        // console.log(this.myForm.value.date_trip)
       }
 
-      dateValue1(event: IMyDateModel) {
+      // dateValue0(event: IMyDateModel) {
         
-        this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
-        // this.myForm.value.date_trip[1] = event.jsdate;
-        this.myForm.value.d_date[1] = event.date;
-        this.dateTemp[1] = event.jsdate;
-        // console.log(this.myForm.value.date_trip[1]);
+      //   this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
+      //   // this.myForm.value.date_trip[0] = event.jsdate;
+      //   this.dateTemp[0] = event.jsdate;
+      //   this.myForm.value.d_date[0] = event.date;
 
-        if(event.date.day == 0) {
-          // console.log(event.date.day);
-          this.myForm.value.date_trip[1]='';
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[0].day}
-            };
-          } else {
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
-          };
-        }
-      }
+      //   // console.log(this.myForm.value);
 
-      dateValue2(event: IMyDateModel) {
+      //   if(event.date.day == 0) {
+      //     // console.log(event.date.day);
+      //     this.myForm.value.date_trip[0]='';
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()-1}
+      //       };
+      //     } else {
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
+      //     };
+      //   }
+      // }
+
+      // dateValue1(event: IMyDateModel) {
         
-        this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
-        // this.myForm.value.date_trip[2] = event.jsdate;
-        this.dateTemp[2] = event.jsdate;
-        this.myForm.value.d_date[2] = event.date;
+      //   this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
+      //   // this.myForm.value.date_trip[1] = event.jsdate;
+      //   this.myForm.value.d_date[1] = event.date;
+      //   this.dateTemp[1] = event.jsdate;
+      //   // console.log(this.myForm.value.date_trip[1]);
 
-        if(event.date.day == 0) {
-          // console.log(event.date.day);
-          this.myForm.value.date_trip[2]='';
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[1].day}
-            };
-          } else {
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
-          };
-        }
-      }
+      //   if(event.date.day == 0) {
+      //     // console.log(event.date.day);
+      //     this.myForm.value.date_trip[1]='';
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[0].day}
+      //       };
+      //     } else {
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
+      //     };
+      //   }
+      // }
 
-      dateValue3(event: IMyDateModel) {
+      // dateValue2(event: IMyDateModel) {
         
-        this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
-        // this.myForm.value.date_trip[3] = event.jsdate;
-        this.dateTemp[3] = event.jsdate;
-        this.myForm.value.d_date[3] = event.date;
+      //   this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
+      //   // this.myForm.value.date_trip[2] = event.jsdate;
+      //   this.dateTemp[2] = event.jsdate;
+      //   this.myForm.value.d_date[2] = event.date;
 
-        if(event.date.day == 0) {
-          // console.log(event.date.day);
-          this.myForm.value.date_trip[3]='';
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[2].day}
-            };
-          } else {
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
-          };
-        }
-      }
+      //   if(event.date.day == 0) {
+      //     // console.log(event.date.day);
+      //     this.myForm.value.date_trip[2]='';
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[1].day}
+      //       };
+      //     } else {
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
+      //     };
+      //   }
+      // }
 
-      dateValue4(event: IMyDateModel) {
+      // dateValue3(event: IMyDateModel) {
         
-        this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
-        // this.myForm.value.date_trip[4] = event.jsdate;
-        this.dateTemp[4] = event.jsdate;
-        this.myForm.value.d_date[4] = event.date;
+      //   this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
+      //   // this.myForm.value.date_trip[3] = event.jsdate;
+      //   this.dateTemp[3] = event.jsdate;
+      //   this.myForm.value.d_date[3] = event.date;
 
-        if(event.date.day == 0) {
-          // console.log(event.date.day);
-          this.myForm.value.date_trip[4]='';
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[3].day}
-            };
-          } else {
-          this.myDatePickerOptions = {
-            disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
-          };
-        }
-      }
+      //   if(event.date.day == 0) {
+      //     // console.log(event.date.day);
+      //     this.myForm.value.date_trip[3]='';
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[2].day}
+      //       };
+      //     } else {
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
+      //     };
+      //   }
+      // }
+
+      // dateValue4(event: IMyDateModel) {
+        
+      //   this.daysRange = event.date.day + (parseInt(this.daysLength) - 1);
+      //   // this.myForm.value.date_trip[4] = event.jsdate;
+      //   this.dateTemp[4] = event.jsdate;
+      //   this.myForm.value.d_date[4] = event.date;
+
+      //   if(event.date.day == 0) {
+      //     // console.log(event.date.day);
+      //     this.myForm.value.date_trip[4]='';
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day:this.myForm.value.d_date[3].day}
+      //       };
+      //     } else {
+      //     this.myDatePickerOptions = {
+      //       disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.daysRange}
+      //     };
+      //   }
+      // }
 
       timePress(event: any) {
         // console.log(event.target.value)

@@ -1,6 +1,5 @@
 <div class="container">
-    
-  <!-- <pre>Selected items: <span *ngFor="let filterItem of checked()" style="padding-right:10px;">{{ filterItem.trip_name }}</span></pre> -->
+
     <div class="root-search"> Home > {{titleSearch }}</div>
     <div class="current-search"> {{titleSearch}} </div>
     <span class="rslt"> Hasil Pencarian Paket Wisata {{titleSearch}}</span>
@@ -163,10 +162,10 @@
                 </div>
             </div>
         </div>
-        
+
 
         <div class="search-result">
-            <div *ngIf="notFound" class="not-found"> 
+            <div *ngIf="notFound" class="not-found">
                 <img src="/assets/img/oops.png">
                 <div class="not-found-text">
                     Trip Tidak Ditemukan
@@ -200,7 +199,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- <div class="col-md-2 col-sm-4 col-xs-6">
                 <div class="thumb-promo">
                     <img src="../assets/img/1.jpg" class="img-promo">
@@ -224,7 +223,7 @@
                 </div>
             </div> -->
         </div>
-        
+
 
         <!--<div class="col-md-2 col-sm-4 col-xs-6">
             <div class="thumb-promo">
@@ -322,7 +321,7 @@
 </div>
 
 
- <!-- <app-footer></app-footer> -->
+<!-- <app-footer></app-footer> -->
 <div class="footer">
     <div class="col-md-2">
         <img alt="Brand" src="../assets/img/logo.png" class="footer-brand-logo">
@@ -330,7 +329,7 @@
 
     <div class="col-md-2">
         <p class="cr-head">Travinesia</p>
-        <p class="cr-tittle" >Tentang Travinesia</p>
+        <p class="cr-tittle">Tentang Travinesia</p>
         <p class="cr-tittle" (click)="gototerm()">Hubungi Kami</p>
         <p class="cr-tittle" routerLink="/termCondition">Syarat dan Ketentuan</p>
         <p class="cr-tittle" (click)="gototerm()">Karir</p>

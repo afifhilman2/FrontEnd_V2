@@ -43,9 +43,9 @@ export class UbahProfilTravelComponent implements OnInit {
       this.id = profile.provider._id;
 
       this.myForm.patchValue({
-        slogan : profile.provider.slogan,
-        description : profile.provider.description,
-        office_address : profile.provider.office_address,
+        slogan : profile.provider.slogan.replace(/<br\s*[\/]?>/gi, "\n"),
+        description : profile.provider.description.replace(/<br\s*[\/]?>/gi, "\n"),
+        office_address : profile.provider.office_address.replace(/<br\s*[\/]?>/gi, "\n"),
         province : profile.provider.province._id,
         office_phone_number : profile.provider.office_phone_number,
 
