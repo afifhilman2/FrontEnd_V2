@@ -293,7 +293,7 @@ input[type=number] {
     -ms-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    height: .5rem;
+    height: .7rem;
     border-color: #ab47bc;
     border-top-style: none;
     border-right-style: none;

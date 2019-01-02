@@ -1,7 +1,7 @@
 <!-- <div class="trv-notice" *ngIf="massage">
   <span class="txt-notice"> Email Sudah Terdaftar </span>
 </div> -->
-<div class="container">
+<div class="container" style="margin-top: 30px;">
   <div class="trv-tema-atas">
     <h2><strong> Daftar di Travinesia </strong></h2>
     <div class="garis-vertical"></div>
@@ -14,13 +14,15 @@
       <div class="form-group" [ngClass]="displayFieldCss('name')">
         <label for="name" class="label_form"> Nama Lengkap </label>
         <input id="name" type="text" class="form-control" formControlName="name" autofocus >
+        <small>Nama tidak dapat diedit</small>
         <div *ngIf="formRegister.get('name').hasError('required') && formRegister.get('name').touched" class="alert trv-alert">Nama Tidak Boleh Kosong</div> 
       </div> 
       <div class="form-group" [ngClass]="displayFieldCss('telephone')">
         <label for="telephone"> Nomor Telepon </label>
-        <input type="text" class="form-control" formControlName="telephone" (keypress)="keyPress($event)">
+        <input type="text" class="form-control" formControlName="telephone" (keypress)="keyPress($event)" maxlength="13">
         <small>Harap mengisi nomor telepon yang aktif untuk keamanan transaksi</small>
         <div *ngIf="formRegister.get('telephone').hasError('required') && formRegister.get('telephone').touched" class="alert trv-alert">No Telepon Tidak Boleh Kosong</div> 
+         
       </div>
       <div class="form-group" [ngClass]="displayFieldCss('email')">
         <label for="email"> Email </label>
@@ -29,7 +31,7 @@
         <div *ngIf="formRegister.get('email').hasError('pattern') && formRegister.get('email').touched" class="alert trv-alert">Format Email Salah </div> 
 
       </div>
-      <div class="form-group" [ngClass]="displayFieldCss('password')">
+      <div class="form-group password" [ngClass]="displayFieldCss('password')">
         <label for="password"> Password </label>
         <input id="password" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"> 
         <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="password()"></span>
@@ -38,9 +40,9 @@
         <div *ngIf="formRegister.get('password').hasError('pattern') || formRegister.get('password').hasError('minlength') && formRegister.get('password').touched" class="alert trv-alert">Minimal 8 Karakter dari Kombinasi Huruf Kapital dan Angka</div>  
       </div>
       <div>
-        <input type="checkbox" class="checkbox">
+        <input type="checkbox" class="checkbox" (change)="cekTerm($event)">
         <label class="label--checkbox">
-          Saya mengkonfirmasi telah menyetujui Syarat dan ketentuan,serta Kebijakan Privasi Travinesia. <a class="disini" routerLink="/termCondition">Baca Selengkapnya</a>
+          Saya mengkonfirmasi telah menyetujui Syarat dan ketentuan,serta Kebijakan Privasi Travinesia. <a class="disini" [routerLink]="['/termcondition']">Baca Selengkapnya</a>
         </label>  
       </div>
       <button class="btn btn-daftar pull-right" type="submit" >Daftar</button>

@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
           </button>
 
-            <a [routerLink]="['']" class="navbar-brand" href="#">
+            <a [routerLink]="['']" class="navbar-brand">
                 <img alt="Brand" src="../assets/img/travinesia-logo.png" class="brand-logo">
             </a>
         </div>
@@ -20,7 +20,7 @@
             <form class="navbar-form navbar-left" (submit)="goSearch(trip_name)">
                 <div class="input-group stylish-input-group">
 
-                    <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control " placeholder="Cari Wisata">
+                    <input type="text" (keyup)="searchTerm$.next($event.target.value)" class="form-control " placeholder="Cari Wisata" [(ngModel)]="trip_name" name="name" autocomplete="off">
                     <ul *ngIf="results" class="search-dropdown">
                         <li *ngFor="let result of results | slice:0:9" class="item-search" (click)="goToSearch(result.trip_name)">
                             <a >
@@ -61,7 +61,7 @@
                         <!-- <span class="notif"></span> -->
                     </li>
                     <a role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="profil">
-                        <img [src]="photos" class="foto-profil-provider">
+                        <img *ngIf="photos" [src]="photos" class="foto-profil-provider">
                     </a>
                     <ul class="dropdown-menu user-drop" aria-labelledby="dropdownMenu">
 
@@ -140,7 +140,7 @@
         </li>
 
         <li class="kanan">
-            <a href=""> <span class="icon-question">
+            <a [routerLink]="['/termcondition']"> <span class="icon-question">
              <span class="path1"></span><span class="path2"></span>
                 </span>
                 Bantuan
@@ -174,17 +174,16 @@
         </div>
 
         <div class="login-forgot">
-            <div class="col-md-6 text-left">
-                <input type="checkbox" class="checkbox">
-                <label class="label-checkbox"> Ingat Saya
-                    </label>
+            <div class="ingat-saya">
+                <!-- <input type="checkbox" class="checkbox">
+                <label class="label-checkbox"> Ingat Saya </label> -->
+
+                    <div role="button" [routerLink]="['/LupaPassword']" class="lupa-password">
+                        Lupa Password ?
+                    </div>
             </div>
 
-            <div class="col-md-6">
-                <a role="button" [routerLink]="['/LupaPassword']">
-                    <p>Lupa Password ?</p>
-                </a>
-            </div>
+            
         </div>
 
         <button class="btn btn-masuk" type="submit Form">Masuk</button>

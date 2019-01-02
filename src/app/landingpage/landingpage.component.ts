@@ -19,7 +19,7 @@ export class LandingpageComponent implements OnInit {
   dataTrip;
   profinsi:any[];
   category:any[];
-  photo:[ '../assets/img/user.png']
+  photo:[ '../assets/img/user.png'];
 
   catego;
   profin;
@@ -42,6 +42,8 @@ export class LandingpageComponent implements OnInit {
   rating
 
   dataPromo;
+
+  idfavorit : boolean = false;
   // {date : {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate()+2} }
   constructor(private router: Router, private appService: AppService, private toastr: ToastrService) { 
     // this.loaded = true;
@@ -70,9 +72,17 @@ export class LandingpageComponent implements OnInit {
 
     this.appService.getAllPromo().subscribe(promo =>{
       this.dataPromo = promo.data;
+      
       // console.log(this.dataPromo)
     })
+
+    if(sessionStorage.token != null){
+      //   // if(dataFavorite.data.flag_favorite = true){
+        this.idfavorit = true
+      }
   }
+
+  
 
 
   public myDatePickerOptions: IMyDpOptions = {
@@ -155,13 +165,20 @@ export class LandingpageComponent implements OnInit {
   favorit(id){
     this.favorite.id_trip = id;
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
-      if(sessionStorage.token != null){
-        // if(dataFavorite.data.flag_favorite = true){
-      //   this.change = true
-      // }
-      } else{
-        this.router.navigate(['/LoginPage'])
+      console.log(dataFavorite)
+      if(dataFavorite.status == 401){
+        this.toastr.error('Anda harus login terlebih dahulu')
+      } else if(dataFavorite.status == 200){
+        this.toastr.success('Trip berhasil difavoritkan')
       }
+
+      // if(sessionStorage.token != null){
+      //   // if(dataFavorite.data.flag_favorite = true){
+      // //   this.change = true
+      // // }
+      // } else{
+      //   this.router.navigate(['/LoginPage'])
+      // }
     })
   }
 

@@ -95,6 +95,7 @@ export class DetailPaketComponent implements OnInit {
   ngOnInit() {
     
     this.getDiskusi();
+    this.getReview();
   }
 
 
@@ -107,6 +108,7 @@ export class DetailPaketComponent implements OnInit {
   trip_star: boolean[] = [false,false,false,false,false];
   rating
   idAgen;
+  trip_photo : any[] = [] ;
   getTrip(): void{
     // this.book._id = this.dataTrip;
     this.http.get('https://travinesia.com:1210/get/trip_detail/' + this.dataTrip)
@@ -117,7 +119,7 @@ export class DetailPaketComponent implements OnInit {
             // console.log(this.detailTrip)
             this.hargaProduct = trip.data.publish_price;
             // this.valueDiscount = trip.data.discount_date[0]
-            // console.log(this.valueDiscount)
+            // console.log(trip.data.photo_trip.length)
             this.kat = trip.data.category;
             this.quota_left = trip.data.quota_left; 
             this.date = trip.data.date_trip;
@@ -141,6 +143,13 @@ export class DetailPaketComponent implements OnInit {
                     // console.log(this.discount_amount)
                   }
                 }
+              }
+            }
+
+            for(var i = 0; i < trip.data.photo_trip.length; i++){
+              if(trip.data.photo_trip[i]){
+                this.trip_photo[i] = trip.data.photo_trip[i]
+                // console.log( trip.data.photo_trip)
               }
             }
 
@@ -170,8 +179,12 @@ export class DetailPaketComponent implements OnInit {
     this.coment.patchValue({
       id_diskusi: this.idDiskusi
     })
-    
+    // console.log(this.coment.value)
     this.appServis.addCommentUser(this.coment.value).subscribe(comment => {
+      if(comment.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/DetailPaket/', this.dataTrip]));
+      }
       // console.log(comment)  
     })
   }
@@ -187,6 +200,7 @@ export class DetailPaketComponent implements OnInit {
   getReview(){
     this.appServis.review(this.dataTrip).subscribe(riview =>{
       this.review = riview.data;
+      // console.log(this.review)
     })
   }
 
@@ -194,7 +208,7 @@ export class DetailPaketComponent implements OnInit {
   quantity=1;
   goToProsespemesanan(){
     
-   if(!(sessionStorage.token == null)){
+  //  if(!(sessionStorage.token == null)){
      if(this.formBooking.valid){
       this.formBooking.patchValue({
         _id: this.dataTrip, 
@@ -206,37 +220,33 @@ export class DetailPaketComponent implements OnInit {
       // console.log(this.formBooking.value)
       this.appServis.booking(this.formBooking.value).subscribe(book => {
         // console.log(book)
-        sessionStorage.setItem("book_trip", JSON.stringify(book.data));
+        
         if (book.status == 200){
-          
+          sessionStorage.setItem("book_trip", JSON.stringify(book.data));
           this.router.navigate(['/ProsesPemesanan']);
         }else if(book.status == 400){
-          alert('Tanggal Belum dipilih')
-          return false
+          this.toastr.error('Tanggal Belum dipilih')
+          // return false
         }else if(book.status == 401){
-          this.massage = 'Silahkan Login terlebih dahulu'
+          this.toastr.error('Silahkan Login terlebih dahulu', 'Anda Belum Login')
         }
       });
       // console.log(this.formBooking.value)
-      this.router.navigate(['/ProsesPemesanan']);
+      // this.router.navigate(['/ProsesPemesanan']);
         
      }else{
       this.validateAllFormFields(this.formBooking);
      }
-   }else {
-    alert('Please log in') 
-    this.router.navigate(['/LoginPage']);
-    return false;
-   }
+  //  }else {
+  //   alert('Please log in') 
+  //   this.router.navigate(['/LoginPage']);
+  //   return false;
+  //  }
   }
 
   totalHarga;
   privateTrip;
   increment() { 
-    // console.log(this.detailTrip.id_type_trip.id_type_trip)
-    // this.quantity++;
-    // this.totalHarga = this.quantity * this.hargaProduct;
-    // this.formBooking.value.publish_price = this.totalHarga;
     
     if(this.detailTrip.id_type_trip.id_type_trip == 2){
       this.quantity++; 
@@ -246,7 +256,6 @@ export class DetailPaketComponent implements OnInit {
         if(this.quantity >= this.detailTrip.min_qty_group[i] && this.detailTrip.min_qty_group[i] !=""){
           
           this.hargaProduct = this.detailTrip.publish_price_group[i]
-          // console.log(this.hargaProduct)
           this.totalHarga = this.quantity * this.hargaProduct;
         }
         else{
@@ -254,9 +263,12 @@ export class DetailPaketComponent implements OnInit {
           }  
       }
     }else if(this.detailTrip.id_type_trip.id_type_trip == 1){
-      this.quantity++;
-      this.hargaProduct;
-      this.totalHarga = this.quantity * this.hargaProduct;
+      if(this.quantity < 10){
+        this.quantity++;
+        this.hargaProduct;
+        this.totalHarga = this.quantity * this.hargaProduct;
+      }
+      
       // console.log(this.hargaProduct)
       // this.formBooking.value.publish_price = this.totalHarga;
 
@@ -279,6 +291,10 @@ export class DetailPaketComponent implements OnInit {
   sendComment(){
     if(!(sessionStorage.token == null)){
     this.appServis.sendDiskusi(this.dataTrip,this.text).subscribe(text =>{
+      if(text.status == 200){
+        this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/DetailPaket/', this.dataTrip]));
+      }
       // console.log(text);
     })
   }else{

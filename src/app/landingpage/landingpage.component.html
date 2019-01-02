@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label for="kategori">Hari : </label>
                                 <select class="form-control" (change)="getDays($event)">
-                                        <option value="" disabled selected>Pilih Kategori</option> 
+                                        <option value="" disabled selected>Pilih Hari</option> 
                                     <option *ngFor="let days of counter(5);let i = index" value="{{i+1}}">{{i+1}} Hari</option>
                                 </select>
                             </div>
@@ -124,13 +124,13 @@
                     <div *ngIf="i<6" >
                         <div class="col-md-2 col-sm-4 col-xs-6">
                             <div class="thumb-promo">
-                                <div class="favorit">
+                                <div class="favorit" *ngIf="idfavorit">
                                     <span class="glyphicon glyphicon-heart fav" (click)="favorit(trip._id)" [ngClass]="{'change' : change}"></span>
                                 </div>
                                 <div (click)="goToDetail(trip._id)" class="go-detail">
                                     <img src="{{trip.photo_trip['0']}}" class="img-promo">
                                     <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div>
-                                    <div class="trip">Open</div>
+                                    <div class="trip">Open Trip</div>
                                     <div class="body-caption">
                                         <div class="cover-star">
                                             <div style="display:inline;">

@@ -30,7 +30,7 @@ export class UbahProfilComponent implements OnInit {
   }
 
 
-  pwd = {
+  typePassword = {
     password :'', 
     new_password:'',
     repeatPassword:''
@@ -167,15 +167,15 @@ export class UbahProfilComponent implements OnInit {
   
 
 
-  changePassword(pwd){
-    if(this.pwd.new_password==this.pwd.repeatPassword && this.pwd.password!=this.pwd.new_password){
-      // this.pwd.new_password;
-      // this.pwd.password;
-      // this.pwd.repeatPassword;
-      this.appServis.changePwd(this.pwd).subscribe(pwd => {
-        // console.log(pwd);
+  changePassword(){
+    // console.log(this.typePassword)
+    if(this.typePassword.new_password==this.typePassword.repeatPassword && this.typePassword.password!=this.typePassword.new_password){
+      this.appServis.changePwd(this.typePassword).subscribe(pwd => {
+        console.log(pwd);
         if(pwd.status == 200){
           this.toastr.success('Password Berhasil Diubah')
+        }else if(pwd.status == 400){
+          this.toastr.error('Masukkan Password Baru')
         }
         
       })
@@ -188,8 +188,5 @@ export class UbahProfilComponent implements OnInit {
     // })
   }
 
-  changePhotoProfile(){
-
-  }
 }
 

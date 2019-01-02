@@ -56,7 +56,7 @@ export class ResetPasswordComponent implements OnInit {
           })
         }
         else if (user.status==400){
-          this.toastr.warning('Password Baru Tidak Dapat Disimpan')
+          this.toastr.error('Password Baru Tidak Dapat Disimpan')
         }
       })
     })

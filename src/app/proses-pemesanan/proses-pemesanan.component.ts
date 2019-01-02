@@ -55,13 +55,17 @@ export class ProsesPemesananComponent implements OnInit {
   idTrip;
   dataTripBook;
 
+  starEmpty= "https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png"
+  star = "https://img.travinesia.com/icon/ikon card trip_bintang_16x16.png"
+  trip_star: boolean[] = [false,false,false,false,false];
+  rating
   
 
   ngOnInit() {
 
     // if(sessionStorage.getItem("book_trip") != null){
       this.dataTrip = JSON.parse(sessionStorage.getItem("book_trip"))
-    // console.log(this.dataTrip)
+    console.log(this.dataTrip)
     this.bayar = this.dataTrip.publish_price * this.dataTrip.quantity;
     // console.log(this.type_trip)
     this.nbook.publish_price = this.dataTrip.publish_price;
@@ -75,6 +79,12 @@ export class ProsesPemesananComponent implements OnInit {
     this.nbook.id_province = this.dataTrip.id_trip.id_province;
     this.nbook.id_category = this.dataTrip.id_trip.category[0];
 
+    if(this.dataTrip.id_trip.rate_div!=0){
+      this.rating = Math.floor(this.dataTrip.id_trip.rate_total/this.dataTrip.id_trip.rate_div);
+      for(var i = 0; i < this.rating; i++){
+        this.trip_star[i] = !this.trip_star[i];
+      }
+    }
     // } else {
     //   this.router.navigate(['/'])
     // }

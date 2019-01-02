@@ -23,6 +23,12 @@ export class ProsesBayarComponent implements OnInit {
     _id:'',
   }
 
+  billing:any = {
+    product:'',
+    payment_channel:'',
+    bill_no:''
+  }
+
   promo;
   totalBayar;
   random;
@@ -61,8 +67,10 @@ export class ProsesBayarComponent implements OnInit {
     this.price = this.dataBooking.publish_price*this.dataBooking.quantity;
     this.hargaAsuransi = this.dataBooking.asuransi_price;
     this.boking._id = this.dataBooking._id;
-    
 
+    this.billing.bill_no = this.boking.no_booking;
+    this.billing.product = this.dataBooking.id_trip.trip_name;
+    
     
   }
 
@@ -70,7 +78,7 @@ export class ProsesBayarComponent implements OnInit {
    getBookingId(): void{
     this.appService.paymentBooking().subscribe( bookPayment => {
       this.payment = bookPayment.data;
-      // console.log(this.payment);
+      console.log(this.payment);
       // console.log(this.bca);
     })
   }
@@ -84,11 +92,13 @@ export class ProsesBayarComponent implements OnInit {
     if(this.dataBank == 3){
       this.boking.id_paymentMethod = id_payment;
       this.boking.id_typePayment = id_type_payment;
-      this.boking.admin_fee = 7000;
+      this.boking.admin_fee = 0;
+      this.billing.payment_channel=707
     }else if(this.dataBank == 4){
       this.boking.id_paymentMethod = id_payment;
       this.boking.id_typePayment = id_type_payment;
-      this.boking.admin_fee = 7500;
+      this.boking.admin_fee = 0;
+      this.billing.payment_channel=706
     }else{
       this.boking.id_paymentMethod = id_payment;
       this.boking.id_typePayment = id_type_payment;
@@ -100,12 +110,25 @@ export class ProsesBayarComponent implements OnInit {
 
   goToCheckout(){
     
-    // console.log(this.boking)
+    // console.log(this.billing)
     this.appService.addPayment(this.boking).subscribe(boking=>{
       // console.log(boking)
-      sessionStorage.setItem("booking", JSON.stringify(boking.data))
+      
       if(boking.status == 200){
         this.router.navigate(['/ProsesBayar2'])
+        // console.log(this.billing.payment_channel==706 || this.billing.payment_channel==707)
+        sessionStorage.setItem("booking", JSON.stringify(boking.data))
+        if(this.billing.payment_channel==706 || this.billing.payment_channel==707){
+          // this.billing.payment_channel=706
+          this.appService.addBillingPayment(this.boking._id,this.billing).subscribe(billing => {
+            // console.log(billing)
+            if(billing.status==200){
+              let trx_id = billing.body.trx_id;
+              sessionStorage.setItem("trx_id", trx_id);
+              this.router.navigate(['/ProsesBayar2']);
+            }
+          })
+        }
       } else if(boking.status == 400){
         this.toastr.error('Belum Memilih Metode Pembayaran')
       }

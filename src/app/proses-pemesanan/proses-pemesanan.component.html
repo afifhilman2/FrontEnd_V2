@@ -1,21 +1,16 @@
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
-<div *ngIf="dataTrip" class="container">
-  <div class="tahapan-proses">
-    <div class="tahapan-proses1">
-      <div class="no-proses1">
-        <p>1</p>
-      </div>
-      <p class="proses1 pull-right">Pesan</p>
-    </div>
-    <div class="tahapan-proses2">
-      <div class="no-proses2">
-        <p>2</p>
-      </div>
-      <p class="proses2">
-        Bayar
-      </p>
-    </div>
+<!-- <div class="tahapan-proses"> -->
+  <div class="tahapan-proses1">
+      <div class="proses1 pull-right">Pesan</div>
+      <div class="no-proses1 pull-right">1</div>
   </div>
+  <div class="tahapan-proses2">
+    <div class="no-proses2"><p>2</p></div>
+    <div class="proses2">Bayar</div>
+  </div>
+<!-- </div> -->
+<div *ngIf="dataTrip" class="container">
+  
   <div class="isi-tahapan">
     <div class="col-md-4">
       <div class="isi-tahapan-pesanan">
@@ -25,15 +20,11 @@
         <div class="gambar">
           <img src="{{dataTrip.id_trip.photo_trip['0']}}">
         </div>
-        <div [ngClass]="dataTrip.id_type_trip.type_trip == 'Open Trip'? 'jenis-trip': 'private'" >{{dataTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</div>
+        <div [ngClass]="dataTrip.id_type_trip.type_trip == 'Open Trip'? 'jenis-trip': 'private'" >{{dataTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open Trip' : 'Private Trip'}}</div>
       
         <div class="detail-pesanan">
           <div class="isi-pesanan-star">
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
-            <span class="icon-star"></span>
+            <img *ngFor="let star of trip_star; let i = index" src="{{(star)? star : starEmpty}}" class="icon-star">
           </div>
           <div class="isi-pesanan-nama-pulau">
             <p>{{dataTrip?.id_trip?.trip_name}}</p>
@@ -75,7 +66,7 @@
             <p>Data Pemesan</p>
           </div>
           <div class="panel-body">
-            <div class="form-data-pemesan">
+            <!-- <div class="form-data-pemesan"> -->
               <div class="form-group">
                 <label class="label-form-pemesanan">Nama Lengkap</label>
                 <input type="text" class="form-control" [(ngModel)]="nbook.order_name" name="order_name"> 
@@ -92,7 +83,7 @@
                   <input type="number" class="form-control" [(ngModel)]="nbook.order_telephone" name="telephone">
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
             <div class="ubah-data">
               <p></p>
             </div>
@@ -113,7 +104,7 @@
           </div>
         </div>
       </div>
-      <div class="asuransi-perjalanan">
+      <!-- <div class="asuransi-perjalanan">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="cbx">
@@ -126,12 +117,12 @@
           <div class="panel-body">
            <div class="keterangan">
             <p>Perlindungan atas kehilangan barang dan batal perjalanan hingga Rp350.000 dan kecelakaan hingga Rp60 000 000</p>
-            <span class="pelajari">Pelajari Selengkapnya</span>
+            <span class="pelajari" [routerLink]="['/termcondition']">Pelajari Selengkapnya</span>
             <span class="dana pull-right">+ Rp 30 000/Orang</span>
            </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="kode-promo">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -159,9 +150,9 @@
               <div class="diskon">
                 <span>Diskon atau Promo</span><span class="titik-dua">:</span><span class="nominal pull-right"> Rp {{nbook.promo_fee}}</span>
               </div>
-              <div class="asuransi">
+              <!-- <div class="asuransi">
                 <span>Asuransi</span><span class="jumlah"> {{(nbook.asuransi_price)!=0? 'x'+dataTrip.quantity:''}}</span><span class="titik-dua">:</span><span class="nominal pull-right">Rp {{(nbook.asuransi_price).toLocaleString('id')}}</span>
-              </div>
+              </div> -->
               <div class="kode">
                 <span>Kode Unik</span><span class="titik-dua">:</span><span class="nominal pull-right" ([ngModel])="nbook.uniq_code">- Rp {{(random).toLocaleString('id')}}</span>
               </div>

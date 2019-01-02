@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormControl, } from '@angular/forms';
 
 import { LupaKataSandiRouterModule } from './lupa-kata-sandi-routing.module';
 import { LupaKataSandiComponent } from './lupa-kata-sandi.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 
 
@@ -15,7 +16,8 @@ import { LupaKataSandiComponent } from './lupa-kata-sandi.component';
     LupaKataSandiRouterModule
   ],
   declarations: [ 
-    LupaKataSandiComponent
+    LupaKataSandiComponent,
+    ResetPasswordComponent
    ],
  
 })

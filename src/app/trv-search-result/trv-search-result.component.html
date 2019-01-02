@@ -21,112 +21,52 @@
             <div class="box-wrap-tipe">
                 <div class="head-box">
                     <div class="tittle-box">Tipe</div>
-                    <div class="listbox">
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios">
-                                <span class="outer">
-                                    <span class="inner"></span>
-                                </span>
-                                    Open Trip
-                            </label>
-                        </div> 
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios" (change)="checked($event)" value="Private"><span class="outer"><span class="inner"></span></span>
-                                Private Trip
-                            </label>
-                        </div>
-                    </div>
+                </div>
+                <div class="listbox">
+                    <div class="radio" *ngFor="let typeTrip of type_trip">
+                        <label class="label-radio" ><input type="radio" name="radios">
+                            <span class="outer">
+                                <span class="inner"></span>
+                            </span>
+                                {{typeTrip.type_trip}}
+                        </label>
+                    </div> 
+                    <!-- <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios" (change)="checked($event)" value="Private"><span class="outer"><span class="inner"></span></span>
+                            Private Trip
+                        </label>
+                    </div> -->
                 </div>
             </div>
 
             <div class="box-wrap-lokasi">
                 <div class="head-box">
                     <div class="tittle-box">Lokasi</div>
-                    <div class="listbox">
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Jawa
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Sumatera
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Kalimantan
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Sulawesi
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Maluku
-                            </label>
-                        </div>
+                </div>
+                <div class="listbox">
+                    <div class="radio" *ngFor="let province of profinsi | slice:0:limit; let i = index">
+                        <label class="label-radio" >
+                            <input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <!-- <p *ngFor="let province of profinsi | slice:0:7"> -->
+                                    {{province.province_name}}
+                            <!-- </p> -->
+                            
+                        </label>
                     </div>
+                    <!-- <p (click)="showMore" *ngIf="limit === 5">Lihat Selengkapnya</p>
+                    <p (click)="showLess" *ngIf="limit > 5">Tutup</p> -->
                 </div>
             </div>
 
             <div class="box-wrap-kategori">
                 <div class="head-box">
                     <div class="tittle-box">Kategori</div>
-                    <div class="listbox">
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Beach
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                City Tour
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Culture
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Fishing
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Hiking
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Honeymoon
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Sailing
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                Tracking
-                            </label>
-                        </div>
+                </div>
+                <div class="listbox">
+                    <div class="radio" *ngFor="let category of category">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            {{category.category_name}}
+                        </label>
                     </div>
                 </div>
             </div>
@@ -134,12 +74,13 @@
             <div class="box-wrap-harga">
                 <div class="head-box">
                     <div class="tittle-box">Harga</div>
-                    <div class="listbox">
+                    
+                </div>
+                <div class="listbox">
 
-                        <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                            <span class="range-min">0</span> <span class="range-max">10.000.000</span>
-                        </div>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                        <span class="range-min">0</span> <span class="range-max">10.000.000</span>
                     </div>
                 </div>
             </div>
@@ -147,75 +88,77 @@
             <div class="box-wrap-rating">
                 <div class="head-box">
                     <div class="tittle-box">Rating</div>
-                    <div class="listbox">
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="icon-star"></span>
-                                <span class="icon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="icon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>    
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>    
-                            </label>
-                        </div>
-
+                    
+                </div>
+                <div class="listbox">
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                        </label>
                     </div>
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{star}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">    
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">
+                            <img src="{{starEmpty}}" class="icon-star">    
+                        </label>
+                    </div>
+
                 </div>
             </div>
 
             <div class="box-wrap-lainnya">
                 <div class="head-box">
                     <div class="tittle-box">Lainnya</div>
-                    <div class="listbox">
-                        <div class="radio">
-                            <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
-                                    Diskon
-                                </label>
-                        </div>
+                    
+                </div>
+                <div class="listbox">
+                    <div class="radio">
+                        <label class="label-radio"><input type="radio" name="radios"><span class="outer"><span class="inner"></span></span>
+                                Diskon
+                            </label>
                     </div>
                 </div>
             </div>
@@ -230,16 +173,16 @@
                 </div>
             </div>
             <div *ngFor="let data of dataSearchCategory; let i = index">
-                <div  class="col-md-2 col-sm-4 col-xs-6">
+                <div  class="col-md-2 col-sm-4 col-xs-6 list-trip">
                     <div class="thumb-promo">
-                        <div class="favorit">
+                        <div class="favorit" *ngIf="idfavorit">
                             <span class="glyphicon glyphicon-heart fav" (click)="favorit(data._id)" [ngClass]="{'change' : change}"></span>
                         </div>
                         <div (click)="goToDetail(data._id)">
                             <img src="{{data.photo_trip[0]}}" class="img-promo">
                             <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div>
-                            <div class="trip" *ngIf="(data.id_type_trip.type_trip == 'Open Trip')">Open</div>
-                            <div class="private-trip" *ngIf="(data.id_type_trip.type_trip == 'Private Trip')">Private</div>
+                            <div class="trip" *ngIf="(data.id_type_trip.type_trip == 'Open Trip')">Open Trip</div>
+                            <div class="private-trip" *ngIf="(data.id_type_trip.type_trip == 'Private Trip')">Private Trip</div>
                             <div class="body-caption">
                                 <div class="cover-star">
                                     <div style="display:inline;">

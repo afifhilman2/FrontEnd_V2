@@ -54,16 +54,16 @@
               <div class="thumb-promo" (click)="goDetail(trip._id)">
                   <img src="{{trip.photo_trip[0]}}" class="img-promo">
                   <!-- <div class="disc" *ngIf="discount_trip[i]">{{discount_trip[i] + '% '}}</div> -->
-                  <div [ngClass]="trip.id_type_trip.type_trip == 'Open Trip' ? 'opentrip' : 'private'" class="trip">{{trip.id_type_trip.type_trip== 'Open Trip' ? 'Open' : 'Private'}}</div>
+                  <div [ngClass]="trip.id_type_trip.type_trip == 'Open Trip' ? 'opentrip' : 'private'">{{trip.id_type_trip.type_trip== 'Open Trip' ? 'Open Trip' : 'Private Trip'}}</div>
                   <div class="body-caption">
-                      <div class="row">
-                          <div class="col-md-6 kiri">
-                              <span class="icon-star" *ngFor="let stars of counter((trip.rate_div!=0)? (trip.rate_total/trip.rate_div) : 0);let i = index" id="{{i}}"></span>
-                          </div>
-                          <div class="col-md-6 kanan">
-                              <div class="caption-price">Rp {{trip.publish_price}}</div>
-                          </div>
-                      </div>
+                        <div class="cover-star">
+                            <div style="display:inline;">
+                                <img *ngFor="let star of trip_star; let i = index" src="{{(star)? star : starEmpty}}" class="icon-star">
+                            </div>
+                            <div class="price pull-right">
+                                <div class="caption-price">{{trip.publish_price === null ? '' : 'Rp ' + trip.publish_price.toLocaleString('id')}}</div>
+                            </div>
+                        </div>
                       <div class="caption-tittle">{{trip.trip_name}}</div>
                       <div class="caption-duration"><span class="glyphicon glyphicon-time"></span> {{trip.days}}H{{trip.night}}M</div>
                       <div class="travel-name"><span class="glyphicon glyphicon-user"></span> {{travelAgent?.travel_name}}</div>

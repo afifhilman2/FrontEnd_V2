@@ -1,27 +1,25 @@
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
+<div class="tahapan-proses1">
+  <div class="proses1 pull-right">Pesan</div>
+  <div class="no-proses1 pull-right">1</div>
+</div>
+<div class="tahapan-proses2">
+  <div class="no-proses2"><p>2</p></div>
+  <div class="proses2">Bayar</div>
+</div>
 <div class="container">
-  <div class="tahapan-proses">
-    <div class="tahapan-proses1">
-      <div class="no-proses1">
-        <p>1</p>
-      </div>
-      <p class="proses1 pull-right">Pesan</p>
-    </div>
-    <div class="tahapan-proses2">
-      <div class="no-proses2">
-        <p>2</p>
-      </div>
-      <p class="proses2">
-        Bayar
-      </p>
-    </div>
-  </div>
   <div class="batas-pemesanan">
     <p class="text-center batas">Batas Pembayaran</p>
     <p class="text-center perintah">Silahkan segera selesaikan pembayaran sebelum batas waktu habis</p>
   </div>
   <div>
     <p class="text-center waktu">{{ countDown }}</p>
+  </div>
+  <div *ngIf="trx_id !== null" class="petunjuk">
+    <p>Petunjuk Pembayaran :</p>
+    <p>1. Sampaikan ke kasir bahwa Anda hendak membayar transaksi Travinesia.</p>
+    <p>2. Tunjukkan Kode Pembayaran Anda (bukan No. Pesanan) ke kasir.</p>
+    <p>3. Dikenankan biaya tambahan oleh pihak Alfamart (sudah termasuk harga Total)</p>
   </div>
   <div class="panel-transfer">
     <div class="panel panel-default transfer">
@@ -30,7 +28,7 @@
       </div>
       <div class="panel-body">
         <div class="no">
-          <p class="text-center no-resi">{{(dataBooking.id_paymentMethod.no_rek_owner | slice:0:4) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:5:9) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:10:end) }}</p>
+          <p class="text-center no-resi">{{trx_id == null ? (dataBooking.id_paymentMethod.no_rek_owner | slice:0:4) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:5:9) + ' ' + (dataBooking.id_paymentMethod.no_rek_owner | slice:10:14) :  trx_id }}</p>
           <p class="text-center pesan">{{'a.n ' + dataBooking.id_paymentMethod.owner_name}}</p>
         </div>
       </div>

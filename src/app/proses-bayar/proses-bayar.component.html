@@ -1,23 +1,15 @@
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
+<div class="tahapan-proses1">
+  <div class="proses1 pull-right">Pesan</div>
+  <div class="no-proses1 pull-right">1</div>
+</div>
+<div class="tahapan-proses2">
+  <div class="no-proses2"><p>2</p></div>
+  <div class="proses2">Bayar</div>
+</div>
 <div class="container">
   
-  <form (submit)="goToCheckout($event)" id="idBook">
-  <div class="tahapan-proses">
-    <div class="tahapan-proses1">
-      <div class="no-proses1">
-        <p>1</p>
-      </div>
-      <p class="proses1 pull-right">Pesan</p>
-    </div>
-    <div class="tahapan-proses2">
-      <div class="no-proses2">
-        <p>2</p>
-      </div>
-      <p class="proses2">
-        Bayar
-      </p>
-    </div>
-  </div>
+  <form (submit)="goToCheckout()" id="idBook">
   <div class="trv-notice">
     <span class="txt-notice"> Pesanan telah disimpan. Silahkan <b>Pilih metode pembayaran</b></span>
   </div>
@@ -81,25 +73,25 @@
                 </form> -->
               </div>
               <div role="tabpanel" class="tab-pane" id="indomart">
-                  <div class="coming-soon">
+                  <!-- <div class="coming-soon">
                       <p>Fitur ini Dalam Pengembangan,</p>
                       <span>Silahhkan Hubungi Nomor</span>
-                    </div>
-                <!-- <div class="kredit-form">
+                    </div> -->
+                <div class="kredit-form">
                   <ul class="indo-alfa" *ngFor="let indo of payment">
                       <li class="gambar" tabindex="5" *ngIf="(indo.id_payment_method == '4')" (click)="sendValueBank(indo._id, indo.id_type_payment._id, indo.id_payment_method)">
                         <img src="{{indo.photo_payment}}">
                       </li>
                   </ul>
                   <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
-                </div> -->
+                </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="alfamart">
-                  <div class="coming-soon">
+                  <!-- <div class="coming-soon">
                       <p>Fitur ini Dalam Pengembangan,</p>
                       <span>Silahhkan Hubungi Nomor</span>
-                    </div>
-                <!-- <div class="kredit-form">
+                    </div> -->
+                <div class="kredit-form">
                   <ul class="indo-alfa" *ngFor="let alfa of payment">
                       <li class="gambar" tabindex="6" *ngIf="( alfa.id_payment_method=='3')" (click)="sendValueBank(alfa._id, alfa.id_type_payment._id, alfa.id_payment_method)">
                         <img src="{{alfa.photo_payment}}">
@@ -107,7 +99,7 @@
                   </ul>
                   <p class="next-petunjuk"> Petunjuk selanjutnya muncul setelah menekan tombol <b>Lanjutkan</b></p>
 
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
@@ -151,7 +143,7 @@
         </div>
         <div class="panel-body">
           <div class="no">
-            <p class="no-resi" ([ngModel])="boking.no_booking">{{boking.no_booking}}<span class="salin pull-right" (click)="copyMessage(detail_promo?.promo_code)">Salin</span></p>
+            <p class="no-resi" ([ngModel])="boking.no_booking">{{boking.no_booking}}<span class="salin pull-right" >Salin</span></p>
             <p class="pesan">Nomor Pesanan digunakan untuk mewakili paket trip yang dipesan</p>
           </div>
         </div>

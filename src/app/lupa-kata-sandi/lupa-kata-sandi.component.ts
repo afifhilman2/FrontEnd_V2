@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Http, Response } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lupa-kata-sandi',
@@ -15,24 +16,27 @@ export class LupaKataSandiComponent implements OnInit {
     password:''
   }
 
-  succes : boolean = false;
+  content1 : boolean = true;
+  content2 : boolean = false;
   isEdit:boolean = false;
 
-  constructor(public appService: AppService, private http:Http, private toastr: ToastrService) { 
+  constructor(public appService: AppService, private http:Http, private toastr: ToastrService, private router:Router) { 
     
   }
 
-  onSubmitEmail(user){
-    this.http.put('https://travinesia.com:1210/v1/user/forgot_password', this.user)
-    .subscribe(
-      (res: Response) =>{
-        let users = res.json();
-        // console.log(users);
-        if(users.status == 200){
-          this.toastr.success('berisi tautan untuk tahap berikutnya','Silahkan cek Email Anda')
-        }
-      }
-    )
+  onSubmitEmail(){
+    this.appService.forgetPassword(this.user).subscribe(users =>{
+      // console.log(users);
+      if(users.status == 200){
+        this.toastr.success('berisi tautan untuk tahap berikutnya','Silahkan cek Email Anda');
+        // this.router.navigate([])
+        this.content1 = false;
+        this.content2 = true;
+      } else if(users.status == 404){
+        this.toastr.error('Email Belum Terdaftar') 
+      } 
+    })
+        
   }
 
   onForgot(user) {

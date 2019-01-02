@@ -66,6 +66,14 @@ th {
     display: inline-block;
 }
 
+.notFound{
+    color: #4a4a4a;
+    font-size: 13px;
+    padding: 10px;
+    border: solid 1px #dddddd;
+    text-align: center;
+}
+
 .btn-pesan {
     width: 274px;
     height: 43px;

@@ -19,14 +19,14 @@
 
             <form class="navbar-form navbar-left">
                 <div class="input-group stylish-input-group">
-                    <input type="text" id='search' (click)=' openDropDown() ' #txtName [(ngModel)]="filtertext" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Cari Wisata">
+                    <!-- <input type="text" id='search' #txtName [(ngModel)]="filtertext" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Cari Wisata"> -->
                     <!-- <div class="search-dropdown" *ngIf='showDropDown'>
                         <div class="item-search" *ngFor="let name of filterTrip | filter: filtertext : 'trip_name'">
                             {{name?.trip_name}}
                         </div>
                     </div> -->
                     <span class="input-group-addon">
-                              <button [routerLink]="['/searchNavbar/1']" type="submit" (click)=search()>
+                              <button [routerLink]="['/searchNavbar/1']" type="submit">
                                   <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>

@@ -1,6 +1,6 @@
 <!-- <app-loader *ngIf="loaded"></app-loader> -->
 <div class="container" >
-    <div class="trv-notice" *ngIf="massage">{{massage}}</div>
+    <!-- <div class="trv-notice" *ngIf="massage">{{massage}}</div> -->
   <div class="row">
     <div class="menu-description">
       <div class="diskon-paket" *ngIf="detailTrip?.flag_discount == 1"> Diskon {{discount_amount === undefined ? '' : discount_amount + '% '}} </div>
@@ -8,12 +8,12 @@
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          <li data-target="#myCarousel" *ngFor="let poto of detailTrip?.photo_trip; let i=index" class="{{(i==0)? 'active':''}}"></li>
+          <li data-target="#myCarousel" *ngFor="let poto of this.trip_photo; let i=index" class="{{(i==0)? 'active':''}}"></li>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <div *ngFor="let photo of detailTrip?.photo_trip; let i=index" class="item {{(i == 0)?'active':''}}">
+          <div *ngFor="let photo of this.trip_photo; let i=index" class="item {{(i == 0)?'active':''}}">
               <img src="{{photo}}" class="img-slider" alt="pulau">
           </div>
         </div>
@@ -30,7 +30,7 @@
       <div class="jenis-paket">
         <div [ngClass]="detailTrip?.id_type_trip?.type_trip == 'Open Trip'? 'type-trip' : 'privat'">
             <span class="glyphicon glyphicon-tag"></span>
-            <span class="jenis-trip" >{{detailTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open' : 'Private'}}</span>
+            <span class="jenis-trip" >{{detailTrip?.id_type_trip?.type_trip == 'Open Trip' ? 'Open Trip' : 'Private Trip'}}</span>
         </div>
         <span class="waktu-trip">( {{detailTrip?.days}} Hari {{detailTrip?.night}} Malam) <p class="pembatas">|</p></span>
         <span class="lokasi">Lokasi : <p class="lokasi-detail">{{detailTrip?.id_province.province_name}} </p> <p class="pembatas">|</p></span>
@@ -39,7 +39,7 @@
       <div class="nama-paket" >
         <div class="judul-paket">{{detailTrip?.trip_name}}</div>
         <div class="alamat-paket">
-          <p>{{detailTrip?.id_province.province_name}}</p>
+          <!-- <p>{{detailTrip?.id_province.province_name}}</p> -->
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -142,6 +142,9 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="status-pembayaran">
+              <div *ngIf="review?.length == 0" class="notFound">
+                Belum Ada Ulasan
+              </div>
               <div class="komen" *ngFor="let r of review">
                 <img src="{{r.id_user.photo}}" class="komen-image">
                 <div class="komen-user">

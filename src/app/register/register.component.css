@@ -37,6 +37,10 @@
     height: 44px;
 }
 
+.password{
+    position: relative;
+}
+
 .wrap-form {
 	width: 526px;
     height: 690px;
@@ -206,8 +210,8 @@ small{
 
 .mata{
     position: absolute;
-    right: 156px;
-    top: 354px;
+    right: 144px;
+    top: 37px;
     font-size: 20px;
     color: #dddddd;
     cursor: pointer;

@@ -18,7 +18,7 @@ import { DataService} from './data.service';
 import { GuardService } from './guard.service';
 import { routes, AppRoutingModule } from './app.route';
 import { AppService } from './app.service';
-import { CalendarComponent } from './calendar/calendar.component';
+// import { CalendarComponent } from './calendar/calendar.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { SearchFilterPipe } from './header/search-pipe';
@@ -44,6 +44,7 @@ import { GoogleLoginProvider, FacebookLoginProvider} from "angularx-social-login
 import { TermConditionComponent } from './term-condition/term-condition.component';
 import { HeaderNologinComponent } from './header-nologin/header-nologin.component';
 import { EksternalModule } from './eksternal/eksternal.module';
+import { HeaderProviderComponent } from './header-provider/header-provider.component';
 // import { DetailPaketPemesananComponent } from './detail-paket-pemesanan/detail-paket-pemesanan.component';
 // import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
@@ -72,8 +73,9 @@ export function provideConfig() {
     // HeaderComponent,
     HeaderUserComponent,
     SidebarAkunProfilComponent,
+    HeaderProviderComponent,
     // UbahKataSandiComponent,
-    CalendarComponent,
+    // CalendarComponent,
     SearchFilterPipe,
     ClickOutsideDirective,
     MiniFooterComponent,

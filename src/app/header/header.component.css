@@ -170,6 +170,16 @@ ul>li>a:focus .glyphicon-chevron-down {
     margin-left: -12px;
 }
 
+.ingat-saya{
+    display: inline;
+}
+
+.lupa-password{
+    /* display: inline-block; */
+    color: #993fa8;
+    float: right !important;  
+}
+
 .label-checkbox {
     position: relative;
     top: -6px;
@@ -180,7 +190,7 @@ ul>li>a:focus .glyphicon-chevron-down {
     font-size: 11px;
     color: #d24d57;
     position: absolute;
-    left: 44px;
+    left: 30px;
     margin-top: 1px;
 }
 

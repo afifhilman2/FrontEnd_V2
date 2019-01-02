@@ -87,19 +87,25 @@ export class RegisterComponent implements OnInit {
   massage: boolean = false;
   onSubmit(){ 
     if(this.formRegister.valid){
-      this.appService.registerUser(this.formRegister.value).subscribe(newUser =>{
-          // console.log(newUser)
-          if(newUser.status == 200){
-            sessionStorage.setItem("newUser.stauts", newUser.status)
-            this.router.navigate(['/LoginPage']); 
-            this.toastr.success('Silahkan Cek Email Untuk Melakukan Verifikasi', 'Selamat Email Sudah Terdaftar');
-          } else if(newUser.status == 406){
-            this.toastr.error('Email Sudah Terdaftar');
-          }
-      })
+    if( this.cek == false){
+      this.toastr.error('Harap isi bagian persetujuan')
+    }else{
+      
+        this.appService.registerUser(this.formRegister.value).subscribe(newUser =>{
+            // console.log(newUser)
+            if(newUser.status == 200){
+              sessionStorage.setItem("newUser.stauts", newUser.status)
+              this.router.navigate(['/LoginPage']); 
+              this.toastr.success('Silahkan Cek Email Untuk Melakukan Verifikasi', 'Selamat Email Sudah Terdaftar');
+            } else if(newUser.status == 406){
+              this.toastr.error('Email Sudah Terdaftar');
+            }
+        })
+      }
     }else{
       this.validateAllFormFields(this.formRegister);
     }
+    
   }
 
   // fbLogin() {
@@ -168,5 +174,15 @@ export class RegisterComponent implements OnInit {
   
     signOut(): void {
       this.authService.signOut();
+    }
+
+    cek:boolean = false
+    cekTerm(e){
+      // console.log(e.target.checked)
+      if(e.target.checked){
+        this.cek = true;
+      }else{
+        this.cek = false; 
+      }
     }
 }  

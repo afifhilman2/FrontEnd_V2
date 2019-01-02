@@ -31,7 +31,12 @@ export class DetailPaketPemesananComponent implements OnInit {
     // paged items
   pagedItems: any[];
 
-  constructor( private pagerService:PagerService, private router: Router,public active: ActivatedRoute, private toastr: ToastrService, private appServis: AppService) { 
+  starEmpty= "https://img.travinesia.com/iconweb/icon card trip_bintang kosong.png"
+  star = "https://img.travinesia.com/icon/ikon card trip_bintang_16x16.png"
+  trip_star: boolean[] = [false,false,false,false,false];
+  rating
+
+  constructor( private pagerService:PagerService, private router: Router, public active: ActivatedRoute, private toastr: ToastrService, private appServis: AppService) { 
     this.active.paramMap.subscribe(params => {
       this.appServis.getTravel(params.get('domain')).subscribe(travelAgent => {
         this.flag_status = travelAgent.status;
@@ -39,6 +44,14 @@ export class DetailPaketPemesananComponent implements OnInit {
           this.success = travelAgent.booking_success;
           this.travelAgent = travelAgent.provider;
           this.allItems = travelAgent.provider.trips;
+
+          if(travelAgent.rate_div!=0){
+            this.rating = Math.floor(travelAgent.rate_total/travelAgent.rate_div);
+            for(var i = 0; i < this.rating; i++){
+              this.trip_star[i] = !this.trip_star[i];
+            }
+          }
+
           if(this.allItems.length == 0) {
             this.pageOps = !this.pageOps;
             this.pageData = !this.pageData;
@@ -94,4 +107,7 @@ export class DetailPaketPemesananComponent implements OnInit {
     this.toastr.warning('Silahkan Hubungi No '+ this.travelAgent.provider.office_phone_number,'Fitur masih dalam pengembangan');
   }
 
+  goDetail(id){
+    this.router.navigate(['/DetailPaket/' + id])
+  }
 }

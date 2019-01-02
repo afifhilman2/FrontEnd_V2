@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
   userTravel = true;
   providerTravel = true;
   
+  typeSearc = {
+    trip_name:''
+  }
+
   data = {
     name:'',
     telephone:'',
@@ -39,7 +43,7 @@ export class HeaderComponent implements OnInit {
     photo:''
   }
 
-  tripData;
+  // tripData;
 
   user = {
     email:'',
@@ -57,18 +61,12 @@ export class HeaderComponent implements OnInit {
   emailAtAlertMessage:string ='';
 
 
-  changeHead:boolean = true;
-  changeHeadUser:boolean = false;
-
   categoryAllTrip:any[];
   categoryAllTripId:any[];
-  idCategory:any[];
 
-  getTripSearch:any[]=[];
+
   trip: any[];
 
-
-  filterTrip;
 
   showDropDown: boolean = false;
 
@@ -163,7 +161,7 @@ export class HeaderComponent implements OnInit {
 
   //search
   goToSearch(trip_name){
-    this.router.navigateByUrl('/search', {skipLocationChange: true}).then(()=>
+    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
     this.router.navigate(['/search'], {queryParams:{keyword: trip_name, flag_search: 1}}));
    }
    
@@ -173,8 +171,13 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  // tripName;
   goSearch(trip_name){
-   this.goToSearch(trip_name) 
+    this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['/search'], {queryParams:{keyword: trip_name, flag_search: 1}}));
+  //  this.goToSearch(trip_name) 
+    // this.tripName = e.target.value
+  //  console.log(trip_name)
   }
 
   //tutup search
@@ -263,7 +266,8 @@ export class HeaderComponent implements OnInit {
         sessionStorage.setItem("branch_session", JSON.stringify(this.data));
         sessionStorage.setItem("role", userGoogle.role);
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['']))
+        this.router.navigate(['']));
+        this.toastr.success('Login Berhasil')
         if(sessionStorage.getItem('url_login')){
           this.router.navigate([sessionStorage.getItem('url_login')]);
           sessionStorage.removeItem('url_login');
@@ -291,7 +295,8 @@ export class HeaderComponent implements OnInit {
         sessionStorage.setItem("branch_session", JSON.stringify(this.data));
         sessionStorage.setItem("role", user.role);
         this.router.navigateByUrl('/free', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['']))
+        this.router.navigate(['']));
+        this.toastr.success('Login Berhasil')
         if(sessionStorage.getItem('url_login')){
           this.router.navigate([sessionStorage.getItem('url_login')]);
           sessionStorage.removeItem('url_login');

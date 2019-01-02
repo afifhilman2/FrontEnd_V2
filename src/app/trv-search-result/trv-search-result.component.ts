@@ -24,13 +24,44 @@ export class TrvSearchResultComponent implements OnInit {
 
   private filters: ((data: any[]) => any[])[] = [];
 
+  profinsi;
+  category;
+  type_trip;
+ 
+  limit = 5;
+  idfavorit: boolean = false;
 
   notFound: boolean = false;
   constructor (private toastr:ToastrService, private routeActive :ActivatedRoute, private appService:AppService, public http:Http, private router: Router) { 
+    
+    this.appService.getProvinceTrip().subscribe (province => {
+      this.profinsi = province.data;
+    });
 
+
+    this.appService.getCategoryTrip().subscribe ( kategori =>{
+      this.category = kategori.data
+
+    })
+
+    this.appService.getTypeTrip().subscribe(data=>{
+      this.type_trip = data.data;
+    })
 
   //  this.categoryId = id;
   //   console.log(this.categoryId);
+  if(sessionStorage.token != null){
+    //   // if(dataFavorite.data.flag_favorite = true){
+      this.idfavorit = true
+    }
+  }
+
+  showMore(){
+    this.limit = this.category.length
+  }
+
+  showLess(){
+    this.limit = 5
   }
 
   dataSearchCategory : any[] = [];
@@ -75,7 +106,7 @@ export class TrvSearchResultComponent implements OnInit {
             }
           }
 
-        } else if(results_trip == 404){
+        } else if(results_trip.status == 404){
           this.notFound = true;
         }
         
@@ -187,6 +218,9 @@ export class TrvSearchResultComponent implements OnInit {
     this.favorite.id_trip = id;
     this.appService.addFavorit(this.favorite).subscribe(dataFavorite =>{
       // console.log(dataFavorite)
+      if(dataFavorite.status == 200){
+        this.toastr.success('Trip berhasil difavoritkan')
+      }
     })
   }
 
@@ -214,4 +248,9 @@ export class TrvSearchResultComponent implements OnInit {
   gototerm(){
     this.toastr.warning('Masih Dalam Pengembangan')
   }
+
+  goDiskon(){
+    this.router.navigate(['/search'],{queryParams:{flag_search: 4}});
+  }
+  
 }

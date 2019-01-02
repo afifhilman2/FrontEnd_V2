@@ -12,24 +12,47 @@
     margin-left: 15px;
     margin-bottom: 30px;
 }
+
+
+.tahapan-proses1{
+    width: 49.5%;
+    height: 60px;
+    background-color: #f5f5f5;
+    padding-top: 10px;
+    padding-right: 30px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 30px;
+}
+
 .no-proses1{
     width: 24px;
     height: 24px;
     border-radius: 50%;
     background-color: white;
-    padding-left: 6px;
-    margin-top: 8px;
-    margin-right: 20px;
-    margin-left: 290px;
-    
+    font-size: 20px;
+    color: #f5f5f5;
+    display: inline-block;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 9px
 }
 
 
-.no-proses1 p{
-    line-height: 24px;
-    font-size: 20px;
-    font-family: sans-serif;
-    color: #f5f5f5;
+.proses1{
+    font-size: 30px;
+    color: white;
+    margin-left: 17px;
+}
+
+.tahapan-proses2{
+    width: 50%;
+    height: 60px;
+    background-color: #9c27b0;
+    padding-top: 10px;
+    padding-left: 30px;
+    display: inline-block; 
+    margin-bottom: 30px;
 }
 
 .no-proses2{
@@ -37,50 +60,21 @@
     height: 24px;
     border-radius: 50%;
     background-color: white;
-    padding-left: 6.5px;
-    margin-top: 8px;
-}
-
-.no-proses2 p{
-    line-height: 24px;
     font-size: 20px;
-    font-family: sans-serif;
     color: #9c27b0;
-}
-.tahapan-proses1{
-    width: 449px;
-    height: 68px;
-    background-color: #f5f5f5;
-    padding-top: 15px;
-    padding-right: 30px;
-    border-top-left-radius: 10px;
-
-}
-
-.proses1{
-    font-size: 30px;
-    font-family: sans-serif;
-    color: white;
-    margin-top: -32px;
-    margin-left: 50px;
-}
-
-.tahapan-proses2{
-    width: 449px;
-    height: 68px;
-    background-color: #9c27b0;
-    padding-top: 15px;
-    padding-left: 30px;
-    border-top-right-radius: 10px;
+    display: inline-block;
+    text-align: center;
+   
 }
 
 .proses2{
     font-size: 30px;
-    font-family: sans-serif;
     color: white;
-    margin-top: -32px;
-    margin-left: 40px;
+    margin-left: 17px;
+    display: inline-block;
+    line-height: 1.2;
 }
+
 
 .trv-notice{
     width: 895px;
@@ -200,11 +194,12 @@ hr{
     color: #9c27b0;
     margin-left: 65px
 }
+
 .btn-simpan{
     width: 273px;
     height: 36px;
-    border-radius: 3px;
-    background-color: #e91e63;
+    border-radius: 5px;
+    background-color: #9c27b0;
     color: white;
     font-family: sans-serif;
     font-size: 15px;

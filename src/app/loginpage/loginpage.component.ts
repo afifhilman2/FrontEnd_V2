@@ -106,9 +106,9 @@ export class LoginpageComponent implements OnInit {
           this.toastr.success('Login Berhasil')
           this.router.navigate([''])
         } else if(loginUser.status == 403){
-          this.toastr.warning('Silahkan Aktifasi Akun Anda')
+          this.toastr.warning('Silahkan Verifikasi Akun Anda', '', { timeOut: 5000 })
         } else if(loginUser.status == 400){
-          this.toastr.error('Email atau Password Salah')
+          this.toastr.error('Email atau Password Salah', '', {timeOut:5000})
         }
       }
       else {

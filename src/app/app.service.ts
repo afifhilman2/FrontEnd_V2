@@ -375,6 +375,12 @@ export class AppService {
         .map(this.extractData);
     }
 
+    //lupa password
+    forgetPassword(pasword){
+        return this.http.put('https://travinesia.com:1210/v1/user/forgot_password', pasword)
+        .map(res => res.json()); 
+    }
+
     queryUrl: string = '?search=';
     search(terms: Observable<string>) {
         return terms.debounceTime(400)
@@ -406,6 +412,13 @@ export class AppService {
         return this.http.put('https://travinesia.com:1210/v1/user/booking/add_payment', boking, {headers: headers})
         .map(res => res.json())
     }
+
+    addBillingPayment(id_booking,billing){
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post('https://travinesia.com:1210/v1/user/payment/add/'+id_booking, billing, {headers: headers})
+        .map(res => res.json())
+      }
 
     sendDiskusi(trip_id,text){
         let headers = new Headers();
@@ -522,14 +535,14 @@ export class AppService {
       addComment(id, comments){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + id, comments, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post/' + id, comments, {headers: headers})
         .map(res => res.json())
       }
 
       addCommentUser(comments){
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
-        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + comments, {headers: headers})
+        return this.http.post('https://travinesia.com:1210/v1/discussion/post_comment/' + comments.id_diskusi, comments, {headers: headers})
         .map(res => res.json())
       }      
 

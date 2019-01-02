@@ -168,19 +168,19 @@
 
                         <div class="form-group">
                             <label class="label-modal">Password Lama</label>
-                            <input [type]="show ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.password" name="password">
+                            <input [type]="show ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="typePassword.password" name="password">
                             <span *ngIf="show === false" class="glyphicon glyphicon-eye-open mata" (click)="pwdLama()"></span>
                             <span *ngIf="show === true" class="glyphicon glyphicon-eye-close mata" (click)="pwdLama()"></span>
                         </div>
                         <div class="form-group">
                             <label class="label-modal">Password Baru</label>
-                            <input [type]="showUBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.new_password" name="new_password">
+                            <input [type]="showUBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="typePassword.new_password" name="new_password">
                             <span *ngIf="showUBaru === false" class="glyphicon glyphicon-eye-open mata" (click)="pwdBaru()"></span>
                             <span *ngIf="showUBaru === true" class="glyphicon glyphicon-eye-close mata" (click)="pwdBaru()"></span>
                         </div>
                         <div class="form-group">
                             <label class="label-modal">Ulangi Password Baru</label>
-                            <input [type]="showBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="pwd.repeatPassword" name="repeatPassword">
+                            <input [type]="showBaru ? 'text': 'password'" class="form-control modal-form" [(ngModel)]="typePassword.repeatPassword" name="repeatPassword">
                             <span *ngIf="showBaru === false" class="glyphicon glyphicon-eye-open mata" (click)="updatePwdBaru()"></span>
                             <span *ngIf="showBaru === true" class="glyphicon glyphicon-eye-close mata" (click)="updatePwdBaru()"></span>
                         </div>
@@ -188,7 +188,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-batal" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-save" data-dismiss="modal">Simpan</button>
+                        <button type="submit" class="btn btn-save">Simpan</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-activated-acount',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class ActivatedAcountComponent implements OnInit {
 
   
-  constructor(private appService: AppService, private routeActive: ActivatedRoute, private router:Router) { }
+  constructor(private tostr:ToastrService ,private appService: AppService, private routeActive: ActivatedRoute, private router:Router) { }
 
   temporary_token;
   ngOnInit() {
@@ -20,6 +21,7 @@ export class ActivatedAcountComponent implements OnInit {
       this.appService.activationAccount(this.temporary_token).subscribe(account => {
         if(account.status==200){
           this.router.navigate(['/LoginPage']);
+          this.tostr.success('Selamat akun Anda berhasil terdaftar')
         }
       })
     })

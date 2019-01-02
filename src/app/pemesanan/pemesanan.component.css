@@ -9,7 +9,6 @@
 .profil{
     font-weight: bold;
     font-size: 40px;
-    font-family: sans-serif;
     display: initial;
 }
 
@@ -24,9 +23,8 @@
 }
 
 .txt-notice{
-    width: 500px;
+    width: 535px;
     height: 13px;
-    font-family: sans-serif;
     font-size: 13px;
     padding-top: 10px;
     letter-spacing: normal;

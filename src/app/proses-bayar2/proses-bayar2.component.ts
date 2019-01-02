@@ -59,12 +59,15 @@ export class ProsesBayar2Component implements OnInit {
      return jam + ':' + min + ':' + sec;
    }
 
+
+   trx_id;
   ngOnInit() {
     this.getBookingId();
 
     this.dataBooking = JSON.parse(sessionStorage.getItem("booking"));
     // console.log(this.dataBooking);
-
+    this.trx_id = JSON.parse(sessionStorage.getItem("trx_id"))
+    console.log(this.trx_id)
 
     this.lengthPrice = this.dataBooking.coded_amount.toString().length;
     // console.log(this.lengthPrice);
