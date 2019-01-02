@@ -132,19 +132,19 @@
                         <span class="label-date">Anda dapat memilih maksimal 5 tanggal keberangkatan untuk trip serupa</span>
                     </div>
 
-                    <div formArrayName="date_trip">
+                    <div>
 
                         <div class="row">
                             <div class="col-md-4">
-                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="dateValue0($event)" formControlName="0" [options]="myDatePickerOptions"></my-date-picker>
+                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="onDateChanged($event,0)" [(ngModel)]="date_temp[0]" [ngModelOptions]="{standalone: true}" [options]="myDatePickerOptions"></my-date-picker>
                             </div>
 
                             <div class="col-md-4">
-                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="dateValue1($event)" formControlName="1" [options]="myDatePickerOptions"></my-date-picker>
+                                <my-date-picker [disabled]="privatetrip || disableDate || flag_date[0]" locale='id' (dateChanged)="onDateChanged($event,1)" [(ngModel)]="date_temp[1]" [ngModelOptions]="{standalone: true}" [options]="myDatePickerOptions"></my-date-picker>
                             </div>
 
                             <div class="col-md-4">
-                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="dateValue2($event)" formControlName="2" [options]="myDatePickerOptions"></my-date-picker>
+                                <my-date-picker [disabled]="privatetrip || disableDate || flag_date[0] || flag_date[1]" locale='id' (dateChanged)="onDateChanged($event,2)" [(ngModel)]="date_temp[2]" [ngModelOptions]="{standalone: true}" [options]="myDatePickerOptions"></my-date-picker>
                             </div>
                         </div>
 
@@ -152,11 +152,11 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="dateValue3($event)" formControlName="3" [options]="myDatePickerOptions"></my-date-picker>
+                                <my-date-picker [disabled]="privatetrip || disableDate || flag_date[0] || flag_date[1] || flag_date[2]" locale='id' (dateChanged)="onDateChanged($event,3)" [(ngModel)]="date_temp[3]" [ngModelOptions]="{standalone: true}" [options]="myDatePickerOptions"></my-date-picker>
                             </div>
 
                             <div class="col-md-4">
-                                <my-date-picker [disabled]="privatetrip || disableDate" locale='id' (dateChanged)="dateValue4($event)" formControlName="4" [options]="myDatePickerOptions"></my-date-picker>
+                                <my-date-picker [disabled]="privatetrip || disableDate || flag_date[0] || flag_date[1] || flag_date[2] || flag_date[3]" locale='id' (dateChanged)="onDateChanged($event,4)" [(ngModel)]="date_temp[4]" [ngModelOptions]="{standalone: true}" [options]="myDatePickerOptions"></my-date-picker>
                             </div>
                         </div>
                     </div>
